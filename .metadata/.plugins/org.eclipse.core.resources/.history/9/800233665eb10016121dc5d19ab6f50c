@@ -7,7 +7,6 @@ org.springframework.ide.eclipse.core.validator.enable.com.springsource.server.id
 org.springframework.ide.eclipse.core.validator.enable.com.springsource.sts.bestpractices.beansvalidator=false
 org.springframework.ide.eclipse.core.validator.enable.com.springsource.sts.server.quickfix.manifestvalidator=false
 org.springframework.ide.eclipse.core.validator.enable.org.springframework.ide.eclipse.beans.core.beansvalidator=true
-org.springframework.ide.eclipse.core.validator.enable.org.springframework.ide.eclipse.bestpractices.beansvalidator=false
 org.springframework.ide.eclipse.core.validator.enable.org.springframework.ide.eclipse.boot.bootvalidator=true
 org.springframework.ide.eclipse.core.validator.enable.org.springframework.ide.eclipse.core.springvalidator=false
 org.springframework.ide.eclipse.core.validator.enable.org.springframework.ide.eclipse.data.core.datavalidator=true
