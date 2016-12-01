@@ -1,0 +1,75 @@
+@CHARSET "UTF-8";
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+/* header wrapper */
+#header{
+	position: relative;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+}
+
+/* header navigation*/
+#mainNav{
+	border : none;
+	background-color: #333333;
+}
+
+#mainNav>ul>li>a:hover{
+	background-color: #33CCCC;
+}
+
+.navbar-nav>li>a{
+	margin-top : 8px; 
+	color : white !important;
+}
+
+.navbar-toggle{
+	color:white !important;
+}
+
+/* signin & signout */
+.modal-header, h2, .close{
+	text-align:center;
+	font-size:30px;
+	z-index:11;
+}
+
+.modal-header, .modal-body{
+	padding:40px 50px;
+}
+
+.naver{
+	background:#23B300;
+	color:#fff;
+	margin-bottom:20px;
+	padding:5px;
+	text-align: center;
+}
+
+.naver>a:hover,
+.naver>a:active,
+.naver>a:link,
+.naver>a:visited{
+	color:#fff;
+	text-decoration:none;	
+}
+
+/* footer */
+#footer{
+	height:230px;
+	padding-top:50px;
+	color:#fff;
+	background-color: #333333;
+}
+
+#sitemap {
+	margin-top:-10px;
+}
+
+#footer_list{
+	list-style : none;
+	margin:0;
+	padding:0;
+}
