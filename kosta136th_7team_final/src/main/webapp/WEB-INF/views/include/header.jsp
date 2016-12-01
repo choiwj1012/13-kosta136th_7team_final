@@ -10,13 +10,10 @@
 		
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="../../../resources/magnific-popup/magnific-popup.css">
 		<link rel="stylesheet" href="../../../resources/css/common.css">
 		
 		<script src="http://code.jquery.com/jquery-2.2.3.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-		<script src="../../../resources/scrollreveal/scrollreveal.min.js"></script>
-		<script src="../../../resources/magnific-popup/jquery.magnific-popup.min.js"></script>
 		<script src="../../../resources/js/common.js"></script>
 		
 		<!--[if lt IE 9]>
