@@ -58,6 +58,10 @@
 							<li><a href="/news">최신 뉴스</a></li>
 							<li><a href="/recommand">거래소 추천</a></li>
 							<li><a href="/board">게시판</a></li>
+							
+							<!-- 임시 마이 페이지 -->
+							<li><a href="/myPage">마이페이지</a></li>
+							
 							<li><a href="#" id="signupBtn" data-toggle="modal" data-target="#signup">회원가입</a></li>
 							<li><a href="#" id="signinBtn" data-toggle="modal" data-target="#signin">로그인</a></li>
 		                </ul>

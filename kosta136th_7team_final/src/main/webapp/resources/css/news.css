@@ -11,6 +11,10 @@
 	margin:10px 0;
 }
 
+#subscribeBtn{
+	margin-top:50px;	
+}
+
 #favoriteNewsTable{
 	border:1px solid black;
 	margin:10px 0;
@@ -23,10 +27,6 @@
 }
 
 /* 구독신청 영역 */
-#subscribeBtn{
-	margin-top:50px;	
-}
-
 #submitEmail{
 	padding:12px;
 	margin:15px 0;

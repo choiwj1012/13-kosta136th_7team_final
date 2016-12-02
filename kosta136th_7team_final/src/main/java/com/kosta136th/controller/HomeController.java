@@ -47,4 +47,32 @@ public class HomeController {
 		
 	}
 	
+	@RequestMapping(value = "/myPage", method = RequestMethod.GET)
+	public String myPage(){
+		
+		return "sub/myPage";
+		
+	}
+	
+	@RequestMapping(value = "/manageMyBoard", method = RequestMethod.GET)
+	public String manageMyBoard(){
+		
+		return "sub/manageMyBoard";
+		
+	}
+	
+	@RequestMapping(value = "/manageMyInfo", method = RequestMethod.GET)
+	public String manageMyInfo(){
+		
+		return "sub/manageMyInfo";
+		
+	}
+	
+	@RequestMapping(value = "/manageMyBitcoin", method = RequestMethod.GET)
+	public String manageMyBitcoin(){
+		
+		return "sub/manageMyBitcoin";
+		
+	}
+	
 }
