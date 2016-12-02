@@ -1,0 +1,44 @@
+@CHARSET "UTF-8";
+
+/* 배너 및 광고 이미지*/
+#bannerImg{
+	margin-bottom:20px;
+}
+
+/* 기사 테이블 */
+#newsTable{
+	border:1px solid black;
+	margin:10px 0;
+}
+
+#favoriteNewsTable{
+	border:1px solid black;
+	margin:10px 0;
+}
+
+/* 사이드 영역 */
+#side{
+	height:100%;
+	background-color: #F2F2F2;
+}
+
+/* 구독신청 영역 */
+#subscribeBtn{
+	margin-top:50px;	
+}
+
+#submitEmail{
+	padding:12px;
+	margin:15px 0;
+	background-color: #4ADBDA;
+}
+
+/* 관련 기사 검색 */
+#searchNews{
+	background-color: #A40000;
+	margin-bottom:15px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: -15px;
+	padding-right: -15px;
+}
