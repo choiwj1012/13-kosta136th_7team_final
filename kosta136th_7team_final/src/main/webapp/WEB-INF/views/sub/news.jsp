@@ -260,36 +260,20 @@
 			
 			<br />		
 			
-			<!-- keyword 검색 체크박스 -->		
-			<!-- 국내기사 해외기사 탭을 이동할때마다 보이는 input이 다름 (클래스가 show or hidden) -->
-			<div class="row hidden text-center" id="searchNews"> <!-- 국내기사 -->
+			<!-- keyword 검색 체크박스 -->				
+			<div class="row text-center" id="searchNews"> <!-- 해외기사 -->
 				
 				<h4>관련 기사 검색</h4>
 				
-				<div class="checkbox">
-					<label for="">
-						<input type="checkbox" value="비트코인 시세">비트코인 시세
+				<div class="row" id="checkbox">
+					<label for="" class="checkbox-inline">
+						<input type="checkbox" value="domestic"/> 국내기사
+					</label>
+					<label for="" class="checkbox-inline">
+						<input type="checkbox" value="foreign"/> 해외기사
 					</label>
 				</div>
 				
-				<div class="checkbox">
-					<label for="">
-						<input type="checkbox" value="비트코인 채굴">비트코인 채굴
-					</label>
-				</div>
-				
-				<div class="checkbox">
-					<label for="">
-						<input type="checkbox" value="비트코인 구매">비트코인 구매
-					</label>
-				</div>
-			
-			</div> <!-- ./ keyword(domestic) -->
-			
-			
-			<div class="row show text-center" id="searchNews"> <!-- 해외기사 -->
-				
-				<h4>관련 기사 검색</h4>
 				<div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
 					<form role="form" action="">
 				

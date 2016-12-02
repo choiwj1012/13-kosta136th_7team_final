@@ -34,11 +34,13 @@
 }
 
 /* 관련 기사 검색 */
+#checkbox{
+	margin-bottom : 3px;
+}
+
 #searchNews{
 	background-color: #A40000;
 	margin-bottom:15px;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	padding-left: -15px;
-	padding-right: -15px;
 }
