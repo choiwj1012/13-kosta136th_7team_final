@@ -24,24 +24,24 @@
 				<form action="" role="form">
 					
 					<div class="form-group">
-						<label for="email">이메일 주소</label>
-						<input type="email" class="form-control" id="email" placeholder="이메일 주소를 입력하세요" required />
+						<label for="signup_email">이메일 주소</label>
+						<input type="email" class="form-control" id="signup_email" placeholder="이메일 주소를 입력하세요" required />
 						<button type="button" class="btn btn-primary">이메일 체크</button>
 					</div>
 					
 					<div class="form-group">
-						<label for="password">비밀번호</label>
-						<input type="password" class="form-control" id="password" placeholder="비밀번호를 입력하세요" required />
+						<label for="signup_password">비밀번호</label>
+						<input type="password" class="form-control" id="signup_password" placeholder="비밀번호를 입력하세요" required />
 					</div>
 					
 					<div class="form-group">
-						<label for="check_password">비밀번호체크</label>
-						<input type="password" class="form-control" id="check_password" placeholder="비밀번호를 재입력하세요" required/>
+						<label for="signup_check_password">비밀번호체크</label>
+						<input type="password" class="form-control" id="signup_check_password" placeholder="비밀번호를 재입력하세요" required/>
 					</div>
 					
 					<div class="form-group">
-						<label for="nickName">닉네임</label>
-						<input type="text" class="form-control" id="nickName" placeholder="닉네임을 입력하세요" required/>
+						<label for="signup_nickName">닉네임</label>
+						<input type="text" class="form-control" id="signup_nickName" placeholder="닉네임을 입력하세요" required/>
 						<button type="button" class="btn btn-primary">닉네임 체크</button>
 					</div>
 					
@@ -86,13 +86,13 @@
 			<form action="" role="form">
 				
 				<div class="form-group">
-					<label for="email">이메일 주소</label>
-					<input type="email" class="form-control" id="email" placeholder="이메일 주소를 입력하세요" />
+					<label for="signin_email">이메일 주소</label>
+					<input type="email" class="form-control" id="signin_email" placeholder="이메일 주소를 입력하세요" />
 				</div>
 				
 				<div class="form-group">
-					<label for="password">비밀번호</label>
-					<input type="password" class="form-control" id="password" placeholder="비밀번호를 입력하세요" />
+					<label for="signin_password">비밀번호</label>
+					<input type="password" class="form-control" id="signin_password" placeholder="비밀번호를 입력하세요" />
 				</div>
         						
 				<div class="row text-center">
