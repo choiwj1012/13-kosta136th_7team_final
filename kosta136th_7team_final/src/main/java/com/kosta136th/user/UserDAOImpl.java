@@ -11,7 +11,7 @@ public class UserDAOImpl implements UserDAO{
 	@Inject
 	private SqlSession session;
 	
-	private static String namespace = "com.kosta136th.mapper.UserMapper";
+	private static String namespace = "com.kosta136th.mapper.userMapper";
 	
 	@Override
 	public User signinEmail(User loginEmailDTO) throws Exception {
@@ -30,9 +30,9 @@ public class UserDAOImpl implements UserDAO{
 		int affectedRows = 0;
 		boolean signupSuccess = false;
 		System.out.println(loginEmailDTO.getEmail());
-		
+		System.out.println(loginEmailDTO.getPassword());
+		System.out.println(loginEmailDTO.getNickname());
 		affectedRows = session.insert(namespace + ".insertLoginProfileByEmail", loginEmailDTO);
-		
 		if (affectedRows > 0){
 			signupSuccess = true;
 		}else{
