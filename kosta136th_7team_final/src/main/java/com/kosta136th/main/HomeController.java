@@ -19,12 +19,12 @@ public class HomeController {
 		
 	}
 	
-	@RequestMapping(value = "/news", method = RequestMethod.GET)
-	public String news(){
-		
-		return "sub/news";
-		
-	}
+//	@RequestMapping(value = "/news", method = RequestMethod.GET)
+//	public String news(){
+//		
+//		return "sub/news";
+//		
+//	}
 	
 	@RequestMapping(value = "/graph", method = RequestMethod.GET)
 	public String price(){
