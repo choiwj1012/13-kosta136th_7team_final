@@ -19,10 +19,12 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public boolean signupEmail(LoginEmailDTO loginEmailDTO) throws Exception {
-		// TODO Auto-generated method stub
+		
 		boolean signupSuccess = false;
 		
 		signupSuccess = userDAO.signupEmail(loginEmailDTO);
+		
 		return signupSuccess;
+		
 	}
 }

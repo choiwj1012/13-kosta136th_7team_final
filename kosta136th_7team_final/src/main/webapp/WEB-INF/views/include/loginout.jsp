@@ -149,7 +149,9 @@
 <script>
 	$(document).ready(function(){
 		$('#signup_email_btn').on('click', function(e){
+			
 			e.preventDefault();
+			
 			$.ajax({
 				type : 'POST',
 				url : '/requestSignupEmail',

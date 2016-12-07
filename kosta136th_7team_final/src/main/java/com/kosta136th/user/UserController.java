@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class UserController {
+	
 	@Inject
 	private UserService userService;
 	
@@ -41,21 +42,28 @@ public class UserController {
 	
 	@RequestMapping(value = "/requestSignupEmail", method = RequestMethod.POST)
 	@ResponseBody
-	public  ResponseEntity<String> requestSignupEmail(@RequestBody LoginEmailDTO loginEmailDTO){
+	public ResponseEntity<String> requestSignupEmail(@RequestBody LoginEmailDTO loginEmailDTO){
+		
 		boolean signupSuccess = false;
+		
 		ResponseEntity <String> entity = null;
+		
 		try {
+			
 			signupSuccess = userService.signupEmail(loginEmailDTO);
+			
 			if (signupSuccess == true){
 				entity = new ResponseEntity<>("성공했습니다", HttpStatus.OK);
 			} else{
 				entity = new ResponseEntity<>("실패했습니다", HttpStatus.BAD_REQUEST);
 			}
+			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			entity = new ResponseEntity<>("실패했습니다", HttpStatus.BAD_REQUEST);
 		}
+		
 		return entity;
+		
 	}
 }
