@@ -46,7 +46,7 @@
 		                    <span class="sr-only">Toggle navigation</span> Menu 
 		                </button>
 		                
-		                <a class="navbar-brand" href="index.html">
+		                <a class="navbar-brand" href="/">
 		                	<img id="main_logo_image" src="../../resources/img/logo_header.png" alt="bitriver_logo" />
 		                </a>
 		                
