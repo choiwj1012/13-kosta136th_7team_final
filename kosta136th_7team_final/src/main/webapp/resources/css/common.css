@@ -73,3 +73,29 @@
 	margin:0;
 	padding:0;
 }
+
+div.col-sm-2.footer_logo img {
+	width: 200px;
+	padding-right: 10px;
+	border-right: 1px solid #696969;
+}
+
+span.footer_copyright {
+	color: #7f7f7f;
+}
+
+p.address {
+	width: 100%;
+	padding-left: 300px;
+}
+
+div#sitemap {
+	width: 100%;
+	position: relative;
+}
+
+div.dropup {
+	position: absolute;
+	top: -80px;
+	right: 50px;
+}

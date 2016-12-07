@@ -23,7 +23,7 @@
 				<ul class="nav navbar-nav">
 					<li><a href="/graph">실시간 시세</a></li>
 					<li><a href="/news">최신 뉴스</a></li>
-					<li><a href="/recommand">거래소 추천</a></li>
+					<li><a href="/btcInfoLand">BTC 정보광장</a></li>
 					<li><a href="/board">게시판</a></li>
 					<li><a href="#" id="signupBtn" data-toggle="modal" data-target="#signup">회원가입</a></li>
 					<li><a href="#" id="signinBtn" data-toggle="modal" data-target="#signin">로그인</a></li>

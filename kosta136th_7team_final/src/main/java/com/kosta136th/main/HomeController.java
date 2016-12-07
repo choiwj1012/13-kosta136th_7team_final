@@ -87,7 +87,15 @@ public class HomeController {
 	@RequestMapping(value = "/btcInfoLand_board_list", method = RequestMethod.GET)
 	public String btcInfoLandBoardList(){
 		
-		return "sub/btcinfoLand_board_list";
+		return "sub/btcInfoLand_board_list";
+		
+	}
+
+	// BTC 정보광장 딜러 전문소식 상세보기 Mapping
+	@RequestMapping(value = "/btcInfoLand_board_read", method = RequestMethod.GET)
+	public String btcInfoLandBoardRead(){
+		
+		return "sub/btcInfoLand_board_read";
 		
 	}
 	
