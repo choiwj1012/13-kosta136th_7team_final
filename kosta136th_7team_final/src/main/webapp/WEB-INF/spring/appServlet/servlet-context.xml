@@ -28,6 +28,6 @@
 	<context:component-scan base-package="com.kosta136th.guest" />
 	<context:component-scan base-package="com.kosta136th.marketPrice" />
 	<context:component-scan base-package="com.kosta136th.user" />
-	
+	<context:component-scan base-package="com.kosta136th.scrap" />
 	
 </beans:beans>

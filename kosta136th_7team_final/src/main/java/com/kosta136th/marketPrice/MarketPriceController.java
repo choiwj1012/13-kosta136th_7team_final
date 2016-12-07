@@ -6,18 +6,12 @@ import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Locale;
 
-<<<<<<< HEAD
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-=======
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
->>>>>>> refs/remotes/origin/master
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,13 +21,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/rate/*")
 public class MarketPriceController {
 
-<<<<<<< HEAD
 	@RequestMapping(value = "/bitrate", method = RequestMethod.GET)
 	public String callWorldCoinIndexDotCom(Model model) {
 
 		try {
 			String apiURL;	
-			//Àü´Þ ¹ÞÀº JSON ¹®ÀÚ¿­À» º¸°üÇÏ´Â ½ºÆ®¸µ
+			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ JSON ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½
 			String command = "";
 			//https://www.worldcoinindex.com/apiservice/json?key=3GJ2UwUK92ikwWvZOZ0xtKXlA
 			//https://www.worldcoinindex.com/apiservice/json?key=9s5GeQzzoxzwM1WiHYdXnNDqZ
@@ -45,9 +38,9 @@ public class MarketPriceController {
 			int responseCode = con.getResponseCode();
 			BufferedReader br;
 
-			if(responseCode==200) { // Á¤»ó È£Ãâ
+			if(responseCode==200) { // ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½
 				br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-			} else {  // ¿¡·¯ ¹ß»ý
+			} else {  // ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½
 				br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
 			}
 			String inputLine;
@@ -65,10 +58,10 @@ public class MarketPriceController {
 
 				JSONParser jsonParser = new JSONParser();
 
-				//JSONµ¥ÀÌÅÍ¸¦ ³Ö¾î JSON Object ·Î ¸¸µé¾î ÁØ´Ù.
+				//JSONï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Ö¾ï¿½ JSON Object ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½.
 				JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonInfo);
 
-				//booksÀÇ ¹è¿­À» ÃßÃâ
+				//booksï¿½ï¿½ ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				JSONArray marketsInfoArray = (JSONArray) jsonObject.get("Markets");
 
 
@@ -76,10 +69,10 @@ public class MarketPriceController {
 
 				for(int i=0; i<marketsInfoArray.size(); i++){
 
-					//¹è¿­ ¾È¿¡ ÀÖ´Â°Íµµ JSONÇü½Ä ÀÌ±â ¶§¹®¿¡ JSON Object ·Î ÃßÃâ
+					//ï¿½è¿­ ï¿½È¿ï¿½ ï¿½Ö´Â°Íµï¿½ JSONï¿½ï¿½ï¿½ï¿½ ï¿½Ì±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ JSON Object ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 					JSONObject marketsObject = (JSONObject) marketsInfoArray.get(i);
 
-					//Áö¼ö¸¦ ¾ø¾Ö±âÀ§ÇØ °¢°¢ÀÇ º¯¼ö¸¦ »õ·Î ¼±¾ð
+					//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 					BigDecimal price_btc = new BigDecimal((Double) marketsObject.get("Price_btc"));
 					BigDecimal price_usd = new BigDecimal((Double) marketsObject.get("Price_usd"));
 					BigDecimal price_cny = new BigDecimal((Double) marketsObject.get("Price_cny"));
@@ -88,10 +81,10 @@ public class MarketPriceController {
 					BigDecimal price_rur = new BigDecimal((Double) marketsObject.get("Price_rur"));
 					BigDecimal volume_24h = new BigDecimal((Double) marketsObject.get("Volume_24h"));
 
-					//³ª´©±âÇÒ¶§ÀÇ  ºÐ¸ðÀÌ´Ù.
+					//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¶ï¿½ï¿½ï¿½  ï¿½Ð¸ï¿½ï¿½Ì´ï¿½.
 					BigDecimal ex = new BigDecimal(1);
 
-					//ex)price_rur/ex = ex´Â 1ÀÌ±â¶§¹®¿¡ price_rur º»ÀÎÀÇ°ªÀÌ ³ª¿Â´Ù. ±×¸®°í 7ÀÚ¸®¼ö·Î ¼Ò¼öÁ¡À» Á¦ÇÑÇÏ°í ³»¸²À¸·Î ¼Ò¼ö¸¦Ã³¸®ÇÑ´Ù.
+					//ex)price_rur/ex = exï¿½ï¿½ 1ï¿½Ì±â¶§ï¿½ï¿½ï¿½ï¿½ price_rur ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â´ï¿½. ï¿½×¸ï¿½ï¿½ï¿½ 7ï¿½Ú¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò¼ï¿½ï¿½ï¿½Ã³ï¿½ï¿½ï¿½Ñ´ï¿½.
 					BigDecimal price_btc_out = price_btc.divide(ex, 6, BigDecimal.ROUND_DOWN);
 					BigDecimal price_usd_out = price_usd.divide(ex, 7, BigDecimal.ROUND_DOWN);
 					BigDecimal price_cny_out = price_cny.divide(ex, 7, BigDecimal.ROUND_DOWN);
@@ -134,13 +127,13 @@ public class MarketPriceController {
 	    	ArrayList<Rate> rateList = new ArrayList<Rate>();
 	        try {
 	            String apiURL;	
-	            /*USDKRW - ¹Ì±¹
-	            JPYKRW - ÀÏº»
-	            EURKRW - À¯·´
-	            CNYKRW - Áß±¹ µî
-	            RURKRW - ·¯½Ã¾Æ
-	            GBPKRW - ¿µ±¹
-	            BTCKRW - ´Ù¸¥ api 
+	            /*USDKRW - ï¿½Ì±ï¿½
+	            JPYKRW - ï¿½Ïºï¿½
+	            EURKRW - ï¿½ï¿½ï¿½ï¿½
+	            CNYKRW - ï¿½ß±ï¿½ ï¿½ï¿½
+	            RURKRW - ï¿½ï¿½ï¿½Ã¾ï¿½
+	            GBPKRW - ï¿½ï¿½ï¿½ï¿½
+	            BTCKRW - ï¿½Ù¸ï¿½ api 
 	            */
 
 	            String command = "";
@@ -154,9 +147,9 @@ public class MarketPriceController {
 	            int responseCode = con.getResponseCode();
 	            BufferedReader br;
 	           
-	            if(responseCode==200) { // Á¤»ó È£Ãâ
+	            if(responseCode==200) { // ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½
 	                br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-	            } else {  // ¿¡·¯ ¹ß»ý
+	            } else {  // ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½
 	                br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
 	            }
 	            String inputLine;
@@ -204,6 +197,5 @@ public class MarketPriceController {
 	        }
 		return "sub/graph";
 	}
-=======
->>>>>>> refs/remotes/origin/master
+
 }
