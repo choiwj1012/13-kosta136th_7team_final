@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 
 <!-- 회원가입 modal -->
 <div class="modal fade" id="signup" role="dialog">
@@ -40,14 +39,14 @@
 					</div>
 					
 					<div class="form-group">
-						<label for="signup_nickName">닉네임</label>
-						<input type="text" class="form-control" id="signup_nickName" placeholder="닉네임을 입력하세요" required/>
+						<label for="signup_nickname">닉네임</label>
+						<input type="text" class="form-control" id="signup_nickname" placeholder="닉네임을 입력하세요" required/>
 						<button type="button" class="btn btn-primary">닉네임 체크</button>
 					</div>
 					
 					<div class="row text-center">
 						<div class="col-sm-12">
-							<button type="submit" class="btn btn-primary">
+							<button type="submit" id ="signup_email_btn" class="btn btn-primary">
  							가입하기 <span class="glyphicon glyphicon-ok"></span>
  							</button>
 						</div>
@@ -97,7 +96,7 @@
         						
 				<div class="row text-center">
 					<div class="col-sm-12">
-						<button type="submit" class="btn btn-primary">
+						<button type="submit" id = "signin_email_btn" class="btn btn-primary">
 							로그인하기 <span class="glyphicon glyphicon-ok"></span>
 						</button>
 					</div>
@@ -112,3 +111,85 @@
 </div>
 
 </div> <!-- ./modal (signin) -->
+
+<!-- 안녕하세요, 여기부터는 자바스크립트입니다 -->
+
+<!-- 이메일로 로그인 버튼을 클릭했을 때 작동하는 스크립트입니다. -->
+<script>
+	$(document).ready(function(){
+		$('#signin_email_btn').on('click', function(e){
+			e.preventDefault();
+			$.ajax({
+				type : 'POST',
+				url : '/requestSigninEmail',
+				headers : {
+					"Content-Type": "application/json",
+					"X-HTTP-Method-Override" : "POST"
+				},
+				dataType : 'text',
+			    data : JSON.stringify({ 
+			    	'email' : $('#signin_email').val(),
+			    	'password' : $('#signin_password').val()
+			    }),
+			    success : function(data) {
+			    	alert(data);
+			        alert(typeof(data));
+			        var LoginSession = $.parseJSON(data);
+			        var email = LoginSession.email;
+			        var nickname = LoginSession.nickname;
+			        alert(email);
+			        alert(nickname);
+			    }
+			});
+		});
+	});
+</script>
+
+<!-- 이메일로 가입 버튼을 클릭했을 때 작동하는 스크립트입니다. -->
+<script>
+	$(document).ready(function(){
+		$('#signup_email_btn').on('click', function(e){
+			
+			e.preventDefault();
+			
+			$.ajax({
+				type : 'POST',
+				url : '/requestSignupEmail',
+				headers : {
+					"Content-Type": "application/json",
+					"X-HTTP-Method-Override" : "POST"
+				},
+				dataType : 'text',
+			    data : JSON.stringify({ 
+			    	'email' : $('#signup_email').val(),
+			    	'password' : $('#signup_password').val(),
+			    	'nickname' : $('#signup_nickname').val()
+			    }),
+			    success : function(data) {
+			        var isSignupSuccess = data;
+			        alert(data);
+			        var LoginSession = $.parseJSON(data);
+			        var email = LoginSession.email;
+			        var nickname = LoginSession.nickname;
+			        alert(email);
+			        alert(nickname);
+			    }
+			});
+		});
+	});
+</script>
+
+
+<script>
+	$(document).ready(function(){
+		$('#naverSignin').on('click', function(){
+			$.ajax({
+				type : 'POST',
+				url : '/requestSigninNaver',
+			    success : function(data) {
+			    	
+			    }
+			});
+		});
+	});
+</script>
