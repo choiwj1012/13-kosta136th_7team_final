@@ -19,10 +19,10 @@ public class UserController {
 	
 	@RequestMapping(value = "/requestSigninEmail", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<LoginSessionDTO> requestSigninEmail(@RequestBody LoginEmailDTO loginEmailDTO, HttpSession session){
+	public ResponseEntity<User> requestSigninEmail(@RequestBody User loginEmailDTO, HttpSession session){
 		
-		LoginSessionDTO loginSessionDTO = null;
-		ResponseEntity <LoginSessionDTO> entity = null;
+		User loginSessionDTO = null;
+		ResponseEntity <User> entity = null;
 		System.out.println(loginEmailDTO.getEmail());
 		System.out.println(loginEmailDTO.getPassword());
 		System.out.println(loginEmailDTO.getNickname());
@@ -42,7 +42,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/requestSignupEmail", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<String> requestSignupEmail(@RequestBody LoginEmailDTO loginEmailDTO){
+	public ResponseEntity<String> requestSignupEmail(@RequestBody User loginEmailDTO){
 		
 		boolean signupSuccess = false;
 		

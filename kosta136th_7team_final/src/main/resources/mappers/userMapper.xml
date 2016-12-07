@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace = "com.kosta136th.mappers.UserMapper">
 
 	<select resultType="com.kosta136th.user.LoginSessionDTO" id="getLoginProfileByEmail">
-		select email, nickname from (select user_email as email, user_password as password, user_nickname as nickname from user)T where email = #{email} and password = #{password}  
+		select user_email, user_password, user_nickname from user where user_email = #{email} and user_password = #{password}  
 	</select>
 	
 	<insert id = "insertLoginProfileByEmail">

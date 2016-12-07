@@ -10,15 +10,15 @@ public class UserServiceImpl implements UserService{
 	private UserDAO userDAO;
 	
 	@Override
-	public LoginSessionDTO signinEmail(LoginEmailDTO loginEmailDTO) throws Exception {
+	public User signinEmail(User loginEmailDTO) throws Exception {
 		// TODO Auto-generated method stub
-		LoginSessionDTO loginSessionDTO = null;
+		User loginSessionDTO = null;
 		loginSessionDTO = userDAO.signinEmail(loginEmailDTO);
 		return loginSessionDTO;
 	}
 
 	@Override
-	public boolean signupEmail(LoginEmailDTO loginEmailDTO) throws Exception {
+	public boolean signupEmail(User loginEmailDTO) throws Exception {
 		
 		boolean signupSuccess = false;
 		
