@@ -11,7 +11,7 @@ public class UserDAOImpl implements UserDAO{
 	@Inject
 	private SqlSession session;
 	
-	private static String namespace = "com.kosta136th.mapper.userMapper";
+	private static String namespace = "com.kosta136th.mapper.UserMapper";
 	
 	@Override
 	public User signinEmail(User loginEmailDTO) throws Exception {

@@ -5,17 +5,15 @@ import java.sql.DriverManager;
 
 import org.junit.Test;
 
-public class MariaDBConnectionTest {
+public class MySQLDBConnectionTest {
 
-
-	// variable
-	private static final String DRIVER = "org.mariadb.jdbc.Driver";
-	private static final String URL = "jdbc:mariadb://localhost:3300/bitcoin";
+	private static final String DRIVER = "com.mysql.jdbc.Driver";
+	private static final String URL = "jdbc:mysql://127.0.0.1:3306/test_db";
 	private static final String USER = "root";
 	private static final String PW = "1234";
 	
-	@Test
-	public void testConnection() throws Exception {
+	@Test 
+	public void testConnection() throws Exception{
 		
 		Class.forName(DRIVER);
 		
@@ -23,14 +21,10 @@ public class MariaDBConnectionTest {
 			
 			System.out.println(con);
 			
-		} catch(Exception e) {
-			
+		} catch(Exception e){
 			e.printStackTrace();
-			
 		}
 		
 	}
-	
-	
 	
 }

@@ -3,9 +3,9 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace = "com.kosta136th.mappers.userMapper">
+<mapper namespace = "com.kosta136th.mapper.UserMapper">
 
-	<select resultType="com.kosta136th.user.LoginSessionDTO" id="getLoginProfileByEmail">
+	<select resultType="com.kosta136th.user.User" id="getLoginProfileByEmail">
 		select user_email, user_password, user_nickname from user where user_email = #{email} and user_password = #{password}  
 	</select>
 	
