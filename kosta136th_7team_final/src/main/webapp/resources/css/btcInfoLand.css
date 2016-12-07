@@ -1,0 +1,269 @@
+@CHARSET "UTF-8";
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+
+.col-sm-4{
+	margin-left:0px;
+	margin-top: 10px;
+}
+
+div.panel{
+	width:100%;
+	/* margin-left:-12px; */
+}
+
+.row {
+	/* width: 1130px; */
+	/* margin-left: 5px; */
+	/* border:1px solid red; */
+	
+}
+
+.dealer_list_group {
+	width: 1130px; 
+	/* margin-left: 20px; */
+	margin: 0 auto;
+}
+
+.col-sm-6 {
+	height: 150px;
+	border: 1px solid #cacaca;	
+}
+
+.border_left_none {
+	border-left: none;
+}
+
+.dealer_infoarea {
+	position: relative;
+}
+
+.dealer_photoshot {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	height: 130px;
+	width: 130px;
+	overflow: hidden;
+	border: 1px solid #cacaca;
+}
+
+span.page_title {
+	font-size:20px;
+	font-weight: bold;
+}
+
+.search_group {
+	padding-left: 220px;
+}
+
+.dealer_wrapper {
+	width: 340px;
+	border:1px solid #b4b3b4;
+}
+
+.page-header {
+	position: relative;
+}
+
+.breadcrumb {
+	position: absolute;
+	right:2px;
+	top:10px;
+	text-align: right;
+	width: 300px;
+	background-color: #ffffff;
+}
+
+.dealer_wrapper:hover {
+	margin-top: 0px;
+	margin-left: 1px;
+	border:1px solid #f2164b;
+	cursor: pointer;
+}
+
+.dealer_img{
+	width: 100%;
+	overflow:hidden;
+	padding-left:5px;
+	padding-top:5px;
+	padding-right:5px;
+}
+
+.dealer_img img{
+	width: 327px;
+	overflow:hidden;
+}
+
+.dealer_content{
+	padding-top:5px;
+}
+
+.dealer_content h2{
+	font-size: 18px;
+	text-align: left;
+	margin-left: 10px;
+	margin-bottom: 0px;
+}
+
+.dealer_content .dealer_id {
+	color: #cacaca;
+	margin-top:2px;
+	margin-left: 10px;
+}
+
+.dealer_content .hashTag_group {
+	margin-left: 10px;
+	margin-bottom: 10px;
+}
+
+.dealer_wrapper h3{
+	font-size: 18px;
+	font-weight:bold;
+	margin-left: 10px;
+}
+
+.dealer_pagination {
+	text-align: center;
+}
+
+.dealer_room_title {
+	position: absolute;
+	top:10px;
+	left: 150px;
+	font-size: 20px;
+	font-weight: bold;	
+}
+
+.dealer_position_title {
+	position: absolute;
+	top:33px;
+	font-weight: bold;
+	left: 150px;
+}
+
+.position_iteam {
+	position: absolute;
+	top:33px;
+	left: 210px;
+	font-weight: none;
+}
+
+.btngrp {
+	position: absolute;
+	top:100px;
+	left: 210px;
+}
+
+.dealer_point {
+	margin:0px;
+	padding-top: 12px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.card_board_list {
+	padding-left: 0px;
+	margin-left: -12px;
+}
+
+.vote_use {
+	margin:0px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.board_card {
+	width: 270px;
+	height: 280px;
+	margin-top: 10px;
+	border: 1px solid #b4b3b4;
+}
+
+.board_card:hover {
+	cursor: pointer;
+	border: 1px solid red;
+}
+
+/* .board_card_img {
+	margin-left: 2px;
+	margin-top: 2px;
+	width: 264px;
+	overflow: hidden;
+}
+ */
+.board_card_img a:after {
+	margin-left: 2px;
+	margin-top: 2px;
+	width: 264px;
+	overflow: hidden;
+	
+	
+	position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #78f2f3;
+    opacity: 0;
+    content: "";
+    -webkit-transition-property: opacity;
+    transition-property: opacity;
+    -webkit-transition-timing-function: cubic-bezier(.55, .085, .68, .53);
+    transition-timing-function: cubic-bezier(.55, .085, .68, .53);
+    -webkit-transition-duration: .15s;
+    transition-duration: .15s
+}
+
+.board_card_content {
+	position: relative;
+}
+
+.board_card_title {
+	margin:0px;
+	padding-top: 20px;
+	padding-left: 5px;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.board_card_summ {
+	margin:0px;
+	padding-top: 2px;
+	padding-left: 5px;
+	font-size: 12px;
+	color: #b4b3b4;
+}
+
+.board_card_readcount {
+	position: absolute;
+	right: 2px;
+	top: 2px;
+	color: #b4b3b4;
+}
+
+.board_card_writer {
+	position: absolute;
+	left: 2px;
+	top: 2px;
+	color: #b4b3b4;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
