@@ -22,8 +22,18 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.kosta136th.main" />
+<<<<<<< HEAD
  	<context:component-scan base-package="com.kosta136th.scrap" />
 	
 	
+=======
+	<context:component-scan base-package="com.kosta136th.admin" />
+	<context:component-scan base-package="com.kosta136th.dealer" />
+	<context:component-scan base-package="com.kosta136th.dealerNews" />
+	<context:component-scan base-package="com.kosta136th.guest" />
+	<context:component-scan base-package="com.kosta136th.marketPrice" />
+	<context:component-scan base-package="com.kosta136th.user" />
+	<context:component-scan base-package="com.kosta136th.scrap" />
+>>>>>>> refs/remotes/origin/master
 	
 </beans:beans>
