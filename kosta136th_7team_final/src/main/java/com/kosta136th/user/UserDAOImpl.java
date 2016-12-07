@@ -14,9 +14,9 @@ public class UserDAOImpl implements UserDAO{
 	private static String namespace = "com.kosta136th.mapper.UserMapper";
 	
 	@Override
-	public LoginSessionDTO signinEmail(LoginEmailDTO loginEmailDTO) throws Exception {
+	public User signinEmail(User loginEmailDTO) throws Exception {
 		
-		LoginSessionDTO loginSessionDTO = null;
+		User loginSessionDTO = null;
 		
 		loginSessionDTO = session.selectOne(namespace + ".getLoginProfileByEmail", loginEmailDTO);
 		
@@ -25,7 +25,7 @@ public class UserDAOImpl implements UserDAO{
 	}
 	
 	@Override
-	public boolean signupEmail(LoginEmailDTO loginEmailDTO) {
+	public boolean signupEmail(User loginEmailDTO) {
 
 		int affectedRows = 0;
 		boolean signupSuccess = false;
