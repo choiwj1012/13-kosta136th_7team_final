@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace = "com.kosta136th.mapper.marketPriceMapper">
+	
+		<insert id="rateSave">
+			insert into MARKET_PRICE 
+			(Label, Name, Price_btc, Price_usd, Price_cny, Price_eur, Price_gbp, Price_rur, Volume, Timestamp)
+			values(#{label}, #{name}, #{price_btc_result}, #{price_usd_result}, #{price_cny_result}, #{price_eur_result}, #{price_gbp_result}, #{price_rur_result}, #{volume_24h_result}, ${timestamp})
+		</insert>
+	
+	</mapper>
