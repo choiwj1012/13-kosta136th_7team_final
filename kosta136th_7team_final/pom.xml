@@ -178,33 +178,20 @@
             <artifactId>xmlpull-xpp3</artifactId>
             <version>3.0.0.20130526</version>
         </dependency>
-<<<<<<< HEAD
-        
-        <dependency>
-=======
 		
 		<!-- jstl -->    
 		<dependency>
->>>>>>> 7f50dfd92c9d44563e58d4dff1e7a3b5315ad44d
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
         
-<<<<<<< HEAD
-        <dependency>
-		    <groupId>org.jsoup</groupId>
-		    <artifactId>jsoup</artifactId>
-		    <version>1.10.1</version>
-		</dependency>
-=======
         <!-- jsoup -->
         <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
             <version>1.10.1</version>
         </dependency>
->>>>>>> 7f50dfd92c9d44563e58d4dff1e7a3b5315ad44d
             
 	</dependencies>
     <build>
