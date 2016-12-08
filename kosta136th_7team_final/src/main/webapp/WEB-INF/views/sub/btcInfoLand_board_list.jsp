@@ -1,16 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
 
 <%@ include file="../include/header.jsp"%>
-<%-- <%@ include file="../include/grandNav.jsp"%> --%>
 
 <head>
-<link rel="stylesheet" href="../../resources/css/board.css" />
-<link rel="stylesheet" href="../../resources/css/btcInfoLand.css" />
-<script src="../../resources/js/jquery.tubular.1.0.js"></script>
-<script src="../../resources/js/index.js"></script>
+	<link rel="stylesheet" href="../../resources/css/btcInfoLand.css" />
 </head>
 
 
@@ -104,7 +99,7 @@
 		<div class="card_board_list">
 			<div class="col-sm-3 ">
 				<div class="board_card">
-					<div class="board_card_img"><a href="#"><img src="../../resources/img/dealer_test_img01.jpg"></a></div>
+					<div class="board_card_img"><a href="/btcInfoLand_board_read"><img src="../../resources/img/dealer_test_img01.jpg"></a></div>
 					<div class="board_card_content">
 						<div class="board_card_title">게시글 제목이 출력 됩니다.</div>
 						<div class="board_card_writer">@webtohouse</div>
@@ -115,7 +110,7 @@
 			</div>
 			<div class="col-sm-3">
 				<div class="board_card">
-					<div class="board_card_img"><img src="../../resources/img/dealer_test_img01.jpg"></div>
+					<div class="board_card_img"><a href="/btcInfoLand_board_read"><img src="../../resources/img/dealer_test_img01.jpg"></a></div>
 					<div class="board_card_content">
 						<div class="board_card_title">게시글 제목이 출력 됩니다.</div>
 						<div class="board_card_writer">@webtohouse</div>

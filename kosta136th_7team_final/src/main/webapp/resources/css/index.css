@@ -38,10 +38,7 @@
 		
 /* first section */		
 .bg-first {
-	position: relative;
-	top:0;
-	left:0;
-	height:470px;
+	padding-bottom:50px;
   	background-color: #222222;
 }
 
@@ -53,13 +50,12 @@
 }
 
 #bg-first_logo{
-	width:400px;
+	padding:30px 0;
 }
 
 /* second section */
 .bg-second{
 	position: relative;
-	height:450px;
 	background-color:#fff;
 }
 
@@ -67,16 +63,19 @@
 	margin:20px 0;
 }
 
+.second-content{
+	padding-bottom:30px;
+}
+
 /* third section */
 .bg-third{
 	padding-top:70px;
-	height:300px;
+	padding-bottom:70px;
 	background:url("../img/city_blur.png");
 	color:#fff;
 }
 
 /* fourth section */
-.bg-fourth{
-	height:540px;
-	background:url("../img/logos_resize.png");
+#logos{
+	width:100%;
 }
