@@ -17,7 +17,7 @@
 			<div class="modal-body">
 			
 				<div class="naver text-center">
-					<a href="#"><img src="../../resources/img/naver_icon_resize.png" alt="" /> 네이버로 가입하기</a>
+					<a href="#" id="signup_naver_img"><img src="../../resources/img/naver_icon_resize.png" alt="" /> 네이버로 가입하기</a>
 				</div>
 			
 				<form action="" role="form">
@@ -174,6 +174,27 @@
 	});
 </script>
 
+<!-- 네이버로 가입 버튼을 클릭했을 때 작동하는 스크립트입니다. -->
+<script>
+	$(document).ready(function(){
+		$('#signup_naver_img').on('click', function(e){
+			
+			e.preventDefault();
+			
+			$.ajax({
+				type : 'POST',
+				url : '/requestNaverIDLoginAPI',
+			    success : function(data) {
+			    	window.open(data);
+			    	/* location.href = data; */
+			    	/* window.open(data, '소셜 로그인'); */
+			    }
+			});
+			
+		});
+	});
+</script>
+
 
 <script>
 	$(document).ready(function(){
@@ -182,7 +203,7 @@
 				type : 'POST',
 				url : '/requestSigninNaver',
 			    success : function(data) {
-			    	
+			    	location.href = data;
 			    }
 			});
 		});
