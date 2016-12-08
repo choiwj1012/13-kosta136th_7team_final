@@ -14,22 +14,22 @@
 		
 		<!-- header image -->
 		<div id="header-image">
-			<img src="../../resources/img/main_bitcoin_img.png" alt="메인화면 콘텐츠" />
+			<img src="../../resources/img/main_bitcoin_img.png" alt="메인화면 콘텐츠" id="main_coin_img"/>
 		</div>
 	
 		<!-- header content -->
 		<div id="header-content">
-			<img src="../../resources/img/main_typo.png" alt="메인화면 이미지" />
+			<img src="../../resources/img/main_typo.png" alt="메인화면 이미지" id="main_typo_img"/>
 		</div>
 		
 		<!-- graph link img -->
 		<div id="graph-link">
-			<a href="/graph"><img src="../../resources/img/graph_button.png" alt="graph-link" /></a> 
+			<a href="/graph"><img src="../../resources/img/graph_button.png" alt="graph-link" id="graph-link_img"/></a> 
 		</div>
 		
 		<!-- news link img -->
 		<div id="news-link">
-			<a href="/news"><img src="../../resources/img/news_button.png" alt="news-link" /></a>
+			<a href="/news"><img src="../../resources/img/news_button.png" alt="news-link" id="news-link_img"/></a>
 		</div>
 			
 		<!-- background -->
@@ -92,7 +92,7 @@
 	</section>
 	
 	<section class="bg-second">
-		<div class="container text-center">
+		<div class="container-fluid text-center">
 		
 			<div class="row second-title">
 				<h2>비트리버 서비스</h2>

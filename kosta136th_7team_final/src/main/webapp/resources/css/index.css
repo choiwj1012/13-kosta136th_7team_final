@@ -29,6 +29,10 @@
 	z-index:10;
 }
 
+#graph-link_img{
+	width:80%;
+}
+
 #news-link{
 	position: absolute;
 	top:55%;
@@ -36,6 +40,10 @@
 	z-index:10;
 }
 		
+#news-link_img{
+	width:80%;
+}		
+
 /* first section */		
 .bg-first {
 	padding-bottom:50px;

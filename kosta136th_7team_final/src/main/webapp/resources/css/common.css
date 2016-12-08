@@ -65,6 +65,11 @@
 
 #footer_logo_img{
 	margin-top:20px;
+	width:80%;
+}
+
+#footer_content{
+	margin-top:20px;
 }
 
 span.footer_copyright {
@@ -72,5 +77,6 @@ span.footer_copyright {
 }
 
 #sitemap{
+	margin-top:20px;
 	margin-bottom:20px;
 }
