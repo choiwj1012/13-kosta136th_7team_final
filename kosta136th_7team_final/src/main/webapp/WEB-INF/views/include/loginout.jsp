@@ -168,11 +168,6 @@
 			    success : function(data) {
 			        var isSignupSuccess = data;
 			        alert(data);
-			        var LoginSession = $.parseJSON(data);
-			        var email = LoginSession.email;
-			        var nickname = LoginSession.nickname;
-			        alert(email);
-			        alert(nickname);
 			    }
 			});
 		});

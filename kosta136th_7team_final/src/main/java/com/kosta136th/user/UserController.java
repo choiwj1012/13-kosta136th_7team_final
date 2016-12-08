@@ -29,6 +29,7 @@ public class UserController {
 		try { 
 			loginSessionDTO = userService.signinEmail(loginEmailDTO);
 			entity = new ResponseEntity<>(loginSessionDTO, HttpStatus.OK);
+			System.out.println(loginSessionDTO.toString());
 			session.setAttribute("LoginSession", loginSessionDTO);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -40,7 +41,7 @@ public class UserController {
 		return entity;
 	}
 	
-	@RequestMapping(value = "/requestSignupEmail", method = RequestMethod.POST)
+	@RequestMapping(value = "/requestSignupEmail", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	@ResponseBody
 	public ResponseEntity<String> requestSignupEmail(@RequestBody User loginEmailDTO){
 		
@@ -57,7 +58,7 @@ public class UserController {
 			} else{
 				entity = new ResponseEntity<>("실패했습니다", HttpStatus.BAD_REQUEST);
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<>("실패했습니다", HttpStatus.BAD_REQUEST);
