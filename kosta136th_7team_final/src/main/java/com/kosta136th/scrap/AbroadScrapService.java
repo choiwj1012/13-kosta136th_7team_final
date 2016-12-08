@@ -5,6 +5,7 @@ import java.util.List;
 
 public interface AbroadScrapService {
 
-	List<AbroadScrap> serachNews() throws IOException;
+	List<AbroadScrap> serachAllNews() throws IOException;
+	List<AbroadScrap> serachNews(int pageNum) throws IOException;
 
 }

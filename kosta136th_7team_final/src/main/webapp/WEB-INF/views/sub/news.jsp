@@ -28,75 +28,63 @@
 			
 			<!-- 국내기사 // 해외기사 탭 -->
 			<ul class="nav nav-tabs">
-				<li><a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'korArticle')" id="defaultOpen">국내기사</a></li>
-  				<li><a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'engArticle')">해외기사</a></li>
+				<li><a href="/news/tab1" class="tablinks" onclick="openCity(event, 'korArticle')" id="defaultOpen">국내기사</a></li>
+  				<li><a href="/news/tab2" class="tablinks" onclick="openCity(event, 'engArticle')">해외기사</a></li>
 			</ul>
-			
 			<div id="engArticle" class="tabcontent">
-			  <c:forEach items="${abrNewsList}" var ="b">
-					
+				<c:forEach items="${abrNewsList}" var ="b">
 					<div class="row" id="newsTable">
-					
 						<div class="col-sm-3">
 							<img src=${b.imgSrc} width="150" height="200" alt="" />
 						</div>
-					
 						<div class="col-sm-7">
 							<h3><a href = ${b.link} target="_blank">${b.title}</a></h3>
 							<p>${b.date }</p>
 							<p>${b.author}</p>
 							<p>${b.description }</p>
 						</div>
-					
 						<div class="col-sm-2">
 							<button type="button" id="subscribeBtn" class="btn btn-primary">구독하기</button>
-						</div>
-											
+						</div>				
 					</div>
-					
 				</c:forEach>
 			</div>					
 
 			<div id="korArticle" class="tabcontent">
-
 				<c:forEach items="${newsList}" var ="b">
-					
 					<div class="row" id="newsTable">
-					
 						<div class="col-sm-3">
 							<img src="https://dummyimage.com/130x130" alt="" />
 						</div>
-					
 						<div class="col-sm-7">
 							<h3><a href = ${b.link} target="_blank">${b.title}</a></h3>
 							<p>${b.pubDate }</p>
 							<p>${b.description }</p>
 						</div>
-					
 						<div class="col-sm-2">
 							<button type="button" id="subscribeBtn" class="btn btn-primary">구독하기</button>
-						</div>
-											
+						</div>			
 					</div>
-					
 				</c:forEach>
-			</div> 
-			<div id = "pageBottom"></div>
-			
-			
-			<!-- 뉴스기사 pagination -->
+			</div>
 			<div class="row text-center">
-				<ul class="pagination">
-					<li><a href="#"><i class="fa fa-angle-left"></i> 이전</a></li>
-					<li class="active"><a href="1">1</a></li>
-					<li><a href="/news/2">2</a></li>
-					<li><a href="3">3</a></li>
-					<li><a href="4">4</a></li>
-					<li><a href="5">5</a></li>
-					<li><a href="#">다음 <i class="fa fa-angle-right"></i></a></li>
-				</ul>
-			</div> <!-- ./pagination -->
-										
+						<ul class="pagination">
+							<c:if test="${pageMaker.prev}">
+								<li><a href="${tab}?page=${pageMaker.startPage - 1}">&laquo;</a></li>
+							</c:if>
+							<c:forEach begin="${pageMaker.startPage}"
+								end="${pageMaker.endPage }" var="idx">
+								<li
+									<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+									<a href="${tab}?page=${idx }">${idx}</a>
+								</li>
+							</c:forEach>
+							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+								<li><a
+									href="${tab}?page=${pageMaker.endpage+1 }">&raquo;</a></li>
+							</c:if>
+						</ul>
+			</div>
 		</div> <!-- ./main section -->
 		
 		
@@ -242,12 +230,36 @@ function openCity(evt, cityName) {
     document.getElementById(cityName).style.display = "block";
     evt.currentTarget.className += " active";
 }
+<form id="jobForm">
+<input type='hidden' name="page" value=${pageMaker.cri.perPageNum}>
+<input type='hidden' name="perPageNum" value=${pageMaker.cri.perPageNum}>
+</form>
 
-</script>
 
 <script>
-	document.getElementById("defaultOpen").click();
+	var result = '${msg}';
+
+	if (result == 'SUCCESS') {
+		alert("처리가 완료되었습니다.");
+	}
+	
+	$(".pagination li a").on("click", function(event){
+		
+		event.preventDefault(); 
+		
+		var targetPage = $(this).attr("href");
+		
+		var jobForm = $("#jobForm");
+		jobForm.find("[name='page']").val(targetPage);
+		jobForm.attr("action","/board/listPage").attr("method", "get");
+		jobForm.submit();
+	});
+	
 </script>
+
+<!-- <script>
+	document.getElementById("defaultOpen").click();
+</script> -->
 
 
 <%@ include file="../include/footer.jsp" %>		
