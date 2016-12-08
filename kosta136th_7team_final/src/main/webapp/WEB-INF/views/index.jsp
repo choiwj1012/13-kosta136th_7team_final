@@ -56,7 +56,7 @@
 		       	 			<li><a href="/graph">실시간 시세</a></li>
 							<li><a href="/news">최신 뉴스</a></li>
 							<li><a href="/btcInfoLand">BTC정보광장</a></li>
-							<li><a href="/board">자유게시판</a></li>
+							<li><a href="/board_list">자유게시판</a></li>
 							
 							<!-- 임시 마이 페이지 -->
 							<li><a href="/myPage">마이페이지</a></li>
