@@ -22,15 +22,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/rate/*")
 public class MarketPriceDataController {
 	
-	@Inject
+	/*@Inject
 	MarketPriceService marketPriceservice;
-<<<<<<< HEAD:kosta136th_7team_final/src/main/java/com/kosta136th/marketPrice/MarketPriceController.java
-	
 	@Scheduled(fixedDelay = 12000000)
-=======
-
-	@Scheduled(fixedDelay=12000000)
->>>>>>> 8fa8d9977ad81ad059e4d88f8dca24da96fdc5cb:kosta136th_7team_final/src/main/java/com/kosta136th/marketPrice/MarketPriceDataController.java
 	@RequestMapping(value = "/rateSave", method = RequestMethod.GET)
 	public void rateSave() {
 		
@@ -124,7 +118,7 @@ public class MarketPriceDataController {
 			System.out.println(e);
 		}
 		
-	}	
+	}*/	
 	
 //	@RequestMapping(value = "/bitrate", method = RequestMethod.GET)
 //	public String callWorldCoinIndexDotCom(Model model) {
