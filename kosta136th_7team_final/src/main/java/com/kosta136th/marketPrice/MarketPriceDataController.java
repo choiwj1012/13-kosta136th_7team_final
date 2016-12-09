@@ -11,30 +11,32 @@ import javax.inject.Inject;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/rate/*")
-public class MarketPriceController {
-
-	@Inject
+public class MarketPriceDataController {
+	
+	/*@Inject
 	MarketPriceService marketPriceservice;
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																				
+	@Scheduled(fixedDelay = 12000000)
 	@RequestMapping(value = "/rateSave", method = RequestMethod.GET)
-	public String rateSave() {
+	public void rateSave() {
+		
+		System.out.println("저장하러왔습니다.");
 		
 		try {
+			
 			String apiURL;	
 			
 			String command = "";
 			
-			apiURL = "https://www.worldcoinindex.com/apiservice/json?key=3GJ2UwUK92ikwWvZOZ0xtKXlA";
+			apiURL = "https://www.worldcoinindex.com/apiservice/json?key=TSd9QUg1uE9PRE3JSFP88IWvJ";
 
 			URL url = new URL(apiURL);
 			HttpURLConnection con = (HttpURLConnection)url.openConnection();
@@ -56,7 +58,7 @@ public class MarketPriceController {
 			if(responseCode==200) {
 				command = res.toString();
 			}
-
+			
 			String jsonInfo = command;
 			try {
 
@@ -101,9 +103,9 @@ public class MarketPriceController {
 					marketPrice.setPrice_rur_result(price_rur_out);
 					marketPrice.setVolume_24h_result(volume_24h_out);
 					marketPrice.setTimestamp((Long) marketsObject.get("Timestamp"));;
-				
-					marketPriceservice.rateSave(marketPrice);
 					
+					marketPriceservice.rateSave(marketPrice);
+
 				}
 
 				
@@ -114,44 +116,15 @@ public class MarketPriceController {
 			
 		} catch (Exception e) {
 			System.out.println(e);
-		}		
+		}
 		
-		return "index";
-		
-	}
+	}*/	
 	
 //	@RequestMapping(value = "/bitrate", method = RequestMethod.GET)
 //	public String callWorldCoinIndexDotCom(Model model) {
 //
 //		try {
-//			String apiURL;	
-//			//���� ���� JSON ���ڿ��� �����ϴ� ��Ʈ��
-//			String command = "";
-//			//https://www.worldcoinindex.com/apiservice/json?key=3GJ2UwUK92ikwWvZOZ0xtKXlA
-//			//https://www.worldcoinindex.com/apiservice/json?key=9s5GeQzzoxzwM1WiHYdXnNDqZ
-//			apiURL = "https://www.worldcoinindex.com/apiservice/json?key=3GJ2UwUK92ikwWvZOZ0xtKXlA";
-//
-//			URL url = new URL(apiURL);
-//			HttpURLConnection con = (HttpURLConnection)url.openConnection();
-//			con.setRequestMethod("GET");
-//			int responseCode = con.getResponseCode();
-//			BufferedReader br;
-//
-//			if(responseCode==200) { // ���� ȣ��
-//				br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-//			} else {  // ���� �߻�
-//				br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
-//			}
-//			String inputLine;
-//			StringBuffer res = new StringBuffer();
-//			while ((inputLine = br.readLine()) != null) {
-//				res.append(inputLine);
-//			}
-//			br.close();
-//			if(responseCode==200) {
-//				command = res.toString();
-//			}
-//
+//			
 //			String jsonInfo = command;
 //			try {
 //
