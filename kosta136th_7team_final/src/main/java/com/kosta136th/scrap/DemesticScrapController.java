@@ -19,6 +19,7 @@ public class DemesticScrapController {
 	
 	@RequestMapping(value = "/news", method = RequestMethod.GET)
 	public String news(Criteria cri, Model model) throws Exception{
+		System.out.println("/news실행");
 		String tab = "news/tab1";
 		model.addAttribute("tab", tab);
 		int pageStart = cri.getPageStart();
@@ -37,6 +38,7 @@ public class DemesticScrapController {
 	
 	@RequestMapping(value = "/news/tab1", method = RequestMethod.GET)
 	public String newsTab1(Criteria cri, Model model) throws Exception{
+		System.out.println("tab1실행");
 		String tab = "tab1";
 		model.addAttribute("tab", tab);
 		int pageStart = cri.getPageStart();
@@ -54,6 +56,7 @@ public class DemesticScrapController {
 	
 	@RequestMapping(value = "/news/tab2", method = RequestMethod.GET)
 	public String newsTab2(Criteria cri, Model model) throws Exception{
+		System.out.println("/tab2실행");
 		String tab = "tab2";
 		model.addAttribute("tab", tab);
 		int pageStart = cri.getPageStart();
@@ -84,20 +87,28 @@ public class DemesticScrapController {
 	}
 	
 	@RequestMapping(value = "/searchScrap", method = RequestMethod.POST)
-	public String searchScrap(@RequestBody SearchInfo vo) throws Exception{
+	public String searchScrap(@RequestBody SearchInfo vo, Model model, Criteria cri) throws Exception{
 		String tabInfo = vo.getTabInfo();
-		String searchKeyword = vo.getSearchKeyword();
-		System.out.println("서치실행");
-		System.out.println("tabInfo : " + tabInfo);
-		System.out.println("searchKeyword : " + searchKeyword);
 		if(tabInfo.equals("tab1"))
 		{
-			List<DemesticScrap> list = demService.searchNews(searchKeyword);
-			return "sub/news/tab1";
+			System.out.println("tab1검색실행");
+			String tab = "tab1";
+			model.addAttribute("tab", tab);
+			int pageStart = cri.getPageStart();
+			int perPageNum = cri.getPerPageNum();
+	    	String keyword = "비트코인 가트너";
+	    	List<DemesticScrap> list = demService.newsList(keyword,100, 1);
+	        model.addAttribute("newsList", list);
+	        System.out.println(list.size());
+	        PageMaker pageMaker = new PageMaker();
+	        pageMaker.setCri(cri);
+	        pageMaker.setTotalCount(list.size());
+	        model.addAttribute("pageMaker", pageMaker);
+			return "sub/news";
 		}
 		else
 		{
-			return "sub/news/tab2";
+			return "sub/news";
 		}
 	}	
 }

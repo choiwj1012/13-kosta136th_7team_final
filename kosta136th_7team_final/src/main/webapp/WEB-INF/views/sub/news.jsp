@@ -299,11 +299,11 @@ function button1_click(tabInfo)
 	alert("tabInfo : " + tabInfo + "검색어 : " + searchKeyword + " 검색버튼눌림");
 	
 	$.ajax({
-		type : 'post',
-		url : '/searchScrap',
+		type : 'get',
+		url : '/news',
 		headers :{
 			"Content-Type" : "application/json",
-			"X-HTTP-Method_Overrride" : "POST",
+			"X-HTTP-Method_Overrride" : "GET",
 		},
 		dataType : 'text',
 		data : JSON.stringify({

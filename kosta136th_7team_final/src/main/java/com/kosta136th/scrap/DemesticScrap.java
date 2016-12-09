@@ -8,6 +8,7 @@ public class DemesticScrap {
 	private String description;
 	private String pubDate;
 	private String keyword;
+	
 	public int getUser_num() {
 		return user_num;
 	}

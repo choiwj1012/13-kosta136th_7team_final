@@ -14,7 +14,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INSERT INTO DOMESTIC_SCRAP(USER_NUM, DOMESTIC_SCRAP_URL, DOMESTIC_SCRAP_TITLE, DOMESTIC_SCRAP_DESCRIPTION, DOMESTIC_SCRAP_PUBDATE, DOMESTIC_SCRAP_KEYWORD)
 		VALUES(#{user_num},#{link},#{title},#{description},#{pubDate},#{keyword}); 
 	</insert>
-	
-	<>
 
 </mapper>
