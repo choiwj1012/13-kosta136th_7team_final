@@ -1,6 +1,9 @@
 package com.kosta136th.user;
 
+import java.security.MessageDigest;
+
 import javax.inject.Inject;
+import javax.xml.bind.DatatypeConverter;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -14,25 +17,73 @@ public class UserDAOImpl implements UserDAO{
 	private static String namespace = "com.kosta136th.mapper.UserMapper";
 	
 	@Override
-	public User signinEmail(User loginEmailDTO) throws Exception {
+	public User signinEmail(User loginEmailVO) throws Exception {
 		
+		//DAO의 반환은 DTO
 		User loginSessionDTO = null;
 		
-		loginSessionDTO = session.selectOne(namespace + ".getLoginProfileByEmail", loginEmailDTO);
+		//로그
+		System.out.println("--DAOImpl Before--");
+		System.out.println(loginEmailVO.toString());
+		loginEmailVO.setPassword(encryptPasswordSHA256(loginEmailVO.getPassword()));
+		System.out.println(loginEmailVO.toString());
+				
+		try {
+			loginSessionDTO = session.selectOne(namespace + ".getLoginProfileByEmail", loginEmailVO);
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		//로그
+		System.out.println("--DAOImpl After--");
+		System.out.println(loginSessionDTO.toString());
 		
 		return loginSessionDTO;
 		
 	}
 	
+	//쓸 필드가 이메일 뿐이므로 네이버 로그인은 딱히 객체를 만들 필요가 없어.
 	@Override
-	public boolean signupEmail(User loginEmailDTO) {
+	public User signinNaver(String email) throws Exception {
+		//DAO의 반환은 DTO
+		User loginSessionDTO = null;
+		
+		//로그
+		System.out.println("--DAOImpl Before--");
+		System.out.println(email);
+				
+		try{
+			loginSessionDTO = session.selectOne(namespace+".getLoginProfileByNaver", email);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		//로그
+		System.out.println("--DAOImpl After--");
+		System.out.println(loginSessionDTO.toString());
+		
+		return loginSessionDTO;	
+	}
+	
+	@Override
+	public boolean signupEmail(User signinEmailVO) throws Exception {
 
 		int affectedRows = 0;
 		boolean signupSuccess = false;
-		System.out.println(loginEmailDTO.getEmail());
-		System.out.println(loginEmailDTO.getPassword());
-		System.out.println(loginEmailDTO.getNickname());
-		affectedRows = session.insert(namespace + ".insertLoginProfileByEmail", loginEmailDTO);
+		
+		//로그
+		System.out.println("--DAOImpl--");
+		System.out.println(signinEmailVO.toString());
+		signinEmailVO.setPassword(encryptPasswordSHA256(signinEmailVO.getPassword()));
+		System.out.println(signinEmailVO.toString());
+		
+		try{
+			affectedRows = session.insert(namespace + ".insertLoginProfileByEmail", signinEmailVO);
+		}catch(Exception e){
+			e.printStackTrace();
+			affectedRows = 0;			
+		}
+		
 		if (affectedRows > 0){
 			signupSuccess = true;
 		}else{
@@ -41,4 +92,104 @@ public class UserDAOImpl implements UserDAO{
 		
 		return signupSuccess;
 	}
+	
+	@Override
+	public boolean signupNaver(User signupNaverVO) throws Exception {
+		int affectedRows = 0;
+		boolean signupSuccess = false;
+		
+		//로그
+		System.out.println("--DAOImpl--");
+		System.out.println(signupNaverVO.toString());
+		
+		try{
+			affectedRows = session.insert(namespace + ".insertLoginProfileByNaver", signupNaverVO);
+		}catch(Exception e){
+			e.printStackTrace();
+			affectedRows = 0;
+		}
+		
+		if (affectedRows > 0){
+			signupSuccess = true;
+		}else{
+			signupSuccess = false;
+		}
+		
+		return signupSuccess;
+	}
+
+	@Override
+	public String encryptPasswordSHA256(String password) throws Exception {
+		
+		String encryptedPassword;
+
+		MessageDigest digest = null;
+		digest = MessageDigest.getInstance("SHA-256");
+		byte[] hash = digest.digest(password.getBytes("UTF-8"));
+		
+		//로그
+		System.out.print("해쉬값 : ");
+		
+		for (int i = 0; i < hash.length; i++){
+			System.out.print(hash[i]);
+		}
+		System.out.println();
+		
+		encryptedPassword = DatatypeConverter.printHexBinary(hash);
+		
+		//로그
+		System.out.println(encryptedPassword);
+		
+		return encryptedPassword;
+	}
+
+	@Override
+	public String checkEmailDuplication(String email) throws Exception {
+		String email_state;
+		//email_state = 0 : DB에 있는 이메일
+		//email_state = 1 : DB에 없는 이메일
+		//email_state = 2 : 기타
+
+		User userEmail = null;
+		
+		try{
+			userEmail = session.selectOne(namespace+".isEmailDuplicate", email);
+			
+			if (userEmail != null){
+				email_state = "0";	//나오면 DB에 있다(0)
+			}else{
+				email_state = "1"; //안 나오면 DB에 없다(1)
+			}
+			
+		}catch(Exception e){
+			email_state = "2";
+		}
+		
+		return email_state;
+	}
+
+	@Override
+	public String checkNicknameDuplication(String nickname) throws Exception {
+		String nickname_state;
+		//nickname_state = 0 : DB에 있는 이메일
+		//nickname_state = 1 : DB에 없는 이메일
+		//nickname_state = 2 : 기타
+		System.out.println("nickname : " + nickname);
+		
+		User userNickname = null;
+		
+		try {
+			userNickname = session.selectOne(namespace+".isNicknameDuplicate", nickname);
+			if (userNickname != null){
+				nickname_state = "0";	//나오면 DB에 있다(0)
+			}else{
+				nickname_state = "1"; //안 나오면 DB에 없다(1)
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			nickname_state = "2";
+		}
+		return nickname_state;
+	}
+		
 }
