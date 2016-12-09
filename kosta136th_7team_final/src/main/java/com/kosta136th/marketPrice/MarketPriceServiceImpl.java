@@ -14,6 +14,7 @@ public class MarketPriceServiceImpl implements MarketPriceService{
 	public void rateSave(MarketPrice marketPrice) throws Exception {
 
 		dao.rateSave(marketPrice);
+		System.out.println("여긴 service");
 		
 	}
 

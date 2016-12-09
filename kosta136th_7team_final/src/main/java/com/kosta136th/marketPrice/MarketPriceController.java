@@ -27,9 +27,12 @@ public class MarketPriceController {
 	MarketPriceService marketPriceservice;
 																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																				
 	@RequestMapping(value = "/rateSave", method = RequestMethod.GET)
-	public String rateSave() {
+	public void rateSave() {
+		
+		System.out.println("저장하러왔습니다.");
 		
 		try {
+			
 			String apiURL;	
 			
 			String command = "";
@@ -56,7 +59,7 @@ public class MarketPriceController {
 			if(responseCode==200) {
 				command = res.toString();
 			}
-
+			
 			String jsonInfo = command;
 			try {
 
@@ -101,7 +104,7 @@ public class MarketPriceController {
 					marketPrice.setPrice_rur_result(price_rur_out);
 					marketPrice.setVolume_24h_result(volume_24h_out);
 					marketPrice.setTimestamp((Long) marketsObject.get("Timestamp"));;
-				
+					
 					marketPriceservice.rateSave(marketPrice);
 					
 				}
@@ -116,7 +119,7 @@ public class MarketPriceController {
 			System.out.println(e);
 		}		
 		
-		return "index";
+//		return "index";
 		
 	}
 	
