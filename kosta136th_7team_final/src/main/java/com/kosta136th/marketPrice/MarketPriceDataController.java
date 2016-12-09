@@ -20,12 +20,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/rate/*")
-public class MarketPriceController {
+public class MarketPriceDataController {
 	
 	@Inject
 	MarketPriceService marketPriceservice;
+<<<<<<< HEAD:kosta136th_7team_final/src/main/java/com/kosta136th/marketPrice/MarketPriceController.java
 	
 	@Scheduled(fixedDelay = 12000000)
+=======
+
+	@Scheduled(fixedDelay=12000000)
+>>>>>>> 8fa8d9977ad81ad059e4d88f8dca24da96fdc5cb:kosta136th_7team_final/src/main/java/com/kosta136th/marketPrice/MarketPriceDataController.java
 	@RequestMapping(value = "/rateSave", method = RequestMethod.GET)
 	public void rateSave() {
 		
@@ -37,7 +42,7 @@ public class MarketPriceController {
 			
 			String command = "";
 			
-			apiURL = "https://www.worldcoinindex.com/apiservice/json?key=3GJ2UwUK92ikwWvZOZ0xtKXlA";
+			apiURL = "https://www.worldcoinindex.com/apiservice/json?key=TSd9QUg1uE9PRE3JSFP88IWvJ";
 
 			URL url = new URL(apiURL);
 			HttpURLConnection con = (HttpURLConnection)url.openConnection();
@@ -125,34 +130,7 @@ public class MarketPriceController {
 //	public String callWorldCoinIndexDotCom(Model model) {
 //
 //		try {
-//			String apiURL;	
-//			//���� ���� JSON ���ڿ��� �����ϴ� ��Ʈ��
-//			String command = "";
-//			//https://www.worldcoinindex.com/apiservice/json?key=3GJ2UwUK92ikwWvZOZ0xtKXlA
-//			//https://www.worldcoinindex.com/apiservice/json?key=9s5GeQzzoxzwM1WiHYdXnNDqZ
-//			apiURL = "https://www.worldcoinindex.com/apiservice/json?key=3GJ2UwUK92ikwWvZOZ0xtKXlA";
-//
-//			URL url = new URL(apiURL);
-//			HttpURLConnection con = (HttpURLConnection)url.openConnection();
-//			con.setRequestMethod("GET");
-//			int responseCode = con.getResponseCode();
-//			BufferedReader br;
-//
-//			if(responseCode==200) { // ���� ȣ��
-//				br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-//			} else {  // ���� �߻�
-//				br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
-//			}
-//			String inputLine;
-//			StringBuffer res = new StringBuffer();
-//			while ((inputLine = br.readLine()) != null) {
-//				res.append(inputLine);
-//			}
-//			br.close();
-//			if(responseCode==200) {
-//				command = res.toString();
-//			}
-//
+//			
 //			String jsonInfo = command;
 //			try {
 //
