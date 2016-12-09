@@ -1,0 +1,76 @@
+@CHARSET "UTF-8";
+
+/* 성용에게 문의하세요 */
+body {
+	
+	background: #333;
+	margin: 0;
+	
+}
+
+h3 {
+	color: #eeeeee;
+}
+
+
+.container-fluid {
+	
+	margin: 0;
+	padding: 0;
+	
+}
+
+#mainNav {
+
+	background: #222;
+	margin: 0;
+	height: 65px;
+	
+}
+
+.tabs {
+    min-width: 300px;
+    min-height: 900px;
+    height: 100%;
+    overflow: scroll;
+}
+
+.nav-tabs>li.active>a {
+	
+	color: #FFF;
+	cursor: default;
+	background-color: #33cccc;
+	border: 0;
+		
+	
+}
+
+#market_price_list {
+	
+	margin: 0;
+	border: 0;
+	padding: 10px;
+	
+	
+	background: #272727;
+	/* ie 스크롤바 색상 변경 */
+	scrollbar-track-color: #2a2a2a;
+	scrollbar-arrow-color: #2a2a2a;
+	scrollbar-face-color: #333333;
+	overflow-y:auto; overflow-x:hidden;
+	
+}
+
+
+	/* chrome, safari 스크롤바 색상 변경 */
+
+	  ::-webkit-scrollbar {width: 12px; height: 8px;}
+	/* ::-webkit-scrollbar-button:start:decrement, ::-webkit-scrollbar-button:end:increment {display: block; height: 10px; background: #2a2a2a} */
+	::-webkit-scrollbar-corner {background:#2a2a2a }
+	::-webkit-scrollbar-button {width: 12px;height: 12px; background: #2a2a2a}
+	::-webkit-scrollbar-thumb {width: 9px; height:9px; background: #474747; -webkit-border-radius: 10px; border-radius:10px}
+	::-webkit-scrollbar-track {width: 12px;height: 8px;background: #2a2a2a}  /* 길 */
+	/*::-webkit-scrollbar-track-piece {width: 12px;height: 8px;background: #f00; -webkit-border-radius: 10px; border-radius:10px}*/
+	
+	
+
