@@ -19,10 +19,10 @@ public class HomeController {
 	}
 	
 	
-	@RequestMapping(value = "/graph", method = RequestMethod.GET)
+	@RequestMapping(value = "/marketPrice", method = RequestMethod.GET)
 	public String price(){
 		
-		return "sub/graph";
+		return "sub/marketPrice";
 		
 	}
 	
