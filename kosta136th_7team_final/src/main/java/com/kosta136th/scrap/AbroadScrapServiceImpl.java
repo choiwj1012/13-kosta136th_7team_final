@@ -1,8 +1,9 @@
 package com.kosta136th.scrap;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -12,8 +13,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class AbroadScrapServiceImpl implements AbroadScrapService{
 
+	@Inject
+	private AbroadScrapDAO dao;
+	  
 	@Override
-	public List<AbroadScrap> serachAllNews() throws IOException {
+	public List<AbroadScrap> serachAllNews() throws Exception {
 		List<AbroadScrap> list = new ArrayList<AbroadScrap>();
 
 		for(int h = 0; h < 10; h++)
@@ -231,7 +235,7 @@ public class AbroadScrapServiceImpl implements AbroadScrapService{
 	}
 	
 	@Override
-	public List<AbroadScrap> serachNews(int pageNum) throws IOException {
+	public List<AbroadScrap> serachNews(int pageNum) throws Exception {
 		List<AbroadScrap> list = new ArrayList<AbroadScrap>();
 
 				Document doc = Jsoup.connect("https://news.bitcoin.com/page/"+pageNum+"/")
@@ -331,6 +335,13 @@ public class AbroadScrapServiceImpl implements AbroadScrapService{
 			
 		
 		return list;
+	}
+
+	@Override
+	public void addAbroadScrap(AbroadScrap vo) throws Exception{
+
+			dao.addAbroadScrap(vo);
+	
 	}
 }
 

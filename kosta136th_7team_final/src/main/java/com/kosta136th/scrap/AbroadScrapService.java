@@ -1,11 +1,11 @@
 package com.kosta136th.scrap;
 
-import java.io.IOException;
 import java.util.List;
 
 public interface AbroadScrapService {
 
-	List<AbroadScrap> serachAllNews() throws IOException;
-	List<AbroadScrap> serachNews(int pageNum) throws IOException;
+	List<AbroadScrap> serachAllNews() throws Exception;
+	List<AbroadScrap> serachNews(int pageNum) throws Exception;
+	void addAbroadScrap(AbroadScrap vo) throws Exception;
 
 }

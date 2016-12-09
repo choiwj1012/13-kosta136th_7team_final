@@ -8,10 +8,6 @@
 </header>
 <%@ include file="../include/grandNav.jsp" %>
 
-
-
-
-
 <div class="container">
 
 	<div class="row">
@@ -19,7 +15,6 @@
 		<!-- main section -->
 		<div class="col-md-9">
 			
-			<form action="newsList.do"></form>
 			<!-- 배너 및 광고 -->
 			<div class="row text-center" id="bannerImg">
 				<img src="../../resources/img/banner.png" alt="banner" />
@@ -28,7 +23,7 @@
 			
 			<!-- 국내기사 // 해외기사 탭 -->
 			<ul class="nav nav-tabs">
-				<li><a href="/news/tab1" class="tablinks" onclick="openCity(event, 'korArticle')" id="defaultOpen">국내기사</a></li>
+				<li><a href="/news/tab1" class="tablinks" onclick="openCity(event, 'korArticle')">국내기사</a></li>
   				<li><a href="/news/tab2" class="tablinks" onclick="openCity(event, 'engArticle')">해외기사</a></li>
 			</ul>
 			<div id="engArticle" class="tabcontent">
@@ -44,7 +39,7 @@
 							<p>${b.description }</p>
 						</div>
 						<div class="col-sm-2">
-							<button type="button" id="subscribeBtn" class="btn btn-primary">구독하기</button>
+							<button type="button" id="subscribeBtn" class="btn btn-primary" onclick="engSubscribe('${b.imgSrc}','${b.link}','${b.title}','${b.date}','${b.author }','${b.description}')">구독하기</button>
 						</div>				
 					</div>
 				</c:forEach>
@@ -62,7 +57,7 @@
 							<p>${b.description }</p>
 						</div>
 						<div class="col-sm-2">
-							<button type="button" id="subscribeBtn" class="btn btn-primary">구독하기</button>
+							<button type="button" id="subscribeBtn" class="btn btn-primary" onclick="korSubscribe('${b.link}', '${b.title }', '${b.pubDate }', '${b.description }')">구독하기</button>
 						</div>			
 					</div>
 				</c:forEach>
@@ -81,7 +76,7 @@
 							</c:forEach>
 							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 								<li><a
-									href="${tab}?page=${pageMaker.endpage+1 }">&raquo;</a></li>
+									href="${tab}?page=${pageMaker.endPage+1 }">&raquo;</a></li>
 							</c:if>
 						</ul>
 			</div>
@@ -113,10 +108,10 @@
 					<form role="form" action="">
 				
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="검색할 키워드를 적어주세요" />
+							<input type="text" id ="searchKeyword" class="form-control" placeholder="검색할 키워드를 적어주세요" />
 						</div>
 					
-						<button type="submit" class="btn btn-primary">검색하기</button>
+						<button type="submit" class="btn btn-primary" onclick="button1_click('${tab }')">검색하기</button>
 					
 					</form>
 				</div>
@@ -200,16 +195,15 @@
 			
 			<!-- google adsense -->
 			<div class="row text-center">
-
-				<img src="https://dummyimage.com/200x600" alt="google adsense" />
+				<a href = "http://gall.dcinside.com/board/lists/?id=parkboyoung" target="_blank" ><img src="https://dummyimage.com/200x600" alt="google adsense"/></a>
 			</div>
 		
 		</div> <!-- ./side section -->
 			
 	</div> 
 </div>
-<script type="text/javascript">
 
+<script>
 function openCity(evt, cityName) {
     // Declare all variables
     var i, tabcontent, tablinks;
@@ -230,36 +224,97 @@ function openCity(evt, cityName) {
     document.getElementById(cityName).style.display = "block";
     evt.currentTarget.className += " active";
 }
-<form id="jobForm">
-<input type='hidden' name="page" value=${pageMaker.cri.perPageNum}>
-<input type='hidden' name="perPageNum" value=${pageMaker.cri.perPageNum}>
-</form>
-
-
+</script>
 <script>
-	var result = '${msg}';
-
-	if (result == 'SUCCESS') {
-		alert("처리가 완료되었습니다.");
-	}
+function engSubscribe(imgSrc, link, title, date, author, description)
+{
 	
-	$(".pagination li a").on("click", function(event){
+	alert("외국기사스크랩버튼 클릭됨" + "\n"
+			+ "imgsrc : " + imgSrc+ "\n" 
+			+ "link : " + link+ "\n"
+			+ "title : " + title + "\n"
+			+ "date : " + date + "\n"
+			+ "author : " + author + "\n"
+			+ "description : " + description);
+	
+	$.ajax({
+		type : 'post',
+		url : '/addAbroadScrap',
+		headers :{
+			"Content-Type" : "application/json",
+			"X-HTTP-Method_Overrride" : "POST",
+		},
+		dataType : 'text',
+		data : JSON.stringify({
+			imgSrc : imgSrc,
+			link : link,
+			title : title,
+			date : date,
+			author : author,
+			description : description
+		}),
 		
-		event.preventDefault(); 
-		
-		var targetPage = $(this).attr("href");
-		
-		var jobForm = $("#jobForm");
-		jobForm.find("[name='page']").val(targetPage);
-		jobForm.attr("action","/board/listPage").attr("method", "get");
-		jobForm.submit();
 	});
-	
+}
+
+function korSubscribe(link, title, pubDate, description)
+{
+	var keyword = "비트코인";
+	alert("한국기사스크랩버튼 클릭됨" + "\n"
+			+ "link : " + link + "\n"
+			+ "title : " + title + "\n"
+			+ "pubDate : " + pubDate + "\n"
+			+ "description : " + description + "\n"
+			+ "keyword : " + keyword);
+	$.ajax({
+		type : 'post',
+		url : '/addDemesticScrap',
+		headers :{
+			"Content-Type" : "application/json",
+			"X-HTTP-Method_Overrride" : "POST",
+		},
+		dataType : 'text',
+		data : JSON.stringify({
+			link : link,
+			title : title,
+			pubDate : pubDate,
+			description : description,
+			keyword : keyword
+		}),
+		
+	});
+}
+
 </script>
 
-<!-- <script>
-	document.getElementById("defaultOpen").click();
-</script> -->
-
+<script>
+function button1_click(tabInfo)
+{
+	var searchKeyword = $('#searchKeyword').val();
+	if(tabInfo == "news/tab1")
+	{
+		temp = tabInfo.split('/');
+		tabInfo = temp[1];
+	}
+	alert("tabInfo : " + tabInfo + "검색어 : " + searchKeyword + " 검색버튼눌림");
+	
+	$.ajax({
+		type : 'post',
+		url : '/searchScrap',
+		headers :{
+			"Content-Type" : "application/json",
+			"X-HTTP-Method_Overrride" : "POST",
+		},
+		dataType : 'text',
+		data : JSON.stringify({
+			tabInfo : tabInfo,
+			searchKeyword : searchKeyword
+		}),
+		
+	});
+	
+	
+}
+</script>
 
 <%@ include file="../include/footer.jsp" %>		

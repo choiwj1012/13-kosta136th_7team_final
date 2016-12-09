@@ -8,7 +8,7 @@ public class PageMaker {
   private boolean prev;
   private boolean next;
 
-  private int displayPageNum = 10;
+  private int displayPageNum = 5;
 
   private Criteria cri;
 
@@ -23,7 +23,6 @@ public class PageMaker {
   }
 
   private void calcData() {
-
     endPage = (int) (Math.ceil(cri.getPage() / (double) displayPageNum) * displayPageNum);
 
     startPage = (endPage - displayPageNum) + 1;

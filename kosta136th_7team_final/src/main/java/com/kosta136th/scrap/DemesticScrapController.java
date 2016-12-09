@@ -6,7 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
@@ -19,13 +19,12 @@ public class DemesticScrapController {
 	
 	@RequestMapping(value = "/news", method = RequestMethod.GET)
 	public String news(Criteria cri, Model model) throws Exception{
-		String tab = "tab1";
-		int nowPageNum = 1;
+		String tab = "news/tab1";
 		model.addAttribute("tab", tab);
 		int pageStart = cri.getPageStart();
 		int perPageNum = cri.getPerPageNum();
     	String keyword = "비트코인";
-    	List<DomesticScrap> list = demService.searchNews(keyword, perPageNum,pageStart);
+    	List<DemesticScrap> list = demService.newsList(keyword, perPageNum,pageStart);
         model.addAttribute("newsList", list);
         PageMaker pageMaker = new PageMaker();
         pageMaker.setCri(cri);
@@ -43,7 +42,7 @@ public class DemesticScrapController {
 		int pageStart = cri.getPageStart();
 		int perPageNum = cri.getPerPageNum();
     	String keyword = "비트코인";
-    	List<DomesticScrap> list = demService.searchNews(keyword,perPageNum, pageStart);
+    	List<DemesticScrap> list = demService.newsList(keyword,perPageNum, pageStart);
         model.addAttribute("newsList", list);
         PageMaker pageMaker = new PageMaker();
         pageMaker.setCri(cri);
@@ -58,8 +57,7 @@ public class DemesticScrapController {
 		String tab = "tab2";
 		model.addAttribute("tab", tab);
 		int pageStart = cri.getPageStart();
-		int perPageNum = cri.getPerPageNum();
-    	List<AbroadScrap> abrList = abrService.serachNews(1);
+    	List<AbroadScrap> abrList = abrService.serachNews(pageStart);
         model.addAttribute("abrNewsList", abrList);
         PageMaker pageMaker = new PageMaker();
         pageMaker.setCri(cri);
@@ -69,45 +67,37 @@ public class DemesticScrapController {
 		
 	}
 	
-	
-//	@RequestMapping(value = "/news/tab1/{pageNum}", method = RequestMethod.GET)
-//	public String newsPage1(Model model, @PathVariable("pageNum") Integer pageNum) throws Exception{
-//		int perPageNews = 10;
-//		int start = (perPageNews-1)*(pageNum-1)+pageNum;
-//		int display = 10;
-//		String tab = "tab1";
-//		model.addAttribute("tab", tab);
-//		
-//    	String keyword = "비트코인";
-//    	List<DomesticScrap> list = demService.searchNews(keyword,display,start);
-//        model.addAttribute("newsList", list);
-//		return "sub/news";
-//		
-//	}
-//	
-//	@RequestMapping(value = "/news/tab2/{pageNum}", method = RequestMethod.GET)
-//	public String newsPage2(Model model, @PathVariable("pageNum") Integer pageNum) throws Exception{
-//		String tab = "tab2";
-//		model.addAttribute("tab", tab);
-//    	List<AbroadScrap> abrList = abrService.serachNews(pageNum);
-//        model.addAttribute("abrNewsList", abrList);
-//		return "sub/news";
-//		
-//	}
-	
-	/*@RequestMapping(value = "/news/tab2/{pageNum}", method = RequestMethod.GET)
-	public String newsPage(Model model, @PathVariable("pageNum") Integer pageNum) throws Exception{
-		int perPageNews = 10;
-		int start = (perPageNews-1)*(pageNum-1)+pageNum;
-		int end = start + perPageNews+1;
-    	String keyword = "비트코인";
-    	List<DomesticScrap> list = demService.searchNews(keyword,end,start);
-    	List<AbroadScrap> abrList = abrService.serachNews(pageNum);
-        model.addAttribute("newsList", list);
-        model.addAttribute("abrNewsList", abrList);
-		return "sub/news";
+	@RequestMapping(value = "/addAbroadScrap", method = RequestMethod.POST)
+	public String addAbroadScrap(@RequestBody AbroadScrap vo) throws Exception{
+		vo.setUser_num(4);
+		abrService.addAbroadScrap(vo);
 		
-	}*/
+		return "sub/news/tab2";
+	}
 	
+	@RequestMapping(value = "/addDemesticScrap", method = RequestMethod.POST)
+	public String addDemesticScrap(@RequestBody DemesticScrap vo) throws Exception{
+		vo.setUser_num(4);
+		demService.addDemesticScrap(vo);
+		
+		return "sub/news/tab1";
+	}
 	
+	@RequestMapping(value = "/searchScrap", method = RequestMethod.POST)
+	public String searchScrap(@RequestBody SearchInfo vo) throws Exception{
+		String tabInfo = vo.getTabInfo();
+		String searchKeyword = vo.getSearchKeyword();
+		System.out.println("서치실행");
+		System.out.println("tabInfo : " + tabInfo);
+		System.out.println("searchKeyword : " + searchKeyword);
+		if(tabInfo.equals("tab1"))
+		{
+			List<DemesticScrap> list = demService.searchNews(searchKeyword);
+			return "sub/news/tab1";
+		}
+		else
+		{
+			return "sub/news/tab2";
+		}
+	}	
 }

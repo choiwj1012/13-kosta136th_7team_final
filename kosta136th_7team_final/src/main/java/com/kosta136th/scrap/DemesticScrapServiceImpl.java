@@ -10,6 +10,8 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Service;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -18,12 +20,15 @@ import org.xmlpull.v1.XmlPullParserFactory;
 @Service
 public class DemesticScrapServiceImpl implements DemesticScrapService{
 
+	@Inject
+	private DemesticScrapDAO dao;
+	
 	private static String clientID = "lBUvkUjh3n4RKMaC5_FR";
 	private static String clientSecret = "Mt4Ub4i38b";
 	
 	@Override
-	public List<DomesticScrap> searchNews(String keyword, int display, int start) throws Exception {
-		List<DomesticScrap> list = null;
+	public List<DemesticScrap> newsList(String keyword, int display, int start) throws Exception {
+		List<DemesticScrap> list = null;
 		try {
 			URL url;
 			url = new URL("https://openapi.naver.com/v1/search/"
@@ -46,13 +51,13 @@ public class DemesticScrapServiceImpl implements DemesticScrapService{
 
 
 			int eventType = parser.getEventType();
-			DomesticScrap b = null;
+			DemesticScrap b = null;
 			while (eventType != XmlPullParser.END_DOCUMENT) {
 				switch (eventType) {
 				case XmlPullParser.END_DOCUMENT: // 문서의 끝
 					break;
 				case XmlPullParser.START_DOCUMENT:
-					list = new ArrayList<DomesticScrap>();
+					list = new ArrayList<DemesticScrap>();
 					break;
 				case XmlPullParser.END_TAG: {
 					String tag = parser.getName();
@@ -67,7 +72,7 @@ public class DemesticScrapServiceImpl implements DemesticScrapService{
 					String tag = parser.getName();
 					switch (tag) {
 					case "item":
-						b = new DomesticScrap();
+						b = new DemesticScrap();
 						break;
 					case "title":
 						if(b != null)
@@ -114,6 +119,19 @@ public class DemesticScrapServiceImpl implements DemesticScrapService{
 		}
 		
 		return list;
+	}
+
+	@Override
+	public void addDemesticScrap(DemesticScrap vo) throws Exception{
+		dao.addDemesticScrap(vo);
+		
+	}
+
+	@Override
+	public List<DemesticScrap> searchNews(String searchKeyword) throws Exception {
+		
+		return dao.searchNews(searchKeyword);
+		
 	}
 
 }
