@@ -1,6 +1,7 @@
 package com.kosta136th.user;
 
 public class User {
+
 	private String email;
 	private String password;
 	private String nickname;
@@ -36,6 +37,11 @@ public class User {
 
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+	
+	@Override
+	public String toString() {
+		return "User [email=" + email + ", password=" + password + ", nickname=" + nickname + "]";
 	}
 	
 }

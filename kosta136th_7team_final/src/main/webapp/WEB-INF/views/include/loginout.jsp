@@ -25,7 +25,7 @@
 					<div class="form-group">
 						<label for="signup_email">이메일 주소</label>
 						<input type="email" class="form-control" id="signup_email" placeholder="이메일 주소를 입력하세요" required />
-						<button type="button" class="btn btn-primary">이메일 체크</button>
+						<button type="button" id = "check_email_btn" class="btn btn-primary">이메일 체크</button>
 					</div>
 					
 					<div class="form-group">
@@ -41,7 +41,7 @@
 					<div class="form-group">
 						<label for="signup_nickname">닉네임</label>
 						<input type="text" class="form-control" id="signup_nickname" placeholder="닉네임을 입력하세요" required/>
-						<button type="button" class="btn btn-primary">닉네임 체크</button>
+						<button type="button" id = "check_nickname_btn" class="btn btn-primary">닉네임 체크</button>
 					</div>
 					
 					<div class="row text-center">
@@ -70,7 +70,8 @@
 		
 	<!-- modal content -->
 	<div class="modal-content">
-	
+		이메일 : ${signinSessionDTO.email}
+		별명 : ${signinSessionDTO.nickname}	
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal">&times;</button>
 			<h2><span class="glyphicon glyphicon-lock"></span>로그인</h2>
@@ -79,9 +80,9 @@
 		<div class="modal-body">
 		
 			<div class="naver text-center">
-				<a href="#"><img src="../../resources/img/naver_icon_resize.png" alt="" /> 네이버로 로그인 하기</a>
+				<a href="#" id = "signin_naver_img"><img src="../../resources/img/naver_icon_resize.png" alt="" /> 네이버로 로그인 하기</a>
 			</div>
-		
+
 			<form action="" role="form">
 				
 				<div class="form-group">
@@ -183,7 +184,7 @@
 			
 			$.ajax({
 				type : 'POST',
-				url : '/requestNaverIDLoginAPI',
+				url : '/requestSignupNaver',
 			    success : function(data) {
 			    	window.open(data);
 			    	/* location.href = data; */
@@ -195,17 +196,83 @@
 	});
 </script>
 
-
+<!-- 네이버로 로그인 버튼을 클릭했을 때 작동하는 스크립트입니다. -->
 <script>
 	$(document).ready(function(){
-		$('#naverSignin').on('click', function(){
+		$('#signin_naver_img').on('click', function(e){
+			
+			e.preventDefault();
+			
 			$.ajax({
 				type : 'POST',
 				url : '/requestSigninNaver',
 			    success : function(data) {
-			    	location.href = data;
+			    	window.open(data);
+			    	/* location.href = data; */
+			    	/* window.open(data, '소셜 로그인'); */
 			    }
 			});
+			
 		});
 	});
 </script>
+
+<!-- 아이디 중복 검사 버튼 클릭했을 때 작동하는 스크립트 -->
+<script>
+			$(document).ready(function(){
+
+				$(document).on('click', '#check_email_btn',function(){
+			
+					$.ajax({
+								url : '/requestCheckEmailDuplication',
+								method : 'post',
+								async : false,
+								data : {
+										email : $('input[type = "email"]').val()
+									},
+								success : function(data){
+									email_state = data;
+									if (email_state === "0"){
+										alert('이미 가입된 이메일입니다');
+									}else if(email_state === "1"){
+										alert('사용할 수 있는 이메일입니다');
+									}else{
+										alert('오류가 발생했습니다');
+									} 
+								}
+					});
+					
+				});
+			});
+	</script>
+
+<!-- 닉네임 중복 검사 버튼 클릭했을 때 작동하는 스크립트 -->
+<!-- 일단은 넣어두고, 컨트롤러에도 만들어 놓지만  -->
+<!-- 닉네임 중복 검사는 기획 단계에서 없어졌다 -->
+<!-- <script>
+			$(document).ready(function(){
+
+				$(document).on('click', '#check_nickname_btn',function(){
+			
+					$.ajax({
+								url : '/requestCheckNicknameDuplication',
+								method : 'post',
+								async : false,
+								data : {
+										nickname : $('#signup_nickname').val()
+									},
+								success : function(data){
+									nickname_state = data;
+									if (nickname_state === "0"){
+										alert('이미 사용중인 닉네임입니다');
+									}else if(nickname_state === "1"){
+										alert('사용할 수 있는 닉네임입니다');
+									}else{
+										alert('오류가 발생했습니다');
+									} 
+								}
+					});
+					
+				});
+			});
+	</script> -->
