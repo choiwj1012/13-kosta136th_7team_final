@@ -1,16 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
 
 <%@ include file="../include/header.jsp"%>
-<%-- <%@ include file="../include/grandNav.jsp"%> --%>
 
 <head>
-<link rel="stylesheet" href="../../resources/css/board.css" />
-<link rel="stylesheet" href="../../resources/css/btcInfoLand.css" />
-<script src="../../resources/js/jquery.tubular.1.0.js"></script>
-<script src="../../resources/js/index.js"></script>
+	<link rel="stylesheet" href="../../resources/css/btcInfoLand.css" />
 </head>
 
 
@@ -71,7 +66,7 @@
 				<div class="col-sm-4 column">
 					<div class="dealer_wrapper">
 						<div class="dealer_img">
-							<img src="../../resources/img/dealer_test_img01.jpg">
+							<a href="/btcInfoLand_board_list"><img src="../../resources/img/dealer_test_img01.jpg"></a>
 						</div>
 						<div class="dealer_content">
 							<h3>
@@ -81,9 +76,72 @@
 							<h2>초보님을 위한 비트코인 시작하기~</h2>
 							<div class="dealer_id">@webtohouse</div>
 							<div class="hashTag_group">
-								<span class="label label-primary">#실시간시세</span> <span
-									class="label label-primary">#Bitcoin</span> <span
-									class="label label-primary">#비트코인초보</span>
+								<span class="label label-primary">#실시간시세</span> 
+								<span class="label label-primary">#Bitcoin</span> 
+								<span class="label label-primary">#비트코인초보</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- end of col-sm-4 column -->
+				<div class="col-sm-4 column">
+					<div class="dealer_wrapper">
+						<div class="dealer_img">
+							<a href="/btcInfoLand_board_list"><img src="../../resources/img/dealer_test_img02.jpg"></a>
+						</div>
+						<div class="dealer_content">
+							<h3>
+								<span class="label label-primary glyphicon glyphicon-heart">20,345</span>
+							</h3>
+							<div class="badge_con"></div>
+							<h2>초보님을 위한 비트코인 시작하기~</h2>
+							<div class="dealer_id">@webtohouse</div>
+							<div class="hashTag_group">
+								<span class="label label-primary">#실시간시세</span> 
+								<span class="label label-primary">#Bitcoin</span> 
+								<span class="label label-primary">#비트코인초보</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- end of col-sm-4 column -->
+				<div class="col-sm-4 column">
+					<div class="dealer_wrapper">
+						<div class="dealer_img">
+							<a href="/btcInfoLand_board_list"><img src="../../resources/img/dealer_test_img03.jpg"></a>
+						</div>
+						<div class="dealer_content">
+							<h3>
+								<span class="label label-primary glyphicon glyphicon-heart">20,345</span>
+							</h3>
+							<div class="badge_con"></div>
+							<h2>초보님을 위한 비트코인 시작하기~</h2>
+							<div class="dealer_id">@webtohouse</div>
+							<div class="hashTag_group">
+								<span class="label label-primary">#실시간시세</span> 
+								<span class="label label-primary">#Bitcoin</span> 
+								<span class="label label-primary">#비트코인초보</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- end of col-sm-4 column -->
+				<div class="col-sm-4 column">
+					<div class="dealer_wrapper">
+						<div class="dealer_img">
+							<a href="/btcInfoLand_board_list"><img src="../../resources/img/dealer_test_img01.jpg"></a>
+						</div>
+						<div class="dealer_content">
+							<h3>
+								<span class="label label-primary glyphicon glyphicon-heart">20,345</span>
+							</h3>
+							<div class="badge_con"></div>
+							<h2>초보님을 위한 비트코인 시작하기~</h2>
+							<div class="dealer_id">@webtohouse</div>
+							<div class="hashTag_group">
+								<span class="label label-primary">#실시간시세</span> 
+								<span class="label label-primary">#Bitcoin</span> 
+								<span class="label label-primary">#비트코인초보</span>
 							</div>
 						</div>
 					</div>
@@ -102,9 +160,9 @@
 							<h2>초보님을 위한 비트코인 시작하기~</h2>
 							<div class="dealer_id">@webtohouse</div>
 							<div class="hashTag_group">
-								<span class="label label-primary">#실시간시세</span> <span
-									class="label label-primary">#Bitcoin</span> <span
-									class="label label-primary">#비트코인초보</span>
+								<span class="label label-primary">#실시간시세</span> 
+								<span class="label label-primary">#Bitcoin</span> 
+								<span class="label label-primary">#비트코인초보</span>
 							</div>
 						</div>
 					</div>
@@ -123,9 +181,9 @@
 							<h2>초보님을 위한 비트코인 시작하기~</h2>
 							<div class="dealer_id">@webtohouse</div>
 							<div class="hashTag_group">
-								<span class="label label-primary">#실시간시세</span> <span
-									class="label label-primary">#Bitcoin</span> <span
-									class="label label-primary">#비트코인초보</span>
+								<span class="label label-primary">#실시간시세</span> 
+								<span class="label label-primary">#Bitcoin</span> 
+								<span class="label label-primary">#비트코인초보</span>
 							</div>
 						</div>
 					</div>
@@ -144,9 +202,9 @@
 							<h2>초보님을 위한 비트코인 시작하기~</h2>
 							<div class="dealer_id">@webtohouse</div>
 							<div class="hashTag_group">
-								<span class="label label-primary">#실시간시세</span> <span
-									class="label label-primary">#Bitcoin</span> <span
-									class="label label-primary">#비트코인초보</span>
+								<span class="label label-primary">#실시간시세</span> 
+								<span class="label label-primary">#Bitcoin</span> 
+								<span class="label label-primary">#비트코인초보</span>
 							</div>
 						</div>
 					</div>
@@ -165,9 +223,9 @@
 							<h2>초보님을 위한 비트코인 시작하기~</h2>
 							<div class="dealer_id">@webtohouse</div>
 							<div class="hashTag_group">
-								<span class="label label-primary">#실시간시세</span> <span
-									class="label label-primary">#Bitcoin</span> <span
-									class="label label-primary">#비트코인초보</span>
+								<span class="label label-primary">#실시간시세</span> 
+								<span class="label label-primary">#Bitcoin</span> 
+								<span class="label label-primary">#비트코인초보</span>
 							</div>
 						</div>
 					</div>
@@ -186,72 +244,9 @@
 							<h2>초보님을 위한 비트코인 시작하기~</h2>
 							<div class="dealer_id">@webtohouse</div>
 							<div class="hashTag_group">
-								<span class="label label-primary">#실시간시세</span> <span
-									class="label label-primary">#Bitcoin</span> <span
-									class="label label-primary">#비트코인초보</span>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- end of col-sm-4 column -->
-				<div class="col-sm-4 column">
-					<div class="dealer_wrapper">
-						<div class="dealer_img">
-							<img src="../../resources/img/dealer_test_img01.jpg">
-						</div>
-						<div class="dealer_content">
-							<h3>
-								<span class="label label-primary glyphicon glyphicon-heart">20,345</span>
-							</h3>
-							<div class="badge_con"></div>
-							<h2>초보님을 위한 비트코인 시작하기~</h2>
-							<div class="dealer_id">@webtohouse</div>
-							<div class="hashTag_group">
-								<span class="label label-primary">#실시간시세</span> <span
-									class="label label-primary">#Bitcoin</span> <span
-									class="label label-primary">#비트코인초보</span>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- end of col-sm-4 column -->
-				<div class="col-sm-4 column">
-					<div class="dealer_wrapper">
-						<div class="dealer_img">
-							<img src="../../resources/img/dealer_test_img02.jpg">
-						</div>
-						<div class="dealer_content">
-							<h3>
-								<span class="label label-primary glyphicon glyphicon-heart">20,345</span>
-							</h3>
-							<div class="badge_con"></div>
-							<h2>초보님을 위한 비트코인 시작하기~</h2>
-							<div class="dealer_id">@webtohouse</div>
-							<div class="hashTag_group">
-								<span class="label label-primary">#실시간시세</span> <span
-									class="label label-primary">#Bitcoin</span> <span
-									class="label label-primary">#비트코인초보</span>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- end of col-sm-4 column -->
-				<div class="col-sm-4 column">
-					<div class="dealer_wrapper">
-						<div class="dealer_img">
-							<img src="../../resources/img/dealer_test_img03.jpg">
-						</div>
-						<div class="dealer_content">
-							<h3>
-								<span class="label label-primary glyphicon glyphicon-heart">20,345</span>
-							</h3>
-							<div class="badge_con"></div>
-							<h2>초보님을 위한 비트코인 시작하기~</h2>
-							<div class="dealer_id">@webtohouse</div>
-							<div class="hashTag_group">
-								<span class="label label-primary">#실시간시세</span> <span
-									class="label label-primary">#Bitcoin</span> <span
-									class="label label-primary">#비트코인초보</span>
+								<span class="label label-primary">#실시간시세</span> 
+								<span class="label label-primary">#Bitcoin</span>
+								<span class="label label-primary">#비트코인초보</span>
 							</div>
 						</div>
 					</div>

@@ -5,8 +5,6 @@
 
 <head>
 	<link rel="stylesheet" href="../../resources/css/board.css" />
-	<script src="../../resources/js/jquery.tubular.1.0.js"></script>
-	<script src="../../resources/js/index.js"></script>
 	<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>	<!-- html editor -->
   	<script>tinymce.init({ selector:'textarea' });</script>		<!-- html editor -->
 </head>

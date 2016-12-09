@@ -5,8 +5,6 @@
 
 <head>
 	<link rel="stylesheet" href="../../resources/css/board.css" />
-	<script src="../../resources/js/jquery.tubular.1.0.js"></script>
-	<script src="../../resources/js/index.js"></script>
 </head>
 
 <body id="page-top">
@@ -25,7 +23,7 @@
 
 		<!-- 좌측 채팅창 영역 -->
 		<div class="col-lg-3 visible-lg" align="left">
-			<img class="side_img" src="https://dummyimage.com/300x800//f3f3f3/00e8cd&text=300x800/+chat" alt="Holder image">
+			<img class="side_img" src="https://dummyimage.com/300x800" alt="Holder image">
 		</div>
 
 
