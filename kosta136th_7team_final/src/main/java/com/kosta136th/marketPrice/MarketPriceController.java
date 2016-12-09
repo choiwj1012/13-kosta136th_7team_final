@@ -25,7 +25,7 @@ public class MarketPriceController {
 	@Inject
 	MarketPriceService marketPriceservice;
 	
-	@Scheduled(fixedDelay=12000)
+	@Scheduled(fixedDelay = 12000000)
 	@RequestMapping(value = "/rateSave", method = RequestMethod.GET)
 	public void rateSave() {
 		
