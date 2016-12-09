@@ -11,25 +11,28 @@ import javax.inject.Inject;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/rate/*")
 public class MarketPriceController {
-
+	
 	@Inject
 	MarketPriceService marketPriceservice;
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																				
+	
+	@Scheduled(fixedDelay=12000)
 	@RequestMapping(value = "/rateSave", method = RequestMethod.GET)
-	public String rateSave() {
+	public void rateSave() {
+		
+		System.out.println("저장하러왔습니다.");
 		
 		try {
+			
 			String apiURL;	
 			
 			String command = "";
@@ -56,7 +59,7 @@ public class MarketPriceController {
 			if(responseCode==200) {
 				command = res.toString();
 			}
-
+			
 			String jsonInfo = command;
 			try {
 
@@ -101,9 +104,9 @@ public class MarketPriceController {
 					marketPrice.setPrice_rur_result(price_rur_out);
 					marketPrice.setVolume_24h_result(volume_24h_out);
 					marketPrice.setTimestamp((Long) marketsObject.get("Timestamp"));;
-				
-					marketPriceservice.rateSave(marketPrice);
 					
+					marketPriceservice.rateSave(marketPrice);
+
 				}
 
 				
@@ -114,11 +117,9 @@ public class MarketPriceController {
 			
 		} catch (Exception e) {
 			System.out.println(e);
-		}		
+		}
 		
-		return "index";
-		
-	}
+	}	
 	
 //	@RequestMapping(value = "/bitrate", method = RequestMethod.GET)
 //	public String callWorldCoinIndexDotCom(Model model) {
