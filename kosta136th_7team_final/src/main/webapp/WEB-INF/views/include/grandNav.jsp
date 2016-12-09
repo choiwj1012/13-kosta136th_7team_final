@@ -21,7 +21,7 @@
 			
 			<div class="collapse navbar-collapse navbar-right">
 				<ul class="nav navbar-nav">
-					<li><a href="/graph">실시간 시세</a></li>
+					<li><a href="/marketPrice">실시간 시세</a></li>
 					<li><a href="/news">최신 뉴스</a></li>
 					<li><a href="/btcInfoLand">BTC 정보광장</a></li>
 					<li><a href="/board_list">자유게시판</a></li>
