@@ -1,37 +1,4 @@
-<<<<<<< HEAD
-//package com.kosta136th.marketPrice;
-//
-//import java.io.BufferedReader;
-//import java.io.InputStreamReader;
-//import java.math.BigDecimal;
-//import java.net.HttpURLConnection;
-//import java.net.URL;
-//import java.util.ArrayList;
-//
-//import javax.inject.Inject;
-//
-//import org.json.simple.JSONArray;
-//import org.json.simple.JSONObject;
-//import org.json.simple.parser.JSONParser;
-//import org.json.simple.parser.ParseException;
-//import org.springframework.scheduling.annotation.Scheduled;
-//import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.bind.annotation.RequestMethod;
-//import org.springframework.web.bind.annotation.RestController;
-//
-//@RestController
-//public class MarketPriceDataController {
-//	
-//	@Inject
-//	MarketPriceService marketPriceservice;
-//
-//	@Scheduled(fixedDelay=3600000)
-//	@RequestMapping(value = "/rateSave", method = RequestMethod.GET)
-//	public void rateSave() {
-//		
-//		System.out.println("저장하러왔습니다.");
-//		
-=======
+
 package com.kosta136th.marketPrice;
 
 import java.io.BufferedReader;
@@ -157,7 +124,7 @@ public class MarketPriceDataController {
 //	@RequestMapping(value = "/bitrate", method = RequestMethod.GET)
 //	public String callWorldCoinIndexDotCom(Model model) {
 //
->>>>>>> 155885d7b0d0b0cc57b15e40d5d07b04fc7a0319
+
 //		try {
 //			
 //			String apiURL;	
@@ -248,4 +215,4 @@ public class MarketPriceDataController {
 //		
 //	}	
 //	
-//}
+}
