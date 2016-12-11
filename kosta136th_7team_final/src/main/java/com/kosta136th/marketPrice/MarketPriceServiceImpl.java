@@ -1,5 +1,7 @@
 package com.kosta136th.marketPrice;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -15,6 +17,12 @@ public class MarketPriceServiceImpl implements MarketPriceService{
 
 		dao.rateSave(marketPrice);
 		
+	}
+
+	@Override
+	public List<MarketPrice> coinRateList() throws Exception {
+		
+		return dao.coinRateList();
 	}
 
 }

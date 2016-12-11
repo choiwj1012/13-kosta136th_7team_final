@@ -22,6 +22,7 @@ public class HomeController {
 	@RequestMapping(value = "/marketPrice", method = RequestMethod.GET)
 	public String price(){
 		
+		
 		return "sub/marketPrice";
 		
 	}
