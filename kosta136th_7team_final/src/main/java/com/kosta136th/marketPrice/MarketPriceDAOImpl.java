@@ -1,5 +1,7 @@
 package com.kosta136th.marketPrice;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -17,6 +19,13 @@ public class MarketPriceDAOImpl implements MarketPriceDAO{
 	public void rateSave(MarketPrice marketPrice) throws Exception {
 		
 		sqlSession.insert(namespace + ".rateSave", marketPrice);
+		
+	}
+
+	@Override
+	public List<MarketPrice> coinRateList() throws Exception {
+		
+		return sqlSession.selectList(namespace + ".bitcoinList");
 		
 	}
 
