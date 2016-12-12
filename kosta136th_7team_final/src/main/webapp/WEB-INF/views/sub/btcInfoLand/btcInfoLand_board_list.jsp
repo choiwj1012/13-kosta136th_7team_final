@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<%@ include file="../include/header.jsp"%>
+<%@ include file="../../include/header.jsp"%>
 
 <head>
 	<link rel="stylesheet" href="../../resources/css/btcInfoLand.css" />
@@ -15,7 +15,7 @@
 		<div class="row">
 			<div class="col-lg-3 visible"></div>
 		</div>
-		<%@ include file="../include/grandNav.jsp"%>
+		<%@ include file="../../include/grandNav.jsp"%>
 		<div class="container">
 			<div class="page-header">
 				<h1>
@@ -203,4 +203,4 @@
 	
 </body>
 
-<%@ include file="../include/footer.jsp"%>
+<%@ include file="../../include/footer.jsp"%>

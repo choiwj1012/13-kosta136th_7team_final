@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ include file="../include/header.jsp" %>
+<%@ include file="../../include/header.jsp" %>
 
 
 <head>
-	<link rel="stylesheet" href="../../resources/css/board.css" />
+	<link rel="stylesheet" href="../../../resources/css/board.css" />
 </head>
 
 <body id="page-top">
@@ -14,7 +14,7 @@
 		<div class="row">
 			<div class="col-lg-3 visible"></div>
 		</div>
-		<%@ include file="../include/grandNav.jsp" %>		
+		<%@ include file="../../include/grandNav.jsp" %>		
 	</div>
 	
 	
@@ -30,7 +30,7 @@
 		<!-- 중앙 게시판 영역 -->
 		<div class="col-lg-6" align="center">
 			<!-- 광고이미지 -->
-			<img class="center_img" src="../../resources/img/AD.gif" alt="Holder image">
+			<img class="center_img" src="../../../resources/img/AD.gif" alt="Holder image">
         	 <!-- center side article -->
 	         <div id="first_board">
 	            <br>
@@ -148,4 +148,4 @@
    </div>
 </body>
 
-<%@ include file="../include/footer.jsp" %>		
+<%@ include file="../../include/footer.jsp" %>		

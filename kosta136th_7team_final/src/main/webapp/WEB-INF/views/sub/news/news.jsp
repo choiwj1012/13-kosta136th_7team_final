@@ -2,11 +2,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
 
-<%@ include file="../include/header.jsp" %>
+<%@ include file="../../include/header.jsp" %>
 <header>
 	<link rel="stylesheet" href="../../resources/css/news.css" />
 </header>
-<%@ include file="../include/grandNav.jsp" %>
+<%@ include file="../../include/grandNav.jsp" %>
 
 <div class="container">
 
@@ -268,4 +268,4 @@ function korSubscribe(link, title, pubDate, description)
 	});
 }
 </script>
-<%@ include file="../include/footer.jsp" %>		
+<%@ include file="../../include/footer.jsp" %>		

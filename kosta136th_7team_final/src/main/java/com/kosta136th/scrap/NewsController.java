@@ -45,7 +45,7 @@ public class NewsController {
 	        model.addAttribute("pageMaker", pageMaker);
 			model.addAttribute("searchTF", searchTF);
 			model.addAttribute("searchKeyword", searchKeyword);
-			return "sub/news";
+			return "sub/news/news";
 			
 		}
 		else
@@ -69,7 +69,7 @@ public class NewsController {
 	        model.addAttribute("pageMaker", pageMaker);
 	        searchTF = 1;
 			model.addAttribute("searchTF", searchTF);
-			return "sub/news";
+			return "sub/news/news";
 		}
 	}
 	
@@ -98,7 +98,7 @@ public class NewsController {
 	        pageMaker.setCri(cri);
 	        pageMaker.setTotalCount(100);
 	        model.addAttribute("pageMaker", pageMaker);
-			return "sub/news";
+			return "sub/news/news";
 		}
 		
 		else
@@ -122,7 +122,7 @@ public class NewsController {
 	        model.addAttribute("pageMaker", pageMaker);
 	        searchTF = 1;
 			model.addAttribute("searchTF", searchTF);
-			return "sub/news";
+			return "sub/news/news";
 		}
 	}
 	
@@ -147,7 +147,7 @@ public class NewsController {
 	        pageMaker.setCri(cri);
 	        pageMaker.setTotalCount(100);
 	        model.addAttribute("pageMaker", pageMaker);
-	        return "sub/news";
+	        return "sub/news/news";
 		}
 		else
 		{
@@ -179,7 +179,7 @@ public class NewsController {
 	        System.out.println(searchAbrlist.size());
 	        searchTF = 1;
 			model.addAttribute("searchTF", searchTF);
-	        return "sub/news";
+	        return "sub/news/news";
 		}
 		
 	}
@@ -190,7 +190,7 @@ public class NewsController {
 		vo.setUser_num(4);
 		abrService.addAbroadScrap(vo);
 		
-		return "sub/news/tab2";
+		return "sub/news/news/tab2";
 	}
 	
 	//국내기사 스크랩
@@ -199,6 +199,6 @@ public class NewsController {
 		vo.setUser_num(4);
 		demService.addDemesticScrap(vo);
 		
-		return "sub/news/tab1";
+		return "sub/news/news/tab1";
 	}
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HomeController {
 	
-	
+	// landing page (index.jsp)
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		
@@ -19,74 +19,74 @@ public class HomeController {
 	}
 	
 	
-	@RequestMapping(value = "/recommand", method = RequestMethod.GET)
-	public String recommand(){
-		
-		return "sub/recommand";
-		
-	}
-	
-	
+	// 자유게시판 리스트 경로
 	@RequestMapping(value = "/board_list", method = RequestMethod.GET)
 	public String boardList(){
 		
-		return "sub/board_list";
+		return "sub/freeboard/board_list";
 		
 	}
 	
 	
+	// 자유게시판 읽기 경로
 	@RequestMapping(value = "/board_read", method = RequestMethod.GET)
 	public String boardRead(){
 		
-		return "sub/board_read";
+		return "sub/freeboard/board_read";
 		
 	}
 	
 	
+	// 자유게시판 쓰기 경로
 	@RequestMapping(value = "/board_write", method = RequestMethod.GET)
 	public String boardWrite(){
 		
-		return "sub/board_write";
+		return "sub/freeboard/board_write";
 		
 	}
 	
 	
+	// 자유게시판 수정 경로
 	@RequestMapping(value = "/board_update", method = RequestMethod.GET)
 	public String boardUpdate(){
 		
-		return "sub/board_update";
+		return "sub/freeboard/board_update";
 		
 	}
 	
 	
+	// 마이페이지 수정 경로
 	@RequestMapping(value = "/myPage", method = RequestMethod.GET)
 	public String myPage(){
 		
-		return "sub/myPage";
+		return "sub/myPage/myPage";
 		
 	}
 	
 	
+	// 마이페이지 유저 스크랩 리스트 경로
 	@RequestMapping(value = "/manageMyBoard", method = RequestMethod.GET)
 	public String manageMyBoard(){
 		
-		return "sub/manageMyBoard";
+		return "sub/myPage/manageMyBoard";
 		
 	}
 	
 	
+	// 마이페이지 유저 정보 수정 경로
 	@RequestMapping(value = "/manageMyInfo", method = RequestMethod.GET)
 	public String manageMyInfo(){
 		
-		return "sub/manageMyInfo";
+		return "sub/myPage/manageMyInfo";
 		
 	}
 	
 	
+	// 마이페이지 유저 비트코인 지갑 보기 경로 (준비중 페이지로 변경)
 	@RequestMapping(value = "/manageMyBitcoin", method = RequestMethod.GET)
 	public String manageMyBitcoin(){
 		
-		return "sub/manageMyBitcoin";
+		return "sub/myPage/manageMyBitcoin";
 		
 	}
 	
@@ -95,7 +95,7 @@ public class HomeController {
 	@RequestMapping(value = "/btcInfoLand", method = RequestMethod.GET)
 	public String btcInfoLand(){
 		
-		return "sub/btcInfoLand";
+		return "sub/btcInfoLand/btcInfoLand";
 		
 	}
 
@@ -104,7 +104,7 @@ public class HomeController {
 	@RequestMapping(value = "/btcInfoLand_board_list", method = RequestMethod.GET)
 	public String btcInfoLandBoardList(){
 		
-		return "sub/btcInfoLand_board_list";
+		return "sub/btcInfoLand/btcInfoLand_board_list";
 		
 	}
 
@@ -113,7 +113,7 @@ public class HomeController {
 	@RequestMapping(value = "/btcInfoLand_board_read", method = RequestMethod.GET)
 	public String btcInfoLandBoardRead(){
 		
-		return "sub/btcInfoLand_board_read";
+		return "sub/btcInfoLand/btcInfoLand_board_read";
 		
 	}
 	
