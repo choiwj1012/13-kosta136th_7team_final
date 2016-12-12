@@ -1,7 +1,10 @@
 package com.kosta136th.marketPrice;
 
+import java.util.List;
+
 public interface MarketPriceService {
 
 	public void rateSave(MarketPrice marketPrice) throws Exception;
-
+	
+	public List<MarketPrice> coinRateList() throws Exception;
 }
