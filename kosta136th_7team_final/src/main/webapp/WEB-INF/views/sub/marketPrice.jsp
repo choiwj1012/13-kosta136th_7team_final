@@ -65,21 +65,8 @@
 								<td>Price</td>
 								<td>Volume_24h</td>
 							</tr>
-							<tr>
-								<c:forEach items="${marketPriceList}" var="marketPrice">
+							<tr id="test">
 								
-									<tr id="test">
-<%-- 										<td>${marketPrice.Label}</td> --%>
-<%-- 										<td><a href=''>${marketPrice.name}</a></td> --%>
-<%-- 										<td>${marketPrice.price_btc_result}</td> --%>
-<%-- 										<td>${marketPrice.price_usd_result}</td> --%>
-<%-- 										<td>${marketPrice.price_cny_result}</td> --%>
-<%-- 										<td>${marketPrice.price_eur_result}</td> --%>
-<%-- 										<td>${marketPrice.price_gbp_result}</td> --%>
-<%-- 										<td>${marketPrice.price_rur_result}</td> --%>
-<%-- 										<td>${marketPrice.volume_24h_result}</td>  --%>
-									<tr>
-								</c:forEach>
 							</tr>
 
 						</table>
@@ -121,40 +108,57 @@
 	<script>
 		$(document).ready(function(){
 			            
-			            $.getJSON("/rate/bitrate", function(data){
+// 			            $.getJSON("/rate/bitRate", function(data){
 			                
-			                var str = "";
+// 			                var str = "";
 			                
-			                $(data).each(
-			                    function(){
-				                    str += "<td>" + this.marketPrice.label + "</td>"
-				                    str += "<td>" + this.marketPrice.name + "</td>"
-				                    str += "<td>" + this.marketPrice.price_btc_result + "</td>";
-				                    str += "<td>" + this.marketvolume_24h_result + "</td>";
-			                });        
+// 			                $(data).each(
+// 			                    function(){
+// 				                    str += "<td>" + this.marketPrice.label + "</td>"
+// 				                    str += "<td>" + this.marketPrice.name + "</td>"
+// 				                    str += "<td>" + this.marketPrice.price_btc_result + "</td>";
+// 				                    str += "<td>" + this.marketvolume_24h_result + "</td>";
+// 			                });        
 			                
-			                $("#test").html(str);
-			            });
+// 			                $("#test").html(str);
+// 			            });
 
 			$('.dd-menu').click(function() {
 	
 				var val = $(this).text();
 				$('#currencyBtn').html(val + "<span class='caret'></span>");
 				
-// 				$.ajax({
-// 					data: {"val" : val},
-// 					url: "/bitRate",
-// 					type: "GET",
-// 					async : false,
-// 					success : function(data) {
-						
-						
-// 					}
+				$.ajax({
+					data: {"val" : val},
+					url: "/rate/bitRate",
+					type: "GET",
+					async : false,
+					success : function(data) {
+						var str = "";
 					
-// 				});
+						str += <c:forEach items="${marketPriceList}" var="marketPrice">
+						
+						str += 		<tr>
+						str +=				<td>${marketPrice.label}</td>
+						str +=				<td><a href=''>${marketPrice.name}</a></td>
+						str +=				<td>${marketPrice.price_btc_result}</td>
+// 										<td>${marketPrice.price_usd_result}</td>
+// 										<td>${marketPrice.price_cny_result}</td>
+// 										<td>${marketPrice.price_eur_result}</td>
+// 										<td>${marketPrice.price_gbp_result}</td>
+// 										<td>${marketPrice.price_rur_result}</td>
+						str +=				<td>${marketPrice.volume_24h_result}</td> 
+						str += 		<tr>
+						str += </c:forEach>
+						
+					 $("#test").html(str);
+					}
+
+					
+			});
 				
 		});
 	
-		});
+	});
 	</script>
 </body>
