@@ -87,3 +87,101 @@
 #logos{
 	width:100%;
 }
+
+
+/****************** chart CSS ******************/
+/**************** 성용에게 문의하세요 ****************/
+
+
+
+#chart_usd, #chart_cny {
+	
+	margin-top: 20px;
+	min-height:	450px;
+	position: relative;
+	
+}
+
+
+/*** 시세리스트 ***/
+/* 제목바  */
+#title_bar {
+	
+	padding: 15px;
+	background: #282b2d;
+	
+}
+
+
+.tabs {
+    min-width: 300px;
+    min-height: 900px;
+    height: 100%;
+    overflow: scroll;
+}
+
+
+/* 탭 버튼 */
+/* .nav-tabs>li.active>a .nav-tabs>li.hover>a {
+	
+	padding: 0;
+	color: #FFF; 
+	cursor: default;
+	background-color: #3e4244;
+	border: none;
+	border-top: 5px solid #eee;
+} */
+
+ul.nav-tabs>li>a {
+	
+	color: #ddd;
+	border: none;
+	border-top: 3px solid #2e3234;
+	border-radius: 0;
+	
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+	
+	color: #FFF; 
+	cursor: default;
+	background-color: #2e3234;
+	border: none;
+	border-top: 3px solid #33AADD;
+	
+}
+
+/* focus, hover시 css */
+.nav-tabs>li>a:hover{
+	
+	color: #FFF; 
+	background-color: #3e4244;
+	border: none;
+	border-top: 3px solid #eee;
+	
+}
+
+/* 버튼과 리스트 구분선 */
+ul.nav.nav-tabs {
+	
+	background: #282b2d;
+	border-bottom: 1px ;
+	
+}
+
+
+
+
+#combo-box {
+	
+	background: #262a2c;
+	border: 1px solid #33aadd;
+	color: #ddd;
+	
+}
+
+#drop-box {
+	
+	max-height: 43px;
+	
+}
