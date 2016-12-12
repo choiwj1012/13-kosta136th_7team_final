@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class NewsController {
 	
@@ -18,6 +19,8 @@ public class NewsController {
     private DemesticScrapService demService; 
 	@Inject
 	private AbroadScrapService abrService;
+	@Inject
+	private AddEmailService emailService;
 	
 	@RequestMapping(value = "/news", method = RequestMethod.GET)
 	public String news(SearchInfo vo, Criteria cri, Model model) throws Exception{
@@ -45,7 +48,7 @@ public class NewsController {
 	        model.addAttribute("pageMaker", pageMaker);
 			model.addAttribute("searchTF", searchTF);
 			model.addAttribute("searchKeyword", searchKeyword);
-			return "sub/news";
+			return "sub/news/news";
 			
 		}
 		else
@@ -69,13 +72,13 @@ public class NewsController {
 	        model.addAttribute("pageMaker", pageMaker);
 	        searchTF = 1;
 			model.addAttribute("searchTF", searchTF);
-			return "sub/news";
+			return "sub/news/news";
 		}
 	}
 	
 	
 	@RequestMapping(value = "/news/tab1", method = RequestMethod.GET)
-	public String newsTab1(@RequestParam("page") int page, SearchInfo vo, Criteria cri, Model model) throws Exception{
+	public String newsTab1(@RequestParam(value = "page", required=false, defaultValue="1") int page, SearchInfo vo, Criteria cri, Model model) throws Exception{
 		model.addAttribute("page", page);
     	List<DemesticScrap> searchlist = new ArrayList<DemesticScrap>();
 		String tab = "tab1";
@@ -98,7 +101,7 @@ public class NewsController {
 	        pageMaker.setCri(cri);
 	        pageMaker.setTotalCount(100);
 	        model.addAttribute("pageMaker", pageMaker);
-			return "sub/news";
+			return "sub/news/news";
 		}
 		
 		else
@@ -122,12 +125,12 @@ public class NewsController {
 	        model.addAttribute("pageMaker", pageMaker);
 	        searchTF = 1;
 			model.addAttribute("searchTF", searchTF);
-			return "sub/news";
+			return "sub/news/news";
 		}
 	}
 	
 	@RequestMapping(value = "/news/tab2", method = RequestMethod.GET)
-	public String newsTab2(@RequestParam("page") int page, SearchInfo vo, Criteria cri, Model model) throws Exception{
+	public String newsTab2(@RequestParam(value = "page", required=false, defaultValue="1") int page, SearchInfo vo, Criteria cri, Model model) throws Exception{
 		int searchTF = 0;
 		String searchKeyword = vo.getSearchKeyword();
 		String tab = "tab2";
@@ -147,7 +150,7 @@ public class NewsController {
 	        pageMaker.setCri(cri);
 	        pageMaker.setTotalCount(100);
 	        model.addAttribute("pageMaker", pageMaker);
-	        return "sub/news";
+	        return "sub/news/news";
 		}
 		else
 		{
@@ -179,7 +182,7 @@ public class NewsController {
 	        System.out.println(searchAbrlist.size());
 	        searchTF = 1;
 			model.addAttribute("searchTF", searchTF);
-	        return "sub/news";
+	        return "sub/news/news";
 		}
 		
 	}
@@ -190,7 +193,7 @@ public class NewsController {
 		vo.setUser_num(4);
 		abrService.addAbroadScrap(vo);
 		
-		return "sub/news/tab2";
+		return "sub/news/news/tab2";
 	}
 	
 	//국내기사 스크랩
@@ -199,6 +202,17 @@ public class NewsController {
 		vo.setUser_num(4);
 		demService.addDemesticScrap(vo);
 		
+		return "sub/news/news/tab1";
+	}
+	
+	//국내기사 스크랩
+	@ResponseBody
+	@RequestMapping(value = "/getEmail", method = RequestMethod.POST)
+	public String getEmail(@RequestBody String email, Model model) throws Exception{
+		String email2 = email.replace("\"", "");
+		emailService.addEmail(email2);
+		int page = 1;
+		model.addAttribute("page", page);
 		return "sub/news/tab1";
 	}
 }

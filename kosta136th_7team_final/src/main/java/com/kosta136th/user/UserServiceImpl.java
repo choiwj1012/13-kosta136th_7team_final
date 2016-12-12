@@ -76,4 +76,14 @@ public class UserServiceImpl implements UserService{
 		
 		return updateUserPasswordSuccess;
 	}
+
+	@Override
+	public boolean signout(User signoutVO) throws Exception {
+		
+		boolean updateUserSignoutSuccess;
+		
+		updateUserSignoutSuccess = userDAO.signout(signoutVO);
+		
+		return updateUserSignoutSuccess;
+	}
 }

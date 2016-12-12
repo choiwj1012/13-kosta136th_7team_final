@@ -25,4 +25,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from ABROAD_SCRAP GROUP BY ABROAD_SCRAP_URL ORDER BY COUNT(*) DESC LIMIT 5;
 	</select>
 	
+	<insert id="insertEmail">
+		INSERT INTO GUEST(GUEST_EMAIL) VALUES(#{email});
+	</insert>
+	
 </mapper>

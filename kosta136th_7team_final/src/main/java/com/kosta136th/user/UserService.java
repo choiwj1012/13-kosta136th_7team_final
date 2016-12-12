@@ -6,6 +6,7 @@ public interface UserService {
 	public String checkEmailDuplication(String email) throws Exception;
 	public String checkNicknameDuplication(String nickname) throws Exception;
 	public User signinNaver(String email) throws Exception;
+	public boolean signout(User signoutVO) throws Exception;
 	public boolean signupNaver(User signinNaverVO) throws Exception;
 	public boolean updateUserPassword(User userVO) throws Exception;
 }

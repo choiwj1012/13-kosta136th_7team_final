@@ -131,17 +131,24 @@
 			e.stopPropagation();
 			
 			var email = $('#signin_email').val();
+			
+			//비밀번호 불러오기
+			var password = $('#signin_password').val();
+
+			if ((email == '')||(password == '')){
+				alert('입력하지 않은 값이 있습니다.');
+				return;	
+			}
+			
 			//이메일의 정규식 regular expression
 			var regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 			//정규식.test(이메일) 결과 잘못된 이메일이면 false가 저장된다
 			var isEmailType = regex.test(email);
+	
 			if (!isEmailType){
 				alert('올바른 이메일 형식이 아닙니다');
 				return;
 			}
-			
-			//비밀번호 불러오기
-			var password = $('#signin_password').val();
 
 			//검사식 
 			regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[~`!@#$%^&*()_+-={}\[\]:;<,>.?/|\\])[A-Za-z\d~`!@#$%^&*()_+-={}\[\]:;<,>.?/|\\]{8,16}$/;
@@ -231,6 +238,57 @@
 		$('#signup_email_btn').on('click', function(e){
 			
 			e.preventDefault();
+			//이메일 불러오기
+			var email = $('#signup_email').val();
+			//비밀번호 불러오기
+			var password = $('#signup_password').val();
+			var nickname = $('#signup_nickname').val();
+			var authentication = $('#signup_authentication').val();
+		  	var checkPassword = $('#signup_check_password').val();
+
+			if ((email == '')||(password == '')||(nickname == '')||(authentication == '')||(checkPassword == '')){
+				alert('입력하지 않은 값이 있습니다.');
+				return;	
+			}
+			
+			//이메일의 정규식 regular expression
+			var regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+			//정규식.test(이메일) 결과 잘못된 이메일이면 false가 저장된다
+			var isEmailType = regex.test(email);
+	
+			if (!isEmailType){
+				alert('올바른 이메일 형식이 아닙니다');
+				return;
+			}
+
+			//검사식 
+			regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[~`!@#$%^&*()_+-={}\[\]:;<,>.?/|\\])[A-Za-z\d~`!@#$%^&*()_+-={}\[\]:;<,>.?/|\\]{8,16}$/;
+		  	//검사식.test(비밀번호) 결과 잘못된 비밀번호면 false가 저장된다
+		  	var isPasswordType = regex.test(password);
+		  			  	
+		  	if (password != checkPassword){
+		  		alert('비밀번호가 일치하지 않습니다');
+		  		return;
+		  	}	
+		  	
+		  	if (!isPasswordType){
+		  		alert("비밀번호(8~16자)는 반드시 한 개 이상의 영문, 숫자, 특수문자를 전부 포함하고 있어야 합니다");
+		  		return;
+		  	}
+			
+			if (!isSignupEmailUnique){
+		  		alert('이메일 중복검사를 해 주세요');
+		  		return;
+		  	}
+		  	
+		  	if (!isAuthenticate){
+		  		alert('인증번호를 발급받으세요');
+		  		return;
+		  	}
+		  	
+			var registerMap = {};
+			registerMap["user"] = [$('#signup_email').val(), $('#signup_password').val(), $('#signup_nickname').val()];
+			registerMap["authentication"] = [$('#signup_authentication').val()];
 			
 			$.ajax({
 				type : 'POST',
@@ -240,13 +298,8 @@
 					"Content-Type": "application/json",
 					"X-HTTP-Method-Override" : "POST"
 				},
-				dataType : 'text',
-			    data : JSON.stringify({
-			    		'email' : $('#signup_email').val(),
-			    		'password' : $('#signup_password').val(),
-			    		'nickname' : $('#signup_nickname').val(),
-			    		'authentication' : $('#signup_authentication').val()
-			    }),	
+				dataType : 'json',
+			    data : JSON.stringify(registerMap),	
 			    success : function(data) {
 				    alert(data);
 			    }
@@ -425,7 +478,7 @@
 					var email = $('#signup_email').val();
 					//이메일의 정규식 regular expression
 					var regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-					//정규식.test(이메일) 결과 잘못된 비밀번호면 false가 저장된다
+					//정규식.test(이메일) 결과 잘못된 이메일이면 false가 저장된다
 					var isEmailType = regex.test(email);
 					if (!isEmailType){
 						alert('올바른 이메일 형식이 아닙니다');
@@ -493,6 +546,7 @@
 								success : function(data){
 									authenticate_state = data;
 									alert(data);
+									isAuthenticate = true;
 								}
 					}); 
 					

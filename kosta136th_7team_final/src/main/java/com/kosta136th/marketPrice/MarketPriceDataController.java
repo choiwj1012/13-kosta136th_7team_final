@@ -35,6 +35,7 @@ public class MarketPriceDataController {
     @Inject
     private MarketPriceService marketPriceService;
     
+
     @Scheduled(fixedDelay = 12000000)
     @RequestMapping(value = "/rateSave", method = RequestMethod.GET)
     public void rateSave() {
@@ -45,7 +46,7 @@ public class MarketPriceDataController {
             String command = "";
             
             //apiURL = "https://www.worldcoinindex.com/apiservice/json?key=TSd9QUg1uE9PRE3JSFP88IWvJ";
-            apiURL = "https://www.worldcoinindex.com/apiservice/json?key=gAGBbdOH2ulQUdnSrttj7DVyo ";
+            apiURL = "https://www.worldcoinindex.com/apiservice/json?key=1111 ";
             
             URL url = new URL(apiURL);
             HttpURLConnection con = (HttpURLConnection)url.openConnection();

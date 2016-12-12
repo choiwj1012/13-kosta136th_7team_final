@@ -5,6 +5,9 @@
 <head>
 	<link rel="stylesheet" href="../../resources/css/index.css" />
 	<script src="../../resources/js/jquery.tubular.1.0.js"></script>
+	<script src="https://code.highcharts.com/stock/highstock.js"></script>			<!-- 차트 API js -->
+	<script src="../../../resources/js/index_chart.js"></script>				<!-- 차트 구현 js -->
+	<script src="../../../resources/js/marketPrice_chart_customizing.js"></script>	<!-- 디자인 커스터마이징 js -->
 	<script src="../../resources/js/index.js"></script>
 	<script>
 		var signinSession = {email : '',
@@ -95,6 +98,11 @@
 		
 	</header>
 		
+	<section class="bg-chart">
+		<div id="chart_usd" class="col-md-6"></div>
+		<div id="chart_cny" class="col-md-6"></div>
+	</section>
+		
 	<section class="bg-first">
 		<div class="container">
 			<div class="row">
@@ -146,6 +154,7 @@
 		<div class="container text-center">
 			<div class="row">
 				
+				
 				<div class="col-md-12">
 					
 					<h3>비트코인 정보를 이메일로 받아보세요</h3>
@@ -174,4 +183,5 @@
 		</div>
 	</section>		
 
-<%@ include file="include/footer.jsp" %>		
+<%@ include file="include/footer.jsp" %>
+		

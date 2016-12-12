@@ -24,7 +24,7 @@
 					</button>
 					
 					<ul class="dropdown-menu" role="menu" aria-labelledby="sitemap">
-						<li role="presentation"><a role="menuitem" tabindex="-1" href="/graph">실시간 시세</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="marketPrice">실시간 시세</a></li>
 						<li role="presentation"><a role="menuitem" tabindex="-1" href="/news">최신 뉴스</a></li>
 						<li role="presentation"><a role="menuitem" tabindex="-1" href="/btcInfoLand">BTC 정보광장</a></li>
 						<li role="presentation"><a role="menuitem" tabindex="-1" href="/board_list">게시판</a></li>

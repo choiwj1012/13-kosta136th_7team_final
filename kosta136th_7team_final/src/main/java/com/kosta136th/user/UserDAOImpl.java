@@ -29,7 +29,10 @@ public class UserDAOImpl implements UserDAO{
 		System.out.println(signinEmailVO.toString());
 				
 		try {
+			//이메일에 해당하는 회원 정보를 찾아
 			signinSessionDTO = session.selectOne(namespace + ".getLoginProfileByEmail", signinEmailVO);
+			//회원정보를 로그인 시간에 넣는다
+			session.insert(namespace + ".insertUserLoginRecord", signinSessionDTO);
 		} catch(Exception e){
 			e.printStackTrace();
 		}
@@ -49,16 +52,17 @@ public class UserDAOImpl implements UserDAO{
 	
 	//쓸 필드가 이메일 뿐이므로 네이버 로그인은 딱히 객체를 만들 필요가 없어.
 	@Override
-	public User signinNaver(String email) throws Exception {
+	public User signinNaver(String NaverEmail) throws Exception {
 		//DAO의 반환은 DTO
 		User signinSessionDTO = null;
 		
 		//로그
 		System.out.println("--DAOImpl Before--");
-		System.out.println(email);
+		System.out.println(NaverEmail);
 				
 		try{
-			signinSessionDTO = session.selectOne(namespace+".getLoginProfileByNaver", email);
+			signinSessionDTO = session.selectOne(namespace+".getLoginProfileByNaver", NaverEmail);
+			session.insert(namespace + ".insertUserLoginRecord", signinSessionDTO);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -76,19 +80,21 @@ public class UserDAOImpl implements UserDAO{
 	}
 	
 	@Override
-	public boolean signupEmail(User signinEmailVO) throws Exception {
+	public boolean signupEmail(User signupEmailVO) throws Exception {
 
 		int affectedRows = 0;
 		boolean signupSuccess = false;
 		
 		//로그
 		System.out.println("--DAOImpl--");
-		System.out.println(signinEmailVO.toString());
-		signinEmailVO.setPassword(encryptPasswordSHA256(signinEmailVO.getPassword()));
-		System.out.println(signinEmailVO.toString());
+		System.out.println(signupEmailVO.toString());
+		signupEmailVO.setPassword(encryptPasswordSHA256(signupEmailVO.getPassword()));
+		System.out.println(signupEmailVO.toString());
 		
 		try{
-			affectedRows = session.insert(namespace + ".insertLoginProfileByEmail", signinEmailVO);
+			affectedRows = session.insert(namespace + ".insertLoginProfileByEmail", signupEmailVO);
+			//가입과 동시에 로그인
+			session.insert(namespace + ".insertUserLoginRecord", signupEmailVO);			
 		}catch(Exception e){
 			e.printStackTrace();
 			affectedRows = 0;			
@@ -114,6 +120,8 @@ public class UserDAOImpl implements UserDAO{
 		
 		try{
 			affectedRows = session.insert(namespace + ".insertLoginProfileByNaver", signupNaverVO);
+			//가입과 동시에 로그인
+			session.insert(namespace + ".insertUserLoginRecord", signupNaverVO);	
 		}catch(Exception e){
 			e.printStackTrace();
 			affectedRows = 0;
@@ -192,7 +200,7 @@ public class UserDAOImpl implements UserDAO{
 		try {
 			userNickname = session.selectOne(namespace+".isNicknameDuplicate", nickname);
 			if (userNickname != null){
-				nickname_state = "0";	//나오면 DB에 있다(0)
+				nickname_state = "0"; //나오면 DB에 있다(0)
 			}else{
 				nickname_state = "1"; //안 나오면 DB에 없다(1)
 			}
@@ -228,6 +236,30 @@ public class UserDAOImpl implements UserDAO{
 		}
 		
 		return updateUserPasswordSuccess;
+	}
+
+	@Override
+	public boolean signout(User signoutVO) throws Exception {
+		int affectedRows = 0;
+		boolean updateUserSignoutSuccess = false;
+		
+		try{
+			System.out.println("signoutVO : " + signoutVO);
+			String login_num = session.selectOne(namespace + ".selectUserLogoutRecord", signoutVO);
+			System.out.println("수정될 login_num : " + login_num);
+			affectedRows = session.update(namespace + ".updateUserLogoutRecord", login_num);
+			System.out.println("수정된 로그 기록 행의 수 : " + affectedRows);
+		}catch(Exception e){
+			e.printStackTrace();
+			affectedRows = 0;
+		}
+		
+		if (affectedRows > 0){
+			updateUserSignoutSuccess = true;
+		}else{
+			updateUserSignoutSuccess = false;
+		}
+		return updateUserSignoutSuccess;
 	}
 		
 }
