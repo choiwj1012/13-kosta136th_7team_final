@@ -20,16 +20,17 @@ public class MarketPriceServiceImpl implements MarketPriceService{
 	}
 
 	@Override
-<<<<<<< HEAD
 	public List<MarketPriceChart> chart(String money_type) throws Exception {
 		
 		return dao.chart(money_type);
 		
-=======
+	}
+	
+	@Override
 	public List<MarketPrice> coinRateList() throws Exception {
 		
 		return dao.coinRateList();
->>>>>>> 5bf89bec30a4b3ab8ad217cbb72ee025027337d4
+
 	}
 
 }

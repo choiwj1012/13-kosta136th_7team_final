@@ -26,12 +26,6 @@
 			WHERE NAME = "LiteCoin"
 		</select>
 		
-		
-	</mapper>
-	
-<<<<<<< HEAD
-	
-=======
 		<select id="bitcoinList" resultType="com.kosta136th.marketPrice.MarketPrice">
 		<![CDATA[
 			SELECT
@@ -43,6 +37,6 @@
 		]]>
 	
 		</select>
-
+		
 	</mapper>
->>>>>>> 5bf89bec30a4b3ab8ad217cbb72ee025027337d4
+
