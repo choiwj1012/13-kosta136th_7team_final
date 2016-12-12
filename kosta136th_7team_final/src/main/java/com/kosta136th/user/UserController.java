@@ -49,21 +49,18 @@ public class UserController {
 	@Inject
 	private UserService userService;
 	
-	@RequestMapping(value = "/requestSigninEmail", method = RequestMethod.POST)
+	@RequestMapping(value = "/requestSigninEmail", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	@ResponseBody
 	public ResponseEntity<User> requestSigninEmail(@RequestBody User signinEmailDTO, HttpSession session){
 		
 		User signinSessionDTO = null;
 		
-		//한글 인코딩을 위해, Restful 방식에서 어쩔 수 없이 쓴다.
-		//이 반복을 줄일 방법이 없을까?
-		HttpHeaders responseHeaders = new HttpHeaders();
-	    responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
 		ResponseEntity <User> entity = null;
 		
-		System.out.println(signinEmailDTO.getEmail());
+		/*System.out.println(signinEmailDTO.getEmail());
 		System.out.println(signinEmailDTO.getPassword());
-		System.out.println(signinEmailDTO.getNickname());
+		System.out.println(signinEmailDTO.getNickname());*/
+		
 		try { 
 			signinSessionDTO = userService.signinEmail(signinEmailDTO);
 			entity = new ResponseEntity<>(signinSessionDTO, HttpStatus.OK);
@@ -86,89 +83,88 @@ public class UserController {
 	@RequestMapping(value = "/requestSignupEmail", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	@ResponseBody
 	public ResponseEntity<String> requestSignupEmail(@RequestBody Map<String, List<String>> registerMap, HttpSession session){
-		
+		//반환값
 		boolean signupSuccess = false;
 		
+		//개인정보 객체의 필드들
 		String email = registerMap.get("user").get(0);
 		String password = registerMap.get("user").get(1);
 		String nickname = registerMap.get("user").get(2);
 		
+		//개인정보 객체
 		User signupEmailDTO = new User(email, password, nickname);
 		
+		//인증 문자열
 		String authentication = registerMap.get("authentication").get(0); 
 		
-		//한글 인코딩을 위해, Restful 방식에서 어쩔 수 없이 쓴다.
-		//이 반복을 줄일 방법이 없을까?
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
 		ResponseEntity <String> entity = null;
 		
-		try{
-			
-		System.out.println(signupEmailDTO.toString());
-		System.out.println("인증 : " + authentication);
-		System.out.println("세션 저장 인증 : " + (String)session.getAttribute("authentication"));
+		//System.out.println(signupEmailDTO.toString());
+			System.out.println("인증 : " + authentication);
+			System.out.println("세션 저장 인증 : " + (String)session.getAttribute("authentication"));
 		//인증번호가 틀리면 그냥 돌아가
-		if (!((String)session.getAttribute("authentication")).equals(authentication)){
-			System.out.println("잘못된 인증번호입니다");
-			entity = new ResponseEntity<String>("잘못된 인증번호입니다", responseHeaders, HttpStatus.BAD_REQUEST);
-			return entity;
-		}else{
-			System.out.println("인증 성공");
-		}
-		
+			if (!((String)session.getAttribute("authentication")).equals(authentication)){
+				//인증번호는 삭제된다
+				session.removeAttribute("authentication");
+				
+				System.out.println("잘못된 인증번호입니다");
+				entity = new ResponseEntity<String>("잘못된 인증번호입니다", HttpStatus.BAD_REQUEST);
+				return entity;
+			} else {
+				//인증번호는 삭제된다
+				session.removeAttribute("authentication");
+				
+				System.out.println("인증 성공");
+			}
 
-		//DAO에 접근. 검사 로직.
-		//네이버 아이디와 일치하는 행을 불러오는 것
-		String email_state;
-		email_state = checkEmailDuplication(email);
+			//DAO에 접근. 검사 로직.
+			//네이버 아이디와 일치하는 행을 불러오는 것
+			String email_state;
+			email_state = checkEmailDuplication(email);
 		
-		//email_state = 0 : DB에 있는 이메일
-		//email_state = 1 : DB에 없는 이메일
-		//email_state = 2 : 기타(오류)
+			//email_state = 0 : DB에 있는 이메일
+			//email_state = 1 : DB에 없는 이메일
+			//email_state = 2 : 기타(오류)
 		
-		switch (email_state){
+			switch (email_state){
 			
-			case "0":
-				entity = new ResponseEntity<String>("이미 가입한 이메일입니다", responseHeaders, HttpStatus.BAD_REQUEST);
-				break;
-			case "2":
-				entity = new ResponseEntity<String>("에러가 발생했습니다", responseHeaders, HttpStatus.BAD_REQUEST);
-				break;
-			case "1":
-				//DAO에 접근. 비즈니스 로직
-				//네이버 회원 가입
-				//로그인에 실패했습니다는 불가능
-				//오류가 발생했습니다는 가능
-				String message = "회원 가입에 실패했습니다";
-				try{
-					User signupEmailVO = new User(signupEmailDTO.getEmail(),"",signupEmailDTO.getNickname());
-					System.out.println(signupEmailVO.toString());
+				case "0":
+					entity = new ResponseEntity<String>("이미 가입한 이메일입니다", HttpStatus.BAD_REQUEST);
+					break;
+				case "2":
+					entity = new ResponseEntity<String>("에러가 발생했습니다", HttpStatus.BAD_REQUEST);
+					break;
+				case "1":
+					//DAO에 접근. 비즈니스 로직
+					//네이버 회원 가입
+					//로그인에 실패했습니다는 불가능
+					//오류가 발생했습니다는 가능
+					String message = "회원 가입에 실패했습니다";
+					try{
+						User signupEmailVO = new User(signupEmailDTO.getEmail(),"",signupEmailDTO.getNickname());
+						System.out.println(signupEmailVO.toString());
 					
-					signupSuccess = userService.signupNaver(signupEmailVO);
+						signupSuccess = userService.signupNaver(signupEmailVO);
 										
-					if (signupSuccess){
-						entity = new ResponseEntity<>("회원가입에 성공했습니다", HttpStatus.OK);
-						setSigninSessionAttribute(session, signupEmailVO);
-					} else{
-						entity = new ResponseEntity<>("실패했습니다", HttpStatus.BAD_REQUEST);
-					}
+						if (signupSuccess){
+							entity = new ResponseEntity<>("회원가입에 성공했습니다", HttpStatus.OK);
+							setSigninSessionAttribute(session, signupEmailVO);
+						} else{
+							entity = new ResponseEntity<>("실패했습니다", HttpStatus.BAD_REQUEST);
+						}
 					
-				} catch(Exception e) {
-					message = "오류가 발생했습니다.";							
-				}
+					} catch(Exception e) {
+						message = "오류가 발생했습니다.";							
+					}
 				//리턴 문자열 : "성공" 또는 "실패"
-				entity = new ResponseEntity<String>(message, responseHeaders, HttpStatus.BAD_REQUEST);
+				entity = new ResponseEntity<String>(message, HttpStatus.BAD_REQUEST);
 				break;
 			default :
-				entity = new ResponseEntity<String>("에러가 발생했습니다", responseHeaders, HttpStatus.BAD_REQUEST);
+				entity = new ResponseEntity<String>("에러가 발생했습니다", HttpStatus.BAD_REQUEST);
 				break;
 				
 		}
-		}catch(Exception e){
-			System.out.println("아래의 오류가 났다.");
-			e.printStackTrace();
-		}
+		
 		return entity;		
 	}
 	
@@ -200,7 +196,10 @@ public class UserController {
 	@RequestMapping(value = "/requestSignout", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	@ResponseBody
 	public void requestSignout(HttpSession httpSession){
-		setSigninSessionAttribute(httpSession, null);	
+		//로그기록을 처리하기 위해 세션의 객체를 옮긴다
+		doSignout((User)httpSession.getAttribute("signinSessionDTO"));
+		//끝난 후 처리한다.
+		setSigninSessionAttribute(httpSession, null);
 	}
 	
 	//콜백 주소(목적지 : destination)를 입력받아
@@ -237,17 +236,12 @@ public class UserController {
 	}
 	
 	//가입 콜백으로 값이 왔다.
-	@RequestMapping(value = "/doSignupNaver")
+	@RequestMapping(value = "/doSignupNaver", produces = "application/text; charset=utf8") 
 	@ResponseBody
 	public ResponseEntity<String> doSignupNaver(@RequestParam("code") String code, @RequestParam("state") String state 
 			, HttpSession httpSession){
 		
 		System.out.println("가입 로직으로 올바르게 찾아왔습니다");
-		
-		//한글 인코딩을 위해, Restful 방식에서 어쩔 수 없이 쓴다.
-		//이 반복을 줄일 방법이 없을까?
-		HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
         
 		ResponseEntity<String> entity = null;
 		
@@ -354,7 +348,7 @@ public class UserController {
 			//DAO에 비접근. 검사 로직 하나로 충분
 			if (email == null){
 				System.out.println("네이버에 없는 이메일");
-				entity = new ResponseEntity<String>("네이버에 없는 이메일입니다.", responseHeaders, HttpStatus.BAD_REQUEST);
+				entity = new ResponseEntity<String>("네이버에 없는 이메일입니다.", HttpStatus.BAD_REQUEST);
 				//리턴 문자열 : "잘못된 이메일입니다."
 				return entity;
 			}
@@ -371,10 +365,10 @@ public class UserController {
 			switch (email_state){
 				
 				case "0":
-					entity = new ResponseEntity<String>("이미 가입한 이메일입니다", responseHeaders, HttpStatus.BAD_REQUEST);
+					entity = new ResponseEntity<String>("이미 가입한 이메일입니다", HttpStatus.BAD_REQUEST);
 					break;
 				case "2":
-					entity = new ResponseEntity<String>("에러가 발생했습니다", responseHeaders, HttpStatus.BAD_REQUEST);
+					entity = new ResponseEntity<String>("에러가 발생했습니다", HttpStatus.BAD_REQUEST);
 					break;
 				case "1":
 					//DAO에 접근. 비즈니스 로직
@@ -394,10 +388,10 @@ public class UserController {
 						message = "오류가 발생했습니다.";							
 					}
 					//리턴 문자열 : "성공" 또는 "실패"
-					entity = new ResponseEntity<String>(message, responseHeaders, HttpStatus.BAD_REQUEST);
+					entity = new ResponseEntity<String>(message, HttpStatus.BAD_REQUEST);
 					break;
 				default :
-					entity = new ResponseEntity<String>("에러가 발생했습니다", responseHeaders, HttpStatus.BAD_REQUEST);
+					entity = new ResponseEntity<String>("에러가 발생했습니다", HttpStatus.BAD_REQUEST);
 					break;
 					
 			}					
@@ -414,9 +408,9 @@ public class UserController {
 		
 		signinSessionDTO = signupNaverVO;
 		if (signinSessionDTO != null){
-		System.out.println("세션 저장 직전 : " + signinSessionDTO.toString());
+			System.out.println("세션 저장 직전 개인 정보: " + signinSessionDTO.toString());
 		}else{
-			System.out.println("세션 저장 직전 : " + "null");			
+			System.out.println("세션 저장 직전 개인 정보: " + "null");			
 		}
 		setSigninSessionAttribute(httpSession, signinSessionDTO);
 		
@@ -424,16 +418,11 @@ public class UserController {
 	}
 	
 	//로그인 콜백으로 값이 왔다.
-		@RequestMapping(value = "/doSigninNaver")
+		@RequestMapping(value = "/doSigninNaver", produces = "application/text; charset=utf8")
 		@ResponseBody
 		public ResponseEntity<String> doSigninNaver(@RequestParam("code") String code, @RequestParam("state") String state 
 				, HttpSession httpSession){
 			System.out.println("로그인 로직으로 올바르게 찾아왔습니다");
-			
-			//한글 인코딩을 위해, Restful 방식에서 어쩔 수 없이 쓴다.
-			//이 반복을 줄일 방법이 없을까?
-			HttpHeaders responseHeaders = new HttpHeaders();
-	        responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
 	        
 			ResponseEntity<String> entity = null;
 			
@@ -539,7 +528,7 @@ public class UserController {
 				//DAO에 비접근. 검사 로직 하나로 충분
 				if (email == null){
 					System.out.println("네이버에 없는 이메일");
-					entity = new ResponseEntity<String>("네이버에 없는 이메일입니다.", responseHeaders, HttpStatus.BAD_REQUEST);
+					entity = new ResponseEntity<String>("네이버에 없는 이메일입니다.", HttpStatus.BAD_REQUEST);
 					//리턴 문자열 : "잘못된 이메일입니다."
 					return entity;
 				}
@@ -556,10 +545,10 @@ public class UserController {
 				switch (email_state){
 					
 					case "1":
-						entity = new ResponseEntity<String>("가입하지 않은 이메일입니다", responseHeaders, HttpStatus.BAD_REQUEST);
+						entity = new ResponseEntity<String>("가입하지 않은 이메일입니다", HttpStatus.BAD_REQUEST);
 						break;
 					case "2":
-						entity = new ResponseEntity<String>("에러가 발생했습니다", responseHeaders, HttpStatus.BAD_REQUEST);
+						entity = new ResponseEntity<String>("에러가 발생했습니다", HttpStatus.BAD_REQUEST);
 						break;
 					case "0":
 						//DAO에 접근. 비즈니스 로직
@@ -578,10 +567,10 @@ public class UserController {
 							message = "오류가 발생했습니다.";							
 						}
 						//리턴 문자열 : "성공" 또는 "실패"
-						entity = new ResponseEntity<String>(message, responseHeaders, HttpStatus.BAD_REQUEST);
+						entity = new ResponseEntity<String>(message, HttpStatus.BAD_REQUEST);
 						break;
 					default :
-						entity = new ResponseEntity<String>("에러가 발생했습니다", responseHeaders, HttpStatus.BAD_REQUEST);
+						entity = new ResponseEntity<String>("에러가 발생했습니다", HttpStatus.BAD_REQUEST);
 						break;
 						
 				}					
@@ -603,7 +592,7 @@ public class UserController {
 		}
 	
 	//인증번호 발송
-	@RequestMapping(value = "/requestAuthentication", method = RequestMethod.POST)
+	@RequestMapping(value = "/requestAuthentication", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String requestAuthentication(@ModelAttribute User SigninEmailDTO, HttpSession httpSession){
 		try {
@@ -632,7 +621,7 @@ public class UserController {
 	}
 	
 	//임시 비밀번호 발송
-		@RequestMapping(value = "/requestIssuePassword", method = RequestMethod.POST)
+		@RequestMapping(value = "/requestIssuePassword", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 		@ResponseBody
 		public String requestIssuePassword(@ModelAttribute User SigninEmailDTO){
 			try {
@@ -649,7 +638,7 @@ public class UserController {
 				String body = "인증번호는 " + registerPassword + "입니다";
 				sendEmail(recipient, subject, body);
 				
-				return registerPassword;
+				return "메일이 발송되었습니다";
 			} catch (AddressException e) {
 				e.printStackTrace();
 				return "AddressException 오류가 발생했습니다";				
@@ -817,7 +806,7 @@ public class UserController {
 	}
 	
 	//이메일 중복 검사 버튼을 클릭하는 경우
-	@RequestMapping(value = "/requestCheckEmailDuplication", method = RequestMethod.POST)
+	@RequestMapping(value = "/requestCheckEmailDuplication", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String requestCheckEmailDuplication(String email){
 		return checkEmailDuplication(email);
@@ -853,6 +842,19 @@ public class UserController {
 		}
 		entity = new ResponseEntity<>(signinSessionDTO, HttpStatus.OK);
 		return entity;
+	}
+	
+	public boolean doSignout(User signoutVO) {
+		boolean updateUserSignoutSuccess = false;
+		
+		try {
+			updateUserSignoutSuccess = userService.signout(signoutVO);
+		} catch (Exception e) {
+			System.out.println("오류의 원인");
+			e.printStackTrace();
+		}
+		
+		return updateUserSignoutSuccess;
 	}
 
 	//도메인을 새로 만들지 않기 위한 내부 클래스. 
