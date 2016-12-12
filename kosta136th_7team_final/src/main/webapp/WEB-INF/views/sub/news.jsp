@@ -108,10 +108,9 @@
 					<div class="form-group">
 						<input type="email" id="email" placeholder="이메일 주소를 입력해 주세요">
 					</div>
-					<input type="button" id="getEmailBtn" class="btn btn-primary" onclick="getEmail()" value = "구독신청하기"/>
+					<input type="submit" id="getEmailBtn" class="btn btn-primary" onclick="getEmail()" value = "구독신청하기"/>
 				</form>
 				
-			
 			</div> <!-- ./submitEmail -->
 			<br />		
 			<!-- keyword 검색 체크박스 -->				
@@ -274,7 +273,8 @@ function getEmail()
 {
 	var email = $("#email").val();
 	var pattern = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-	if( pattern.test(email) ) {
+	if( pattern.test(email) ) 
+	{
 		alert("메일 주소가 올바르게 입력되었습니다." + email);
 		$.ajax({
 			type : 'post',
@@ -284,12 +284,11 @@ function getEmail()
 				"X-HTTP-Method_Overrride" : "POST",
 			},
 			dataType : 'text',
-			data : JSON.stringify({
-				email : email
-			}),
-			
+			data : JSON.stringify(email),
 		});
-	} else {
+	} 
+	else 
+	{
 		alert("메일 주소가 유효하지 않습니다." + email);
 	}
 	

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class NewsController {
 	
@@ -18,6 +19,8 @@ public class NewsController {
     private DemesticScrapService demService; 
 	@Inject
 	private AbroadScrapService abrService;
+	@Inject
+	private AddEmailService emailService;
 	
 	@RequestMapping(value = "/news", method = RequestMethod.GET)
 	public String news(SearchInfo vo, Criteria cri, Model model) throws Exception{
@@ -203,10 +206,11 @@ public class NewsController {
 	}
 	
 	//국내기사 스크랩
-//		@RequestMapping(value = "/addDemesticScrap", method = RequestMethod.POST)
-//		public String getEmail(@RequestBody email vo) throws Exception{
-//			System.out.println(vo);
-//			
-//			return "sub/news/tab1";
-//		}
+	@ResponseBody
+	@RequestMapping(value = "/getEmail", method = RequestMethod.POST)
+	public String getEmail(@RequestBody String email) throws Exception{
+		String email2 = email.replace("\"", "");
+		emailService.addEmail(email2);
+		return "sub/news/tab1";
+	}
 }
