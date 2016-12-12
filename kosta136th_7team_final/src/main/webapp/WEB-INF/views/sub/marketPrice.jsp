@@ -35,10 +35,10 @@
 					<!-- 비트코인과 실화폐 환율 탭 네비 -->
 					<ul class="nav nav-tabs">
 						
-						<li class="market_price_tab active"><a data-toggle="tab" href="#home">BitCoin</a></li>
+						<li class="market_price_tab active"><a data-toggle="tab" href="#bitcoin_price">BitCoin</a></li>
 												
 						<!-- 비트코인 환율 -->
-						<li class="market_price_tab"><a data-toggle="tab" href="#menu1">MarketPrice</a></li>
+						<li class="market_price_tab"><a data-toggle="tab" href="#market_price">MarketPrice</a></li>
 						
 						<!-- 실화폐 환율 -->							
 						<li id="drop-box">
@@ -54,7 +54,6 @@
 						</li>
 						
 					</ul>
-				
 
 				<div class="tab-content">
 					<!-- 첫 탭 화면에 표시되는 정보 (비트코인 환율) -->
@@ -62,76 +61,33 @@
 					
 						<table id="marketPriceList">
 							<tr>
-								<td>Label</td>
-								<td>Name</td>
-								<td>Price</td>
-								<td>Volume_24h</td>
+								<th>Label</th>
+								<th>Name</th>
+								<th>Price</th>
+								<th>Volume_24h</th>
 							</tr>
-							<tr>
-								<c:forEach items="${marketPriceList}" var="marketPrice">
-									<tr id="test">
-										<td>${marketPrice.label}</td>
-										<td><a href=''>${marketPrice.name}</a></td>
-										<td>${marketPrice.price_btc_result}</td>
-										<td>${marketPrice.volume_24h_result}</td>
-									<tr>
-								</c:forEach>
-							</tr>
-						</table>
+							<tbody id="bitrate">
 
-					</div>
-				</div>
-
-				<div class="tab-content">
-					<!-- 첫 탭 화면에 표시되는 정보 (비트코인 환율) -->
-					<div id="bitcoin_price" class="tab-pane fade in active">
-					
-						<table id="marketPriceList">
-							<tr>
-								<td>Label</td>
-								<td>Name</td>
-								<td>Price</td>
-								<td>Volume_24h</td>
-							</tr>
-							<tr id="test">
-								
-<<<<<<< HEAD
-=======
-									<tr id="test">
-
-									<tr>
-									
-								</c:forEach>
->>>>>>> 04aaf1ee09346e1193a6070adb0e11feee4259bb
-							</tr>
+							</tbody>
 
 						</table>
 					</div>
 					
 					<!-- 두번째 탭 화면에서 보여주는 정보 (실화폐환율) -->
 					<div id="market_price" class="tab-pane fade">
-						<table>
-							<tr>
-								<td>ID</td>
-								<td>Name</td>
-								<td>Rate</td>
-								<td>Ask</td>
-								<td>Bid</td>
-							</tr>
-							<c:forEach items="${rateList}" var="rate">
-								<tr id="rate">
-									<td>${rate.id}</td>
+					<table>
+					<tr>
+						<th>Id</th>
+						<th>Name</th>
+						<th>Rate</th>
+						<th>Ask</th>
+						<th>Bid</th>
 
-									<td>${rate.name}</td>
+					</tr>
+					<tbody id="rate">
 
-									<td>${rate.rate}</td>
-
-									<td>${rate.ask}</td>
-
-									<td>${rate.bid}</td>
-								</tr>
-							</c:forEach>
-						</table>
+					</tbody>
+					</table>
 					</div>
 				</div>
 			</div>
@@ -140,87 +96,98 @@
 			
 	<!-- 실시간 시세보기 -->
 	<script>
-<<<<<<< HEAD
-		$(document).ready(function(){
-			            
-// 			            $.getJSON("/rate/bitRate", function(data){
-			                
-// 			                var str = "";
-			                
-// 			                $(data).each(
-// 			                    function(){
-// 				                    str += "<td>" + this.marketPrice.label + "</td>"
-// 				                    str += "<td>" + this.marketPrice.name + "</td>"
-// 				                    str += "<td>" + this.marketPrice.price_btc_result + "</td>";
-// 				                    str += "<td>" + this.marketvolume_24h_result + "</td>";
-// 			                });        
-			                
-// 			                $("#test").html(str);
-// 			            });
 
-			$('.dd-menu').click(function() {
-	
-				var val = $(this).text();
-				$('#currencyBtn').html(val + "<span class='caret'></span>");
+		$(document).ready(function(){
+			
+			var url = "/rate/bitrate?money_type=PRICE_BTC";		//MarketPriceDataController로 부터 받은 데이터를 처리한다.
+			$.getJSON(url,  function (data) {
+				var str = "";
+                $.each(data, function(){
+                    	str += "<tr>"
+	                    str += "<td>" + this.label + "</td>";
+	                    str += "<td>" + this.name + "</td>";
+	                    str += "<td>" + this.price + "</td>";
+	                    str += "<td>" + this.volume_24h + "</td>";
+                    	str += "</tr>"
+                });       
+
+                $("#bitrate").html(str);
+		  	});
+			
+			$(".market_price_tab").click(function(){
+				
+				var url = "/rate/rateList";		//MarketPriceDataController로 부터 받은 데이터를 처리한다.
+				
+				$.getJSON(url, function (data) {
+					
+					var str = "";
+
+
+				$.each(data, function(){
+					
+					str += "<tr>";
+					
+					str +=	"<td>" + this.id + "</td>";
+				
+					str +=	"<td>" + this.name + "</td>";
+				
+					str +=	"<td>" + this.rate + "</td>";
+				
+					str +=	"<td>" + this.ask + "</td>";
+				
+					str +=	"<td>" + this.bid + "</td>";
+					
+					str += "</tr>";
+					
+				})
+
+
+					
+				 $("#rate").html(str);
+				  
+			  });
+				
+			});
+			
+			var money_type = "PRICE_BTC";			
+			$("#combo-box").on('change', function(){
+				
+				money_type = $(this).find(":selected").val();
 				
 				$.ajax({
-					data: {"val" : val},
-					url: "/rate/bitRate",
-					type: "GET",
-					async : false,
-					success : function(data) {
-						var str = "";
+					url: "/rate/bitrate/",				//목적지 URI	//Controller로 보낸다.
+					//async : false,						//동기방식
+					type: 'get',							//get 타입 (post타입 등이 있음)
+					data: {"money_type" : money_type},		//money_type을 넘긴다.
 					
-						str += <c:forEach items="${marketPriceList}" var="marketPrice">
+					success:  function () {				//성공시 return된 객체를
 						
-						str += 		<tr>
-						str +=				<td>${marketPrice.label}</td>
-						str +=				<td><a href=''>${marketPrice.name}</a></td>
-						str +=				<td>${marketPrice.price_btc_result}</td>
-// 										<td>${marketPrice.price_usd_result}</td>
-// 										<td>${marketPrice.price_cny_result}</td>
-// 										<td>${marketPrice.price_eur_result}</td>
-// 										<td>${marketPrice.price_gbp_result}</td>
-// 										<td>${marketPrice.price_rur_result}</td>
-						str +=				<td>${marketPrice.volume_24h_result}</td> 
-						str += 		<tr>
-						str += </c:forEach>
+						var url = "/rate/bitrate?money_type=" + money_type;		//MarketPriceDataController로 부터 받은 데이터를 처리한다.
+						$.getJSON(url,  function (data) {
+							var str = "";
 						
-					 $("#test").html(str);
+			                $.each(data, function(){
+			                    	str += "<tr>"
+				                    str += "<td>" + this.label + "</td>";
+				                    str += "<td>" + this.name + "</td>";
+				                    str += "<td>" + this.price + "</td>";
+				                    str += "<td>" + this.volume_24h + "</td>";
+			                    	str += "</tr>"
+			                });       
+
+			                $("#bitrate").html(str);
+						  
+					  });
+						
 					}
-
 					
-			});
-				
-		});
-	
-=======
-	$(document).ready(function(){
-		            
-		            $.getJSON("/rate/bitrate", function(data){
-		                
-		                var str = "";
-		                
-		                $(data).each(
-		                    function(){
-			                    str += "<td>" + this.marketPrice.label + "</td>"
-			                    str += "<td>" + this.marketPrice.name + "</td>"
-			                    str += "<td>" + this.marketPrice.price_btc_result + "</td>";
-			                    str += "<td>" + this.marketvolume_24h_result + "</td>";
-		                });        
-		                
-		                $("#test").html(str);
-		            });
-
-		$('.dd-menu').click(function() {
-
-			var val = $(this).text();
-			$('#currencyBtn').html(val + "<span class='caret'></span>");
+				});
+								
+			});	
 			
 		});
 
->>>>>>> 04aaf1ee09346e1193a6070adb0e11feee4259bb
-	});
+
 	</script>
 	
 </body>

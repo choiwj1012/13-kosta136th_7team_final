@@ -17,7 +17,7 @@ public class MarketPriceDAOImpl implements MarketPriceDAO{
 	
 	
 	@Override
-	public void rateSave(MarketPrice marketPrice) throws Exception {
+	public void rateSave(MarketPriceSave marketPrice) throws Exception {
 		
 		sqlSession.insert(namespace + ".rateSave", marketPrice);
 		

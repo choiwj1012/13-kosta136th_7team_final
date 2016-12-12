@@ -2,16 +2,16 @@ package com.kosta136th.marketPrice;
 
 import java.math.BigDecimal;
 
-public class MarketPrice {
+public class MarketPriceSave {
 
 	private String label;
 	private String name;
-	private String price_btc;
-	private String price_usd;
-	private String price_cny;
-	private String price_eur;
-	private String price_gbp;
-	private String price_rur;
+	private double price_btc;
+	private double price_usd;
+	private double price_cny;
+	private double price_eur;
+	private double price_gbp;
+	private double price_rur;
 	private long timestamp;
 	private String volume_24h;
 	private BigDecimal price_btc_result;
@@ -34,40 +34,40 @@ public class MarketPrice {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getPrice_btc() {
+	public double getPrice_btc() {
 		return price_btc;
 	}
-	public void setPrice_btc(String price_btc) {
+	public void setPrice_btc(double price_btc) {
 		this.price_btc = price_btc;
 	}
-	public String getPrice_usd() {
+	public double getPrice_usd() {
 		return price_usd;
 	}
-	public void setPrice_usd(String price_usd) {
+	public void setPrice_usd(double price_usd) {
 		this.price_usd = price_usd;
 	}
-	public String getPrice_cny() {
+	public double getPrice_cny() {
 		return price_cny;
 	}
-	public void setPrice_cny(String price_cny) {
+	public void setPrice_cny(double price_cny) {
 		this.price_cny = price_cny;
 	}
-	public String getPrice_eur() {
+	public double getPrice_eur() {
 		return price_eur;
 	}
-	public void setPrice_eur(String price_eur) {
+	public void setPrice_eur(double price_eur) {
 		this.price_eur = price_eur;
 	}
-	public String getPrice_gbp() {
+	public double getPrice_gbp() {
 		return price_gbp;
 	}
-	public void setPrice_gbp(String price_gbp) {
+	public void setPrice_gbp(double price_gbp) {
 		this.price_gbp = price_gbp;
 	}
-	public String getPrice_rur() {
+	public double getPrice_rur() {
 		return price_rur;
 	}
-	public void setPrice_rur(String price_rur) {
+	public void setPrice_rur(double price_rur) {
 		this.price_rur = price_rur;
 	}
 	public long getTimestamp() {

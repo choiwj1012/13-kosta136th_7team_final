@@ -1,14 +1,16 @@
 
 package com.kosta136th.marketPrice;
-<<<<<<< HEAD
+
 
 import org.springframework.web.bind.annotation.RequestMapping;
-=======
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -16,13 +18,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
->>>>>>> 04aaf1ee09346e1193a6070adb0e11feee4259bb
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -30,7 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MarketPriceDataController {
     
     @Inject
-    MarketPriceService marketPriceService;
+    private MarketPriceService marketPriceService;
     
     @Scheduled(fixedDelay = 12000000)
     @RequestMapping(value = "/rateSave", method = RequestMethod.GET)
@@ -97,7 +100,7 @@ public class MarketPriceDataController {
                     BigDecimal price_rur_out = price_rur.divide(ex, 7, BigDecimal.ROUND_DOWN);
                     BigDecimal volume_24h_out = volume_24h.divide(ex, 6, BigDecimal.ROUND_DOWN);
                     
-                    MarketPrice marketPrice = new MarketPrice();
+                    MarketPriceSave marketPrice = new MarketPriceSave();
                     marketPrice.setLabel((String) marketsObject.get("Label"));
                     marketPrice.setName((String) marketsObject.get("Name"));;
                     marketPrice.setPrice_btc_result(price_btc_out);
@@ -130,7 +133,7 @@ public class MarketPriceDataController {
 		//객체 타입으로 데이터를 날리면 안된다. 배열을 보내야한다.
 		//chartMapper.xml로 부터  데이터를 뽑아 온다.
 		List<MarketPriceChart> marketPriceList =  marketPriceService.chart(money_type);
-		
+
 		//JsonArray 객체 생성
 		JSONArray jsonArray = new JSONArray();
 		
@@ -181,16 +184,149 @@ public class MarketPriceDataController {
 			jsonArray.add(bigDecimalArray);
 			
 		}
-		
-<<<<<<< HEAD
-	}*/	
 
-}
-=======
 		return jsonArray;
 		
 		}
 	
+	// 비트코인 화폐 환율
+	@RequestMapping(value = "/bitrate", method = RequestMethod.GET)
+	public ArrayList<MarketPriceOutPut> bitCoinRate(@RequestParam("money_type") String money_type, HttpServletResponse response) throws Exception {
+		
+		List<MarketPrice> bitCoinList = marketPriceService.coinRateList();
+		
+		ArrayList<MarketPriceOutPut> marketPriceList = new ArrayList<MarketPriceOutPut>();
+		
+		for(int i=0; i<bitCoinList.size(); i++){
+
+			BigDecimal price_btc = new BigDecimal(bitCoinList.get(i).getPrice_btc());
+			BigDecimal price_usd = new BigDecimal(bitCoinList.get(i).getPrice_usd());
+			BigDecimal price_cny = new BigDecimal(bitCoinList.get(i).getPrice_cny());
+			BigDecimal price_eur = new BigDecimal(bitCoinList.get(i).getPrice_eur());
+			BigDecimal price_gbp = new BigDecimal(bitCoinList.get(i).getPrice_gbp());
+			BigDecimal price_rur = new BigDecimal(bitCoinList.get(i).getPrice_rur());
+			BigDecimal volume_24h = new BigDecimal(bitCoinList.get(i).getVolume_24h());
+			
+			BigDecimal ex = new BigDecimal(1);	
+			
+			BigDecimal price_btc_out = price_btc.divide(ex, 6, BigDecimal.ROUND_DOWN);
+			BigDecimal price_usd_out = price_usd.divide(ex, 7, BigDecimal.ROUND_DOWN);
+			BigDecimal price_cny_out = price_cny.divide(ex, 7, BigDecimal.ROUND_DOWN);
+			BigDecimal price_eur_out = price_eur.divide(ex, 7, BigDecimal.ROUND_DOWN);
+			BigDecimal price_gbp_out = price_gbp.divide(ex, 7, BigDecimal.ROUND_DOWN);
+			BigDecimal price_rur_out = price_rur.divide(ex, 7, BigDecimal.ROUND_DOWN);
+			BigDecimal volume_24h_out = volume_24h.divide(ex, 6, BigDecimal.ROUND_DOWN);
+
+			MarketPriceOutPut marketPrice = new MarketPriceOutPut();
+			marketPrice.setLabel(bitCoinList.get(i).getLabel());
+			marketPrice.setName(bitCoinList.get(i).getName());;
+			
+			if (money_type.equals("PRICE_BTC")) {
+						
+				marketPrice.setPrice(price_btc_out);
+						
+			} else if (money_type.equals("PRICE_USD")) {
+						
+				marketPrice.setPrice(price_usd_out);
+						
+			} else if (money_type.equals("PRICE_CNY")) {
+						
+				marketPrice.setPrice(price_cny_out);
+						
+			} else if (money_type.equals("PRICE_EUR")) {
+						
+				marketPrice.setPrice(price_eur_out);
+						
+			} else if(money_type.equals("PRICE_GBP")) {
+						
+				marketPrice.setPrice(price_gbp_out);
+						
+			} else if(money_type.equals("PRICE_RUR")) {
+						
+				marketPrice.setPrice(price_rur_out);
+						
+			} else {
+						
+				System.out.println("입력한 값이 없습니다.");
+						
+			}
+
+			marketPrice.setVolume_24h(volume_24h_out);
+			
+			marketPriceList.add(marketPrice);
+	
+			}
+		
+			return marketPriceList;
+
+}
+
+	
+//	 실제 화폐 환율
+	@RequestMapping(value = "/rateList", method = RequestMethod.GET)
+	public ArrayList<Rate> rateList(HttpServletResponse response) throws Exception{
+		
+		ArrayList<Rate> rateList = new ArrayList<Rate>();
+
+            String apiURL;	
+            String command = "";
+            String[] names = {"USDKRW", "JPYKRW", "EURKRW", "CNYKRW", "RUBKRW", "GBPKRW", "BTCKRW"};
+            for(int i = 0; i<names.length; i++){
+            apiURL = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%3D%22"+ names[i] +"%22&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
+            
+            URL url = new URL(apiURL);
+            HttpURLConnection con = (HttpURLConnection)url.openConnection();
+            con.setRequestMethod("GET");
+            int responseCode = con.getResponseCode();
+            BufferedReader br;
+           
+            if(responseCode==200) { 
+                br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            } else {  
+                br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+            }
+            
+            String inputLine;
+            StringBuffer res = new StringBuffer();
+            
+            while ((inputLine = br.readLine()) != null) {
+                res.append(inputLine);
+            }
+            
+            br.close();
+            if(responseCode==200) {
+                command = res.toString();
+            }
+
+    			String jsonInfo = command;
+
+            	JSONObject object = (JSONObject)JSONValue.parse(jsonInfo);
+            	JSONObject test = (JSONObject) object.get("query");
+
+
+            	String jsonInfo2 = test.get("results").toString();
+            	JSONObject object2 = (JSONObject) JSONValue.parse(jsonInfo2);
+
+            	String jsonInfo3 = object2.get("rate").toString();
+            	JSONObject object3 = (JSONObject) JSONValue.parse(jsonInfo3);
+
+                Rate rate = new Rate();
+                rate.setId(object3.get("id").toString());
+                rate.setName(object3.get("Name").toString());
+                rate.setRate(object3.get("Rate").toString());
+                rate.setAsk(object3.get("Ask").toString());
+                rate.setBid(object3.get("Bid").toString());
+            
+                rateList.add(rate);
+
+                
+            }     
+
+        return rateList;
+		
 	}
-    
->>>>>>> 04aaf1ee09346e1193a6070adb0e11feee4259bb
+	
+}
+
+
+
