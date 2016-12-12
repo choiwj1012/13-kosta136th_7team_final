@@ -57,9 +57,9 @@ public class UserController {
 		
 		ResponseEntity <User> entity = null;
 		
-		/*System.out.println(signinEmailDTO.getEmail());
+		System.out.println(signinEmailDTO.getEmail());
 		System.out.println(signinEmailDTO.getPassword());
-		System.out.println(signinEmailDTO.getNickname());*/
+		System.out.println(signinEmailDTO.getNickname());
 		
 		try { 
 			signinSessionDTO = userService.signinEmail(signinEmailDTO);
@@ -86,11 +86,15 @@ public class UserController {
 		//반환값
 		boolean signupSuccess = false;
 		
+		System.out.println(registerMap.toString());
 		//개인정보 객체의 필드들
 		String email = registerMap.get("user").get(0);
 		String password = registerMap.get("user").get(1);
 		String nickname = registerMap.get("user").get(2);
 		
+		System.out.println("email : " + email);
+		System.out.println("password : " + password);
+		System.out.println("nickname : " + nickname);
 		//개인정보 객체
 		User signupEmailDTO = new User(email, password, nickname);
 		
@@ -103,13 +107,14 @@ public class UserController {
 			System.out.println("인증 : " + authentication);
 			System.out.println("세션 저장 인증 : " + (String)session.getAttribute("authentication"));
 		//인증번호가 틀리면 그냥 돌아가
-			if (!((String)session.getAttribute("authentication")).equals(authentication)){
+			if (session.getAttribute("authentication") != null){
+				if (!((String)session.getAttribute("authentication")).equals(authentication)){
 				//인증번호는 삭제된다
 				session.removeAttribute("authentication");
-				
 				System.out.println("잘못된 인증번호입니다");
 				entity = new ResponseEntity<String>("잘못된 인증번호입니다", HttpStatus.BAD_REQUEST);
 				return entity;
+				}
 			} else {
 				//인증번호는 삭제된다
 				session.removeAttribute("authentication");
@@ -141,10 +146,10 @@ public class UserController {
 					//오류가 발생했습니다는 가능
 					String message = "회원 가입에 실패했습니다";
 					try{
-						User signupEmailVO = new User(signupEmailDTO.getEmail(),"",signupEmailDTO.getNickname());
+						User signupEmailVO = new User(signupEmailDTO.getEmail(),signupEmailDTO.getPassword(),signupEmailDTO.getNickname());
 						System.out.println(signupEmailVO.toString());
 					
-						signupSuccess = userService.signupNaver(signupEmailVO);
+						signupSuccess = userService.signupEmail(signupEmailVO);
 										
 						if (signupSuccess){
 							entity = new ResponseEntity<>("회원가입에 성공했습니다", HttpStatus.OK);

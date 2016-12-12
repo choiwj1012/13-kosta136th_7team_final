@@ -34,7 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id = "insertUserLoginRecord">
-		INSERT INTO LOGIN(USER_NUM, LOGIN_DATE) VALUES((SELECT USER_NUM FROM USER WHERE USER_EMAIL = #{email}), NOW())
+		INSERT INTO LOGIN(USER_NUM, LOGIN_DATE, LOGOUT_DATE) VALUES((SELECT USER_NUM FROM USER WHERE USER_EMAIL = #{email}), NOW(), NOW())
 	</insert>
 	
 	<update id = "updateUserLogoutRecord">
