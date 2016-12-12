@@ -7,7 +7,7 @@
 	
 		<insert id="rateSave">
 			INSERT INTO MARKET_PRICE 
-			(LABEL, NAME, PRICE_BTC, PRICE_USD, PRICE_CNY, PRICE_EUR, PRICE_GBP, PRICE_RUR, VOLUME, TIMESTAMP)
+			(LABEL, NAME, PRICE_BTC, PRICE_USD, PRICE_CNY, PRICE_EUR, PRICE_GBP, PRICE_RUR, VOLUME_24H, TIMESTAMP)
 			VALUES(#{label}, #{name}, #{price_btc_result}, #{price_usd_result}, #{price_cny_result}, #{price_eur_result}, #{price_gbp_result}, #{price_rur_result}, #{volume_24h_result}, ${timestamp})
 		</insert>
 		
@@ -29,4 +29,20 @@
 		
 	</mapper>
 	
+<<<<<<< HEAD
 	
+=======
+		<select id="bitcoinList" resultType="com.kosta136th.marketPrice.MarketPrice">
+		<![CDATA[
+			SELECT
+				LABEL, NAME, PRICE_BTC, PRICE_USD, PRICE_CNY, PRICE_EUR, PRICE_GBP, PRICE_RUR, VOLUME_24H
+			FROM
+				MARKET_PRICE
+			ORDER BY MARKET_PRICE_NUM DESC LIMIT 450 ;
+		
+		]]>
+	
+		</select>
+
+	</mapper>
+>>>>>>> 5bf89bec30a4b3ab8ad217cbb72ee025027337d4

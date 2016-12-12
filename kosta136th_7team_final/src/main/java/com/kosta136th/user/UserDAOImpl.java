@@ -17,28 +17,33 @@ public class UserDAOImpl implements UserDAO{
 	private static String namespace = "com.kosta136th.mapper.UserMapper";
 	
 	@Override
-	public User signinEmail(User loginEmailVO) throws Exception {
+	public User signinEmail(User signinEmailVO) throws Exception {
 		
 		//DAO의 반환은 DTO
-		User loginSessionDTO = null;
+		User signinSessionDTO = null;
 		
 		//로그
 		System.out.println("--DAOImpl Before--");
-		System.out.println(loginEmailVO.toString());
-		loginEmailVO.setPassword(encryptPasswordSHA256(loginEmailVO.getPassword()));
-		System.out.println(loginEmailVO.toString());
+		System.out.println(signinEmailVO.toString());
+		signinEmailVO.setPassword(encryptPasswordSHA256(signinEmailVO.getPassword()));
+		System.out.println(signinEmailVO.toString());
 				
 		try {
-			loginSessionDTO = session.selectOne(namespace + ".getLoginProfileByEmail", loginEmailVO);
+			signinSessionDTO = session.selectOne(namespace + ".getLoginProfileByEmail", signinEmailVO);
 		} catch(Exception e){
 			e.printStackTrace();
 		}
 		
 		//로그
 		System.out.println("--DAOImpl After--");
-		System.out.println(loginSessionDTO.toString());
 		
-		return loginSessionDTO;
+		if (signinSessionDTO != null){
+	    	System.out.println(signinSessionDTO.toString());
+		}else{
+			System.out.println("User [null]");
+		}
+		
+		return signinSessionDTO;
 		
 	}
 	
@@ -46,23 +51,28 @@ public class UserDAOImpl implements UserDAO{
 	@Override
 	public User signinNaver(String email) throws Exception {
 		//DAO의 반환은 DTO
-		User loginSessionDTO = null;
+		User signinSessionDTO = null;
 		
 		//로그
 		System.out.println("--DAOImpl Before--");
 		System.out.println(email);
 				
 		try{
-			loginSessionDTO = session.selectOne(namespace+".getLoginProfileByNaver", email);
+			signinSessionDTO = session.selectOne(namespace+".getLoginProfileByNaver", email);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		//로그
 		System.out.println("--DAOImpl After--");
-		System.out.println(loginSessionDTO.toString());
 		
-		return loginSessionDTO;	
+		if (signinSessionDTO != null){
+	    	System.out.println(signinSessionDTO.toString());
+		}else{
+			System.out.println("User [null]");
+		}
+		
+		return signinSessionDTO;	
 	}
 	
 	@Override
@@ -162,6 +172,7 @@ public class UserDAOImpl implements UserDAO{
 			}
 			
 		}catch(Exception e){
+			e.printStackTrace();
 			email_state = "2";
 		}
 		
@@ -190,6 +201,33 @@ public class UserDAOImpl implements UserDAO{
 			nickname_state = "2";
 		}
 		return nickname_state;
+	}
+
+	@Override
+	public boolean updateUserPassword(User userVO) throws Exception {
+		int affectedRows = 0;
+		boolean updateUserPasswordSuccess = false;
+		
+		//로그
+		System.out.println("--DAOImpl--");
+		System.out.println(userVO.toString());
+		
+		userVO.setPassword(encryptPasswordSHA256(userVO.getPassword()));
+
+		try{
+			affectedRows = session.insert(namespace + ".updateUserPassword", userVO);
+		}catch(Exception e){
+			e.printStackTrace();
+			affectedRows = 0;
+		}
+		
+		if (affectedRows > 0){
+			updateUserPasswordSuccess = true;
+		}else{
+			updateUserPasswordSuccess = false;
+		}
+		
+		return updateUserPasswordSuccess;
 	}
 		
 }

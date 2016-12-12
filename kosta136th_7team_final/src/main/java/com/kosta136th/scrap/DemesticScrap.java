@@ -1,18 +1,18 @@
 package com.kosta136th.scrap;
 
-public class DomesticScrap {
-	private int nno;
+public class DemesticScrap {
+	private int user_num;
 	private String title;
-	private String originallink;
 	private String link;
 	private String description;
 	private String pubDate;
 	private String keyword;
-	public int getNno() {
-		return nno;
+	
+	public int getUser_num() {
+		return user_num;
 	}
-	public void setNno(int nno) {
-		this.nno = nno;
+	public void setUser_num(int user_num) {
+		this.user_num = user_num;
 	}
 	public String getTitle() {
 		return title;
@@ -20,12 +20,7 @@ public class DomesticScrap {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getOriginallink() {
-		return originallink;
-	}
-	public void setOriginallink(String originallink) {
-		this.originallink = originallink;
-	}
+
 	public String getLink() {
 		return link;
 	}
@@ -52,8 +47,9 @@ public class DomesticScrap {
 	}
 	@Override
 	public String toString() {
-		return "News [nno=" + nno + ", title=" + title + ", originallink=" + originallink + ", link=" + link
-				+ ", description=" + description + ", pubDate=" + pubDate + ", keyword=" + keyword + "]";
+		return "DomesticScrap [user_num=" + user_num + ", title=" + title + ", link="
+				+ link + ", description=" + description + ", pubDate=" + pubDate + ", keyword=" + keyword + "]";
 	}
+	
 	
 }

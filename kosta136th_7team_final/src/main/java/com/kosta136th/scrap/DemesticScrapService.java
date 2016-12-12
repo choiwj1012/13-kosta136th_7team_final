@@ -4,6 +4,10 @@ import java.util.List;
 
 public interface DemesticScrapService {
 	
-	public List<DomesticScrap> searchNews(String keyword, int display, int start) throws Exception;
+	public List<DemesticScrap> newsList(String keyword, int display, int start) throws Exception;
+
+	public void addDemesticScrap(DemesticScrap vo) throws Exception;
+
+	public List<DemesticPopular> popularNews() throws Exception;
 
 }
