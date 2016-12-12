@@ -102,14 +102,15 @@
 			var url = "/rate/bitrate?money_type=PRICE_BTC";		//MarketPriceDataController로 부터 받은 데이터를 처리한다.
 			$.getJSON(url,  function (data) {
 				var str = "";
-                $.each(data, function(){
+                 $.each(data.reverse(), function(){
                     	str += "<tr>"
 	                    str += "<td>" + this.label + "</td>";
 	                    str += "<td>" + this.name + "</td>";
 	                    str += "<td>" + this.price + "</td>";
 	                    str += "<td>" + this.volume_24h + "</td>";
                     	str += "</tr>"
-                });       
+                }); 
+
 
                 $("#bitrate").html(str);
 		  	});
