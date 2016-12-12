@@ -147,7 +147,7 @@ $(document).ready(function () {
 					
 					var url = "/rate/chartData?money_type=" + money_type;		//MarketPriceDataController로 부터 받은 데이터를 처리한다.
 					$.getJSON(url,  function (data) {
-					  
+						
 					  options.series[0].data  = data;
 					  var chart = new Highcharts.stockChart(options);
 					  
@@ -162,42 +162,9 @@ $(document).ready(function () {
 	//초기값은 btc로 설정.
 	var url = "/rate/chartData?money_type=PRICE_BTC";		//MarketPriceDataController로 부터 받은 데이터를 처리한다.
 	$.getJSON(url,  function (data) {
-	  
+		
 		options.series[0].data  = data;
 		var chart = new Highcharts.stockChart(options);
 	  
   });
 });
-
-
-//chart를 그리는 javascript 코드
-//방법2
-/*$(function () {
-
-//    $.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json&callback=?', function (data) {
-    $.getJSON("/chartData",  function (data) {
-    	
-        // Create the chart
-        Highcharts.stockChart('container', {
-
-        	
-        	
-            rangeSelector: {
-                selected: 1
-            },
-
-            title: {
-                text: '내가 그린 차트는 우주제일 차트'
-            },
-
-            series: [{
-                name: 'usd',
-                data: data,
-                tooltip: {
-                    valueDecimals: 2
-                }
-            }]
-        });
-    });
-});
-*/
