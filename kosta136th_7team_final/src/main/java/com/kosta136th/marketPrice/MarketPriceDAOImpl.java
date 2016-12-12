@@ -15,6 +15,7 @@ public class MarketPriceDAOImpl implements MarketPriceDAO{
 	
 	private static final String namespace = "com.kosta136th.mapper.marketPriceMapper";
 	
+	
 	@Override
 	public void rateSave(MarketPrice marketPrice) throws Exception {
 		
@@ -22,6 +23,13 @@ public class MarketPriceDAOImpl implements MarketPriceDAO{
 		
 	}
 
+	@Override
+	public List<MarketPriceChart> chart(String money_type) throws Exception {
+		
+		return sqlSession.selectList(namespace + ".chartData", money_type);
+
+	}	
+	
 	@Override
 	public List<MarketPrice> coinRateList() throws Exception {
 		

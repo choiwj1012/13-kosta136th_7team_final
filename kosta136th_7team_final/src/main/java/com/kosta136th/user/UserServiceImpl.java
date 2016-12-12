@@ -66,4 +66,14 @@ public class UserServiceImpl implements UserService{
 		
 		return signupSuccess;
 	}
+
+	@Override
+	public boolean updateUserPassword(User userVO) throws Exception {
+
+		boolean updateUserPasswordSuccess;
+		
+		updateUserPasswordSuccess = userDAO.updateUserPassword(userVO);
+		
+		return updateUserPasswordSuccess;
+	}
 }

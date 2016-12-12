@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 public class MarketPrice {
 
 	private String label;
-	private String Name;
+	private String name;
 	private double price_btc;
 	private double price_usd;
 	private double price_cny;
@@ -29,10 +29,10 @@ public class MarketPrice {
 		this.label = label;
 	}
 	public String getName() {
-		return Name;
+		return name;
 	}
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
 	public double getPrice_btc() {
 		return price_btc;

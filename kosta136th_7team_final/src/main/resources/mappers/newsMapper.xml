@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "com.kosta136th.mapper.NewsMapper">
+
+	<insert id="insertAbroadNews">
+		INSERT INTO ABROAD_SCRAP(USER_NUM, ABROAD_SCRAP_URL, ABROAD_SCRAP_TITLE, ABROAD_SCRAP_DESCRIPTION, ABROAD_SCRAP_PUBDATE, ABROAD_SCRAP_IMG_URL, ABROAD_SCRAP_WRITER)
+		VALUES (#{user_num},#{link},#{title},#{description},#{date},#{imgSrc},#{author});
+	</insert>
+	
+	<insert id="insertDemesticNews">
+		INSERT INTO DOMESTIC_SCRAP(USER_NUM, DOMESTIC_SCRAP_URL, DOMESTIC_SCRAP_TITLE, DOMESTIC_SCRAP_DESCRIPTION, DOMESTIC_SCRAP_PUBDATE, DOMESTIC_SCRAP_KEYWORD)
+		VALUES(#{user_num},#{link},#{title},#{description},#{pubDate},#{keyword}); 
+	</insert>
+	
+	<select id="searchDemesticNews" resultType="com.kosta136th.scrap.DemesticPopular">
+		SELECT DOMESTIC_SCRAP_URL, DOMESTIC_SCRAP_TITLE, DOMESTIC_SCRAP_DESCRIPTION, DOMESTIC_SCRAP_PUBDATE,DOMESTIC_SCRAP_KEYWORD 
+		from DOMESTIC_SCRAP GROUP BY DOMESTIC_SCRAP_URL ORDER BY COUNT(*) DESC LIMIT 5;
+	</select>
+	
+	<select id="searchAbroadNews" resultType="com.kosta136th.scrap.AbroadPopular">
+		SELECT ABROAD_SCRAP_URL, ABROAD_SCRAP_TITLE, ABROAD_SCRAP_DESCRIPTION, ABROAD_SCRAP_PUBDATE,ABROAD_SCRAP_IMG_URL
+		from ABROAD_SCRAP GROUP BY ABROAD_SCRAP_URL ORDER BY COUNT(*) DESC LIMIT 5;
+	</select>
+	
+</mapper>
