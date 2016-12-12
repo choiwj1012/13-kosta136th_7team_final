@@ -6,27 +6,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace = "com.kosta136th.mapper.UserMapper">
 
 	<select resultType="com.kosta136th.user.User" id="getLoginProfileByEmail">
-		select user_email as email, user_password as password, user_nickname as nickname from user where user_email = #{email} and user_password = #{password}  
+		SELECT USER_EMAIL AS EMAIL, USER_PASSWORD AS PASSWORD, USER_NICKNAME AS NICKNAME FROM USER WHERE USER_EMAIL = #{email} AND USER_PASSWORD = #{password}  
 	</select>
 	
 	<select resultType="com.kosta136th.user.User" id="getLoginProfileByNaver">
-		select user_email as email, user_password as password, user_nickname as nickname from user where user_email = #{email}  
+		SELECT USER_EMAIL AS EMAIL, USER_PASSWORD AS PASSWORD, USER_NICKNAME AS NICKNAME FROM USER WHERE USER_EMAIL = #{email}  
 	</select>
 	
 	<insert id = "insertLoginProfileByEmail">
-		insert into user(user_email, user_password, user_nickname) values(#{email}, #{password}, #{nickname});
+		INSERT INTO USER(USER_EMAIL, USER_PASSWORD, USER_NICKNAME) VALUES(#{email}, #{password}, #{nickname})
 	</insert>
 	
 	<insert id = "insertLoginProfileByNaver">
-		insert into user(user_email, user_password, user_nickname) values(#{email}, #{password}, #{nickname});
+		INSERT INTO USER(USER_EMAIL, USER_PASSWORD, USER_NICKNAME) VALUES(#{email}, #{password}, #{nickname})
 	</insert>
 	
 	<select resultType="com.kosta136th.user.User" id="isEmailDuplicate">
-		select user_email as email, user_password as password, user_nickname as nickname from user where user_email = #{email}
+		SELECT USER_EMAIL AS EMAIL, USER_PASSWORD AS PASSWORD, USER_NICKNAME AS NICKNAME FROM USER WHERE USER_EMAIL = #{email}
 	</select>
 	
+	<update id = "updateUserPassword">
+		UPDATE USER SET USER_PASSWORD = #{password} WHERE USER_EMAIL = #{email};
+	</update>
+	
 	<select resultType="com.kosta136th.user.User" id="isNicknameDuplicate">
-		select user_email as email, user_password as password, user_nickname as nickname from user where user_nickname = #{nickname}
+		SELECT USER_EMAIL AS EMAIL, USER_PASSWORD AS PASSWORD, USER_NICKNAME AS NICKNAME FROM USER WHERE USER_NICKNAME = #{nickname}
 	</select>
 
 </mapper>
