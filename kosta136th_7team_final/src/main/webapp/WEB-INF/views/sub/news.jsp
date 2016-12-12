@@ -106,10 +106,12 @@
 				<h4>지금 최신정보를 받아보세요 !</h4>				
 				<form role="form">
 					<div class="form-group">
-						<input type="email" class="form-control" placeholder="이메일 주소를 입력해 주세요">
+						<input type="email" id="email" placeholder="이메일 주소를 입력해 주세요">
 					</div>
-					<button type="submit" class="btn btn-primary"> 구독신청하기 </button>
+					<input type="button" id="getEmailBtn" class="btn btn-primary" onclick="getEmail()" value = "구독신청하기"/>
 				</form>
+				
+			
 			</div> <!-- ./submitEmail -->
 			<br />		
 			<!-- keyword 검색 체크박스 -->				
@@ -266,6 +268,31 @@ function korSubscribe(link, title, pubDate, description)
 		}),
 		
 	});
+}
+
+function getEmail()
+{
+	var email = $("#email").val();
+	var pattern = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	if( pattern.test(email) ) {
+		alert("메일 주소가 올바르게 입력되었습니다." + email);
+		$.ajax({
+			type : 'post',
+			url : '/getEmail',
+			headers :{
+				"Content-Type" : "application/json",
+				"X-HTTP-Method_Overrride" : "POST",
+			},
+			dataType : 'text',
+			data : JSON.stringify({
+				email : email
+			}),
+			
+		});
+	} else {
+		alert("메일 주소가 유효하지 않습니다." + email);
+	}
+	
 }
 </script>
 <%@ include file="../include/footer.jsp" %>		

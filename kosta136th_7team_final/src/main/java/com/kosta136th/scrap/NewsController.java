@@ -201,4 +201,12 @@ public class NewsController {
 		
 		return "sub/news/tab1";
 	}
+	
+	//국내기사 스크랩
+//		@RequestMapping(value = "/addDemesticScrap", method = RequestMethod.POST)
+//		public String getEmail(@RequestBody email vo) throws Exception{
+//			System.out.println(vo);
+//			
+//			return "sub/news/tab1";
+//		}
 }
