@@ -51,7 +51,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/requestSigninEmail", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<User> requestSigninEmail(@RequestBody User signinEmailDTO, HttpSession session){
+	public ResponseEntity<User> requestSigninEmail(User signinEmailDTO, HttpSession session){
 		
 		User signinSessionDTO = null;
 		
