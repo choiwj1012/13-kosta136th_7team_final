@@ -14,4 +14,5 @@ public interface UserDAO {
 	public String encryptPasswordSHA256(String password) throws Exception;
 	public String checkEmailDuplication(String email) throws Exception;
 	public String checkNicknameDuplication(String nickname) throws Exception;
+	public boolean updateUserPassword(User userVO) throws Exception;
 }
