@@ -27,7 +27,7 @@ public class MarketPriceController {
     public String marketPrice(Model model) {
     	
     	//home.jsp VIEW를 호출한다.
-        return "sub/marketPrice";	
+        return "sub/marketPrice/marketPrice";	
         
     }
 	
