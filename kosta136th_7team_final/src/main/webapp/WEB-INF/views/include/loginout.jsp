@@ -286,6 +286,7 @@
 		  		return;
 		  	}
 		  	
+		  	alert($('#signup_password').val());
 			var registerMap = {};
 			registerMap["user"] = [$('#signup_email').val(), $('#signup_password').val(), $('#signup_nickname').val()];
 			registerMap["authentication"] = [$('#signup_authentication').val()];
