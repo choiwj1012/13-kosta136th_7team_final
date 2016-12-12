@@ -15,18 +15,15 @@ public class DemesticScrapDAOImpl implements DemesticScrapDAO{
 	
 	private static String namespace = "com.kosta136th.mapper.NewsMapper";
 	
-	
 	@Override
 	public void addDemesticScrap(DemesticScrap vo) throws Exception{
 		session.insert(namespace + ".insertDemesticNews", vo);
-		
 	}
-
-
+	
 	@Override
-	public List<DemesticScrap> searchNews(String searchKeyword) {
+	public List<DemesticPopular> popularNews() throws Exception {
 		
-		return session.selectList(namespace + ".searchDemesticNews", searchKeyword);
+		return session.selectList(namespace + ".searchDemesticNews");
 	}
 
 }

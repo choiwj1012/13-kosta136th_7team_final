@@ -19,12 +19,10 @@
 			<div class="row text-center" id="bannerImg">
 				<img src="../../resources/img/banner.png" alt="banner" />
 			</div>
-			
-			
 			<!-- 국내기사 // 해외기사 탭 -->
 			<ul class="nav nav-tabs">
-				<li><a href="/news/tab1" class="tablinks" onclick="openCity(event, 'korArticle')">국내기사</a></li>
-  				<li><a href="/news/tab2" class="tablinks" onclick="openCity(event, 'engArticle')">해외기사</a></li>
+				<li><a href="/news/tab1?page=1" class="tablinks" onclick="openCity(event, 'korArticle')">국내기사</a></li>
+  				<li><a href="/news/tab2?page=1" class="tablinks" onclick="openCity(event, 'engArticle')">해외기사</a></li>
 			</ul>
 			<div id="engArticle" class="tabcontent">
 				<c:forEach items="${abrNewsList}" var ="b">
@@ -63,29 +61,46 @@
 				</c:forEach>
 			</div>
 			<div class="row text-center">
-						<ul class="pagination">
-							<c:if test="${pageMaker.prev}">
-								<li><a href="${tab}?page=${pageMaker.startPage - 1}">&laquo;</a></li>
-							</c:if>
-							<c:forEach begin="${pageMaker.startPage}"
-								end="${pageMaker.endPage }" var="idx">
-								<li
-									<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-									<a href="${tab}?page=${idx }">${idx}</a>
-								</li>
-							</c:forEach>
-							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-								<li><a
-									href="${tab}?page=${pageMaker.endPage+1 }">&raquo;</a></li>
-							</c:if>
-						</ul>
+				<ul class="pagination">
+					<c:if test = "${searchTF > 0}">
+						<c:if test="${pageMaker.prev}">
+							<li><a href="${tab}?searchKeyword=${searchKeyword}&page=${pageMaker.startPage - 1}">&laquo;</a></li>
+						</c:if>
+						<c:forEach begin="${pageMaker.startPage}"
+							end="${pageMaker.endPage }" var="idx">
+							<li
+								<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+								<a href="${tab}?searchKeyword=${searchKeyword}&page=${idx }&perPageNum=10">${idx}</a>
+							</li>
+						</c:forEach>
+						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+							<li><a
+								href="${tab}?searchKeyword=${searchKeyword}&page=${pageMaker.endPage+1 }">&raquo;</a></li>
+						</c:if>
+					</c:if>
+					<c:if test = "${searchTF == 0 }">
+						<c:if test="${pageMaker.prev}">
+							<li><a href="${tab}?page=${pageMaker.startPage - 1}">&laquo;</a></li>
+						</c:if>
+						<c:forEach begin="${pageMaker.startPage}"
+							end="${pageMaker.endPage }" var="idx">
+							<li
+								<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+								<a href="${tab}?page=${idx }&perPageNum=10">${idx}</a>
+							</li>
+						</c:forEach>
+						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+							<li><a
+								href="${tab}?page=${pageMaker.endPage+1 }">&raquo;</a></li>
+						</c:if>
+					</c:if>
+				</ul>
 			</div>
 		</div> <!-- ./main section -->
 		
 		
 		<!-- side section -->
 		<div class="col-md-3" id="side">
-			
 			<!-- 구독신청 -->
 			<div class="text-center" id="submitEmail">
 				<h4>지금 최신정보를 받아보세요 !</h4>				
@@ -96,103 +111,71 @@
 					<button type="submit" class="btn btn-primary"> 구독신청하기 </button>
 				</form>
 			</div> <!-- ./submitEmail -->
-			
 			<br />		
-			
 			<!-- keyword 검색 체크박스 -->				
 			<div class="row text-center" id="searchNews"> <!-- 해외기사 -->
-				
 				<h4>관련 기사 검색</h4>
-				
 				<div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
 					<form role="form" action="">
-				
 						<div class="form-group">
-							<input type="text" id ="searchKeyword" class="form-control" placeholder="검색할 키워드를 적어주세요" />
+							<input type="text" name ="searchKeyword" class="form-control" placeholder="검색할 키워드를 적어주세요" />
+							<input type='hidden' name="page" value=1>
 						</div>
-					
-						<button type="submit" class="btn btn-primary" onclick="button1_click('${tab }')">검색하기</button>
-					
+						<button type="submit" class="btn btn-primary">검색하기</button>
 					</form>
 				</div>
-				
 			</div> <!-- ./ keyword(foreign) -->
 			
-			
 			<!-- 인기기사 테이블 -->
+			<c:if test = "${tab eq 'news/tab1'}">
+				<div class="row text-center">
+					<h4>인기 국내기사 목록</h4>
+				</div>
+				<c:forEach items="${demPopularNews}" var ="b">	
+					<div class="row" id="favoriteNewsTable">
+					<div class="col-sm-5">
+						<img src="https://dummyimage.com/100x100" alt="" />
+					</div>
+					<div class="col-sm-7">
+						<a href = "${b.DOMESTIC_SCRAP_URL }" target="_blank"><p>${b.DOMESTIC_SCRAP_TITLE}</p></a>
+					</div>
+					</div>
+				</c:forEach>
+			</c:if>
+			
+			<c:if test = "${tab eq 'tab1'}">
+				<div class="row text-center">
+					<h4>인기 국내기사 목록</h4>
+				</div>
+				<c:forEach items="${demPopularNews}" var ="b">	
+					<div class="row" id="favoriteNewsTable">
+					<div class="col-sm-5">
+						<img src="https://dummyimage.com/100x100" alt="" />
+					</div>
+					<div class="col-sm-7">
+						<a href = "${b.DOMESTIC_SCRAP_URL }" target="_blank"><p>${b.DOMESTIC_SCRAP_TITLE}</p></a>
+					</div>
+					</div>
+				</c:forEach>
+			</c:if>
+			
+			<c:if test = "${tab eq 'tab2'}">
 			<div class="row text-center">
-				<h4> 주요 인기 기사 목록</h4>
+				<h4>인기 해외기사 목록</h4>
 			</div>
-					
-			<div class="row" id="favoriteNewsTable">
-				
-				<div class="col-sm-5">
-					<img src="https://dummyimage.com/100x100" alt="" />
-				</div>
-				
-				<div class="col-sm-7">
-					<p>기사내용 기사내용 기사내용</p>
-				</div>
-				
-			</div> <!-- ./favoriteNewsTable -->
-			
-			
-			<!-- 인기기사 테이블 -->			
-			<div class="row" id="favoriteNewsTable">
-				
-				<div class="col-sm-5">
-					<img src="https://dummyimage.com/100x100" alt="" />
-				</div>
-				
-				<div class="col-sm-7">
-					<p>기사내용 기사내용 기사내용</p>
-				</div>
-				
-			</div> <!-- ./favoriteNewsTable -->
-			
-			
-			<!-- 인기기사 테이블 -->			
-			<div class="row" id="favoriteNewsTable">
-				
-				<div class="col-sm-5">
-					<img src="https://dummyimage.com/100x100" alt="" />
-				</div>
-				
-				<div class="col-sm-7">
-					<p>기사내용 기사내용 기사내용</p>
-				</div>
-				
-			</div> <!-- ./favoriteNewsTable -->
-			
-			
-			<!-- 인기기사 테이블 -->			
-			<div class="row" id="favoriteNewsTable">
-				
-				<div class="col-sm-5">
-					<img src="https://dummyimage.com/100x100" alt="" />
-				</div>
-				
-				<div class="col-sm-7">
-					<p>기사내용 기사내용 기사내용</p>
-				</div>
-				
-			</div> <!-- ./favoriteNewsTable -->
-			
-			
-			<!-- 인기기사 테이블 -->			
-			<div class="row" id="favoriteNewsTable">
-				
-				<div class="col-sm-5">
-					<img src="https://dummyimage.com/100x100" alt="" />
-				</div>
-				
-				<div class="col-sm-7">
-					<p>기사내용 기사내용 기사내용</p>
-				</div>
-				
-			</div> <!-- ./favoriteNewsTable -->
-			
-			
+				<c:forEach items="${demPopularNews}" var ="b">	
+					<div class="row" id="favoriteNewsTable">
+					<div class="col-sm-5">
+						<img src="${b.ABROAD_SCRAP_IMG_URL}" alt="" height = "100" width = "100" />
+					</div>
+					<div class="col-sm-7">
+						<a href = "${b.ABROAD_SCRAP_URL }" target="_blank"><p>${b.ABROAD_SCRAP_TITLE}</p></a>
+					</div>
+					</div>
+				</c:forEach>
+			</c:if>
+			<!-- ./favoriteNewsTable -->
+			 
 			<!-- google adsense -->
 			<div class="row text-center">
 				<a href = "http://gall.dcinside.com/board/lists/?id=parkboyoung" target="_blank" ><img src="https://dummyimage.com/200x600" alt="google adsense"/></a>
@@ -284,37 +267,5 @@ function korSubscribe(link, title, pubDate, description)
 		
 	});
 }
-
 </script>
-
-<script>
-function button1_click(tabInfo)
-{
-	var searchKeyword = $('#searchKeyword').val();
-	if(tabInfo == "news/tab1")
-	{
-		temp = tabInfo.split('/');
-		tabInfo = temp[1];
-	}
-	alert("tabInfo : " + tabInfo + "검색어 : " + searchKeyword + " 검색버튼눌림");
-	
-	$.ajax({
-		type : 'get',
-		url : '/news',
-		headers :{
-			"Content-Type" : "application/json",
-			"X-HTTP-Method_Overrride" : "GET",
-		},
-		dataType : 'text',
-		data : JSON.stringify({
-			tabInfo : tabInfo,
-			searchKeyword : searchKeyword
-		}),
-		
-	});
-	
-	
-}
-</script>
-
 <%@ include file="../include/footer.jsp" %>		

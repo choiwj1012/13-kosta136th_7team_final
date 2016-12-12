@@ -148,8 +148,6 @@ public class AbroadScrapServiceImpl implements AbroadScrapService{
 				//기사기자 크롤링
 				Elements author= doc.select(".item-details .meta-info .td-post-author-name");
 				Elements author2 = author.select("a[href]");
-				System.out.println();
-				
 
 				//제목 크롤링
 				Elements title= doc.select(".item-details");
@@ -251,7 +249,6 @@ public class AbroadScrapServiceImpl implements AbroadScrapService{
 				//기사기자 크롤링
 				Elements author= doc.select(".item-details .meta-info .td-post-author-name");
 				Elements author2 = author.select("a[href]");
-				System.out.println();
 				
 
 				//제목 크롤링
@@ -342,6 +339,11 @@ public class AbroadScrapServiceImpl implements AbroadScrapService{
 
 			dao.addAbroadScrap(vo);
 	
+	}
+
+	@Override
+	public List<AbroadPopular> popularNews() throws Exception {
+		return dao.popularNews();
 	}
 }
 

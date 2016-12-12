@@ -3,7 +3,6 @@ package com.kosta136th.scrap;
 public class DemesticScrap {
 	private int user_num;
 	private String title;
-	private String originallink;
 	private String link;
 	private String description;
 	private String pubDate;
@@ -21,12 +20,7 @@ public class DemesticScrap {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getOriginallink() {
-		return originallink;
-	}
-	public void setOriginallink(String originallink) {
-		this.originallink = originallink;
-	}
+
 	public String getLink() {
 		return link;
 	}
@@ -53,7 +47,7 @@ public class DemesticScrap {
 	}
 	@Override
 	public String toString() {
-		return "DomesticScrap [user_num=" + user_num + ", title=" + title + ", originallink=" + originallink + ", link="
+		return "DomesticScrap [user_num=" + user_num + ", title=" + title + ", link="
 				+ link + ", description=" + description + ", pubDate=" + pubDate + ", keyword=" + keyword + "]";
 	}
 	

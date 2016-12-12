@@ -4,8 +4,8 @@ import java.util.List;
 
 public interface DemesticScrapDAO {
 
-	void addDemesticScrap(DemesticScrap vo) throws Exception;
+	List<DemesticPopular> popularNews() throws Exception;
 
-	List<DemesticScrap> searchNews(String searchKeyword);
+	void addDemesticScrap(DemesticScrap vo) throws Exception;
 
 }

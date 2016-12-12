@@ -1,5 +1,7 @@
 package com.kosta136th.scrap;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -18,6 +20,12 @@ public class AbroadScrapDAOImpl implements AbroadScrapDAO{
 		
 		session.insert(namespace + ".insertAbroadNews", vo);
 		
+	}
+
+	@Override
+	public List<AbroadPopular> popularNews() throws Exception{
+		
+		return session.selectList(namespace + ".searchAbroadNews");
 	}
 
 }

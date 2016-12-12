@@ -3,6 +3,7 @@ package com.kosta136th.scrap;
 public class SearchInfo {
 	private String tabInfo;
 	private String searchKeyword;
+	
 	public String getTabInfo() {
 		return tabInfo;
 	}

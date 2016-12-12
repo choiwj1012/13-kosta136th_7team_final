@@ -8,6 +8,6 @@ public interface DemesticScrapService {
 
 	public void addDemesticScrap(DemesticScrap vo) throws Exception;
 
-	public List<DemesticScrap> searchNews(String searchKeyword) throws Exception;
+	public List<DemesticPopular> popularNews() throws Exception;
 
 }

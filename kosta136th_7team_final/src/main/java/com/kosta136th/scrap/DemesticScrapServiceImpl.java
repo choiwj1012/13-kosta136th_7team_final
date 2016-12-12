@@ -78,10 +78,6 @@ public class DemesticScrapServiceImpl implements DemesticScrapService{
 						if(b != null)
 							b.setTitle(parser.nextText());
 						break;
-					case "originallink":
-						if(b != null)
-							b.setOriginallink(parser.nextText());
-						break;
 					case "link":
 						if(b != null)
 							b.setLink(parser.nextText());
@@ -127,11 +123,12 @@ public class DemesticScrapServiceImpl implements DemesticScrapService{
 		
 	}
 
+
+
 	@Override
-	public List<DemesticScrap> searchNews(String searchKeyword) throws Exception {
+	public List<DemesticPopular> popularNews() throws Exception{
 		
-		return dao.searchNews(searchKeyword);
-		
+		return dao.popularNews();
 	}
 
 }

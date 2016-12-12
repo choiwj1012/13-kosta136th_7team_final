@@ -1,0 +1,48 @@
+package com.kosta136th.scrap;
+
+public class AbroadPopular {
+	private String ABROAD_SCRAP_URL;
+	private String ABROAD_SCRAP_TITLE;
+	private String ABROAD_SCRAP_DESCRIPTION;
+	private String ABROAD_SCRAP_PUBDATE;
+	private String ABROAD_SCRAP_IMG_URL;
+	
+	
+	public String getABROAD_SCRAP_URL() {
+		return ABROAD_SCRAP_URL;
+	}
+	public void setABROAD_SCRAP_URL(String aBROAD_SCRAP_URL) {
+		ABROAD_SCRAP_URL = aBROAD_SCRAP_URL;
+	}
+	public String getABROAD_SCRAP_TITLE() {
+		return ABROAD_SCRAP_TITLE;
+	}
+	public void setABROAD_SCRAP_TITLE(String aBROAD_SCRAP_TITLE) {
+		ABROAD_SCRAP_TITLE = aBROAD_SCRAP_TITLE;
+	}
+	public String getABROAD_SCRAP_DESCRIPTION() {
+		return ABROAD_SCRAP_DESCRIPTION;
+	}
+	public void setABROAD_SCRAP_DESCRIPTION(String aBROAD_SCRAP_DESCRIPTION) {
+		ABROAD_SCRAP_DESCRIPTION = aBROAD_SCRAP_DESCRIPTION;
+	}
+	public String getABROAD_SCRAP_PUBDATE() {
+		return ABROAD_SCRAP_PUBDATE;
+	}
+	public void setABROAD_SCRAP_PUBDATE(String aBROAD_SCRAP_PUBDATE) {
+		ABROAD_SCRAP_PUBDATE = aBROAD_SCRAP_PUBDATE;
+	}
+	public String getABROAD_SCRAP_IMG_URL() {
+		return ABROAD_SCRAP_IMG_URL;
+	}
+	public void setABROAD_SCRAP_IMG_URL(String aBROAD_SCRAP_IMG_URL) {
+		ABROAD_SCRAP_IMG_URL = aBROAD_SCRAP_IMG_URL;
+	}
+	@Override
+	public String toString() {
+		return "AbroadPopular [ABROAD_SCRAP_URL=" + ABROAD_SCRAP_URL + ", ABROAD_SCRAP_TITLE=" + ABROAD_SCRAP_TITLE
+				+ ", ABROAD_SCRAP_DESCRIPTION=" + ABROAD_SCRAP_DESCRIPTION + ", ABROAD_SCRAP_PUBDATE="
+				+ ABROAD_SCRAP_PUBDATE + ", ABROAD_SCRAP_IMG_URL=" + ABROAD_SCRAP_IMG_URL + "]";
+	}
+	
+}
