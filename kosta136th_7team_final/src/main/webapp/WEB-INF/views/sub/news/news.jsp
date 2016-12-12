@@ -4,7 +4,7 @@
 
 <%@ include file="../../include/header.jsp" %>
 <header>
-	<link rel="stylesheet" href="../../resources/css/news.css" />
+	<link rel="stylesheet" href="../../../../resources/css/news.css" />
 </header>
 <%@ include file="../../include/grandNav.jsp" %>
 
@@ -44,10 +44,10 @@
 			</div>					
 
 			<div id="korArticle" class="tabcontent">
-				<c:forEach items="${newsList}" var ="b">
+				<c:forEach items="${newsList}" var ="b" begin="0" end="9" varStatus="idx">
 					<div class="row" id="newsTable">
 						<div class="col-sm-3">
-							<img src="https://dummyimage.com/130x130" alt="" />
+							<img src= "../../../../resources/img/news/${idx.index}.png" width = "150" height = "150" alt="" />
 						</div>
 						<div class="col-sm-7">
 							<h3><a href = ${b.link} target="_blank">${b.title}</a></h3>
@@ -106,10 +106,11 @@
 				<h4>지금 최신정보를 받아보세요 !</h4>				
 				<form role="form">
 					<div class="form-group">
-						<input type="email" class="form-control" placeholder="이메일 주소를 입력해 주세요">
+						<input type="email" id="email" placeholder="이메일 주소를 입력해 주세요">
 					</div>
-					<button type="submit" class="btn btn-primary"> 구독신청하기 </button>
+					<input type="submit" id="getEmailBtn" class="btn btn-primary" onclick="getEmail()" value = "구독신청하기"/>
 				</form>
+				
 			</div> <!-- ./submitEmail -->
 			<br />		
 			<!-- keyword 검색 체크박스 -->				
@@ -131,10 +132,10 @@
 				<div class="row text-center">
 					<h4>인기 국내기사 목록</h4>
 				</div>
-				<c:forEach items="${demPopularNews}" var ="b">	
+				<c:forEach items="${demPopularNews}" var ="b" begin="0" end="4" varStatus="idx">	
 					<div class="row" id="favoriteNewsTable">
 					<div class="col-sm-5">
-						<img src="https://dummyimage.com/100x100" alt="" />
+						<img src="../../../../resources/img/news/${idx.index+10}.png" alt="" width = "100" height = "100"/>
 					</div>
 					<div class="col-sm-7">
 						<a href = "${b.DOMESTIC_SCRAP_URL }" target="_blank"><p>${b.DOMESTIC_SCRAP_TITLE}</p></a>
@@ -147,10 +148,10 @@
 				<div class="row text-center">
 					<h4>인기 국내기사 목록</h4>
 				</div>
-				<c:forEach items="${demPopularNews}" var ="b">	
+				<c:forEach items="${demPopularNews}" var ="b" begin="0" end="4" varStatus="idx">	
 					<div class="row" id="favoriteNewsTable">
 					<div class="col-sm-5">
-						<img src="https://dummyimage.com/100x100" alt="" />
+						<img src="../../../../resources/img/news/${idx.index+10}.png" alt="" width = "100" height = "100"/>
 					</div>
 					<div class="col-sm-7">
 						<a href = "${b.DOMESTIC_SCRAP_URL }" target="_blank"><p>${b.DOMESTIC_SCRAP_TITLE}</p></a>
@@ -178,7 +179,10 @@
 			 
 			<!-- google adsense -->
 			<div class="row text-center">
-				<a href = "http://gall.dcinside.com/board/lists/?id=parkboyoung" target="_blank" ><img src="https://dummyimage.com/200x600" alt="google adsense"/></a>
+				<a href = "http://twice.jype.com/" target="_blank" ><img src="../../../../resources/img/news/sana.gif" width = "200" height = "200" alt="google adsense"/></a>
+			</div>
+			<div class="row text-center">
+				<a href = "http://gall.dcinside.com/board/lists/?id=twice&page=" target="_blank" ><img src="../../../../resources/img/news/sana2.gif" width = "200" height = "200" alt="google adsense"/></a>
 			</div>
 		
 		</div> <!-- ./side section -->
@@ -266,6 +270,31 @@ function korSubscribe(link, title, pubDate, description)
 		}),
 		
 	});
+}
+
+function getEmail()
+{
+	var email = $("#email").val();
+	var pattern = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	if( pattern.test(email) ) 
+	{
+		alert("메일 주소가 올바르게 입력되었습니다." + email);
+		$.ajax({
+			type : 'post',
+			url : '/getEmail',
+			headers :{
+				"Content-Type" : "application/json",
+				"X-HTTP-Method_Overrride" : "POST",
+			},
+			dataType : 'text',
+			data : JSON.stringify(email),
+		});
+	} 
+	else 
+	{
+		alert("메일 주소가 유효하지 않습니다." + email);
+	}
+	
 }
 </script>
 <%@ include file="../../include/footer.jsp" %>		
