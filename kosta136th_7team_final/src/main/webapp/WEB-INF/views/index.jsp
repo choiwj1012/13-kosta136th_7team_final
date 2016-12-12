@@ -5,7 +5,24 @@
 <head>
 	<link rel="stylesheet" href="../../resources/css/index.css" />
 	<script src="../../resources/js/jquery.tubular.1.0.js"></script>
+	<script src="https://code.highcharts.com/stock/highstock.js"></script>			<!-- 차트 API js -->
+	<script src="../../../resources/js/index_chart.js"></script>				<!-- 차트 구현 js -->
+	<script src="../../../resources/js/marketPrice_chart_customizing.js"></script>	<!-- 디자인 커스터마이징 js -->
 	<script src="../../resources/js/index.js"></script>
+	<script>
+		var signinSession = {email : '',
+							nickname : ''};
+	</script>
+	<script>
+		var isSignupEmailUnique = false;
+		var isAuthenticate = false;
+	</script>
+	<c:if test="${not empty signinSessionDTO}">
+		<script>
+			signinSession.email = ${signinSessionDTO.email};
+			signinSession.nickname = ${signinSessionDTO.nickname};
+		</script>
+	</c:if>
 </head>
 <body id="page-top">
 	
@@ -14,22 +31,22 @@
 		
 		<!-- header image -->
 		<div id="header-image">
-			<img src="../../resources/img/main_bitcoin_img.png" alt="메인화면 콘텐츠" />
+			<img src="../../resources/img/main_bitcoin_img.png" alt="메인화면 콘텐츠" id="main_coin_img"/>
 		</div>
 	
 		<!-- header content -->
 		<div id="header-content">
-			<img src="../../resources/img/main_typo.png" alt="메인화면 이미지" />
+			<img src="../../resources/img/main_typo.png" alt="메인화면 이미지" id="main_typo_img"/>
 		</div>
 		
 		<!-- graph link img -->
 		<div id="graph-link">
-			<a href="/graph"><img src="../../resources/img/graph_button.png" alt="graph-link" /></a> 
+			<a href="/marketPrice"><img src="../../resources/img/graph_button.png" alt="graph-link" id="graph-link_img"/></a> 
 		</div>
 		
 		<!-- news link img -->
 		<div id="news-link">
-			<a href="/news"><img src="../../resources/img/news_button.png" alt="news-link" /></a>
+			<a href="/news"><img src="../../resources/img/news_button.png" alt="news-link" id="news-link_img"/></a>
 		</div>
 			
 		<!-- background -->
@@ -53,16 +70,22 @@
 		
 		            <div class="collapse navbar-collapse navbar-right">
 		                <ul class="nav navbar-nav">
-		       	 			<li><a href="/graph">실시간 시세</a></li>
+		       	 			<li><a href="/marketPrice">실시간 시세</a></li>
 							<li><a href="/news">최신 뉴스</a></li>
-							<li><a href="/recommand">거래소 추천</a></li>
-							<li><a href="/board">게시판</a></li>
+							<li><a href="/btcInfoLand">BTC정보광장</a></li>
+							<li><a href="/board_list">자유게시판</a></li>
+
+							<c:if test="${empty signinSessionDTO}">
+								<li><a href="#" id="signupBtn" data-toggle="modal" data-target="#signup">회원가입</a></li>
+								<li><a href="#" id="signinBtn" data-toggle="modal" data-target="#signin">로그인</a></li>								
+							</c:if>
 							
-							<!-- 임시 마이 페이지 -->
-							<li><a href="/myPage">마이페이지</a></li>
+							<c:if test="${not empty signinSessionDTO}">
+							<!-- 임시 마이 페이지 -->							
+								<li><a href="/myPage" id = "myPage">마이페이지</a></li>
+								<li><a href="#" id="signoutBtn">로그아웃</a></li>
+							</c:if>
 							
-							<li><a href="#" id="signupBtn" data-toggle="modal" data-target="#signup">회원가입</a></li>
-							<li><a href="#" id="signinBtn" data-toggle="modal" data-target="#signin">로그인</a></li>
 		                </ul>
 		            </div>
 		            
@@ -74,6 +97,11 @@
 		</div> <!-- ./wrapper -->
 		
 	</header>
+		
+	<section class="bg-chart">
+		<div id="chart_usd" class="col-md-6"></div>
+		<div id="chart_cny" class="col-md-6"></div>
+	</section>
 		
 	<section class="bg-first">
 		<div class="container">
@@ -92,7 +120,7 @@
 	</section>
 	
 	<section class="bg-second">
-		<div class="container text-center">
+		<div class="container-fluid text-center">
 		
 			<div class="row second-title">
 				<h2>비트리버 서비스</h2>
@@ -126,6 +154,7 @@
 		<div class="container text-center">
 			<div class="row">
 				
+				
 				<div class="col-md-12">
 					
 					<h3>비트코인 정보를 이메일로 받아보세요</h3>
@@ -147,11 +176,12 @@
 	</section>
 	
 	<section class="bg-fourth">
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row">
-				
+				<img src="../../resources/img/logos_resize.png" alt="" id="logos"/>
 			</div>
 		</div>
 	</section>		
 
-<%@ include file="include/footer.jsp" %>		
+<%@ include file="include/footer.jsp" %>
+		

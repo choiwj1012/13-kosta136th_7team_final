@@ -1,0 +1,156 @@
+@CHARSET "UTF-8";
+
+/* 성용에게 문의하세요 */
+body, .container-fluid {
+	
+	background: #333;
+	margin: 0;
+	padding: 0;
+	
+}
+
+/* 글자는 흰색으로 출력 */
+h3 {
+	color: #eeeeee;
+}
+
+#mainNav {
+
+	background: #161a1c;
+	margin: 0;
+	height: 70px;
+	
+}
+
+/*** 시세그래프 ***/
+/* 그래프차트 공백 제거 */
+#market_price_graph, h3.text-center  {
+	
+	margin: 0;
+	padding: 0;
+	
+}
+
+#chart {
+	
+	min-height: 900px;
+	position: relative;
+	
+}
+
+
+/*** 시세리스트 ***/
+/* 제목바  */
+#title_bar {
+	
+	padding: 15px;
+	background: #282b2d;
+	
+}
+
+
+.tabs {
+    min-width: 300px;
+    min-height: 900px;
+    height: 100%;
+    overflow: scroll;
+}
+
+
+/* 탭 버튼 */
+/* .nav-tabs>li.active>a .nav-tabs>li.hover>a {
+	
+	padding: 0;
+	color: #FFF; 
+	cursor: default;
+	background-color: #3e4244;
+	border: none;
+	border-top: 5px solid #eee;
+} */
+
+ul.nav-tabs>li>a {
+	
+	color: #ddd;
+	border: none;
+	border-top: 3px solid #2e3234;
+	border-radius: 0;
+	
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+	
+	color: #FFF; 
+	cursor: default;
+	background-color: #2e3234;
+	border: none;
+	border-top: 3px solid #33AADD;
+	
+}
+
+/* focus, hover시 css */
+.nav-tabs>li>a:hover{
+	
+	color: #FFF; 
+	background-color: #3e4244;
+	border: none;
+	border-top: 3px solid #eee;
+	
+}
+
+/* 버튼과 리스트 구분선 */
+ul.nav.nav-tabs {
+	
+	background: #282b2d;
+	border-bottom: 1px ;
+	
+}
+
+
+
+/* 시세리스트 배경  */
+#market_price_list {
+	
+	margin: 0;
+	border: 1px solid #262a2c;
+	padding: 0;
+	background: #2e3234;	/* 배경 */
+	
+	/* ie 스크롤바 색상 변경 */
+	scrollbar-track-color: #2a2a2a;
+	scrollbar-arrow-color: #2a2a2a;
+	scrollbar-face-color: #333333;
+	overflow-y:auto; overflow-x:hidden;
+	
+}
+
+#combo-box {
+	
+	background: #262a2c;
+	border: 1px solid #33aadd;
+	color: #ddd;
+	
+}
+
+#drop-box {
+	
+	max-height: 43px;
+	
+}
+
+/* .form-group {
+	
+	align: right;
+	
+} */
+
+	/* chrome, safari 스크롤바 색상 변경 */
+
+	::-webkit-scrollbar {width: 12px; height: 8px;}
+	::-webkit-scrollbar-corner {background:#2a2a2a }
+	::-webkit-scrollbar-button {width: 12px;height: 12px; background: #2a2a2a}
+	::-webkit-scrollbar-thumb {width: 9px; height:9px; background: #474747; -webkit-border-radius: 10px; border-radius:10px}
+	::-webkit-scrollbar-track {width: 12px;height: 8px;background: #2a2a2a}  /* 길 */
+	/*::-webkit-scrollbar-track-piece {width: 12px;height: 8px;background: #f00; -webkit-border-radius: 10px; border-radius:10px}*/
+	
+	
+

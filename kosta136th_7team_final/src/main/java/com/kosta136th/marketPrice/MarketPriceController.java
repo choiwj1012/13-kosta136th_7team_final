@@ -1,12 +1,7 @@
 package com.kosta136th.marketPrice;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.math.BigDecimal;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
 
+<<<<<<< HEAD
 import javax.inject.Inject;
 
 import org.json.simple.JSONArray;
@@ -14,11 +9,14 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+=======
+>>>>>>> 68931bff15b818f1830116c0a776d19068dfc30a
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+<<<<<<< HEAD
 @Controller
 @RequestMapping("/rate/*")
 public class MarketPriceController {
@@ -187,17 +185,11 @@ public class MarketPriceController {
 
 					//�������Ҷ���  �и��̴�.
 					BigDecimal ex = new BigDecimal(1);
+=======
+>>>>>>> 68931bff15b818f1830116c0a776d19068dfc30a
 
-					//ex)price_rur/ex = ex�� 1�̱⶧���� price_rur �����ǰ��� ���´�. �׸��� 7�ڸ����� �Ҽ����� �����ϰ� �������� �Ҽ���ó���Ѵ�.
-					BigDecimal price_btc_out = price_btc.divide(ex, 6, BigDecimal.ROUND_DOWN);
-					BigDecimal price_usd_out = price_usd.divide(ex, 7, BigDecimal.ROUND_DOWN);
-					BigDecimal price_cny_out = price_cny.divide(ex, 7, BigDecimal.ROUND_DOWN);
-					BigDecimal price_eur_out = price_eur.divide(ex, 7, BigDecimal.ROUND_DOWN);
-					BigDecimal price_gbp_out = price_gbp.divide(ex, 7, BigDecimal.ROUND_DOWN);
-					BigDecimal price_rur_out = price_rur.divide(ex, 7, BigDecimal.ROUND_DOWN);
-					BigDecimal volume_24h_out = volume_24h.divide(ex, 6, BigDecimal.ROUND_DOWN);
-					MarketPrice marketPrice = new MarketPrice();
 
+<<<<<<< HEAD
 					marketPrice.setLabel((String) marketsObject.get("Label"));
 					marketPrice.setName((String) marketsObject.get("Name"));;
 					marketPrice.setPrice_btc_result(price_btc_out);
@@ -301,5 +293,17 @@ public class MarketPriceController {
 		}
 		return "sub/graph";
 	}
+=======
+@Controller
+public class MarketPriceController {
+>>>>>>> 68931bff15b818f1830116c0a776d19068dfc30a
 
+	// 시세 뷰 경로
+	@RequestMapping(value = "/marketPrice", method = RequestMethod.GET)
+    public String marketPrice(Model model) {
+    	
+    	//home.jsp VIEW를 호출한다.
+        return "sub/marketPrice/marketPrice";	
+        
+    }
 }

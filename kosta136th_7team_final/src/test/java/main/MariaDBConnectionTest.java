@@ -7,6 +7,7 @@ import org.junit.Test;
 
 public class MariaDBConnectionTest {
 
+
 	// variable
 	private static final String DRIVER = "org.mariadb.jdbc.Driver";
 	private static final String URL = "jdbc:mariadb://localhost:3300/bitcoin";
@@ -29,6 +30,7 @@ public class MariaDBConnectionTest {
 		}
 		
 	}
+	
 	
 	
 }
