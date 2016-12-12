@@ -232,6 +232,10 @@
 			
 			e.preventDefault();
 			
+			var registerMap = {};
+			registerMap["user"] = [$('#signup_email').val(), $('#signup_password').val(), $('#signup_nickname').val()];
+			registerMap["authentication"] = [$('#signup_authentication').val()];
+			
 			$.ajax({
 				type : 'POST',
 				url : '/requestSignupEmail',
@@ -240,13 +244,8 @@
 					"Content-Type": "application/json",
 					"X-HTTP-Method-Override" : "POST"
 				},
-				dataType : 'text',
-			    data : JSON.stringify({
-			    		'email' : $('#signup_email').val(),
-			    		'password' : $('#signup_password').val(),
-			    		'nickname' : $('#signup_nickname').val(),
-			    		'authentication' : $('#signup_authentication').val()
-			    }),	
+				dataType : 'json',
+			    data : JSON.stringify(registerMap),	
 			    success : function(data) {
 				    alert(data);
 			    }
