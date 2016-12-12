@@ -4,7 +4,7 @@
 
 <%@ include file="../../include/header.jsp" %>
 <header>
-	<link rel="stylesheet" href="../../resources/css/news.css" />
+	<link rel="stylesheet" href="../../../../resources/css/news.css" />
 </header>
 <%@ include file="../../include/grandNav.jsp" %>
 
@@ -44,10 +44,10 @@
 			</div>					
 
 			<div id="korArticle" class="tabcontent">
-				<c:forEach items="${newsList}" var ="b">
+				<c:forEach items="${newsList}" var ="b" begin="0" end="9" varStatus="idx">
 					<div class="row" id="newsTable">
 						<div class="col-sm-3">
-							<img src="https://dummyimage.com/130x130" alt="" />
+							<img src= "../../../../resources/img/news/${idx.index}.png" width = "150" height = "150" alt="" />
 						</div>
 						<div class="col-sm-7">
 							<h3><a href = ${b.link} target="_blank">${b.title}</a></h3>
@@ -132,10 +132,10 @@
 				<div class="row text-center">
 					<h4>인기 국내기사 목록</h4>
 				</div>
-				<c:forEach items="${demPopularNews}" var ="b">	
+				<c:forEach items="${demPopularNews}" var ="b" begin="0" end="4" varStatus="idx">	
 					<div class="row" id="favoriteNewsTable">
 					<div class="col-sm-5">
-						<img src="https://dummyimage.com/100x100" alt="" />
+						<img src="../../../../resources/img/news/${idx.index+10}.png" alt="" width = "100" height = "100"/>
 					</div>
 					<div class="col-sm-7">
 						<a href = "${b.DOMESTIC_SCRAP_URL }" target="_blank"><p>${b.DOMESTIC_SCRAP_TITLE}</p></a>
@@ -148,10 +148,10 @@
 				<div class="row text-center">
 					<h4>인기 국내기사 목록</h4>
 				</div>
-				<c:forEach items="${demPopularNews}" var ="b">	
+				<c:forEach items="${demPopularNews}" var ="b" begin="0" end="4" varStatus="idx">	
 					<div class="row" id="favoriteNewsTable">
 					<div class="col-sm-5">
-						<img src="https://dummyimage.com/100x100" alt="" />
+						<img src="../../../../resources/img/news/${idx.index+10}.png" alt="" width = "100" height = "100"/>
 					</div>
 					<div class="col-sm-7">
 						<a href = "${b.DOMESTIC_SCRAP_URL }" target="_blank"><p>${b.DOMESTIC_SCRAP_TITLE}</p></a>
@@ -179,7 +179,10 @@
 			 
 			<!-- google adsense -->
 			<div class="row text-center">
-				<a href = "http://gall.dcinside.com/board/lists/?id=parkboyoung" target="_blank" ><img src="https://dummyimage.com/200x600" alt="google adsense"/></a>
+				<a href = "http://twice.jype.com/" target="_blank" ><img src="../../../../resources/img/news/sana.gif" width = "200" height = "200" alt="google adsense"/></a>
+			</div>
+			<div class="row text-center">
+				<a href = "http://gall.dcinside.com/board/lists/?id=twice&page=" target="_blank" ><img src="../../../../resources/img/news/sana2.gif" width = "200" height = "200" alt="google adsense"/></a>
 			</div>
 		
 		</div> <!-- ./side section -->
