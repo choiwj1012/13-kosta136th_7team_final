@@ -13,7 +13,7 @@ public class MarketPriceServiceImpl implements MarketPriceService{
 	MarketPriceDAO dao;
 	
 	@Override
-	public void rateSave(MarketPrice marketPrice) throws Exception {
+	public void rateSave(MarketPriceSave marketPrice) throws Exception {
 
 		dao.rateSave(marketPrice);
 		
