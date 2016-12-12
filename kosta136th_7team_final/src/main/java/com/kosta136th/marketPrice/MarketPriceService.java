@@ -6,5 +6,8 @@ public interface MarketPriceService {
 
 	public void rateSave(MarketPrice marketPrice) throws Exception;
 	
+	public List<MarketPriceChart> chart(String money_type) throws Exception;
+
 	public List<MarketPrice> coinRateList() throws Exception;
+
 }
