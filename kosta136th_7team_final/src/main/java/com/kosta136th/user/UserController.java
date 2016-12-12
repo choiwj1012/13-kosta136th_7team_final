@@ -10,6 +10,7 @@ import java.net.URLEncoder;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
@@ -22,7 +23,6 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpHeaders;
@@ -51,7 +51,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/requestSigninEmail", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<User> requestSigninEmail(User signinEmailDTO, HttpSession session){
+	public ResponseEntity<User> requestSigninEmail(@RequestBody User signinEmailDTO, HttpSession session){
 		
 		User signinSessionDTO = null;
 		
@@ -85,10 +85,17 @@ public class UserController {
 	
 	@RequestMapping(value = "/requestSignupEmail", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	@ResponseBody
-	public ResponseEntity<String> requestSignupEmail(@RequestBody User signupEmailDTO, String authentication, HttpSession session) throws Exception{
+	public ResponseEntity<String> requestSignupEmail(@RequestBody Map<String, List<String>> registerMap, HttpSession session){
 		
 		boolean signupSuccess = false;
 		
+		String email = registerMap.get("user").get(0);
+		String password = registerMap.get("user").get(1);
+		String nickname = registerMap.get("user").get(2);
+		
+		User signupEmailDTO = new User(email, password, nickname);
+		
+		String authentication = registerMap.get("authentication").get(0); 
 		
 		//한글 인코딩을 위해, Restful 방식에서 어쩔 수 없이 쓴다.
 		//이 반복을 줄일 방법이 없을까?
@@ -102,12 +109,15 @@ public class UserController {
 		System.out.println("인증 : " + authentication);
 		System.out.println("세션 저장 인증 : " + (String)session.getAttribute("authentication"));
 		//인증번호가 틀리면 그냥 돌아가
-		if (authentication != session.getAttribute("authentication")){
+		if (!((String)session.getAttribute("authentication")).equals(authentication)){
+			System.out.println("잘못된 인증번호입니다");
 			entity = new ResponseEntity<String>("잘못된 인증번호입니다", responseHeaders, HttpStatus.BAD_REQUEST);
 			return entity;
+		}else{
+			System.out.println("인증 성공");
 		}
 		
-		String email = signupEmailDTO.getEmail();
+
 		//DAO에 접근. 검사 로직.
 		//네이버 아이디와 일치하는 행을 불러오는 것
 		String email_state;
