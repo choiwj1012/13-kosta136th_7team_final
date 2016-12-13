@@ -64,13 +64,25 @@
 					<!-- 첫 탭 화면에 표시되는 정보 (비트코인 환율) -->
 					<div id="bitcoin_price" class="tab-pane fade in active">
 					
-						<table id="marketPriceList">
-							<tr>
-								<th>Label</th>
-								<th>Name</th>
-								<th>Price</th>
-								<th>Volume_24h</th>
-							</tr>
+					
+					<!-- <ul><li><a href="asd" class="onclick">asd</a></li></ul> -->
+					
+					<!-- <table>
+					<tr onclick="window.location='이동할링크'" style="cursor:pointer;" onMouseOver=this.style.backgroundColor="#F0F1F3" onMouseOut=this.style.backgroundColor="#FFFFFF">
+						<td>fifififi</td>
+					</tr>
+					</table> -->
+						
+						<table id="marketPriceList" class="table table-hover">
+							<thead>
+								<tr>
+									<th>Label</th>
+									<th>Name</th>
+									<th>Price</th>
+									<th>Volume_24h</th>
+								</tr>
+							</thead>
+							
 							<tbody id="bitrate">
 
 							</tbody>
@@ -79,19 +91,20 @@
 					</div>
 					
 					<!-- 두번째 탭 화면에서 보여주는 정보 (실화폐환율) -->
-					<div id="market_price" class="tab-pane fade">
-					<table>
-					<tr>
-						<th>Id</th>
-						<th>Name</th>
-						<th>Rate</th>
-						<th>Ask</th>
-						<th>Bid</th>
-
-					</tr>
-					<tbody id="rate">
-
-					</tbody>
+					<div id="market_price">
+					<table id="exchange" class="table table-hover">
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>Name</th>
+								<th>Rate</th>
+								<th>Ask</th>
+								<th>Bid</th>
+							</tr>
+						</thead>
+						<tbody id="rate">
+	
+						</tbody>
 					</table>
 					</div>
 				</div>
@@ -109,6 +122,7 @@
 			$.getJSON(url, function (data) {
 				
 				var str = "";
+<<<<<<< HEAD
                 
 				$.each(data.reverse(), function(){
 					
@@ -119,6 +133,19 @@
                     str += "<td>" + this.volume_24h + "</td>";
                    	str += "</tr>"; 
                    	
+=======
+                 $.each(data.reverse(), function(){
+                    	str += "<tr>"
+                    	str += "<li>"
+                	    str += "<a href='#'>";
+	                    str += "<td>" + this.label + "</td>";
+	                    str += "<td>" + this.name + "</td>";
+	                    str += "<td>" + this.price + "</td>";
+	                    str += "<td>" + this.volume_24h + "</td>";
+                        str += "</a>";
+                        str += "</li>"
+                    	str += "</tr>";
+>>>>>>> 9c30746ce102e35351158ea55a6a5126e9b76959
                 }); 
 				
                 $("#bitrate").html(str);
