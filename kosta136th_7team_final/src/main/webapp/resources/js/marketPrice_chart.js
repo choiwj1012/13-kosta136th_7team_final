@@ -58,8 +58,8 @@ $(document).ready(function () {
 					buttons: [
 						{
 		                    type: 'hour',
-		                    count: 6,
-		                    text: '6h'
+		                    count: 12,
+		                    text: '12h'
 		                }, {
 		                    type: 'day',
 		                    count: 1,
@@ -190,8 +190,15 @@ $(document).ready(function () {
 						
 	});	
 	
+	
+	
+	
+	/******* CHART 시작 ********/
 	// options.series[0].data  = data; 코드 때문에 수시로 초기화해줘야한다.
 	// !! 코드 정리 필요
+	
+	// document - ready 상태일 때
+	// default 상세일 때
 	var options = {
 
 				title: {
@@ -205,8 +212,8 @@ $(document).ready(function () {
 					buttons: [
 						{
 		                    type: 'hour',
-		                    count: 6,
-		                    text: '6h'
+		                    count: 12,
+		                    text: '12h'
 		                }, {
 		                    type: 'day',
 		                    count: 1,
@@ -236,7 +243,7 @@ $(document).ready(function () {
 				},
 				
 				series : [{
-					name: 'btc',
+					name: 'USD',
 		            tooltip: {
 		            valueDecimals: 2
 		            }
@@ -245,14 +252,14 @@ $(document).ready(function () {
 		
 	
 	
-	var money_type = "PRICE_BTC";
+	var money_type = "PRICE_USD";
 	$("#combo-box").on('change', function(){
 
 		money_type = $(this).find(":selected").val();		//선택된 값을 가져옴.
+		
+		// money_name_option는 화폐 종류 그래프에 출력할 값을 저장하는 변수(USD, CNY, BTC...)
 		var money_name_option;
-		if(money_type == "PRICE_BTC") {
-			money_name_option = "BTC";
-		} else if (money_type == "PRICE_USD") {
+		if(money_type == "PRICE_USD") {
 			money_name_option = "USD";
 		} else if (money_type == "PRICE_CNY") {
 			money_name_option = "CNY";
@@ -262,7 +269,9 @@ $(document).ready(function () {
 			money_name_option = "GBP";
 		} else if (money_type == "PRICE_RUR") {
 			money_name_option = "RUR";
-		}
+		} else if (money_type == "PRICE_BTC") {
+			money_name_option = "BTC";
+		} 
 		
 		
 		var options = {
@@ -278,8 +287,8 @@ $(document).ready(function () {
 					buttons: [
 						{
 		                    type: 'hour',
-		                    count: 6,
-		                    text: '6h'
+		                    count: 12,
+		                    text: '12h'
 		                }, {
 		                    type: 'day',
 		                    count: 1,
@@ -320,32 +329,33 @@ $(document).ready(function () {
 		
 		
 		
-			$.ajax({
-				url: "/rate/chartData/",				//목적지 URI	//Controller로 보낸다.
-				//async : false,						//동기방식
-				type: 'get',							//get 타입 (post타입 등이 있음)
+		$.ajax({
 			
-				/* dataType: 'text',					//전송 dataType json */
-				data: {"money_type" : money_type},		//money_type을 넘긴다.
+			url : "/rate/oneChart/",
+			type : 'get',
+			data : {"coinName" : coinName, "moneyType" : moneyType},
+			
+			success : function() {
 				
-				success:  function () {				//성공시 return된 객체를
+				var url = "/rate/oneChart?coinName=" + coinName + "&moneyType=" + moneyType;
+
+				$.getJSON(url, function(data) {
 					
-					var url = "/rate/chartData?money_type=" + money_type;		//MarketPriceDataController로 부터 받은 데이터를 처리한다.
-					$.getJSON(url,  function (data) {
-						
-					  options.series[0].data  = data;
-					  var chart = new Highcharts.stockChart(options);
-					  
-				  });
-				}
-			});
+					options.series[0].data = data;
+					var chart = new Highcharts.stockChart(options);
+					
+				});
+				
+			}
+			
+		});
 			
 	});
 	
 	//MarketPriceDataController.java
 	//@RequestMapping(value = "/chartData") ++ @RequestMapping("/rate/*")
 	//초기값은 btc로 설정.
-	var url = "/rate/chartData?money_type=PRICE_BTC";		//MarketPriceDataController로 부터 받은 데이터를 처리한다.
+	var url = "/rate/oneChart?coinName=Bitcoin&moneyType=PRICE_USD";		//MarketPriceDataController로 부터 받은 데이터를 처리한다.
 	$.getJSON(url,  function (data) {
 		
 		options.series[0].data  = data;
