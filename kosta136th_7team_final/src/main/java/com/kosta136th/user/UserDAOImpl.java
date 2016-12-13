@@ -121,6 +121,9 @@ public class UserDAOImpl implements UserDAO{
 		int affectedRows = 0;
 		boolean signupSuccess = false;
 		
+		Map <String, Object> map = new HashMap <String, Object>();
+		map.put("signupVO", signupNaverVO);
+		map.put("register_type_code", "n");
 		//로그
 		System.out.println("--DAOImpl--");
 		System.out.println(signupNaverVO.toString());
@@ -128,7 +131,8 @@ public class UserDAOImpl implements UserDAO{
 		try{
 			affectedRows = session.insert(namespace + ".insertLoginProfileByNaver", signupNaverVO);
 			//가입과 동시에 로그인
-			session.insert(namespace + ".insertUserLoginRecord", signupNaverVO);	
+			session.insert(namespace + ".insertUserLoginRecord", signupNaverVO);
+			session.insert(namespace + ".insertRegisterType", map);
 		}catch(Exception e){
 			e.printStackTrace();
 			affectedRows = 0;
