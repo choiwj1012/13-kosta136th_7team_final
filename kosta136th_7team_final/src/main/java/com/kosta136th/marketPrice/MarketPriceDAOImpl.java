@@ -39,9 +39,9 @@ public class MarketPriceDAOImpl implements MarketPriceDAO{
 	}
 
 	@Override
-	public List<MarketPriceChart> oneChart(String value,String btnvalue) throws Exception {
-		
-		return sqlSession.selectList(namespace + ".oneChart", value);
+	public List<MarketPrice> oneChart(String coinName) throws Exception {
+
+		return sqlSession.selectList(namespace + ".oneChart", coinName);
 		
 	}
 

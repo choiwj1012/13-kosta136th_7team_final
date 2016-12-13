@@ -123,7 +123,7 @@
 
 			$(document).on("click", "#table_price_row", function(){
 				
-				var value = $(this).children(':eq(1)').text();
+				var coinName = $(this).children(':eq(1)').text();
 				
 				var btnvalue = $("#combo-box").find(":selected").val();
 				
@@ -131,17 +131,17 @@
 					
 					url : "/rate/oneChart/",
 					type : 'get',
-					data : {"value" : value, "btnvalue" : btnvalue},
+					data : {"coinName" : coinName, "btnvalue" : btnvalue},
 					
 					success : function() {
 						
-						var url = "/rate/oneChart?value=" + value + "?btnvalue=" + btnvalue;
-						$.getJSON(url, function(data) {
+// 						var url = "/rate/oneChart?coinName=" + coinName + "?btnvalue=" + btnvalue;
+// 						$.getJSON(url, function(data) {
 							
-							options.series[0].data = data;
-							var chart = new Highcharts.stockChart(options);
+// 							options.series[0].data = data;
+// 							var chart = new Highcharts.stockChart(options);
 							
-						});
+// 						});
 						
 					}
 					
@@ -179,28 +179,21 @@
 					
 					var str = "";
 
-
-				$.each(data, function(){
-					
-					str += "<tr>";
-					
-					str +=	"<td>" + this.id + "</td>";
-				
-					str +=	"<td>" + this.name + "</td>";
-				
-					str +=	"<td>" + this.rate + "</td>";
-				
-					str +=	"<td>" + this.ask + "</td>";
-				
-					str +=	"<td>" + this.bid + "</td>";
-					
-					str += "</tr>";
-					
-				});
-
-				 $("#rate").html(str);
+					$.each(data, function(){
+						
+						str += "<tr>";						
+						str +=	"<td>" + this.id + "</td>";					
+						str +=	"<td>" + this.name + "</td>";					
+						str +=	"<td>" + this.rate + "</td>";					
+						str +=	"<td>" + this.ask + "</td>";					
+						str +=	"<td>" + this.bid + "</td>";					
+						str += "</tr>";
+						
+					});
+	
+					 $("#rate").html(str);
 				  
-			  });
+			  	});
 				
 			});
 			

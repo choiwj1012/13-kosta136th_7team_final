@@ -328,10 +328,9 @@ public class MarketPriceDataController {
 	}
 	
 	@RequestMapping(value = "oneChart", method = RequestMethod.GET)
-	public JSONArray selectChart(@RequestParam("value") String value, @RequestParam("btnvalue") String btnvalue, HttpServletResponse response) throws Exception{
-		
-		
-		List<MarketPriceChart> selectOneChart =  marketPriceService.oneChart(value,btnvalue);
+	public JSONArray selectChart(@RequestParam("coinName") String coinName, @RequestParam("btnvalue") String btnvalue, HttpServletResponse response) throws Exception{
+		System.out.println(btnvalue);
+		List<MarketPrice> selectOneChart =  marketPriceService.oneChart(coinName);
 		
 		JSONArray ChartArray = new JSONArray();
 		
@@ -341,34 +340,44 @@ public class MarketPriceDataController {
 		
 		for(int i = 0 ; i < selectOneChart.size() ; i++){
 			
+			MarketPriceChart marketPrice = new MarketPriceChart();
 			timestamp = selectOneChart.get(i).getTimestamp();
 			
 			if(btnvalue.equals("PRICE_BTC")) {
 				
-				perPrice = selectOneChart.get(i).getPrice_btc();
+				marketPrice.setPrice_btc(selectOneChart.get(i).getPrice_btc());
+				perPrice = marketPrice.getPrice_btc();
 				
 			} else if(btnvalue.equals("PRICE_USD")) {
 				
-				perPrice = selectOneChart.get(i).getPrice_usd();
+				marketPrice.setPrice_btc(selectOneChart.get(i).getPrice_usd());
+				perPrice = marketPrice.getPrice_usd();
 				
 			} else if(btnvalue.equals("PRICE_CNY")) {
 				
-				perPrice = selectOneChart.get(i).getPrice_cny();
+				marketPrice.setPrice_btc(selectOneChart.get(i).getPrice_cny());
+				perPrice = marketPrice.getPrice_cny();
 				
 			} else if(btnvalue.equals("PRICE_EUR")) {
 				
-				perPrice = selectOneChart.get(i).getPrice_eur();
+				marketPrice.setPrice_btc(selectOneChart.get(i).getPrice_eur());
+				perPrice = marketPrice.getPrice_eur();
 				
 			} else if(btnvalue.equals("PRICE_GBP")) {
 				
-				perPrice = selectOneChart.get(i).getPrice_gbp();
+				marketPrice.setPrice_btc(selectOneChart.get(i).getPrice_gbp());
+				perPrice = marketPrice.getPrice_gbp();
 				
 			} else if(btnvalue.equals("PRICE_RUR")) {
 				
-				perPrice = selectOneChart.get(i).getPrice_rur();
+				marketPrice.setPrice_btc(selectOneChart.get(i).getPrice_rur());
+				perPrice = marketPrice.getPrice_rur();
 				
 			}
 					
+			System.out.println(perPrice);
+			System.out.println(timestamp);
+			
 			BigDecimal bigTimestamp = new BigDecimal(timestamp + "000");
 			BigDecimal bigPerPrice = new BigDecimal(perPrice); 	
 
