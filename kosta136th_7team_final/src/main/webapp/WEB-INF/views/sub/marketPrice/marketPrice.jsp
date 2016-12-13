@@ -91,9 +91,13 @@
 					
 						$(document).ready(function(){
 							
-							$(document).on("click", "#label_parent", function(){
+							$(document).on("click", "#table_price_row", function(){
 								
+<<<<<<< HEAD
 								var name = $('#name').text();	
+=======
+								var value = $(this).children(':eq(1)').text();
+>>>>>>> 671dc61edf353f6e06cfd8ba8d75e9f079bb44f0
 								alert(value);
 								
 							});
@@ -137,9 +141,15 @@
 				var str = "";
 
                  $.each(data.reverse(), function(){
+<<<<<<< HEAD
                     	str += "<tr class='table_row' id='label_parent'>";
 	                    str += "<td>" + this.label + "</td>";
 	                    str += "<td id='name'>" + this.name + "</td>";
+=======
+                    	str += "<tr class='table_row' id='table_price_row'>";
+	                    str += "<td>" + this.label + "</td>";
+	                    str += "<td>" + this.name + "</td>";
+>>>>>>> 671dc61edf353f6e06cfd8ba8d75e9f079bb44f0
 	                    str += "<td>" + this.price + "</td>";
 	                    str += "<td>" + this.volume_24h + "</td>";
                     	str += "</tr>";
