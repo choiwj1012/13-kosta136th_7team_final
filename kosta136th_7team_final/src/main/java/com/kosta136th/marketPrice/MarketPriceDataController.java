@@ -328,10 +328,10 @@ public class MarketPriceDataController {
 	}
 	
 	@RequestMapping(value = "oneChart", method = RequestMethod.GET)
-	public JSONArray selectChart(@RequestParam("money_type") String money_type, HttpServletResponse response) throws Exception{
+	public JSONArray selectChart(@RequestParam("value") String value, @RequestParam("btnvalue") String btnvalue, HttpServletResponse response) throws Exception{
 		
 		
-		List<MarketPriceChart> selectOneChart =  marketPriceService.oneChart(money_type);
+		List<MarketPriceChart> selectOneChart =  marketPriceService.oneChart(value,btnvalue);
 		
 		JSONArray ChartArray = new JSONArray();
 		
@@ -343,27 +343,27 @@ public class MarketPriceDataController {
 			
 			timestamp = selectOneChart.get(i).getTimestamp();
 			
-			if(money_type.equals("PRICE_BTC")) {
+			if(btnvalue.equals("PRICE_BTC")) {
 				
 				perPrice = selectOneChart.get(i).getPrice_btc();
 				
-			} else if(money_type.equals("PRICE_USD")) {
+			} else if(btnvalue.equals("PRICE_USD")) {
 				
 				perPrice = selectOneChart.get(i).getPrice_usd();
 				
-			} else if(money_type.equals("PRICE_CNY")) {
+			} else if(btnvalue.equals("PRICE_CNY")) {
 				
 				perPrice = selectOneChart.get(i).getPrice_cny();
 				
-			} else if(money_type.equals("PRICE_EUR")) {
+			} else if(btnvalue.equals("PRICE_EUR")) {
 				
 				perPrice = selectOneChart.get(i).getPrice_eur();
 				
-			} else if(money_type.equals("PRICE_GBP")) {
+			} else if(btnvalue.equals("PRICE_GBP")) {
 				
 				perPrice = selectOneChart.get(i).getPrice_gbp();
 				
-			} else if(money_type.equals("PRICE_RUR")) {
+			} else if(btnvalue.equals("PRICE_RUR")) {
 				
 				perPrice = selectOneChart.get(i).getPrice_rur();
 				
