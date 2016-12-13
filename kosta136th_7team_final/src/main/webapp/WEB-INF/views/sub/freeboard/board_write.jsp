@@ -42,7 +42,7 @@
 	            <div class="form-group">
 	               <h3><label for="title" class="col-sm-2">제목</label></h3>
 	               <div class="col-sm-10">
-	                  <input type="text" class="form-control input-lg" id="title">
+	                  <input type="text" class="form-control input-lg" id="title" placeholder="Enter Title">
 	               </div>
 	            </div>
 	
@@ -55,7 +55,7 @@
 	            </div>
 	
 	            <div class="buttons" align="right" id="buttons">
-	               <button type="button" class="btn btn-primary" id="write_btn">등록</button>
+	               <button type="submit" class="btn btn-primary" id="write_btn">등록</button>
 	               <input type="button" class="btn btn-danger" id="boardList_btn" value="목록">
 	            </div>
 	
