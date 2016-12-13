@@ -34,6 +34,14 @@ public class MarketPriceDAOImpl implements MarketPriceDAO{
 	public List<MarketPrice> coinRateList() throws Exception {
 		
 		return sqlSession.selectList(namespace + ".bitcoinList");
+
+		
+	}
+
+	@Override
+	public List<MarketPriceChart> oneChart(String money_type) throws Exception {
+		
+		return sqlSession.selectList(namespace + ".oneChart", money_type);
 		
 	}
 

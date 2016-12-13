@@ -181,7 +181,7 @@
 						$.getJSON(url,  function (data) {
 							var str = "";
 						
-			                $.each(data, function(){
+			                $.each(data.reverse(), function(){
 			                    	str += "<tr>"
 				                    str += "<td>" + this.label + "</td>";
 				                    str += "<td>" + this.name + "</td>";
