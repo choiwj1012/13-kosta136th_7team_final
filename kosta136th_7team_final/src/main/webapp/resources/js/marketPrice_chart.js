@@ -167,4 +167,10 @@ $(document).ready(function () {
 		var chart = new Highcharts.stockChart(options);
 	  
   });
+	
+	$("#tr").on('click', function(){
+		
+		alert("안녕");
+	});
+	
 });
