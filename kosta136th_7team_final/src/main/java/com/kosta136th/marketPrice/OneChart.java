@@ -3,7 +3,7 @@ package com.kosta136th.marketPrice;
 public class OneChart {
 
 	private String coinName;
-	private String moneytype;
+	private String moneyType;
 	
 	public String getCoinName() {
 		return coinName;
@@ -11,11 +11,11 @@ public class OneChart {
 	public void setCoinName(String coinName) {
 		this.coinName = coinName;
 	}
-	public String getMoneytype() {
-		return moneytype;
+	public String getMoneyType() {
+		return moneyType;
 	}
-	public void setMoneytype(String moneytype) {
-		this.moneytype = moneytype;
+	public void setMoneyType(String moneyType) {
+		this.moneyType = moneyType;
 	}
 	
 }

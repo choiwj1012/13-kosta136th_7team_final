@@ -328,11 +328,11 @@ public class MarketPriceDataController {
 	}
 	
 	@RequestMapping(value = "oneChart", method = RequestMethod.GET)
-	public JSONArray selectChart(@RequestParam("coinName") String coinName, @RequestParam("moneytype") String moneytype, HttpServletResponse response) throws Exception{
+	public JSONArray selectChart(@RequestParam("coinName") String coinName, @RequestParam("moneyType") String moneyType, HttpServletResponse response) throws Exception{
 		
 		OneChart oneChart = new OneChart();
 		oneChart.setCoinName(coinName);
-		oneChart.setMoneytype(moneytype);
+		oneChart.setMoneyType(moneyType);
 		
 		List<MarketPrice> selectOneChart =  marketPriceService.oneChart(oneChart);
 		JSONArray ChartArray = new JSONArray();
@@ -340,38 +340,40 @@ public class MarketPriceDataController {
 		String timestamp;
 		String perPrice = null;
 		
+		
 		for(int i = 0 ; i < selectOneChart.size() ; i++){
 			
 			MarketPrice marketPrice = new MarketPrice();
 			timestamp = selectOneChart.get(i).getTimestamp();
 			
-			if(moneytype.equals("PRICE_BTC")) {
+			if(moneyType.equals("PRICE_BTC")) {
+
 				
 				marketPrice.setPrice_btc(selectOneChart.get(i).getPrice_btc());
 				perPrice = marketPrice.getPrice_btc();
 				
-			} else if(moneytype.equals("PRICE_USD")) {
+			} else if(moneyType.equals("PRICE_USD")) {
 				
 				marketPrice.setPrice_usd(selectOneChart.get(i).getPrice_usd());
 				perPrice = marketPrice.getPrice_usd();
 				
-			} else if(moneytype.equals("PRICE_CNY")) {
+			} else if(moneyType.equals("PRICE_CNY")) {
 				
 				marketPrice.setPrice_cny(selectOneChart.get(i).getPrice_cny());
 				perPrice = marketPrice.getPrice_cny();
 				
-			} else if(moneytype.equals("PRICE_EUR")) {
-				
+			} else if(moneyType.equals("PRICE_EUR")) {
+
 				marketPrice.setPrice_eur(selectOneChart.get(i).getPrice_eur());
 				perPrice = marketPrice.getPrice_eur();
 				
-			} else if(moneytype.equals("PRICE_GBP")) {
-				
+			} else if(moneyType.equals("PRICE_GBP")) {
+
 				marketPrice.setPrice_gbp(selectOneChart.get(i).getPrice_gbp());
 				perPrice = marketPrice.getPrice_gbp();
-				
-			} else if(moneytype.equals("PRICE_RUR")) {
-				
+
+			} else if(moneyType.equals("PRICE_RUR")) {
+
 				marketPrice.setPrice_rur(selectOneChart.get(i).getPrice_rur());
 				perPrice = marketPrice.getPrice_rur();
 				
