@@ -244,9 +244,9 @@ public class UserController {
 	}
 	
 	//가입 콜백으로 값이 왔다.
-	@RequestMapping(value = "/doSignupNaver", produces = "application/text; charset=utf8") 
-	@ResponseBody
-	public ResponseEntity<String> doSignupNaver(@RequestParam("code") String code, @RequestParam("state") String state 
+	@RequestMapping(value = "/doSignupNaver") 
+	//@ResponseBody
+	public String doSignupNaver(@RequestParam("code") String code, @RequestParam("state") String state 
 			, HttpSession httpSession){
 		
 		System.out.println("가입 로직으로 올바르게 찾아왔습니다");
@@ -358,7 +358,8 @@ public class UserController {
 				System.out.println("네이버에 없는 이메일");
 				entity = new ResponseEntity<String>("네이버에 없는 이메일입니다.", HttpStatus.BAD_REQUEST);
 				//리턴 문자열 : "잘못된 이메일입니다."
-				return entity;
+				
+				//return entity;
 			}
 			
 			//DAO에 접근. 검사 로직.
@@ -422,13 +423,14 @@ public class UserController {
 		}
 		setSigninSessionAttribute(httpSession, signinSessionDTO);
 		
-		return entity;
+		//return entity;
+		return "redirect:/";
 	}
 	
 	//로그인 콜백으로 값이 왔다.
-		@RequestMapping(value = "/doSigninNaver", produces = "application/text; charset=utf8")
-		@ResponseBody
-		public ResponseEntity<String> doSigninNaver(@RequestParam("code") String code, @RequestParam("state") String state 
+		@RequestMapping(value = "/doSigninNaver")
+		//@ResponseBody
+		public String doSigninNaver(@RequestParam("code") String code, @RequestParam("state") String state 
 				, HttpSession httpSession){
 			System.out.println("로그인 로직으로 올바르게 찾아왔습니다");
 	        
@@ -538,7 +540,8 @@ public class UserController {
 					System.out.println("네이버에 없는 이메일");
 					entity = new ResponseEntity<String>("네이버에 없는 이메일입니다.", HttpStatus.BAD_REQUEST);
 					//리턴 문자열 : "잘못된 이메일입니다."
-					return entity;
+					
+					//return entity;
 				}
 				
 				//DAO에 접근. 검사 로직.
@@ -595,8 +598,8 @@ public class UserController {
 			
 			setSigninSessionAttribute(httpSession, signinSessionDTO);
 			System.out.println("세션 저장 직전 : " + signinSessionDTO.toString());
-			return entity;
-			
+			//return entity;
+			return "redirect:/";
 		}
 	
 	//인증번호 발송
