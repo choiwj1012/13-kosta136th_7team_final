@@ -91,10 +91,13 @@ public class UserController {
 		String email = registerMap.get("user").get(0);
 		String password = registerMap.get("user").get(1);
 		String nickname = registerMap.get("user").get(2);
+		String register_type_code = registerMap.get("user").get(3);
 		
 		System.out.println("email : " + email);
 		System.out.println("password : " + password);
 		System.out.println("nickname : " + nickname);
+		System.out.println("register_type_code : " + register_type_code);
+		
 		//개인정보 객체
 		User signupEmailDTO = new User(email, password, nickname);
 		
@@ -833,17 +836,19 @@ public class UserController {
 	@RequestMapping(value = "/requestSigninSessionAttribute", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<User> requestSigninSessionAttribute(HttpSession httpSession){
-		System.out.println("세션 정보 요청이 옴");
+		System.out.println("로그인 세션 정보 획득 요청이 옴(/requestSigninSessionAttribute)");
+		System.out.println("세션 signinSessionDTO의 보관 객체 타입은 USER입니다."); 
+		System.out.println("서버 : 세션에서 로그인 부분을 User로 형변환해 읽은 결과");
+		
 		ResponseEntity<User> entity = null;
-		HttpHeaders responseHeaders = new HttpHeaders();
-	    responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
-
+		
 	    User signinSessionDTO = (User)httpSession.getAttribute("signinSessionDTO");
 	    
 	    if (signinSessionDTO != null){
 	    	System.out.println(signinSessionDTO.toString());
 		}else{
-			System.out.println("User [null]");
+			System.out.println("null입니다. 즉, 당신은 로그인이 되어 있지 않다 이 말이오.");
+			System.out.println("이럴 수가 내가 로그인이 null이라니");
 		}
 		entity = new ResponseEntity<>(signinSessionDTO, HttpStatus.OK);
 		return entity;

@@ -24,30 +24,33 @@
 					
 					<div class="form-group">
 						<label for="signup_email">이메일 주소</label>
-						<input type="email" class="form-control" id="signup_email" placeholder="이메일 주소를 입력하세요" required />
+						<input type="email" class="form-control" id="signup_email" placeholder="이메일 주소를 입력하세요"/>
 						<button type="button" id = "check_email_btn" class="btn btn-primary">이메일 체크</button>
 					</div>
 					
 					<div class="form-group">
 						<label for="signup_password">비밀번호</label>
-						<input type="password" class="form-control" id="signup_password" placeholder="비밀번호를 입력하세요" required />
+						<input type="password" class="form-control" id="signup_password" placeholder="비밀번호를 입력하세요"/>
 					</div>
 					
 					<div class="form-group">
 						<label for="signup_check_password">비밀번호체크</label>
-						<input type="password" class="form-control" id="signup_check_password" placeholder="비밀번호를 재입력하세요" required/>
+						<input type="password" class="form-control" id="signup_check_password" placeholder="비밀번호를 재입력하세요"/>
 					</div>
 					
 					<div class="form-group">
 						<label for="signup_nickname">닉네임</label>
-						<input type="text" class="form-control" id="signup_nickname" placeholder="닉네임을 입력하세요" required/>
-						<!-- 중복 허용하면서 없어짐 -->
-<!-- 						<button type="button" id = "check_nickname_btn" class="btn btn-primary">닉네임 체크</button> -->
+						<input type="text" class="form-control" id="signup_nickname" placeholder="닉네임을 입력하세요"/>
 					</div>
-					
+
+					<div class="form-group">					
+						<input type="radio" name="register_type_code" value="h" checked>회원<br>
+ 						<input type="radio" name="register_type_code" value="d">딜러<br>
+					</div>
+ 
 					<div class="form-group">
 						<label for="signup_authentication">인증번호</label>
-						<input type="text" class="form-control" id="signup_authentication" placeholder="인증번호를 입력하세요" required/>
+						<input type="text" class="form-control" id="signup_authentication" placeholder="인증번호를 입력하세요"/>
 						<button type="button" id = "check_authentication_btn" class="btn btn-primary">인증</button>
 					</div>
 					
@@ -58,7 +61,7 @@
  							</button>
 						</div>
 					</div>
-							           						
+												           						
 				</form>
 				
 			</div>
@@ -67,8 +70,8 @@
 			           		
 	</div>
 	
-</div> <!-- ./modal (signup) -->
-         
+</div>
+<!-- ./modal (signup) -->      
            
 <!-- 로그인 modal -->
 <div class="modal fade" id="signin" role="dialog">
@@ -130,30 +133,22 @@
 			e.preventDefault();
 			e.stopPropagation();
 			
-			var email = $('#signin_email').val();
-			
-			//비밀번호 불러오기
+			var email = $('#signin_email').val();			
 			var password = $('#signin_password').val();
-
 			if ((email == '')||(password == '')){
 				alert('입력하지 않은 값이 있습니다.');
 				return;	
 			}
 			
-			//이메일의 정규식 regular expression
 			var regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-			//정규식.test(이메일) 결과 잘못된 이메일이면 false가 저장된다
-			var isEmailType = regex.test(email);
-	
+			var isEmailType = regex.test(email);	
 			if (!isEmailType){
 				alert('올바른 이메일 형식이 아닙니다');
 				return;
 			}
 
-			//검사식 
 			regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[~`!@#$%^&*()_+-={}\[\]:;<,>.?/|\\])[A-Za-z\d~`!@#$%^&*()_+-={}\[\]:;<,>.?/|\\]{8,16}$/;
-		  	//검사식.test(비밀번호) 결과 잘못된 비밀번호면 false가 저장된다
-		  	var isPasswordType = regex.test(password);
+			var isPasswordType = regex.test(password);
 		  	if (!isPasswordType){
 		  		alert("비밀번호(8~16자)는 반드시 한 개 이상의 영문, 숫자, 특수문자를 전부 포함하고 있어야 합니다");
 		  		return;
@@ -178,9 +173,8 @@
 			});
 			
 			var isSignin = requestSigninSessionAttribute();
-
 			if (isSignin == false){
-				alert("false");
+				alert("로그인에 실패하였습니다");
 				$('#signupBtn').remove();
 			    $('#signinBtn').remove();
 			    $('#myPage').remove();
@@ -190,13 +184,13 @@
 	        }
 			
 		    if (isSignin == true){
-		    	alert("true");
 		    	$('#signupBtn').remove();
 			    $('#signinBtn').remove();
 			    $('#myPage').remove();
 			    $('#signoutBtn').remove();
 			    $('.nav').append('<li><a href="/myPage" id = "myPage">마이페이지</a></li>');
 			    $('.nav').append('<li><a href="#" id="signoutBtn">로그아웃</a></li>');
+				$('#signin').modal('hide');
 	        }
 
 		});
@@ -209,26 +203,28 @@
 <script>
 			function requestSigninSessionAttribute(){
 				
+				var isSignin = false;
+				
 				$.ajax({
 					type : 'POST',
 					url : '/requestSigninSessionAttribute',
 					async : false,
-				    success : function(data) {
-				    	alert(JSON.stringify(data));
-				    	var signinSessionDTO = data;
-				        signinSession.email = signinSessionDTO.email;
-				        signinSession.nickname = signinSessionDTO.nickname;
+					dataType: 'json',
+				    success : function(result) {
+						
+						if (result["email"] != null && result ["nickname"] != null){
+							signinSession.email = result["email"];
+							signinSession.nickname = result["nickname"];
+							isSignin = true;
+						}else{
+							signinSession.email = null;
+							singinSession.nickname = null;
+							isSignin = false;
+						}
 				    }
 				});
 				
-				alert(signinSession.email + ":" + signinSession.nickname);
-				
-				if (signinSession.email == undefined){
-			        	return false;
-			    } else {
-			        	return true;  	
-			    }
-						       	
+				return isSignin;		       	
 			}
 </script>
 
@@ -238,9 +234,8 @@
 		$('#signup_email_btn').on('click', function(e){
 			
 			e.preventDefault();
-			//이메일 불러오기
+
 			var email = $('#signup_email').val();
-			//비밀번호 불러오기
 			var password = $('#signup_password').val();
 			var nickname = $('#signup_nickname').val();
 			var authentication = $('#signup_authentication').val();
@@ -251,9 +246,7 @@
 				return;	
 			}
 			
-			//이메일의 정규식 regular expression
 			var regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-			//정규식.test(이메일) 결과 잘못된 이메일이면 false가 저장된다
 			var isEmailType = regex.test(email);
 	
 			if (!isEmailType){
@@ -261,9 +254,7 @@
 				return;
 			}
 
-			//검사식 
 			regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[~`!@#$%^&*()_+-={}\[\]:;<,>.?/|\\])[A-Za-z\d~`!@#$%^&*()_+-={}\[\]:;<,>.?/|\\]{8,16}$/;
-		  	//검사식.test(비밀번호) 결과 잘못된 비밀번호면 false가 저장된다
 		  	var isPasswordType = regex.test(password);
 		  			  	
 		  	if (password != checkPassword){
@@ -286,11 +277,11 @@
 		  		return;
 		  	}
 		  	
-		  	alert($('#signup_password').val());
 			var registerMap = {};
-			registerMap["user"] = [$('#signup_email').val(), $('#signup_password').val(), $('#signup_nickname').val()];
-			registerMap["authentication"] = [$('#signup_authentication').val()];
-			
+			registerMap["user"] = [$('#signup_email').val(), $('#signup_password').val(), 
+				$('#signup_nickname').val(),
+				$(':radio[name="register_type_code"]:checked').val()];
+			var mailTp 		= $(':radio[name="register_type_code"]:checked').val();
 			$.ajax({
 				type : 'POST',
 				url : '/requestSignupEmail',
@@ -309,7 +300,6 @@
 			var isSignin = requestSigninSessionAttribute();
 
 			if (isSignin == false){
-				alert("false");
 				$('#signupBtn').remove();
 			    $('#signinBtn').remove();
 			    $('#myPage').remove();
@@ -319,13 +309,13 @@
 	        }
 			
 		    if (isSignin == true){
-		    	alert("true");
 		    	$('#signupBtn').remove();
 			    $('#signinBtn').remove();
 			    $('#myPage').remove();
 			    $('#signoutBtn').remove();
 			    $('.nav').append('<li><a href="/myPage" id = "myPage">마이페이지</a></li>');
 			    $('.nav').append('<li><a href="#" id="signoutBtn">로그아웃</a></li>');
+				$('#signup').modal('hide');
 	        }
 		    
 		});
@@ -344,15 +334,12 @@
 				url : '/requestSignupNaver',
 			    success : function(data) {
 			    	window.open(data);
-			    	/* location.href = data; */
-			    	/* window.open(data, '소셜 로그인'); */
 			    }
 			});
 			
 			var isSignin = requestSigninSessionAttribute();
 
 			if (isSignin == false){
-				alert("false");
 				$('#signupBtn').remove();
 			    $('#signinBtn').remove();
 			    $('#myPage').remove();
@@ -362,7 +349,6 @@
 	        }
 			
 		    if (isSignin == true){
-		    	alert("true");
 		    	$('#signupBtn').remove();
 			    $('#signinBtn').remove();
 			    $('#myPage').remove();
@@ -401,7 +387,6 @@
 			var isSignin = requestSigninSessionAttribute();
 
 			if (isSignin == false){
-				alert("false");
 				$('#signupBtn').remove();
 			    $('#signinBtn').remove();
 			    $('#myPage').remove();
@@ -411,7 +396,6 @@
 	        }
 			
 		    if (isSignin == true){
-		    	alert("true");
 		    	$('#signupBtn').remove();
 			    $('#signinBtn').remove();
 			    $('#myPage').remove();
@@ -445,7 +429,6 @@
 			var isSignin = requestSigninSessionAttribute();
 			
 			if (isSignin == false){
-				alert("false");
 				$('#signupBtn').remove();
 			    $('#signinBtn').remove();
 			    $('#myPage').remove();
@@ -455,7 +438,6 @@
 	        }
 			
 		    if (isSignin == true){
-		    	alert("true");
 		    	$('#signupBtn').remove();
 			    $('#signinBtn').remove();
 			    $('#myPage').remove();
@@ -477,9 +459,7 @@
 					isAuthenticate = false;
 					
 					var email = $('#signup_email').val();
-					//이메일의 정규식 regular expression
 					var regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-					//정규식.test(이메일) 결과 잘못된 이메일이면 false가 저장된다
 					var isEmailType = regex.test(email);
 					if (!isEmailType){
 						alert('올바른 이메일 형식이 아닙니다');
@@ -578,51 +558,6 @@
 		});
 	});
 </script>
-		
-<!-- <!-- 	이메일 중복 검사 버튼을 클릭했을 때 작동하는 스크립트입니다.
-<script>
-	$(document).ready(function(){
-		$('#check_email_btn').on('click', function(e){
-			
-			e.preventDefault();
-	    	isSignupEmailDuplicate = false;
-			isAuthenticate = false;
-			
-			var password = $('#signup_email').val();
-			//이메일의 정규식 regular expression
-			var regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-			//정규식.test(이메일) 결과 잘못된 비밀번호면 false가 저장된다
-			var isEmailType = regex.test(password);
-			if (!isEmailType){
-				alert('올바른 이메일 형식이 아닙니다');
-				return;
-			}
-			
-			$.ajax({
-				type : 'POST',
-				url : '/requestCheckSignupEmail',
-				async : false,
-				headers : {
-					"Content-Type": "application/json",
-					"X-HTTP-Method-Override" : "POST"
-				},
-				dataType : 'text',
-			    data : JSON.stringify({ 
-			    	'email' : $('#signup_email').val(),
-			    }),
-			    success : function(data) {
-				    alert(data);
-				    if (data === '사용할 수 있는 이메일입니다'){
-				    	isSignupEmailDuplicate = true;
-				    }
-			    }
-			});
-			
-		});
-	});
-</script> -->
-
-
 
 <!-- 닉네임 중복 검사 버튼 클릭했을 때 작동하는 스크립트 -->
 <!-- 일단은 넣어두고, 컨트롤러에도 만들어 놓지만  -->
