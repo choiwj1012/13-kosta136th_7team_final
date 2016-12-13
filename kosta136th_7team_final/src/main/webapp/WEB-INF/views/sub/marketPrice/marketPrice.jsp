@@ -128,15 +128,11 @@
 
 		$(document).ready(function(){
 			
-			$(".table_row").on('click', function() {
-				
-				alert("안녕");
-				
-			});
-			
 			var url = "/rate/bitrate?money_type=PRICE_BTC";		//MarketPriceDataController로 부터 받은 데이터를 처리한다.
+			
 			$.getJSON(url,  function (data) {
 				var str = "";
+                 
                  $.each(data.reverse(), function(){
                     	str += "<tr class='table_row' id='table_price_row'>";
 	                    str += "<td>" + this.label + "</td>";
@@ -204,7 +200,7 @@
 							var str = "";
 						
 			                $.each(data.reverse(), function(){
-			                    	str += "<tr>"
+			                		str += "<tr class='table_row' id='table_price_row'>";
 				                    str += "<td>" + this.label + "</td>";
 				                    str += "<td>" + this.name + "</td>";
 				                    str += "<td>" + this.price + "</td>";
