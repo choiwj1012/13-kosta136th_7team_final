@@ -12,17 +12,7 @@
 	<script src="../../../resources/js/marketPrice_chart_customizing.js"></script>	<!-- 디자인 커스터마이징 js -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>	<!-- !! -->
 	<title>BitCoin MarketPrice</title>
-	<style>
-	
-		#bitrate{
-			cursor : pointer;
-		}
-		
-		#marketPriceList{
-			color : white;			
-		}
-		
-	</style>	
+
 </head>
 
 <body>
@@ -55,12 +45,12 @@
 					<li id="drop-box">
 						<!-- dropdown은 목록 선택시 뷰에 보여지는 목록이 변하지 않아 직관적이지 못함 따라서 select로 변경함 -->
 	                    <select id="combo-box" class="input-large form-control">
-		                    <option id="PRICE_BTC" value="PRICE_BTC" selected="selected"> BTC </option>
-		                    <option id="PRICE_USD" value="PRICE_USD"> USD </option>
-		                    <option id="PRICE_CNY" value="PRICE_CNY"> CNY </option>
-		                    <option id="PRICE_EUR" value="PRICE_EUR"> EUR </option>
-		                    <option id="PRICE_GBP" value="PRICE_GBP"> GBP </option>
-		                    <option id="PRICE_RUR" value="PRICE_RUR"> RUR </option>
+		                    <option class="ratebtn" id="PRICE_BTC" value="PRICE_BTC" selected="selected"> BTC </option>
+		                    <option class="ratebtn" id="PRICE_USD" value="PRICE_USD"> USD </option>
+		                    <option class="ratebtn" id="PRICE_CNY" value="PRICE_CNY"> CNY </option>
+		                    <option class="ratebtn" id="PRICE_EUR" value="PRICE_EUR"> EUR </option>
+		                    <option class="ratebtn" id="PRICE_GBP" value="PRICE_GBP"> GBP </option>
+		                    <option class="ratebtn" id="PRICE_RUR" value="PRICE_RUR"> RUR </option>
 	                	</select>
 					</li>
 					
@@ -87,24 +77,21 @@
 						</table>
 					</div>
 					
-					<script>
+<!-- 					<script> -->
 					
-						$(document).ready(function(){
+<!-- // 						$(document).ready(function(){ -->
 							
-							$(document).on("click", "#table_price_row", function(){
+<!-- // 							$(document).on("click", "#table_price_row", function(){ -->
 								
-<<<<<<< HEAD
-								var name = $('#name').text();	
-=======
-								var value = $(this).children(':eq(1)').text();
->>>>>>> 671dc61edf353f6e06cfd8ba8d75e9f079bb44f0
-								alert(value);
+<!-- // 								var value = $(this).children(':eq(1)').text(); -->
+
+<!-- // 								alert(value); -->
 								
-							});
+<!-- // 							}); -->
 								
-						});	
+<!-- // 						});	 -->
 					
-					</script>
+<!-- 					</script> -->
 					
 					
 					<!-- 두번째 탭 화면에서 보여주는 정보 (실화폐환율) -->
@@ -134,6 +121,36 @@
 
 		$(document).ready(function(){
 
+			$(document).on("click", "#table_price_row", function(){
+				
+				var value = $(this).children(':eq(1)').text();
+				
+				var btnvalue = $("#combo-box").find(":selected").val();
+				
+				$.ajax({
+					
+					url : "/rate/oneChart/",
+					type : 'get',
+					data : {"value" : value, "btnvalue" : btnvalue},
+					
+					success : function() {
+						
+						var url = "/rate/oneChart?value=" + value + "?btnvalue=" + btnvalue;
+						$.getJSON(url, function(data) {
+							
+							options.series[0].data = data;
+							var chart = new Highcharts.stockChart(options);
+							
+						});
+						
+					}
+					
+				});
+				
+				
+				
+			});
+			
 			var url = "/rate/bitrate?money_type=PRICE_BTC";		//MarketPriceDataController로 부터 받은 데이터를 처리한다.
 			
 			$.getJSON(url, function (data) {
@@ -141,15 +158,10 @@
 				var str = "";
 
                  $.each(data.reverse(), function(){
-<<<<<<< HEAD
-                    	str += "<tr class='table_row' id='label_parent'>";
-	                    str += "<td>" + this.label + "</td>";
-	                    str += "<td id='name'>" + this.name + "</td>";
-=======
-                    	str += "<tr class='table_row' id='table_price_row'>";
+                    
+                	    str += "<tr class='table_row' id='table_price_row'>";
 	                    str += "<td>" + this.label + "</td>";
 	                    str += "<td>" + this.name + "</td>";
->>>>>>> 671dc61edf353f6e06cfd8ba8d75e9f079bb44f0
 	                    str += "<td>" + this.price + "</td>";
 	                    str += "<td>" + this.volume_24h + "</td>";
                     	str += "</tr>";
@@ -214,9 +226,9 @@
 							var str = "";
 						                                                                                                      
 			                $.each(data.reverse(), function(){
-			                	str += "<tr class='table_row' id='label_parent'>";
+			               	    str += "<tr class='table_row' id='table_price_row'>";
 			                    str += "<td>" + this.label + "</td>";
-			                    str += "<td id='name'>" + this.name + "</td>";
+			                    str += "<td>" + this.name + "</td>";
 				                str += "<td>" + this.price + "</td>";
 				                str += "<td>" + this.volume_24h + "</td>";
 			                    str += "</tr>"
