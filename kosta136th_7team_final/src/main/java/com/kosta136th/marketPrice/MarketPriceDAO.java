@@ -10,6 +10,6 @@ public interface MarketPriceDAO {
 
 	public List<MarketPrice> coinRateList() throws Exception;
 
-	public List<MarketPriceChart> oneChart(String value, String btnvalue) throws Exception;
+	public List<MarketPrice> oneChart(OneChart oneChart) throws Exception;
 	
 }

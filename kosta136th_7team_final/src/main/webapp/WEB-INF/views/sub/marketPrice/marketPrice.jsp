@@ -76,24 +76,7 @@
 
 						</table>
 					</div>
-					
-<!-- 					<script> -->
-					
-<!-- // 						$(document).ready(function(){ -->
-							
-<!-- // 							$(document).on("click", "#table_price_row", function(){ -->
-								
-<!-- // 								var value = $(this).children(':eq(1)').text(); -->
 
-<!-- // 								alert(value); -->
-								
-<!-- // 							}); -->
-								
-<!-- // 						});	 -->
-					
-<!-- 					</script> -->
-					
-					
 					<!-- 두번째 탭 화면에서 보여주는 정보 (실화폐환율) -->
 					<div id="market_price">
 					<table id="exchange" class="table table-hover">
@@ -123,19 +106,19 @@
 
 			$(document).on("click", "#table_price_row", function(){
 				
-				var value = $(this).children(':eq(1)').text();
+				var coinName = $(this).children(':eq(1)').text();
 				
-				var btnvalue = $("#combo-box").find(":selected").val();
+				var moneytype = $("#combo-box").find(":selected").val();
 				
 				$.ajax({
 					
 					url : "/rate/oneChart/",
 					type : 'get',
-					data : {"value" : value, "btnvalue" : btnvalue},
+					data : {"coinName" : coinName, "moneytype" : moneytype},
 					
 					success : function() {
 						
-						var url = "/rate/oneChart?value=" + value + "?btnvalue=" + btnvalue;
+						var url = "/rate/oneChart?coinName=" + coinName + "&moneytype=" + moneytype;
 						$.getJSON(url, function(data) {
 							
 							options.series[0].data = data;
@@ -179,28 +162,21 @@
 					
 					var str = "";
 
-
-				$.each(data, function(){
-					
-					str += "<tr>";
-					
-					str +=	"<td>" + this.id + "</td>";
-				
-					str +=	"<td>" + this.name + "</td>";
-				
-					str +=	"<td>" + this.rate + "</td>";
-				
-					str +=	"<td>" + this.ask + "</td>";
-				
-					str +=	"<td>" + this.bid + "</td>";
-					
-					str += "</tr>";
-					
-				});
-
-				 $("#rate").html(str);
+					$.each(data, function(){
+						
+						str += "<tr>";						
+						str +=	"<td>" + this.id + "</td>";					
+						str +=	"<td>" + this.name + "</td>";					
+						str +=	"<td>" + this.rate + "</td>";					
+						str +=	"<td>" + this.ask + "</td>";					
+						str +=	"<td>" + this.bid + "</td>";					
+						str += "</tr>";
+						
+					});
+	
+					 $("#rate").html(str);
 				  
-			  });
+			  	});
 				
 			});
 			
