@@ -167,11 +167,10 @@ thead {
 }
 
 
-.table>tbody#bitrate>tr:hover{
+.table>tbody#bitrate>tr:hover, .table>tbody#rate>tr:hover{
 	
-	/* color: #a6b6bc; */
 	background: #3e4244;
-	
+	cursor: pointer;
 	
 }
 

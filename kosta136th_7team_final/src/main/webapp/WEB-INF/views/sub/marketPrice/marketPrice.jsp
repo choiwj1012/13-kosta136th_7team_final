@@ -36,52 +36,43 @@
 				<div id="chart"></div>
 			</div>
 
-			<!-- 비트코인 시세 테이블 -->
+			<!-- 비트코인 시세 테이블 -->			
 			<div id="market_price_list" class="col-md-4 visible tabs">	<!-- visible tabs -->
-			
+				
 				<div id="title_bar">
 					<h3 class="text-center">BitCoin MarketPrice</h3>
 				</div>	
 					
-					<!-- 비트코인과 실화폐 환율 탭 네비 -->
-					<ul class="nav nav-tabs">
-						
-						<li class="market_price_tab active"><a data-toggle="tab" href="#bitcoin_price">BitCoin</a></li>
-												
-						<!-- 비트코인 환율 -->
-						<li class="market_price_tab"><a data-toggle="tab" href="#market_price">MarketPrice</a></li>
-						
-						<!-- 실화폐 환율 -->							
-						<li id="drop-box">
-							<!-- dropdown은 목록 선택시 뷰에 보여지는 목록이 변하지 않아 직관적이지 못함 따라서 select로 변경함 -->
-		                    <select id="combo-box" class="input-large form-control">
-			                    <option id="PRICE_BTC" value="PRICE_BTC" selected="selected"> BTC </option>
-			                    <option id="PRICE_USD" value="PRICE_USD"> USD </option>
-			                    <option id="PRICE_CNY" value="PRICE_CNY"> CNY </option>
-			                    <option id="PRICE_EUR" value="PRICE_EUR"> EUR </option>
-			                    <option id="PRICE_GBP" value="PRICE_GBP"> GBP </option>
-			                    <option id="PRICE_RUR" value="PRICE_RUR"> RUR </option>
-		                	</select>
-						</li>
-						
-					</ul>
-
+				<!-- 비트코인과 실화폐 환율 탭 네비 -->
+				<ul class="nav nav-tabs">
+					
+					<li class="market_price_tab active"><a data-toggle="tab" href="#bitcoin_price">BitCoin</a></li>
+											
+					<!-- 비트코인 환율 -->
+					<li class="market_price_tab"><a data-toggle="tab" href="#market_price">MarketPrice</a></li>
+					
+					<!-- 실화폐 환율 -->							
+					<li id="drop-box">
+						<!-- dropdown은 목록 선택시 뷰에 보여지는 목록이 변하지 않아 직관적이지 못함 따라서 select로 변경함 -->
+	                    <select id="combo-box" class="input-large form-control">
+		                    <option id="PRICE_BTC" value="PRICE_BTC" selected="selected"> BTC </option>
+		                    <option id="PRICE_USD" value="PRICE_USD"> USD </option>
+		                    <option id="PRICE_CNY" value="PRICE_CNY"> CNY </option>
+		                    <option id="PRICE_EUR" value="PRICE_EUR"> EUR </option>
+		                    <option id="PRICE_GBP" value="PRICE_GBP"> GBP </option>
+		                    <option id="PRICE_RUR" value="PRICE_RUR"> RUR </option>
+	                	</select>
+					</li>
+					
+				</ul>
+				
 				<div class="tab-content">
 					<!-- 첫 탭 화면에 표시되는 정보 (비트코인 환율) -->
 					<div id="bitcoin_price" class="tab-pane fade in active">
-					
-					
-					<!-- <ul><li><a href="asd" class="onclick">asd</a></li></ul> -->
-					
-					<!-- <table>
-					<tr onclick="window.location='이동할링크'" style="cursor:pointer;" onMouseOver=this.style.backgroundColor="#F0F1F3" onMouseOut=this.style.backgroundColor="#FFFFFF">
-						<td>fifififi</td>
-					</tr>
-					</table> -->
-						
+
 						<table id="marketPriceList" class="table table-hover">
 							<thead>
-								<tr>
+								<tr id="test">
 									<th>Label</th>
 									<th>Name</th>
 									<th>Price</th>
@@ -95,6 +86,22 @@
 
 						</table>
 					</div>
+					
+					<script>
+					
+						$(document).ready(function(){
+							
+							$(document).on("click", "#label_parent", function(){
+								
+								var name = $('#name').text();	
+								alert(value);
+								
+							});
+								
+						});	
+					
+					</script>
+					
 					
 					<!-- 두번째 탭 화면에서 보여주는 정보 (실화폐환율) -->
 					<div id="market_price">
@@ -122,33 +129,25 @@
 	<script>
 
 		$(document).ready(function(){
-			
+
 			var url = "/rate/bitrate?money_type=PRICE_BTC";		//MarketPriceDataController로 부터 받은 데이터를 처리한다.
 			
 			$.getJSON(url, function (data) {
 				
 				var str = "";
-                
-				$.each(data.reverse(), function(){
-					
-                   	str += "<tr class='search'>";
-                    str += "<td>" + this.label + "</td>";
-                    str += "<td>" + this.name + "</td>";
-                    str += "<td>" + this.price + "</td>";
-                    str += "<td>" + this.volume_24h + "</td>";
-                   	str += "</tr>"; 
-                   	
+
+                 $.each(data.reverse(), function(){
+                    	str += "<tr class='table_row' id='label_parent'>";
+	                    str += "<td>" + this.label + "</td>";
+	                    str += "<td id='name'>" + this.name + "</td>";
+	                    str += "<td>" + this.price + "</td>";
+	                    str += "<td>" + this.volume_24h + "</td>";
+                    	str += "</tr>";
                 }); 
 				
                 $("#bitrate").html(str);
-        			
-                
+              
 		  	});
-			$(".search").on('click',function(){
-				
-				alert("ㄴㅁㅇ러ㅣ;ㄹㅇㄴ머ㅣㅏ;");
-				
-			});
 			
 			$(".market_price_tab").click(function(){
 				
@@ -205,12 +204,12 @@
 							var str = "";
 						                                                                                                      
 			                $.each(data.reverse(), function(){
-			                    	str += "<tr>"
-				                    str += "<td>" + this.label + "</td>";
-				                    str += "<td>" + this.name + "</td>";
-				                    str += "<td>" + this.price + "</td>";
-				                    str += "<td>" + this.volume_24h + "</td>";
-			                    	str += "</tr>"
+			                	str += "<tr class='table_row' id='label_parent'>";
+			                    str += "<td>" + this.label + "</td>";
+			                    str += "<td id='name'>" + this.name + "</td>";
+				                str += "<td>" + this.price + "</td>";
+				                str += "<td>" + this.volume_24h + "</td>";
+			                    str += "</tr>"
 			                });       
 
 			                $("#bitrate").html(str);
