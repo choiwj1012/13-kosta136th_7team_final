@@ -69,13 +69,15 @@
 					</table> -->
 						
 						<table id="marketPriceList" class="table table-hover">
-							<tr>
-								
-								<th>Label</th>
-								<th>Name</th>
-								<th>Price</th>
-								<th>Volume_24h</th>
-							</tr>
+							<thead>
+								<tr>
+									<th>Label</th>
+									<th>Name</th>
+									<th>Price</th>
+									<th>Volume_24h</th>
+								</tr>
+							</thead>
+							
 							<tbody id="bitrate">
 
 							</tbody>
@@ -84,19 +86,20 @@
 					</div>
 					
 					<!-- 두번째 탭 화면에서 보여주는 정보 (실화폐환율) -->
-					<div id="market_price" class="tab-pane fade">
-					<table>
-					<tr>
-						<th>Id</th>
-						<th>Name</th>
-						<th>Rate</th>
-						<th>Ask</th>
-						<th>Bid</th>
-
-					</tr>
-					<tbody id="rate">
-
-					</tbody>
+					<div id="market_price">
+					<table id="exchange" class="table table-hover">
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>Name</th>
+								<th>Rate</th>
+								<th>Ask</th>
+								<th>Bid</th>
+							</tr>
+						</thead>
+						<tbody id="rate">
+	
+						</tbody>
 					</table>
 					</div>
 				</div>
