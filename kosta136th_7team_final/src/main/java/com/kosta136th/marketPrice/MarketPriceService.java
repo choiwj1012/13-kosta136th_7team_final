@@ -10,4 +10,6 @@ public interface MarketPriceService {
 
 	public List<MarketPrice> coinRateList() throws Exception;
 
+	public List<MarketPriceChart> oneChart(String money_type) throws Exception;
+
 }
