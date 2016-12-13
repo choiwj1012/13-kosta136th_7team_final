@@ -328,46 +328,51 @@ public class MarketPriceDataController {
 	}
 	
 	@RequestMapping(value = "oneChart", method = RequestMethod.GET)
-	public JSONArray selectChart(@RequestParam("money_type") String money_type, HttpServletResponse response) throws Exception{
+	public JSONArray selectChart(@RequestParam("coinName") String coinName, @RequestParam("moneyType") String moneyType, HttpServletResponse response) throws Exception{
 		
+		MarketPriceChartInput marketPriceChartInput = new MarketPriceChartInput();
+		marketPriceChartInput.setCoinName(coinName);
+		marketPriceChartInput.setMoneyType(moneyType);
 		
-		List<MarketPriceChart> selectOneChart =  marketPriceService.oneChart(money_type);
+		List<MarketPriceChart> selectOneChart =  marketPriceService.oneChart(marketPriceChartInput);
 		
 		JSONArray ChartArray = new JSONArray();
 		
-		
 		String timestamp;
 		String perPrice = null;
+		
 		
 		for(int i = 0 ; i < selectOneChart.size() ; i++){
 			
 			timestamp = selectOneChart.get(i).getTimestamp();
 			
-			if(money_type.equals("PRICE_BTC")) {
+			if(moneyType.equals("PRICE_BTC")) {
 				
 				perPrice = selectOneChart.get(i).getPrice_btc();
 				
-			} else if(money_type.equals("PRICE_USD")) {
+			} else if(moneyType.equals("PRICE_USD")) {
 				
 				perPrice = selectOneChart.get(i).getPrice_usd();
 				
-			} else if(money_type.equals("PRICE_CNY")) {
+			} else if(moneyType.equals("PRICE_CNY")) {
 				
 				perPrice = selectOneChart.get(i).getPrice_cny();
 				
-			} else if(money_type.equals("PRICE_EUR")) {
+			} else if(moneyType.equals("PRICE_EUR")) {
 				
 				perPrice = selectOneChart.get(i).getPrice_eur();
 				
-			} else if(money_type.equals("PRICE_GBP")) {
+			} else if(moneyType.equals("PRICE_GBP")) {
 				
 				perPrice = selectOneChart.get(i).getPrice_gbp();
 				
-			} else if(money_type.equals("PRICE_RUR")) {
+			} else if(moneyType.equals("PRICE_RUR")) {
 				
 				perPrice = selectOneChart.get(i).getPrice_rur();
 				
 			}
+			
+			System.out.println("timestamp: " + timestamp);
 					
 			BigDecimal bigTimestamp = new BigDecimal(timestamp + "000");
 			BigDecimal bigPerPrice = new BigDecimal(perPrice); 	

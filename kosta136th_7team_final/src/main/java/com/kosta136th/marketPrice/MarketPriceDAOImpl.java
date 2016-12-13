@@ -39,9 +39,24 @@ public class MarketPriceDAOImpl implements MarketPriceDAO{
 	}
 
 	@Override
-	public List<MarketPriceChart> oneChart(String money_type) throws Exception {
+	public List<MarketPriceChart> oneChart(MarketPriceChartInput marketPriceChartInput) throws Exception {
 		
-		return sqlSession.selectList(namespace + ".oneChart", money_type);
+		System.out.println("marketPriceChartInput.getBtnvalue(): " + marketPriceChartInput.getMoneyType() );
+		System.out.println("marketPriceChartInput.getValue(): " + marketPriceChartInput.getCoinName() );
+		
+		List<MarketPriceChart> test = sqlSession.selectList(namespace + ".oneChart", marketPriceChartInput);
+		
+		System.out.println("test.get(0).getPrice_usd() : "+ test.get(0).getPrice_usd());
+		System.out.println("test.get(0).getPrice_btc() : "+ test.get(0).getPrice_btc());
+		System.out.println("test.get(0).getPrice_btc() : "+ test.get(0).getTimestamp());
+		System.out.println("test.get(1).getPrice_btc() : "+ test.get(1).getTimestamp());
+		System.out.println("test.get(2).getPrice_btc() : "+ test.get(2).getTimestamp());
+		System.out.println("test.get(3).getPrice_btc() : "+ test.get(3).getTimestamp());
+		System.out.println("test.get(4).getPrice_btc() : "+ test.get(4).getTimestamp());
+		System.out.println("test.get(5).getPrice_btc() : "+ test.get(5).getTimestamp());
+		
+		return test;
+		//return sqlSession.selectList(namespace + ".oneChart", marketPriceChartInput);
 		
 	}
 
