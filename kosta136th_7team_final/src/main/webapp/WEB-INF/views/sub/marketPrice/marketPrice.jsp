@@ -13,14 +13,20 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>	<!-- !! -->
 	<title>BitCoin MarketPrice</title>
 	<style>
+	
 		#bitrate{
 			cursor : pointer;
 		}
+		
+		#marketPriceList{
+			color : white;			
+		}
+		
 	</style>	
 </head>
 
 <body>
-
+		
 	<div class="container-fluid">
 
 		<div>
@@ -122,36 +128,27 @@
 			$.getJSON(url, function (data) {
 				
 				var str = "";
-<<<<<<< HEAD
                 
 				$.each(data.reverse(), function(){
 					
-                   	str += "<tr>";
+                   	str += "<tr class='search'>";
                     str += "<td>" + this.label + "</td>";
                     str += "<td>" + this.name + "</td>";
                     str += "<td>" + this.price + "</td>";
                     str += "<td>" + this.volume_24h + "</td>";
                    	str += "</tr>"; 
                    	
-=======
-                 $.each(data.reverse(), function(){
-                    	str += "<tr>"
-                    	str += "<li>"
-                	    str += "<a href='#'>";
-	                    str += "<td>" + this.label + "</td>";
-	                    str += "<td>" + this.name + "</td>";
-	                    str += "<td>" + this.price + "</td>";
-	                    str += "<td>" + this.volume_24h + "</td>";
-                        str += "</a>";
-                        str += "</li>"
-                    	str += "</tr>";
->>>>>>> 9c30746ce102e35351158ea55a6a5126e9b76959
                 }); 
 				
                 $("#bitrate").html(str);
-        
+        			
                 
 		  	});
+			$(".search").on('click',function(){
+				
+				alert("ㄴㅁㅇ러ㅣ;ㄹㅇㄴ머ㅣㅏ;");
+				
+			});
 			
 			$(".market_price_tab").click(function(){
 				
@@ -178,10 +175,8 @@
 					
 					str += "</tr>";
 					
-				})
+				});
 
-
-					
 				 $("#rate").html(str);
 				  
 			  });
