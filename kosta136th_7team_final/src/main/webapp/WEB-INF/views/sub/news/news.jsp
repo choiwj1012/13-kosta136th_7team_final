@@ -55,7 +55,8 @@
 							<p>${b.description }</p>
 						</div>
 						<div class="col-sm-2">
-							<button type="button" id="subscribeBtn" class="btn btn-primary" onclick="korSubscribe('${b.link}', '${b.title }', '${b.pubDate }', '${b.description }')">구독하기</button>
+							<%-- <button type="button" id="subscribeBtn" class="btn btn-primary" onclick="korSubscribe('${b.link}', '${b.title }', '${b.pubDate }', '${b.description }')">구독하기</button> --%>
+								<button type="button" id="subscribeBtn" class="btn btn-primary">구독하기</button>
 						</div>			
 					</div>
 				</c:forEach>
@@ -243,6 +244,11 @@ function engSubscribe(imgSrc, link, title, date, author, description)
 		
 	});
 }
+
+$(document).on("click","#newsTable button",function()
+{
+	alert("Asdf");
+});
 
 function korSubscribe(link, title, pubDate, description)
 {
