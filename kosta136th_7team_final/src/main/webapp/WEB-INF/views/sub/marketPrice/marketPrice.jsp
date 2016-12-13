@@ -76,24 +76,7 @@
 
 						</table>
 					</div>
-					
-<!-- 					<script> -->
-					
-<!-- // 						$(document).ready(function(){ -->
-							
-<!-- // 							$(document).on("click", "#table_price_row", function(){ -->
-								
-<!-- // 								var value = $(this).children(':eq(1)').text(); -->
 
-<!-- // 								alert(value); -->
-								
-<!-- // 							}); -->
-								
-<!-- // 						});	 -->
-					
-<!-- 					</script> -->
-					
-					
 					<!-- 두번째 탭 화면에서 보여주는 정보 (실화폐환율) -->
 					<div id="market_price">
 					<table id="exchange" class="table table-hover">
@@ -135,13 +118,13 @@
 					
 					success : function() {
 						
-// 						var url = "/rate/oneChart?coinName=" + coinName + "?btnvalue=" + btnvalue;
-// 						$.getJSON(url, function(data) {
+						var url = "/rate/oneChart?coinName=" + coinName + "&moneytype=" + moneytype;
+						$.getJSON(url, function(data) {
 							
-// 							options.series[0].data = data;
-// 							var chart = new Highcharts.stockChart(options);
+							options.series[0].data = data;
+							var chart = new Highcharts.stockChart(options);
 							
-// 						});
+						});
 						
 					}
 					
