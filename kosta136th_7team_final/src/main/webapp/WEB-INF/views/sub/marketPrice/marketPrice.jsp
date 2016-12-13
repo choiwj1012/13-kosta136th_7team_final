@@ -85,6 +85,22 @@
 						</table>
 					</div>
 					
+					<script>
+					
+						$(document).ready(function(){
+							
+							$(document).on("click", "#label_parent", function(){
+								
+								var value = $('#label').text();	
+								alert(value);
+								
+							});
+								
+						});	
+					
+					</script>
+					
+					
 					<!-- 두번째 탭 화면에서 보여주는 정보 (실화폐환율) -->
 					<div id="market_price">
 					<table id="exchange" class="table table-hover">
@@ -122,16 +138,17 @@
 			$.getJSON(url,  function (data) {
 				var str = "";
                  $.each(data.reverse(), function(){
-                    	str += "<tr class='table_row'>"
-	                    str += "<td>" + this.label + "</td>";
+                    	str += "<tr class='table_row' id='label_parent'>";
+	                    str += "<td id='label'>" + this.label + "</td>";
 	                    str += "<td>" + this.name + "</td>";
 	                    str += "<td>" + this.price + "</td>";
 	                    str += "<td>" + this.volume_24h + "</td>";
                     	str += "</tr>";
                 }); 
 
-
+				
                 $("#bitrate").html(str);
+              
 		  	});
 			
 			$(".market_price_tab").click(function(){
