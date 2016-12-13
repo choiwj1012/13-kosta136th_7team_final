@@ -89,9 +89,9 @@
 					
 						$(document).ready(function(){
 							
-							$(document).on("click", "#label_parent", function(){
+							$(document).on("click", "#table_price_row", function(){
 								
-								var value = $('#label').text();	
+								var value = $(this).children(':eq(1)').text();
 								alert(value);
 								
 							});
@@ -138,8 +138,8 @@
 			$.getJSON(url,  function (data) {
 				var str = "";
                  $.each(data.reverse(), function(){
-                    	str += "<tr class='table_row' id='label_parent'>";
-	                    str += "<td id='label'>" + this.label + "</td>";
+                    	str += "<tr class='table_row' id='table_price_row'>";
+	                    str += "<td>" + this.label + "</td>";
 	                    str += "<td>" + this.name + "</td>";
 	                    str += "<td>" + this.price + "</td>";
 	                    str += "<td>" + this.volume_24h + "</td>";
