@@ -152,7 +152,7 @@ public class UserController {
 						User signupEmailVO = new User(signupEmailDTO.getEmail(),signupEmailDTO.getPassword(),signupEmailDTO.getNickname());
 						System.out.println(signupEmailVO.toString());
 					
-						signupSuccess = userService.signupEmail(signupEmailVO);
+						signupSuccess = userService.signupEmail(signupEmailVO, register_type_code);
 										
 						if (signupSuccess){
 							entity = new ResponseEntity<>("회원가입에 성공했습니다", HttpStatus.OK);

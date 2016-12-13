@@ -168,7 +168,7 @@
 		<script>
 			signinSession.email = 
 				'${signinSessionDTO.email}';
-			signinSession.nickname = '${signinSessionDTO.nickname}'';
+			signinSession.nickname = '${signinSessionDTO.nickname}';
 		</script>
 	</c:if>
 	

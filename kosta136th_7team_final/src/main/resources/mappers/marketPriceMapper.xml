@@ -38,10 +38,12 @@
 	
 		</select>
 		
-		<select id="oneChart" resultType="com.kosta136th.marketPrice.MarketPriceChart">
-			SELECT TIMESTAMP, ${moneyType}
-			FROM MARKET_PRICE
-			WHERE NAME = "${coinName}"
+
+		<select id="oneChart" resultType="com.kosta136th.marketPrice.MarketPrice">
+		SELECT TIMESTAMP, ${moneyType}
+		FROM MARKET_PRICE
+		WHERE NAME = #{coinName}
+
 		</select>
 		
 	</mapper>

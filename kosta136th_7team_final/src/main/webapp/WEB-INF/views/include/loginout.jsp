@@ -281,7 +281,7 @@
 			registerMap["user"] = [$('#signup_email').val(), $('#signup_password').val(), 
 				$('#signup_nickname').val(),
 				$(':radio[name="register_type_code"]:checked').val()];
-			var mailTp 		= $(':radio[name="register_type_code"]:checked').val();
+			registerMap["authentication"] = [$('#signup_authentication').val()];
 			$.ajax({
 				type : 'POST',
 				url : '/requestSignupEmail',
