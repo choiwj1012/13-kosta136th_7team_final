@@ -12,6 +12,11 @@
 	<script src="../../../resources/js/marketPrice_chart_customizing.js"></script>	<!-- 디자인 커스터마이징 js -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>	<!-- !! -->
 	<title>BitCoin MarketPrice</title>
+	<style>
+		#bitrate{
+			cursor : pointer;
+		}
+	</style>	
 </head>
 
 <body>
@@ -100,19 +105,25 @@
 		$(document).ready(function(){
 			
 			var url = "/rate/bitrate?money_type=PRICE_BTC";		//MarketPriceDataController로 부터 받은 데이터를 처리한다.
-			$.getJSON(url,  function (data) {
+			
+			$.getJSON(url, function (data) {
+				
 				var str = "";
-                 $.each(data.reverse(), function(){
-                    	str += "<tr>"
-	                    str += "<td>" + this.label + "</td>";
-	                    str += "<td>" + this.name + "</td>";
-	                    str += "<td>" + this.price + "</td>";
-	                    str += "<td>" + this.volume_24h + "</td>";
-                    	str += "</tr>"
+                
+				$.each(data.reverse(), function(){
+					
+                   	str += "<tr>";
+                    str += "<td>" + this.label + "</td>";
+                    str += "<td>" + this.name + "</td>";
+                    str += "<td>" + this.price + "</td>";
+                    str += "<td>" + this.volume_24h + "</td>";
+                   	str += "</tr>"; 
+                   	
                 }); 
-
-
+				
                 $("#bitrate").html(str);
+        
+                
 		  	});
 			
 			$(".market_price_tab").click(function(){
@@ -150,12 +161,14 @@
 				
 			});
 			
-			var money_type = "PRICE_BTC";			
+			var money_type = "PRICE_BTC";	
+			
 			$("#combo-box").on('change', function(){
 				
 				money_type = $(this).find(":selected").val();
 				
 				$.ajax({
+					
 					url: "/rate/bitrate/",				//목적지 URI	//Controller로 보낸다.
 					//async : false,						//동기방식
 					type: 'get',							//get 타입 (post타입 등이 있음)
@@ -164,9 +177,11 @@
 					success:  function () {				//성공시 return된 객체를
 						
 						var url = "/rate/bitrate?money_type=" + money_type;		//MarketPriceDataController로 부터 받은 데이터를 처리한다.
-						$.getJSON(url,  function (data) {
-							var str = "";
 						
+						$.getJSON(url,  function (data) {
+							
+							var str = "";
+						                                                                                                      
 			                $.each(data.reverse(), function(){
 			                    	str += "<tr>"
 				                    str += "<td>" + this.label + "</td>";
@@ -177,7 +192,7 @@
 			                });       
 
 			                $("#bitrate").html(str);
-						  
+
 					  });
 						
 					}
