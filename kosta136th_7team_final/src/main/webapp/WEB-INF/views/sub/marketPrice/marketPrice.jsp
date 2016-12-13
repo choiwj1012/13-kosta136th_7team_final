@@ -59,8 +59,18 @@
 					<!-- 첫 탭 화면에 표시되는 정보 (비트코인 환율) -->
 					<div id="bitcoin_price" class="tab-pane fade in active">
 					
-						<table id="marketPriceList">
+					
+					<!-- <ul><li><a href="asd" class="onclick">asd</a></li></ul> -->
+					
+					<!-- <table>
+					<tr onclick="window.location='이동할링크'" style="cursor:pointer;" onMouseOver=this.style.backgroundColor="#F0F1F3" onMouseOut=this.style.backgroundColor="#FFFFFF">
+						<td>fifififi</td>
+					</tr>
+					</table> -->
+						
+						<table id="marketPriceList" class="table table-hover">
 							<tr>
+								
 								<th>Label</th>
 								<th>Name</th>
 								<th>Price</th>
@@ -104,11 +114,15 @@
 				var str = "";
                  $.each(data.reverse(), function(){
                     	str += "<tr>"
+                    	str += "<li>"
+                	    str += "<a href='#'>";
 	                    str += "<td>" + this.label + "</td>";
 	                    str += "<td>" + this.name + "</td>";
 	                    str += "<td>" + this.price + "</td>";
 	                    str += "<td>" + this.volume_24h + "</td>";
-                    	str += "</tr>"
+                        str += "</a>";
+                        str += "</li>"
+                    	str += "</tr>";
                 }); 
 
 

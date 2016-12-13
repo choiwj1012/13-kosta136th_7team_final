@@ -137,6 +137,15 @@ ul.nav.nav-tabs {
 	
 }
 
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, {
+	
+	color: #a6b6bc;
+	border-bottom: 1px solid #262a2c;
+	
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td,  {
+
 /* .form-group {
 	
 	align: right;
