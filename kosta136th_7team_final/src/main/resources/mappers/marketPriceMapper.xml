@@ -39,7 +39,7 @@
 		</select>
 		
 		<select id="oneChart" resultType="com.kosta136th.marketPrice.MarketPrice">
-		SELECT TIMESTAMP, PRICE_BTC, PRICE_USD, PRICE_CNY, PRICE_EUR, PRICE_GBP, PRICE_RUR
+		SELECT TIMESTAMP, ${moneytype}
 		FROM MARKET_PRICE
 		WHERE NAME = #{coinName}
 		</select>

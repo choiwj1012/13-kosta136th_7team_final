@@ -35,9 +35,9 @@ public class MarketPriceServiceImpl implements MarketPriceService{
 	}
 
 	@Override
-	public List<MarketPrice> oneChart(String coinName) throws Exception {
+	public List<MarketPrice> oneChart(OneChart oneChart) throws Exception {
 		
-		return dao.oneChart(coinName);
+		return dao.oneChart(oneChart);
 		
 	}
 

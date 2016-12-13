@@ -125,13 +125,13 @@
 				
 				var coinName = $(this).children(':eq(1)').text();
 				
-				var btnvalue = $("#combo-box").find(":selected").val();
+				var moneytype = $("#combo-box").find(":selected").val();
 				
 				$.ajax({
 					
 					url : "/rate/oneChart/",
 					type : 'get',
-					data : {"coinName" : coinName, "btnvalue" : btnvalue},
+					data : {"coinName" : coinName, "moneytype" : moneytype},
 					
 					success : function() {
 						
