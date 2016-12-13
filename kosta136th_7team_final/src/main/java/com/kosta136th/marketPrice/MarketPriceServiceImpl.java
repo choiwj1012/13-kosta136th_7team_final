@@ -1,12 +1,13 @@
 package com.kosta136th.marketPrice;
 
-import java.util.List;
-
 import javax.inject.Inject;
+
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 @Service
+
 public class MarketPriceServiceImpl implements MarketPriceService{
 
 	@Inject
@@ -31,6 +32,13 @@ public class MarketPriceServiceImpl implements MarketPriceService{
 		
 		return dao.coinRateList();
 
+	}
+
+	@Override
+	public List<MarketPriceChart> oneChart(String money_type) throws Exception {
+		
+		return dao.oneChart(money_type);
+		
 	}
 
 }
