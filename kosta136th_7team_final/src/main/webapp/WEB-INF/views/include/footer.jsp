@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <footer id="footer">
+	
 	<div class="container-fluid text-center">
 		<div class="row">
 
@@ -35,6 +36,14 @@
 			
 		</div>
 	</div>
+	
+	<!-- 채팅 기능 추가구현 -->
+	<div id="chatroom">
+		
+		<iframe src="http://52.78.224.181:3000/public/index.html" frameborder="0"></iframe>
+	
+	</div>
+	
 </footer>
 </body>
 </html>
