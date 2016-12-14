@@ -241,7 +241,7 @@ public class UserController {
 			clientId = "pF0PyCKhhv5zfVs24Tzl";//애플리케이션 클라이언트 아이디값
 			
 			//destination 형식의 예 : /requestSignupNaver
-			redirectURI = URLEncoder.encode("http://127.0.0.1:8080" + destination, "UTF-8");
+			redirectURI = URLEncoder.encode("http://127.0.0.1:80" + destination, "UTF-8");
 			
 			SecureRandom random = new SecureRandom();
 			state = new BigInteger(130, random).toString();
@@ -289,7 +289,7 @@ public class UserController {
 		String access_token; //전달 받은 JSON으로부터 access token을 잘라서 보관하는 스트링
 
 		try{
-			redirectURI = URLEncoder.encode("http://127.0.0.1:8080/doSignupNaver", "UTF-8");
+			redirectURI = URLEncoder.encode("http://127.0.0.1:80/doSignupNaver", "UTF-8");
 
 			apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
 			apiURL += "client_id=" + clientId;
@@ -481,7 +481,7 @@ public class UserController {
 			String access_token; //전달 받은 JSON으로부터 access token을 잘라서 보관하는 스트링
 
 			try{
-				redirectURI = URLEncoder.encode("http://127.0.0.1:8080/doSigninNaver", "UTF-8");
+				redirectURI = URLEncoder.encode("http://127.0.0.1:80/doSigninNaver", "UTF-8");
 
 				apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
 				apiURL += "client_id=" + clientId;
