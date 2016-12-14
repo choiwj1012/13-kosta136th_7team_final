@@ -45,12 +45,12 @@
 					<li id="drop-box">
 						<!-- dropdown은 목록 선택시 뷰에 보여지는 목록이 변하지 않아 직관적이지 못함 따라서 select로 변경함 -->
 	                    <select id="combo-box" class="input-large form-control">
-		                    <option class="ratebtn" id="PRICE_BTC" value="PRICE_BTC" selected="selected"> BTC </option>
-		                    <option class="ratebtn" id="PRICE_USD" value="PRICE_USD"> USD </option>
+		                    <option class="ratebtn" id="PRICE_USD" value="PRICE_USD" selected="selected"> USD </option>
 		                    <option class="ratebtn" id="PRICE_CNY" value="PRICE_CNY"> CNY </option>
 		                    <option class="ratebtn" id="PRICE_EUR" value="PRICE_EUR"> EUR </option>
 		                    <option class="ratebtn" id="PRICE_GBP" value="PRICE_GBP"> GBP </option>
 		                    <option class="ratebtn" id="PRICE_RUR" value="PRICE_RUR"> RUR </option>
+		                    <option class="ratebtn" id="PRICE_BTC" value="PRICE_BTC"> BTC </option>
 	                	</select>
 					</li>
 					
@@ -98,4 +98,12 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- 채팅 기능 추가구현 -->
+	<div id="chatroom">
+		
+		<iframe id="chat" src="http://52.78.224.181:3000/public/index.html" frameborder="none"></iframe>
+	
+	</div>
+	
 </body>

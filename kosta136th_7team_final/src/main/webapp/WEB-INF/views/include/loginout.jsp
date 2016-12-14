@@ -329,33 +329,19 @@
 			
 			e.preventDefault();
 			
+			var isSignin;
+			
 			$.ajax({
 				type : 'POST',
 				url : '/requestSignupNaver',
+				async : false,
+				data : {
+					"currentPage" : document.location.href
+				},
 			    success : function(data) {
-			    	window.open(data);
+					location.href = data; 	
 			    }
 			});
-			
-			var isSignin = requestSigninSessionAttribute();
-
-			if (isSignin == false){
-				$('#signupBtn').remove();
-			    $('#signinBtn').remove();
-			    $('#myPage').remove();
-			    $('#signoutBtn').remove();
-				$('.nav').append('<li><a href="#" id="signupBtn" data-toggle="modal" data-target="#signup">회원가입</a></li>');
-	        	$('.nav').append('<li><a href="#" id="signinBtn" data-toggle="modal" data-target="#signin">로그인</a></li>'); 
-	        }
-			
-		    if (isSignin == true){
-		    	$('#signupBtn').remove();
-			    $('#signinBtn').remove();
-			    $('#myPage').remove();
-			    $('#signoutBtn').remove();
-			    $('.nav').append('<li><a href="/myPage" id = "myPage">마이페이지</a></li>');
-			    $('.nav').append('<li><a href="#" id="signoutBtn">로그아웃</a></li>');
-	        }
 			
 		});
 	});
@@ -368,41 +354,19 @@
 			
 			e.preventDefault();
 			
-			var childrenWindow = {};
 			var isSignin;
 			
 			$.ajax({
 				type : 'POST',
 				url : '/requestSigninNaver',
 				async : false,
+				data : {
+					"currentPage" : document.location.href
+				},
 			    success : function(data) {
-			    	childrenWindow = window.open(data);
-			    	while(childrenWindow != null){
-			    	//자식창이 naver로 이동이 끝날 때까지 아랫줄을 시행하지 않고 기다린다.
-			    	}
-			    	isSignin = requestSigninSessionAttribute();
+					location.href = data; 				    	
 			    }
 			});
-			
-			var isSignin = requestSigninSessionAttribute();
-
-			if (isSignin == false){
-				$('#signupBtn').remove();
-			    $('#signinBtn').remove();
-			    $('#myPage').remove();
-			    $('#signoutBtn').remove();
-				$('.nav').append('<li><a href="#" id="signupBtn" data-toggle="modal" data-target="#signup">회원가입</a></li>');
-	        	$('.nav').append('<li><a href="#" id="signinBtn" data-toggle="modal" data-target="#signin">로그인</a></li>'); 
-	        }
-			
-		    if (isSignin == true){
-		    	$('#signupBtn').remove();
-			    $('#signinBtn').remove();
-			    $('#myPage').remove();
-			    $('#signoutBtn').remove();
-			    $('.nav').append('<li><a href="/myPage" id = "myPage">마이페이지</a></li>');
-			    $('.nav').append('<li><a href="#" id="signoutBtn">로그아웃</a></li>');
-	        }
 			
 		});
 	});
