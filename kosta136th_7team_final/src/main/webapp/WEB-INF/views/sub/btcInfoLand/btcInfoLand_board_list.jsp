@@ -22,8 +22,8 @@
 					BTC 정보광장<small>_딜러 전문소식</small>
 				</h1>
 				<ul class="breadcrumb">
-					<li><a href="#">Home</a></li>
-					<li><a href="#">BTC정보광장</a></li>
+					<li><a href="/">Home</a></li>
+					<li><a href="btcInfoLand">BTC정보광장</a></li>
 					<li class="active">딜러 전문소식</li>
 				</ul>
 			</div>
