@@ -5,7 +5,6 @@
 	<link rel="stylesheet" href="../../../../resources/css/news.css" />
 </header>
 <%@ include file="../../include/grandNav.jsp" %>
-
 <div class="container">
 
 	<div class="row">
@@ -22,42 +21,87 @@
 				<li><a href="/news/tab1?page=1" class="tablinks" onclick="openCity(event, 'korArticle')">국내기사</a></li>
   				<li><a href="/news/tab2?page=1" class="tablinks" onclick="openCity(event, 'engArticle')">해외기사</a></li>
 			</ul>
+			
 			<div id="engArticle" class="tabcontent">
-				<c:forEach items="${abrNewsList}" var ="b">
-					<div class="row" id="newsTable">
-						<div class="col-sm-3">
-							<img src=${b.imgSrc} width="150" height="200" alt="" />
-						</div>
-						<div class="col-sm-7">
-							<h3><a href = ${b.link} target="_blank">${b.title}</a></h3>
-							<p>${b.date }</p>
-							<p>${b.author}</p>
-							<p>${b.description }</p>
-						</div>
-						<div class="col-sm-2">
-							<button type="button" id="subscribeBtn" class="btn btn-primary" onclick="engSubscribe('${b.imgSrc}','${b.link}','${b.title}','${b.date}','${b.author }','${b.description}')">구독하기</button>
-						</div>				
-					</div>
-				</c:forEach>
-			</div>					
+                <c:forEach items="${abrNewsList}" var ="b">
+                    <div class="row" id="newsTable">
+                        <div class="col-sm-3" id="imgSrc">
+                            <img src=${b.imgSrc} width="150" height="200" alt="" />
+                        </div>
+                        <div class="col-sm-7" id="etcAttr">
+                            <h3><a href = ${b.link} target="_blank">${b.title}</a></h3>
+                            <p>${b.date}</p>
+                            <p>${b.author}</p>
+                            <p>${b.description }</p>
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="button" id="subscribeBtn" class="btn btn-primary">구독하기</button>
+                        </div>                
+                    </div>
+                </c:forEach>
+                
+                 <script>
+            
+                 $(document).ready(function(){
+                     
+                     $(document).on('click', '#subscribeBtn', function(){
+                         
+                         var imgSrc = $(this).parent().parent().children('#imgSrc').children('img').attr('src');
+                        var link = $(this).parent().parent().children('#etcAttr').children(':eq(0)').children('a').attr('href');
+                        var title =    $(this).parent().parent().children('#etcAttr').children(':eq(0)').children('a').text(); 
+                        var date = $(this).parent().parent().children('#etcAttr').children(':eq(1)').text(); 
+                        var author = $(this).parent().parent().children('#etcAttr').children(':eq(2)').text(); 
+                        var description = $(this).parent().parent().children('#etcAttr').children(':eq(3)').text(); 
+                        
+                        engSubscribe(imgSrc, link, title, date, author, description);
+                     
+                     });
+                     
+                 });
+                 
+            	</script>
+                
+            </div>                    
+
+           
 
 			<div id="korArticle" class="tabcontent">
 				<c:forEach items="${newsList}" var ="b" begin="0" end="9" varStatus="idx">
 					<div class="row" id="newsTable">
-						<div class="col-sm-3">
+						<div class="col-sm-3" id="imgSrc">
 							<img src= "../../../../resources/img/news/${idx.index}.png" width = "150" height = "150" alt="" />
 						</div>
-						<div class="col-sm-7">
-							<h3><a href = ${b.link} target="_blank">${b.title}</a></h3>
+						<div class="col-sm-7" id="etcAttr">
+							<h3><a href = "${b.link}" target="_blank">${b.title}</a></h3>
 							<p>${b.pubDate }</p>
 							<p>${b.description }</p>
 						</div>
 						<div class="col-sm-2">
-							<%-- <button type="button" id="subscribeBtn" class="btn btn-primary" onclick="korSubscribe('${b.link}', '${b.title }', '${b.pubDate }', '${b.description }')">구독하기</button> --%>
-								<button type="button" id="subscribeBtn" class="btn btn-primary">구독하기</button>
-						</div>			
+							    <button type="button" id="subscribeBtn2" class="btn btn-primary">구독하기</button>
+						</div>		
+							
 					</div>
 				</c:forEach>
+				
+				<script>
+            
+                 $(document).ready(function(){
+                     
+                     $(document).on('click', '#subscribeBtn2', function(){
+                         
+                        var imgSrc = $(this).parent().parent().children('#imgSrc').children('img').attr('src');
+                        var link = $(this).parent().parent().children('#etcAttr').children(':eq(0)').children('a').attr('href');
+                        var title =    $(this).parent().parent().children('#etcAttr').children(':eq(0)').children('a').text(); 
+                        var pubDate = $(this).parent().parent().children('#etcAttr').children(':eq(1)').text();
+                        var description = $(this).parent().parent().children('#etcAttr').children(':eq(2)').text(); 
+
+                        korSubscribe(link, title, pubDate, description);
+                     
+                     });
+                     
+                 });
+                 
+            	</script>
 			</div>
 			<div class="row text-center">
 				<ul class="pagination">
@@ -212,6 +256,8 @@ function openCity(evt, cityName) {
 }
 </script>
 <script>
+
+
 function engSubscribe(imgSrc, link, title, date, author, description)
 {
 	
@@ -243,21 +289,14 @@ function engSubscribe(imgSrc, link, title, date, author, description)
 	});
 }
 
-$(document).on("click","#newsTable button",function()
-{
-	alert("Asdf");
-});
-
 function korSubscribe(link, title, pubDate, description)
 {
-	var keyword = "비트코인";
 	alert("한국기사스크랩버튼 클릭됨" + "\n"
 			+ "link : " + link + "\n"
 			+ "title : " + title + "\n"
-			+ "pubDate : " + pubDate + "\n"
-			+ "description : " + description + "\n"
-			+ "keyword : " + keyword);
-	$.ajax({
+			+ "date : " + pubDate + "\n"
+			+ "date : " + description);
+	 $.ajax({
 		type : 'post',
 		url : '/addDemesticScrap',
 		headers :{
@@ -269,9 +308,8 @@ function korSubscribe(link, title, pubDate, description)
 			link : link,
 			title : title,
 			pubDate : pubDate,
-			description : description,
-			keyword : keyword
-		}),
+			description : description
+		})
 		
 	});
 }
