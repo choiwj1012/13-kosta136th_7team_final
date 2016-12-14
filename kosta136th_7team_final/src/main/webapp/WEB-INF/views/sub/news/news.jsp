@@ -28,34 +28,49 @@
 			<div id="engArticle" class="tabcontent">
 				<c:forEach items="${abrNewsList}" var ="b">
 					<div class="row" id="newsTable">
-						<div class="col-sm-3">
+						<div class="col-sm-3" id="imgSrc">
 							<img src=${b.imgSrc} width="150" height="200" alt="" />
 						</div>
-						<div class="col-sm-7">
+						<div class="col-sm-7" id="etcAttr">
 							<h3><a href = ${b.link} target="_blank">${b.title}</a></h3>
 							<p>${b.date}</p>
 							<p>${b.author}</p>
 							<p>${b.description }</p>
 						</div>
 						<div class="col-sm-2">
-							<button type="button" id="subscribeBtn" class="btn btn-primary"">구독하기</button>
+							<button type="button" id="subscribeBtn" class="btn btn-primary">구독하기</button>
 						</div>				
-						
-						<script>
-							$(document).ready(function(){
-								
-								$(document).on('click', '#subscribeBtn', function(){
-									
-									engSubscribe('${b.imgSrc}','${b.link}','${b.title}','${b.date}','${b.author }','${b.description}');
-									
-								});
-								
-							});
-						</script>
-						
 					</div>
 				</c:forEach>
 			</div>					
+
+			<script>
+			
+	             $(document).ready(function(){
+	            	 
+	                 $(document).on('click', '#subscribeBtn', function(){
+	                     
+	                 	var imgSrc = $(this).parent().parent().children('#imgSrc').children('img').attr('src');
+	                    var link = $(this).parent().parent().children('#etcAttr').children(':eq(0)').children('a').attr('href');
+	                    var title =	$(this).parent().parent().children('#etcAttr').children(':eq(0)').children('a').text(); 
+	                    var date = $(this).parent().parent().children('#etcAttr').children(':eq(1)').text(); 
+	                    var author = $(this).parent().parent().children('#etcAttr').children(':eq(2)').text(); 
+	                    var description = $(this).parent().parent().children('#etcAttr').children(':eq(3)').text(); 
+	                     
+	                    alert(imgSrc);
+	                    alert(link);
+	                    alert(title);
+	                    alert(date);
+	                    alert(author);
+	                    alert(description);
+	                    
+	                    engSubscribe(imgSrc, link, title, date, author, description);
+	                 
+	                 });
+	                 
+	             });
+	             
+		    </script>
 
 			<div id="korArticle" class="tabcontent">
 				<c:forEach items="${newsList}" var ="b" begin="0" end="9" varStatus="idx">
