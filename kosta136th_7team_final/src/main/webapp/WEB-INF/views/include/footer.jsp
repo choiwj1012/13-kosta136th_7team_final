@@ -40,7 +40,7 @@
 	<!-- 채팅 기능 추가구현 -->
 	<div id="chatroom">
 		
-		<iframe src="http://52.78.224.181:3000/public/index.html" frameborder="0"></iframe>
+		<iframe id="chat" src="http://52.78.224.181:3000/public/index.html" frameborder="none"></iframe>
 	
 	</div>
 	

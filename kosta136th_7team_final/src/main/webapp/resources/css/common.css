@@ -81,17 +81,17 @@ span.footer_copyright {
 }
 
 #chatroom{
-	width:300px;
-	height:600px;
+	width:400px;
+	height:700px;
 	position: fixed;
-	bottom:300px;
+	bottom:0px;
 	right:0px;
 	overflow:hidden;
 }
 
-iframe{
-	width:300px;
-	height:600px;
+#chat{
+	width:400px;
+	height:700px;
 	overflow:hidden;
 }
 
