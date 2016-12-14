@@ -91,10 +91,13 @@ public class UserController {
 		String email = registerMap.get("user").get(0);
 		String password = registerMap.get("user").get(1);
 		String nickname = registerMap.get("user").get(2);
+		String register_type_code = registerMap.get("user").get(3);
 		
 		System.out.println("email : " + email);
 		System.out.println("password : " + password);
 		System.out.println("nickname : " + nickname);
+		System.out.println("register_type_code : " + register_type_code);
+		
 		//개인정보 객체
 		User signupEmailDTO = new User(email, password, nickname);
 		
@@ -149,7 +152,7 @@ public class UserController {
 						User signupEmailVO = new User(signupEmailDTO.getEmail(),signupEmailDTO.getPassword(),signupEmailDTO.getNickname());
 						System.out.println(signupEmailVO.toString());
 					
-						signupSuccess = userService.signupEmail(signupEmailVO);
+						signupSuccess = userService.signupEmail(signupEmailVO, register_type_code);
 										
 						if (signupSuccess){
 							entity = new ResponseEntity<>("회원가입에 성공했습니다", HttpStatus.OK);
@@ -176,11 +179,19 @@ public class UserController {
 	//가입 페이지에서 녹색 '네이버로 가입' 버튼 클릭
 	@RequestMapping(value = "/requestSignupNaver", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	@ResponseBody
-	public String requestSignupNaver(){
+	public String requestSignupNaver(@RequestParam String currentPage, HttpSession httpSession){
+		
+		System.out.println("요청자가 보고 있는 현재 페이지 : " + currentPage);
 		
 		String apiURL;
 		
 		apiURL = generateNaverLoginAPI("/doSignupNaver");
+		
+		if (httpSession.getAttribute("currentPage") == null){
+			httpSession.removeAttribute("currentPage");
+		}
+		
+		httpSession.setAttribute("currentPage", currentPage);
 		
 		return apiURL;		
 	}
@@ -188,11 +199,19 @@ public class UserController {
 	//가입 페이지에서 녹색 '네이버로 로그인' 버튼 클릭
 	@RequestMapping(value = "/requestSigninNaver", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	@ResponseBody
-	public String requestSigninNaver(){
+	public String requestSigninNaver(@RequestParam String currentPage, HttpSession httpSession){
+		
+		System.out.println("요청자가 보고 있는 현재 페이지 : " + currentPage);
 		
 		String apiURL;
 		
 		apiURL = generateNaverLoginAPI("/doSigninNaver");
+		
+		if (httpSession.getAttribute("currentPage") == null){
+			httpSession.removeAttribute("currentPage");
+		}
+		
+		httpSession.setAttribute("currentPage", currentPage);
 		
 		return apiURL;		
 	}
@@ -241,9 +260,9 @@ public class UserController {
 	}
 	
 	//가입 콜백으로 값이 왔다.
-	@RequestMapping(value = "/doSignupNaver", produces = "application/text; charset=utf8") 
-	@ResponseBody
-	public ResponseEntity<String> doSignupNaver(@RequestParam("code") String code, @RequestParam("state") String state 
+	@RequestMapping(value = "/doSignupNaver") 
+	//@ResponseBody
+	public String doSignupNaver(@RequestParam("code") String code, @RequestParam("state") String state 
 			, HttpSession httpSession){
 		
 		System.out.println("가입 로직으로 올바르게 찾아왔습니다");
@@ -355,7 +374,8 @@ public class UserController {
 				System.out.println("네이버에 없는 이메일");
 				entity = new ResponseEntity<String>("네이버에 없는 이메일입니다.", HttpStatus.BAD_REQUEST);
 				//리턴 문자열 : "잘못된 이메일입니다."
-				return entity;
+				
+				//return entity;
 			}
 			
 			//DAO에 접근. 검사 로직.
@@ -419,13 +439,23 @@ public class UserController {
 		}
 		setSigninSessionAttribute(httpSession, signinSessionDTO);
 		
-		return entity;
+		//return entity;
+		String destination;
+		if (httpSession.getAttribute("currentPage") != null){
+			destination = (String)httpSession.getAttribute("currentPage");
+			httpSession.removeAttribute("currentPage");
+		}else{
+			httpSession.removeAttribute("currentPage");
+			destination = "/";
+		}
+		
+		return "redirect:" + destination;
 	}
 	
 	//로그인 콜백으로 값이 왔다.
-		@RequestMapping(value = "/doSigninNaver", produces = "application/text; charset=utf8")
-		@ResponseBody
-		public ResponseEntity<String> doSigninNaver(@RequestParam("code") String code, @RequestParam("state") String state 
+		@RequestMapping(value = "/doSigninNaver")
+		//@ResponseBody
+		public String doSigninNaver(@RequestParam("code") String code, @RequestParam("state") String state 
 				, HttpSession httpSession){
 			System.out.println("로그인 로직으로 올바르게 찾아왔습니다");
 	        
@@ -535,7 +565,8 @@ public class UserController {
 					System.out.println("네이버에 없는 이메일");
 					entity = new ResponseEntity<String>("네이버에 없는 이메일입니다.", HttpStatus.BAD_REQUEST);
 					//리턴 문자열 : "잘못된 이메일입니다."
-					return entity;
+					
+					//return entity;
 				}
 				
 				//DAO에 접근. 검사 로직.
@@ -591,9 +622,23 @@ public class UserController {
 			}
 			
 			setSigninSessionAttribute(httpSession, signinSessionDTO);
-			System.out.println("세션 저장 직전 : " + signinSessionDTO.toString());
-			return entity;
+			if (signinSessionDTO != null){
+				System.out.println("세션 저장 직전 : " + signinSessionDTO.toString());
+			}else{
+				System.out.println("세션 저장 직전 : null, 회원이 아닌 상태에서 네이버 로그인 들어온 것임");
+			}
+			//return entity;
 			
+			String destination;
+			if (httpSession.getAttribute("currentPage") != null){
+				destination = (String)httpSession.getAttribute("currentPage");
+				httpSession.removeAttribute("currentPage");
+			}else{
+				httpSession.removeAttribute("currentPage");
+				destination = "/";
+			}
+			
+			return "redirect:" + destination;
 		}
 	
 	//인증번호 발송
@@ -833,17 +878,19 @@ public class UserController {
 	@RequestMapping(value = "/requestSigninSessionAttribute", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<User> requestSigninSessionAttribute(HttpSession httpSession){
-		System.out.println("세션 정보 요청이 옴");
+		System.out.println("로그인 세션 정보 획득 요청이 옴(/requestSigninSessionAttribute)");
+		System.out.println("세션 signinSessionDTO의 보관 객체 타입은 USER입니다."); 
+		System.out.println("서버 : 세션에서 로그인 부분을 User로 형변환해 읽은 결과");
+		
 		ResponseEntity<User> entity = null;
-		HttpHeaders responseHeaders = new HttpHeaders();
-	    responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
-
+		
 	    User signinSessionDTO = (User)httpSession.getAttribute("signinSessionDTO");
 	    
 	    if (signinSessionDTO != null){
 	    	System.out.println(signinSessionDTO.toString());
 		}else{
-			System.out.println("User [null]");
+			System.out.println("null입니다. 즉, 당신은 로그인이 되어 있지 않다 이 말이오.");
+			System.out.println("이럴 수가 내가 로그인이 null이라니");
 		}
 		entity = new ResponseEntity<>(signinSessionDTO, HttpStatus.OK);
 		return entity;

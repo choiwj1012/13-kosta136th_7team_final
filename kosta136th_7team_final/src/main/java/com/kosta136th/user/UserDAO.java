@@ -4,7 +4,7 @@ public interface UserDAO {
 	//이메일로그인
 	public User signinEmail(User loginEmailVO) throws Exception;
 	//이메일가입
-	public boolean signupEmail(User loginEmailVO) throws Exception;
+	public boolean signupEmail(User loginEmailVO, String register_type_code) throws Exception;
 	//네이버로그인
 	public User signinNaver(String NaverEmail) throws Exception;
 	//네이버가입

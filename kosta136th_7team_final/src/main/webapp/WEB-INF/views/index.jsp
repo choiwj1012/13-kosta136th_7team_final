@@ -9,20 +9,6 @@
 	<script src="../../../resources/js/index_chart.js"></script>				<!-- 차트 구현 js -->
 	<script src="../../../resources/js/marketPrice_chart_customizing.js"></script>	<!-- 디자인 커스터마이징 js -->
 	<script src="../../resources/js/index.js"></script>
-	<script>
-		var signinSession = {email : '',
-							nickname : ''};
-	</script>
-	<script>
-		var isSignupEmailUnique = false;
-		var isAuthenticate = false;
-	</script>
-	<c:if test="${not empty signinSessionDTO}">
-		<script>
-			signinSession.email = ${signinSessionDTO.email};
-			signinSession.nickname = ${signinSessionDTO.nickname};
-		</script>
-	</c:if>
 </head>
 <body id="page-top">
 	
@@ -74,18 +60,6 @@
 							<li><a href="/news">최신 뉴스</a></li>
 							<li><a href="/btcInfoLand">BTC정보광장</a></li>
 							<li><a href="/board_list">자유게시판</a></li>
-
-							<c:if test="${empty signinSessionDTO}">
-								<li><a href="#" id="signupBtn" data-toggle="modal" data-target="#signup">회원가입</a></li>
-								<li><a href="#" id="signinBtn" data-toggle="modal" data-target="#signin">로그인</a></li>								
-							</c:if>
-							
-							<c:if test="${not empty signinSessionDTO}">
-							<!-- 임시 마이 페이지 -->							
-								<li><a href="/myPage" id = "myPage">마이페이지</a></li>
-								<li><a href="#" id="signoutBtn">로그아웃</a></li>
-							</c:if>
-							
 		                </ul>
 		            </div>
 		            
@@ -181,7 +155,34 @@
 				<img src="../../resources/img/logos_resize.png" alt="" id="logos"/>
 			</div>
 		</div>
-	</section>		
+	</section>
+	
+	<script>
+		var signinSession = { 'email' : '',
+							'nickname' : ''};
+		var isSignupEmailUnique = false;
+		var isAuthenticate = false;
+	</script>
+	
+	<c:if test="${not empty signinSessionDTO}">
+		<script>
+			signinSession.email = 
+				'${signinSessionDTO.email}';
+			signinSession.nickname = '${signinSessionDTO.nickname}';
+		</script>
+	</c:if>
+	
+	<script>
+	$(document).ready(function(){
+		if (signinSession.email === '' || signinSession.nickname === ''){
+			$('.navbar-nav').append('<li><a href="#" id="signupBtn" data-toggle="modal" data-target="#signup">회원가입</a></li>');
+			$('.navbar-nav').append('<li><a href="#" id="signinBtn" data-toggle="modal" data-target="#signin">로그인</a></li>');	
+		} else {
+			$('.navbar-nav').append('<li><a href="/myPage" id = "myPage">마이페이지</a></li>');
+			$('.navbar-nav').append('<li><a href="#" id="signoutBtn">로그아웃</a></li>');
+		}
+	});
+	</script>		
 
 <%@ include file="include/footer.jsp" %>
 		

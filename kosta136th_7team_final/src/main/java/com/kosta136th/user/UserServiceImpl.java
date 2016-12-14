@@ -17,11 +17,11 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public boolean signupEmail(User loginEmailDTO) throws Exception {
+	public boolean signupEmail(User loginEmailDTO, String register_type_code) throws Exception {
 		
 		boolean signupSuccess;
 		
-		signupSuccess = userDAO.signupEmail(loginEmailDTO);
+		signupSuccess = userDAO.signupEmail(loginEmailDTO, register_type_code);
 		
 		return signupSuccess;
 		

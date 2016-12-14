@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosta136th.mapper.freeBoardMapper">
+
+	<insert id="create">
+		INSERT INTO 
+			FREEBOARD(TITLE, CONTENT) 
+		VALUES 
+			(#{title}, #{content})
+	</insert>
+	
+	<select id="read" resultType="com.kosta136th.freeBoard.FreeBoard">
+		SELECT
+			FREEBOARD_NUM, TITLE, CONTENT, WRITER, REGIDATE, VIEWCNT
+		FROM 
+			FREEBOARD
+		WHERE
+			FREEBOARD_NUM = #{freeBoard_Num}
+	</select>
+	
+	<select id="listAll" resultType="com.kosta136th.freeBoard.FreeBoard">
+		<![CDATA[
+		SELECT
+			FREEBOARD_NUM, TITLE, CONTENT, WRITER, REGIDATE, VIEWCNT
+		FROM 
+			FREEBOARD
+		WHERE
+			FREEBOARD_NUM > 0
+		ORDER BY FREEBOARD_NUM DESC
+		]]>
+	</select>
+	
+	<update id="updateViewCnt">
+		UPDATE
+			FREEBOARD
+		SET
+			VIEWCNT = VIEWCNT +1
+		WHERE
+			FREEBOARD_NUM = #{freeBoard_Num}
+	</update>
+	
+	<select id="listCriteria" resultType="com.kosta136th.freeBoard.FreeBoard">
+		<![CDATA[
+		SELECT
+			FREEBOARD_NUM, TITLE, WRITER, REGDATE, VIEWCNT, REPLYCNT
+		FROM
+			FREEBOARD
+		WHERE 
+			FREEBOARD_NUM > 0
+		ORDER BY FREEBOARD_NUM DESC, REGDATE DESC
+		LIMIT #{pageStart}, #{perPageNum}
+		]]>
+	</select>
+	
+	<!-- <select id="countPaging" resultType="int">
+		<![CDATA[
+		SELECT
+			COUNT(freeBoard_Num)
+		FROM
+			FREEBOARD
+		WHERE
+			freeBoard_Num > 0
+		]]>
+	</select> -->
+	
+	
+	
+
+
+
+</mapper>

@@ -1,6 +1,8 @@
 package com.kosta136th.user;
 
 import java.security.MessageDigest;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.xml.bind.DatatypeConverter;
@@ -80,10 +82,14 @@ public class UserDAOImpl implements UserDAO{
 	}
 	
 	@Override
-	public boolean signupEmail(User signupEmailVO) throws Exception {
+	public boolean signupEmail(User signupEmailVO, String register_type_code) throws Exception {
 
 		int affectedRows = 0;
 		boolean signupSuccess = false;
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("signupVO", signupEmailVO);
+		map.put("register_type_code", register_type_code);
 		
 		//로그
 		System.out.println("--DAOImpl--");
@@ -94,7 +100,8 @@ public class UserDAOImpl implements UserDAO{
 		try{
 			affectedRows = session.insert(namespace + ".insertLoginProfileByEmail", signupEmailVO);
 			//가입과 동시에 로그인
-			session.insert(namespace + ".insertUserLoginRecord", signupEmailVO);			
+			session.insert(namespace + ".insertUserLoginRecord", signupEmailVO);
+			session.insert(namespace + ".insertRegisterType", map);
 		}catch(Exception e){
 			e.printStackTrace();
 			affectedRows = 0;			
@@ -114,6 +121,9 @@ public class UserDAOImpl implements UserDAO{
 		int affectedRows = 0;
 		boolean signupSuccess = false;
 		
+		Map <String, Object> map = new HashMap <String, Object>();
+		map.put("signupVO", signupNaverVO);
+		map.put("register_type_code", "n");
 		//로그
 		System.out.println("--DAOImpl--");
 		System.out.println(signupNaverVO.toString());
@@ -121,7 +131,8 @@ public class UserDAOImpl implements UserDAO{
 		try{
 			affectedRows = session.insert(namespace + ".insertLoginProfileByNaver", signupNaverVO);
 			//가입과 동시에 로그인
-			session.insert(namespace + ".insertUserLoginRecord", signupNaverVO);	
+			session.insert(namespace + ".insertUserLoginRecord", signupNaverVO);
+			session.insert(namespace + ".insertRegisterType", map);
 		}catch(Exception e){
 			e.printStackTrace();
 			affectedRows = 0;

@@ -5,6 +5,7 @@
 <header>
 	<link rel="stylesheet" href="../../../../resources/css/news.css" />
 </header>
+
 <%@ include file="../../include/grandNav.jsp" %>
 
 <div class="container">

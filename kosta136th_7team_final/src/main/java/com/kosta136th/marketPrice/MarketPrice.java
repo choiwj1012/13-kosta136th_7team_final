@@ -12,7 +12,7 @@ public class MarketPrice {
 	private String price_eur;
 	private String price_gbp;
 	private String price_rur;
-	private long timestamp;
+	private String timestamp;
 	private String volume_24h;
 	private BigDecimal price_btc_result;
 	private BigDecimal price_usd_result;
@@ -70,10 +70,10 @@ public class MarketPrice {
 	public void setPrice_rur(String price_rur) {
 		this.price_rur = price_rur;
 	}
-	public long getTimestamp() {
+	public String getTimestamp() {
 		return timestamp;
 	}
-	public void setTimestamp(long timestamp) {
+	public void setTimestamp(String timestamp) {
 		this.timestamp = timestamp;
 	}
 	public String getVolume_24h() {
