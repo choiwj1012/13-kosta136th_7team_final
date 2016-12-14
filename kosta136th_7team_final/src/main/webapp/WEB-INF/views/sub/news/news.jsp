@@ -24,6 +24,7 @@
 				<li><a href="/news/tab1?page=1" class="tablinks" onclick="openCity(event, 'korArticle')">국내기사</a></li>
   				<li><a href="/news/tab2?page=1" class="tablinks" onclick="openCity(event, 'engArticle')">해외기사</a></li>
 			</ul>
+			
 			<div id="engArticle" class="tabcontent">
 				<c:forEach items="${abrNewsList}" var ="b">
 					<div class="row" id="newsTable">
@@ -32,13 +33,26 @@
 						</div>
 						<div class="col-sm-7">
 							<h3><a href = ${b.link} target="_blank">${b.title}</a></h3>
-							<p>${b.date }</p>
+							<p>${b.date}</p>
 							<p>${b.author}</p>
 							<p>${b.description }</p>
 						</div>
 						<div class="col-sm-2">
-							<button type="button" id="subscribeBtn" class="btn btn-primary" onclick="engSubscribe('${b.imgSrc}','${b.link}','${b.title}','${b.date}','${b.author }','${b.description}')">구독하기</button>
+							<button type="button" id="subscribeBtn" class="btn btn-primary"">구독하기</button>
 						</div>				
+						
+						<script>
+							$(document).ready(function(){
+								
+								$(document).on('click', '#subscribeBtn', function(){
+									
+									engSubscribe('${b.imgSrc}','${b.link}','${b.title}','${b.date}','${b.author }','${b.description}');
+									
+								});
+								
+							});
+						</script>
+						
 					</div>
 				</c:forEach>
 			</div>					
