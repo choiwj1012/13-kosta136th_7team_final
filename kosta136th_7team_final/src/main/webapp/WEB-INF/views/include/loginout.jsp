@@ -335,7 +335,10 @@
 				type : 'POST',
 				url : '/requestSignupNaver',
 				async : false,
-			    success : function(data) { 	
+				data : {
+					"currentPage" : document.location.href
+				},
+			    success : function(data) {
 					location.href = data; 	
 			    }
 			});
@@ -357,6 +360,9 @@
 				type : 'POST',
 				url : '/requestSigninNaver',
 				async : false,
+				data : {
+					"currentPage" : document.location.href
+				},
 			    success : function(data) {
 					location.href = data; 				    	
 			    }

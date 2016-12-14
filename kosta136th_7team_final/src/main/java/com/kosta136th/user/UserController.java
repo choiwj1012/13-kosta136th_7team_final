@@ -179,11 +179,19 @@ public class UserController {
 	//가입 페이지에서 녹색 '네이버로 가입' 버튼 클릭
 	@RequestMapping(value = "/requestSignupNaver", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	@ResponseBody
-	public String requestSignupNaver(){
+	public String requestSignupNaver(@RequestParam String currentPage, HttpSession httpSession){
+		
+		System.out.println("요청자가 보고 있는 현재 페이지 : " + currentPage);
 		
 		String apiURL;
 		
 		apiURL = generateNaverLoginAPI("/doSignupNaver");
+		
+		if (httpSession.getAttribute("currentPage") == null){
+			httpSession.removeAttribute("currentPage");
+		}
+		
+		httpSession.setAttribute("currentPage", currentPage);
 		
 		return apiURL;		
 	}
@@ -191,11 +199,19 @@ public class UserController {
 	//가입 페이지에서 녹색 '네이버로 로그인' 버튼 클릭
 	@RequestMapping(value = "/requestSigninNaver", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	@ResponseBody
-	public String requestSigninNaver(){
+	public String requestSigninNaver(@RequestParam String currentPage, HttpSession httpSession){
+		
+		System.out.println("요청자가 보고 있는 현재 페이지 : " + currentPage);
 		
 		String apiURL;
 		
 		apiURL = generateNaverLoginAPI("/doSigninNaver");
+		
+		if (httpSession.getAttribute("currentPage") == null){
+			httpSession.removeAttribute("currentPage");
+		}
+		
+		httpSession.setAttribute("currentPage", currentPage);
 		
 		return apiURL;		
 	}
@@ -424,7 +440,16 @@ public class UserController {
 		setSigninSessionAttribute(httpSession, signinSessionDTO);
 		
 		//return entity;
-		return "redirect:/";
+		String destination;
+		if (httpSession.getAttribute("currentPage") != null){
+			destination = (String)httpSession.getAttribute("currentPage");
+			httpSession.removeAttribute("currentPage");
+		}else{
+			httpSession.removeAttribute("currentPage");
+			destination = "/";
+		}
+		
+		return "redirect:" + destination;
 	}
 	
 	//로그인 콜백으로 값이 왔다.
@@ -597,9 +622,23 @@ public class UserController {
 			}
 			
 			setSigninSessionAttribute(httpSession, signinSessionDTO);
-			System.out.println("세션 저장 직전 : " + signinSessionDTO.toString());
+			if (signinSessionDTO != null){
+				System.out.println("세션 저장 직전 : " + signinSessionDTO.toString());
+			}else{
+				System.out.println("세션 저장 직전 : null, 회원이 아닌 상태에서 네이버 로그인 들어온 것임");
+			}
 			//return entity;
-			return "redirect:/";
+			
+			String destination;
+			if (httpSession.getAttribute("currentPage") != null){
+				destination = (String)httpSession.getAttribute("currentPage");
+				httpSession.removeAttribute("currentPage");
+			}else{
+				httpSession.removeAttribute("currentPage");
+				destination = "/";
+			}
+			
+			return "redirect:" + destination;
 		}
 	
 	//인증번호 발송
