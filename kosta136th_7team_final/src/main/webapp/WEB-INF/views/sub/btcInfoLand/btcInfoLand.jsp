@@ -22,8 +22,8 @@
 					BTC 정보광장<small>_이달의 추천 딜러</small>
 				</h1>
 				<ul class="breadcrumb">
-					<li><a href="#">Home</a></li>
-					<li><a href="#">BTC정보광장</a></li>
+					<li><a href="/">Home</a></li>
+					<li><a href="btcInfoLand">BTC정보광장</a></li>
 					<li class="active">이달의 추천딜러</li>
 				</ul>
 			</div>
