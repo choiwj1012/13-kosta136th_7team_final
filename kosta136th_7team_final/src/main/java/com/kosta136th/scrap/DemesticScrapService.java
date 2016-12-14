@@ -10,4 +10,6 @@ public interface DemesticScrapService {
 
 	public List<DemesticPopular> popularNews() throws Exception;
 
+	
+
 }
