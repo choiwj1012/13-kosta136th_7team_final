@@ -131,4 +131,6 @@ public class DemesticScrapServiceImpl implements DemesticScrapService{
 		return dao.popularNews();
 	}
 
+
+
 }

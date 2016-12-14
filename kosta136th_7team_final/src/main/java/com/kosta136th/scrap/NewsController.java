@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -199,7 +200,8 @@ public class NewsController {
 	//국내기사 스크랩
 	@RequestMapping(value = "/addDemesticScrap", method = RequestMethod.POST)
 	public String addDemesticScrap(@RequestBody DemesticScrap vo) throws Exception{
-		vo.setUser_num(4);
+		vo.setUser_num(5);
+		vo.setKeyword("비트코인");
 		demService.addDemesticScrap(vo);
 		
 		return "sub/news/news/tab1";

@@ -26,4 +26,5 @@ public class DemesticScrapDAOImpl implements DemesticScrapDAO{
 		return session.selectList(namespace + ".searchDemesticNews");
 	}
 
+
 }

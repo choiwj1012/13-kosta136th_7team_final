@@ -99,11 +99,6 @@
 		</div>
 	</div>
 	
-	<!-- 채팅창 온오프 버튼 -->
-	<div id="chatBtn">
-	
-	</div>
-	
 	<!-- 채팅 기능 추가구현 -->
 	<div id="chatroom">
 		
