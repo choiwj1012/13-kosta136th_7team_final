@@ -54,6 +54,9 @@
 							<button class="btn btn-default" type="submit">
 								<i class="glyphicon glyphicon-search"></i>
 							</button>
+						<button class="btn btn-default" type="submit">
+							딜러 페이지 등록
+						</button>
 						</div>
 					</div>
 				</form>
