@@ -24,12 +24,8 @@ public class UserDAOImpl implements UserDAO{
 		//DAO의 반환은 DTO
 		User signinSessionDTO = null;
 		
-		//로그
-		System.out.println("--DAOImpl Before--");
-		System.out.println(signinEmailVO.toString());
 		signinEmailVO.setPassword(encryptPasswordSHA256(signinEmailVO.getPassword()));
-		System.out.println(signinEmailVO.toString());
-				
+
 		try {
 			//이메일에 해당하는 회원 정보를 찾아
 			signinSessionDTO = session.selectOne(namespace + ".getLoginProfileByEmail", signinEmailVO);
@@ -38,16 +34,7 @@ public class UserDAOImpl implements UserDAO{
 		} catch(Exception e){
 			e.printStackTrace();
 		}
-		
-		//로그
-		System.out.println("--DAOImpl After--");	
-		
-		if (signinSessionDTO != null){
-	    	System.out.println(signinSessionDTO.toString());
-		}else{
-			System.out.println("User [null]");
-		}
-		
+				
 		return signinSessionDTO;
 		
 	}
@@ -57,25 +44,12 @@ public class UserDAOImpl implements UserDAO{
 	public User signinNaver(String NaverEmail) throws Exception {
 		//DAO의 반환은 DTO
 		User signinSessionDTO = null;
-		
-		//로그
-		System.out.println("--DAOImpl Before--");
-		System.out.println(NaverEmail);
-				
+
 		try{
 			signinSessionDTO = session.selectOne(namespace+".getLoginProfileByNaver", NaverEmail);
 			session.insert(namespace + ".insertUserLoginRecord", signinSessionDTO);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		
-		//로그
-		System.out.println("--DAOImpl After--");
-		
-		if (signinSessionDTO != null){
-	    	System.out.println(signinSessionDTO.toString());
-		}else{
-			System.out.println("User [null]");
 		}
 		
 		return signinSessionDTO;	
@@ -91,11 +65,7 @@ public class UserDAOImpl implements UserDAO{
 		map.put("signupVO", signupEmailVO);
 		map.put("register_type_code", register_type_code);
 		
-		//로그
-		System.out.println("--DAOImpl--");
-		System.out.println(signupEmailVO.toString());
 		signupEmailVO.setPassword(encryptPasswordSHA256(signupEmailVO.getPassword()));
-		System.out.println(signupEmailVO.toString());
 		
 		try{
 			affectedRows = session.insert(namespace + ".insertLoginProfileByEmail", signupEmailVO);
@@ -124,9 +94,6 @@ public class UserDAOImpl implements UserDAO{
 		Map <String, Object> map = new HashMap <String, Object>();
 		map.put("signupVO", signupNaverVO);
 		map.put("register_type_code", "n");
-		//로그
-		System.out.println("--DAOImpl--");
-		System.out.println(signupNaverVO.toString());
 		
 		try{
 			affectedRows = session.insert(namespace + ".insertLoginProfileByNaver", signupNaverVO);
@@ -156,18 +123,11 @@ public class UserDAOImpl implements UserDAO{
 		digest = MessageDigest.getInstance("SHA-256");
 		byte[] hash = digest.digest(password.getBytes("UTF-8"));
 		
-		//로그
-		System.out.print("해쉬값 : ");
-		
 		for (int i = 0; i < hash.length; i++){
 			System.out.print(hash[i]);
 		}
-		System.out.println();
 		
 		encryptedPassword = DatatypeConverter.printHexBinary(hash);
-		
-		//로그
-		System.out.println(encryptedPassword);
 		
 		return encryptedPassword;
 	}
@@ -226,11 +186,7 @@ public class UserDAOImpl implements UserDAO{
 	public boolean updateUserPassword(User userVO) throws Exception {
 		int affectedRows = 0;
 		boolean updateUserPasswordSuccess = false;
-		
-		//로그
-		System.out.println("--DAOImpl--");
-		System.out.println(userVO.toString());
-		
+
 		userVO.setPassword(encryptPasswordSHA256(userVO.getPassword()));
 
 		try{
@@ -255,11 +211,11 @@ public class UserDAOImpl implements UserDAO{
 		boolean updateUserSignoutSuccess = false;
 		
 		try{
-			System.out.println("signoutVO : " + signoutVO);
+
 			String login_num = session.selectOne(namespace + ".selectUserLogoutRecord", signoutVO);
-			System.out.println("수정될 login_num : " + login_num);
+
 			affectedRows = session.update(namespace + ".updateUserLogoutRecord", login_num);
-			System.out.println("수정된 로그 기록 행의 수 : " + affectedRows);
+
 		}catch(Exception e){
 			e.printStackTrace();
 			affectedRows = 0;

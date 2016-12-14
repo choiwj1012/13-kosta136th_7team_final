@@ -5,46 +5,57 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace = "com.kosta136th.mapper.UserMapper">
 
+	<!-- Email로 로그인시 유저 테이블에서 정보를 가져오는 sql -->
 	<select resultType="com.kosta136th.user.User" id="getLoginProfileByEmail">
 		SELECT USER_EMAIL AS EMAIL, USER_PASSWORD AS PASSWORD, USER_NICKNAME AS NICKNAME FROM USER WHERE USER_EMAIL = #{email} AND USER_PASSWORD = #{password}  
 	</select>
 	
+	<!-- 네이버 로그인시 유저 테이블에서 정보를 가져오는 sql -->
 	<select resultType="com.kosta136th.user.User" id="getLoginProfileByNaver">
 		SELECT USER_EMAIL AS EMAIL, USER_PASSWORD AS PASSWORD, USER_NICKNAME AS NICKNAME FROM USER WHERE USER_EMAIL = #{email}  
 	</select>
 	
+	<!-- 회원가입 할때 유저 테이블에 입력sql -->
 	<insert id = "insertLoginProfileByEmail">
 		INSERT INTO USER(USER_EMAIL, USER_PASSWORD, USER_NICKNAME) VALUES(#{email}, #{password}, #{nickname})
 	</insert>
 	
+	<!-- 네이버로 회원가입시 유저테이블에 입력하는 sql -->
 	<insert id = "insertLoginProfileByNaver">
 		INSERT INTO USER(USER_EMAIL, USER_PASSWORD, USER_NICKNAME) VALUES(#{email}, #{password}, #{nickname})
 	</insert>
 	
+	<!-- Email 중복검사 sql -->
 	<select resultType="com.kosta136th.user.User" id="isEmailDuplicate">
 		SELECT USER_EMAIL AS EMAIL, USER_PASSWORD AS PASSWORD, USER_NICKNAME AS NICKNAME FROM USER WHERE USER_EMAIL = #{email}
 	</select>
 	
+	<!-- 비밀번호 분실시 변경 sql -->
 	<update id = "updateUserPassword">
 		UPDATE USER SET USER_PASSWORD = #{password} WHERE USER_EMAIL = #{email};
 	</update>
 	
+	<!-- 닉네임 중복 체크 sql -->
 	<select resultType="com.kosta136th.user.User" id="isNicknameDuplicate">
 		SELECT USER_EMAIL AS EMAIL, USER_PASSWORD AS PASSWORD, USER_NICKNAME AS NICKNAME FROM USER WHERE USER_NICKNAME = #{nickname}
 	</select>
 	
+	<!-- EmailLog 기록  -->
 	<insert id = "insertUserLoginRecord">
 		INSERT INTO LOGIN(USER_NUM, LOGIN_DATE, LOGOUT_DATE) VALUES((SELECT USER_NUM FROM USER WHERE USER_EMAIL = #{email}), NOW(), NOW())
 	</insert>
 	
+	<!-- Logout버튼 클릭시 로그기록 저장하는 sql -->
 	<update id = "updateUserLogoutRecord">
 		UPDATE LOGIN SET LOGOUT_DATE = NOW() WHERE LOGIN_NUM = #{login_num};
 	</update>
 	
+	<!-- Logout버튼 클릭시 로그기록 저장하는 sql 순서적으로는 이 sql이 먼저작동함 -->
 	<select resultType = "java.lang.String" id = "selectUserLogoutRecord">
 		SELECT LOGIN_NUM FROM LOGIN WHERE USER_NUM = (SELECT USER_NUM FROM USER WHERE USER_EMAIL = #{email}) AND LOGIN_DATE = LOGOUT_DATE ORDER BY LOGOUT_DATE DESC LIMIT 1
 	</select>
 	
+	<!-- 회원가입 유형 입력 sql -->
 	<insert id = "insertRegisterType" parameterType = "map">
 		INSERT INTO REGISTER_TYPE(USER_NUM, REGISTER_TYPE_CODE) VALUES((SELECT USER_NUM FROM USER WHERE USER_EMAIL = #{signupVO.email}), #{register_type_code})
 	</insert>

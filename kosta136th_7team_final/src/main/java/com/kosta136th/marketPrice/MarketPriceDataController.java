@@ -348,7 +348,6 @@ public class MarketPriceDataController {
 			
 			if(moneyType.equals("PRICE_BTC")) {
 
-				
 				marketPrice.setPrice_btc(selectOneChart.get(i).getPrice_btc());
 				perPrice = marketPrice.getPrice_btc();
 				

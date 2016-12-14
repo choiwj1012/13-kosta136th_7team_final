@@ -54,25 +54,18 @@ public class UserController {
 	public ResponseEntity<User> requestSigninEmail(@RequestBody User signinEmailDTO, HttpSession session){
 		
 		User signinSessionDTO = null;
-		
 		ResponseEntity <User> entity = null;
-		
-		System.out.println(signinEmailDTO.getEmail());
-		System.out.println(signinEmailDTO.getPassword());
-		System.out.println(signinEmailDTO.getNickname());
-		
+
 		try { 
+			
 			signinSessionDTO = userService.signinEmail(signinEmailDTO);
 			entity = new ResponseEntity<>(signinSessionDTO, HttpStatus.OK);
-			//로그
-			if (signinSessionDTO != null){
-				System.out.println(signinSessionDTO.toString());
-			}else{
-				System.out.println("User[null]");
-			}
+			
 		} catch (Exception e) {
+			
 			e.printStackTrace();
 			entity = new ResponseEntity<>(signinSessionDTO, HttpStatus.BAD_REQUEST);
+			
 		}
 		
 		setSigninSessionAttribute(session, signinSessionDTO);
@@ -85,18 +78,12 @@ public class UserController {
 	public ResponseEntity<String> requestSignupEmail(@RequestBody Map<String, List<String>> registerMap, HttpSession session){
 		//반환값
 		boolean signupSuccess = false;
-		
-		System.out.println(registerMap.toString());
+
 		//개인정보 객체의 필드들
 		String email = registerMap.get("user").get(0);
 		String password = registerMap.get("user").get(1);
 		String nickname = registerMap.get("user").get(2);
 		String register_type_code = registerMap.get("user").get(3);
-		
-		System.out.println("email : " + email);
-		System.out.println("password : " + password);
-		System.out.println("nickname : " + nickname);
-		System.out.println("register_type_code : " + register_type_code);
 		
 		//개인정보 객체
 		User signupEmailDTO = new User(email, password, nickname);
@@ -105,24 +92,20 @@ public class UserController {
 		String authentication = registerMap.get("authentication").get(0); 
 		
 		ResponseEntity <String> entity = null;
-		
-		//System.out.println(signupEmailDTO.toString());
-			System.out.println("인증 : " + authentication);
-			System.out.println("세션 저장 인증 : " + (String)session.getAttribute("authentication"));
+
 		//인증번호가 틀리면 그냥 돌아가
 			if (session.getAttribute("authentication") != null){
 				if (!((String)session.getAttribute("authentication")).equals(authentication)){
 				//인증번호는 삭제된다
-				session.removeAttribute("authentication");
-				System.out.println("잘못된 인증번호입니다");
-				entity = new ResponseEntity<String>("잘못된 인증번호입니다", HttpStatus.BAD_REQUEST);
-				return entity;
+					session.removeAttribute("authentication");
+
+					entity = new ResponseEntity<String>("잘못된 인증번호입니다", HttpStatus.BAD_REQUEST);
+					return entity;
 				}
 			} else {
 				//인증번호는 삭제된다
 				session.removeAttribute("authentication");
-				
-				System.out.println("인증 성공");
+
 			}
 
 			//DAO에 접근. 검사 로직.
@@ -149,27 +132,33 @@ public class UserController {
 					//오류가 발생했습니다는 가능
 					String message = "회원 가입에 실패했습니다";
 					try{
+						
 						User signupEmailVO = new User(signupEmailDTO.getEmail(),signupEmailDTO.getPassword(),signupEmailDTO.getNickname());
-						System.out.println(signupEmailVO.toString());
 					
 						signupSuccess = userService.signupEmail(signupEmailVO, register_type_code);
 										
 						if (signupSuccess){
+							
 							entity = new ResponseEntity<>("회원가입에 성공했습니다", HttpStatus.OK);
 							setSigninSessionAttribute(session, signupEmailVO);
+							
 						} else{
+							
 							entity = new ResponseEntity<>("실패했습니다", HttpStatus.BAD_REQUEST);
+							
 						}
 					
 					} catch(Exception e) {
-						message = "오류가 발생했습니다.";							
+						
+						message = "오류가 발생했습니다.";		
+						
 					}
 				//리턴 문자열 : "성공" 또는 "실패"
-				entity = new ResponseEntity<String>(message, HttpStatus.BAD_REQUEST);
-				break;
-			default :
-				entity = new ResponseEntity<String>("에러가 발생했습니다", HttpStatus.BAD_REQUEST);
-				break;
+					entity = new ResponseEntity<String>(message, HttpStatus.BAD_REQUEST);
+					break;
+				default :
+					entity = new ResponseEntity<String>("에러가 발생했습니다", HttpStatus.BAD_REQUEST);
+					break;
 				
 		}
 		
@@ -180,8 +169,6 @@ public class UserController {
 	@RequestMapping(value = "/requestSignupNaver", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String requestSignupNaver(@RequestParam String currentPage, HttpSession httpSession){
-		
-		System.out.println("요청자가 보고 있는 현재 페이지 : " + currentPage);
 		
 		String apiURL;
 		
@@ -201,10 +188,7 @@ public class UserController {
 	@ResponseBody
 	public String requestSigninNaver(@RequestParam String currentPage, HttpSession httpSession){
 		
-		System.out.println("요청자가 보고 있는 현재 페이지 : " + currentPage);
-		
 		String apiURL;
-		
 		apiURL = generateNaverLoginAPI("/doSigninNaver");
 		
 		if (httpSession.getAttribute("currentPage") == null){
@@ -232,7 +216,6 @@ public class UserController {
 		
 		String apiURL;
 		apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
-		
 		String clientId; 
 	    String redirectURI;//YOUR_CALLBACK_URL
 	    String state;
@@ -249,9 +232,7 @@ public class UserController {
 			apiURL += "&client_id=" + clientId;
 			apiURL += "&redirect_uri=" + redirectURI;
 			apiURL += "&state=" + state;
-			
-			System.out.println("네이버로 요청할 apiURL : "+apiURL);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -264,9 +245,7 @@ public class UserController {
 	//@ResponseBody
 	public String doSignupNaver(@RequestParam("code") String code, @RequestParam("state") String state 
 			, HttpSession httpSession){
-		
-		System.out.println("가입 로직으로 올바르게 찾아왔습니다");
-        
+
 		ResponseEntity<String> entity = null;
 		
 		User signinSessionDTO;
@@ -298,13 +277,10 @@ public class UserController {
 			apiURL += "&code=" + code;
 			apiURL += "&state=" + state;
 
-			System.out.println("네이버로 요청할 apiURL : "+apiURL);
-
 			url = new URL(apiURL);
 			con = (HttpURLConnection)url.openConnection();
 			con.setRequestMethod("GET");
 			responseCode = con.getResponseCode();
-			System.out.println("responseCode : "+responseCode);
 
 			if(responseCode==200) { // 정상 호출
 				br = new BufferedReader(new InputStreamReader(con.getInputStream()));
@@ -331,13 +307,11 @@ public class UserController {
 			access_token = (String)map.get("access_token");
 			
 			//여기까지가 접근 토큰 얻어오는 코드
+			
 			//여기 이후 개인정보를 얻어오는 코드
-
 			String header = "Bearer " + access_token; // Bearer 다음에 공백 추가
 			//전달 받은 인적 사항의 JSON을 보관하는 스트링
 			json = "";
-			System.out.println("token : " + access_token);
-
 			apiURL = "https://openapi.naver.com/v1/nid/me";
 			url = new URL(apiURL);
 			con = (HttpURLConnection)url.openConnection();
@@ -355,15 +329,10 @@ public class UserController {
 			}
 			br.close();
 			json = response.toString();
-			System.out.println("response json : " + json);
-
 			mapper = new ObjectMapper();
 			
 			NaverUser naverUser = null;
 			naverUser = mapper.readValue(json, NaverUser.class);
-			
-			System.out.println("Naver user E-mail: " + naverUser.getEmail());
-			
 			//개인정보를 얻어오는 것이 끝났다
 			
 			//네이버에 이 이메일이 존재하지 않는다.
@@ -432,11 +401,6 @@ public class UserController {
 		}
 		
 		signinSessionDTO = signupNaverVO;
-		if (signinSessionDTO != null){
-			System.out.println("세션 저장 직전 개인 정보: " + signinSessionDTO.toString());
-		}else{
-			System.out.println("세션 저장 직전 개인 정보: " + "null");			
-		}
 		setSigninSessionAttribute(httpSession, signinSessionDTO);
 		
 		//return entity;
@@ -457,8 +421,7 @@ public class UserController {
 		//@ResponseBody
 		public String doSigninNaver(@RequestParam("code") String code, @RequestParam("state") String state 
 				, HttpSession httpSession){
-			System.out.println("로그인 로직으로 올바르게 찾아왔습니다");
-	        
+
 			ResponseEntity<String> entity = null;
 			
 			User signinSessionDTO = null;
@@ -528,7 +491,6 @@ public class UserController {
 				String header = "Bearer " + access_token; // Bearer 다음에 공백 추가
 				//전달 받은 인적 사항의 JSON을 보관하는 스트링
 				json = "";
-				System.out.println("token : " + access_token);
 
 				apiURL = "https://openapi.naver.com/v1/nid/me";
 				url = new URL(apiURL);
@@ -553,8 +515,6 @@ public class UserController {
 				
 				NaverUser naverUser = null;
 				naverUser = mapper.readValue(json, NaverUser.class);
-				System.out.println("이 Naver user의 E-mail: " + naverUser.getEmail());
-				
 				//개인정보를 얻어오는 것이 끝났다
 				
 				//네이버에 이 이메일이 존재하지 않는다.
@@ -562,7 +522,7 @@ public class UserController {
 				//그런 경우는
 				//DAO에 비접근. 검사 로직 하나로 충분
 				if (email == null){
-					System.out.println("네이버에 없는 이메일");
+
 					entity = new ResponseEntity<String>("네이버에 없는 이메일입니다.", HttpStatus.BAD_REQUEST);
 					//리턴 문자열 : "잘못된 이메일입니다."
 					
@@ -622,11 +582,6 @@ public class UserController {
 			}
 			
 			setSigninSessionAttribute(httpSession, signinSessionDTO);
-			if (signinSessionDTO != null){
-				System.out.println("세션 저장 직전 : " + signinSessionDTO.toString());
-			}else{
-				System.out.println("세션 저장 직전 : null, 회원이 아닌 상태에서 네이버 로그인 들어온 것임");
-			}
 			//return entity;
 			
 			String destination;
@@ -748,7 +703,6 @@ public class UserController {
 		for (int i = 0; i < password.size(); i++){
 			System.out.print(password.get(i));
 		}
-		System.out.println();
 		
 		for (int i = password_length - 1; i > 0; i--){
 
@@ -769,8 +723,6 @@ public class UserController {
 		for (int i = 0; i < password.size(); i++){
 			buffer.append(password.get(i));
 		}
-		
-		System.out.println(buffer.toString());
 		
 		return buffer.toString();
 	}
@@ -827,10 +779,7 @@ public class UserController {
 			e.printStackTrace();
 			email_state = "2";
 		}
-		
-		//로그
-		System.out.println("Email state : " + email_state);
-	
+
 		return email_state;
 	}
 	
@@ -849,9 +798,6 @@ public class UserController {
 			nickname_state = "2";
 		}
 		
-		//로그
-		System.out.println("Nickname state : " + nickname_state);
-
 		return nickname_state;
 	}
 	
@@ -878,20 +824,11 @@ public class UserController {
 	@RequestMapping(value = "/requestSigninSessionAttribute", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<User> requestSigninSessionAttribute(HttpSession httpSession){
-		System.out.println("로그인 세션 정보 획득 요청이 옴(/requestSigninSessionAttribute)");
-		System.out.println("세션 signinSessionDTO의 보관 객체 타입은 USER입니다."); 
-		System.out.println("서버 : 세션에서 로그인 부분을 User로 형변환해 읽은 결과");
 		
 		ResponseEntity<User> entity = null;
 		
 	    User signinSessionDTO = (User)httpSession.getAttribute("signinSessionDTO");
 	    
-	    if (signinSessionDTO != null){
-	    	System.out.println(signinSessionDTO.toString());
-		}else{
-			System.out.println("null입니다. 즉, 당신은 로그인이 되어 있지 않다 이 말이오.");
-			System.out.println("이럴 수가 내가 로그인이 null이라니");
-		}
 		entity = new ResponseEntity<>(signinSessionDTO, HttpStatus.OK);
 		return entity;
 	}
@@ -902,7 +839,7 @@ public class UserController {
 		try {
 			updateUserSignoutSuccess = userService.signout(signoutVO);
 		} catch (Exception e) {
-			System.out.println("오류의 원인");
+
 			e.printStackTrace();
 		}
 		
