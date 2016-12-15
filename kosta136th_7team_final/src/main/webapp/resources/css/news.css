@@ -7,12 +7,24 @@
 
 /* 기사 테이블 */
 #newsTable{
-	border:1px solid black;
 	margin:10px 0;
 }
 
-#subscribeBtn{
-	margin-top:50px;	
+#imgSrc > img{
+	width:150px;
+	height:150px;
+}
+
+hr { 
+	background-color: #D7DADC;
+	height: 1px; 
+	border: 0; 
+}
+
+#subscribeBtn,
+#subscribeBtn2{
+	width:100%;
+	height:100%;
 }
 
 #favoriteNewsTable{

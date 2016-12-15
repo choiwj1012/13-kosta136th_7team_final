@@ -18,30 +18,104 @@
 			<div class="row text-center" id="bannerImg">
 				<img src="../../resources/img/banner.png" alt="banner" />
 			</div>
+			
 			<!-- 국내기사 // 해외기사 탭 -->
 			<ul class="nav nav-tabs">
 				<li><a href="/news/tab1?page=1" class="tablinks" onclick="openCity(event, 'korArticle')">국내기사</a></li>
   				<li><a href="/news/tab2?page=1" class="tablinks" onclick="openCity(event, 'engArticle')">해외기사</a></li>
 			</ul>
+					
+			<!-- 국내기사  -->
+			<div id="korArticle" class="tabcontent">
+				
+				<c:forEach items="${newsList}" var ="b" begin="0" end="9" varStatus="idx">
+					
+					<div class="row" id="newsTable">
+				
+						<div class="col-md-3" id="imgSrc">
+							<img src= "../../../../resources/img/news/${idx.index}.png" alt="기사더미이미지" />
+						</div>
+						
+						<div class="col-md-8" id="etcAttr">
+							<h4><a href = "${b.link}" target="_blank">${b.title}</a></h4>
+							<p>${b.pubDate }</p>
+							<p>${b.description }</p>
+						</div>
+						
+						<div class="col-md-1"></div>
+													
+					</div>
+					
+					<div class="row">
+						<div class="col-md-8"></div>
+						<div class="col-md-3">
+							<button type="button" id="subscribeBtn2" class="btn btn-primary">구독하기</button>
+						</div>
+						<div class="col-md-1"></div>
+					</div>
+					
+					<hr />
+					
+				</c:forEach>
+							
+			</div>
 			
+			<script>
+           
+                $(document).ready(function(){
+                    
+                    $(document).on('click', '#subscribeBtn2', function(){
+                        
+                       var imgSrc = $(this).parent().parent().children('#imgSrc').children('img').attr('src');
+                       var link = $(this).parent().parent().children('#etcAttr').children(':eq(0)').children('a').attr('href');
+                       var title =    $(this).parent().parent().children('#etcAttr').children(':eq(0)').children('a').text(); 
+                       var pubDate = $(this).parent().parent().children('#etcAttr').children(':eq(1)').text();
+                       var description = $(this).parent().parent().children('#etcAttr').children(':eq(2)').text(); 
+
+                       korSubscribe(link, title, pubDate, description);
+                    
+                    });
+                    
+                });
+                
+           	</script>
+           			
+			<!-- 해외 기사  -->
 			<div id="engArticle" class="tabcontent">
 
 				<c:forEach items="${abrNewsList}" var ="b">
+				
 					<div class="row" id="newsTable">
+					
 						<div class="col-sm-3" id="imgSrc">
 							<img src=${b.imgSrc} width="150" height="200" alt="" />
 						</div>
-						<div class="col-sm-7" id="etcAttr">
-							<h3><a href = ${b.link} target="_blank">${b.title}</a></h3>
+						
+						<div class="col-sm-8" id="etcAttr">
+							<h4><a href = ${b.link} target="_blank">${b.title}</a></h4>
 							<p>${b.date}</p>
 							<p>${b.author}</p>
 							<p>${b.description }</p>
 						</div>
-						<div class="col-sm-2">
-							<button type="button" id="subscribeBtn" class="btn btn-primary">구독하기</button>
-						</div>				
+						
+						<div class="col-sm-1"></div>
+														
 					</div>
+					
+					<div class="row">
+					
+						<div class="col-md-8"></div>
+						<div class="col-sm-3">
+							<button type="button" id="subscribeBtn" class="btn btn-primary">구독하기</button>
+						</div>
+						<div class="col-md-1"></div>
+						
+					</div>
+					
+					<hr />
+					
 				</c:forEach>
+				
 			</div>					
 
 			<script>
@@ -56,14 +130,7 @@
 	                    var date = $(this).parent().parent().children('#etcAttr').children(':eq(1)').text(); 
 	                    var author = $(this).parent().parent().children('#etcAttr').children(':eq(2)').text(); 
 	                    var description = $(this).parent().parent().children('#etcAttr').children(':eq(3)').text(); 
-	                     
-	                    alert(imgSrc);
-	                    alert(link);
-	                    alert(title);
-	                    alert(date);
-	                    alert(author);
-	                    alert(description);
-	                    
+	            	                    
 	                    engSubscribe(imgSrc, link, title, date, author, description);
 	                 
 	                 });
@@ -71,46 +138,8 @@
 	             });
 	             
 		    </script>
-
-			<div id="korArticle" class="tabcontent">
-				<c:forEach items="${newsList}" var ="b" begin="0" end="9" varStatus="idx">
-					<div class="row" id="newsTable">
-						<div class="col-sm-3" id="imgSrc">
-							<img src= "../../../../resources/img/news/${idx.index}.png" width = "150" height = "150" alt="" />
-						</div>
-						<div class="col-sm-7" id="etcAttr">
-							<h3><a href = "${b.link}" target="_blank">${b.title}</a></h3>
-							<p>${b.pubDate }</p>
-							<p>${b.description }</p>
-						</div>
-						<div class="col-sm-2">
-							    <button type="button" id="subscribeBtn2" class="btn btn-primary">구독하기</button>
-						</div>		
-							
-					</div>
-				</c:forEach>
-				
-				<script>
-            
-                 $(document).ready(function(){
-                     
-                     $(document).on('click', '#subscribeBtn2', function(){
-                         
-                        var imgSrc = $(this).parent().parent().children('#imgSrc').children('img').attr('src');
-                        var link = $(this).parent().parent().children('#etcAttr').children(':eq(0)').children('a').attr('href');
-                        var title =    $(this).parent().parent().children('#etcAttr').children(':eq(0)').children('a').text(); 
-                        var pubDate = $(this).parent().parent().children('#etcAttr').children(':eq(1)').text();
-                        var description = $(this).parent().parent().children('#etcAttr').children(':eq(2)').text(); 
-
-                        korSubscribe(link, title, pubDate, description);
-                     
-                     });
-                     
-                 });
-                 
-            	</script>
-            	
-			</div>
+        	
+			<!-- 페이징처리 -->		
 			<div class="row text-center">
 				<ul class="pagination">
 					<c:if test = "${searchTF > 0}">

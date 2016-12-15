@@ -88,12 +88,7 @@
 	width:100%;
 }
 
-
 /****************** chart CSS ******************/
-/**************** 성용에게 문의하세요 ****************/
-
-
-
 #chart_usd, #chart_cny {
 	
 	margin-top: 20px;
@@ -101,7 +96,6 @@
 	position: relative;
 	
 }
-
 
 /*** 시세리스트 ***/
 /* 제목바  */
@@ -112,7 +106,6 @@
 	
 }
 
-
 .tabs {
     min-width: 300px;
     min-height: 900px;
@@ -120,18 +113,7 @@
     overflow: scroll;
 }
 
-
 /* 탭 버튼 */
-/* .nav-tabs>li.active>a .nav-tabs>li.hover>a {
-	
-	padding: 0;
-	color: #FFF; 
-	cursor: default;
-	background-color: #3e4244;
-	border: none;
-	border-top: 5px solid #eee;
-} */
-
 ul.nav-tabs>li>a {
 	
 	color: #ddd;
@@ -168,9 +150,6 @@ ul.nav.nav-tabs {
 	border-bottom: 1px ;
 	
 }
-
-
-
 
 #combo-box {
 	
