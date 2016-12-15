@@ -7,17 +7,123 @@
 </header>
 
 <%@ include file="../../include/grandNav.jsp" %>
-<div class="container">
 
+
+<div class="container">
+	
+	<!-- 광고 배너 위치 -->
+	<div class="row text-center" id="bannerImg">
+		<img src="../../resources/img/banner.png" alt="광고" />
+	</div>
+			
+	<!-- 인기기사 테이블 -->
+	<c:if test = "${tab eq 'news/tab1'}">
+	
+		<div class="panel panel-blue text-center" id="favoriteWrapper">
+			
+			<div class="panel-heading" id="favoriteHeader">
+				<h4>인기 국내기사 목록</h4>
+			</div>
+			
+			<div class="panel-body pan" id="favoriteNewsWrapper">
+			
+				<c:forEach items="${demPopularNews}" var ="b" begin="0" end="2" varStatus="idx">
+							
+					<div class="col-sm-4" id="favoriteNewsTable">
+					
+						<div class="row" id="favorite_img">
+							<img src="../../../../resources/img/news/${idx.index+10}.png" alt="인기기사 이미지" />
+						</div>
+						
+						<div class="row">
+							<a href = "${b.DOMESTIC_SCRAP_URL }" target="_blank">
+								<p>${b.DOMESTIC_SCRAP_TITLE}</p>
+							</a>
+						</div>
+						
+					</div>
+					
+				</c:forEach>
+			
+			</div>
+			
+		</div>
+		
+	</c:if>
+	
+	<c:if test = "${tab eq 'tab1'}">
+		
+		<div class="row text-center">
+			
+			<h4>인기 국내기사 목록</h4>
+		
+			<c:forEach items="${demPopularNews}" var ="b" begin="0" end="2" varStatus="idx">	
+				
+				<div class="col-sm-4" id="favoriteNewsTable">
+					
+					<div class="col-sm-5">
+						<img src="../../../../resources/img/news/${idx.index+10}.png" alt="" width = "100" height = "100"/>
+					</div>
+					
+					<div class="col-sm-7">
+						<a href = "${b.DOMESTIC_SCRAP_URL }" target="_blank"><p>${b.DOMESTIC_SCRAP_TITLE}</p></a>
+					</div>
+					
+				</div>
+				
+			</c:forEach>
+		
+		</div>
+		
+	</c:if>
+	
+	<c:if test = "${tab eq 'tab2'}">
+		
+		<div class="row text-center">
+			<h4>인기 해외기사 목록</h4>
+		</div>
+		
+		<c:forEach items="${demPopularNews}" begin="0" end="2" var ="b">	
+		
+			<div class="col-sm-4" id="favoriteNewsTable">
+			
+				<div class="col-sm-5">
+					<img src="${b.ABROAD_SCRAP_IMG_URL}" alt="" height = "100" width = "100" />
+				</div>
+				
+				<div class="col-sm-7">
+					<a href = "${b.ABROAD_SCRAP_URL }" target="_blank"><p>${b.ABROAD_SCRAP_TITLE}</p></a>
+				</div>
+				
+			</div>
+			
+		</c:forEach>
+		
+	</c:if>
+	<!-- ./favoriteNewsTable -->
+		
+	<div class="clearfix"></div>	
+		
+	<!-- keyword 검색 체크박스 -->
+	<div class="row">					
+		<div class="row text-center" id="searchNews">
+			<h4>관련 기사 검색</h4>
+			<div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
+				<form role="form" action="">
+					<div class="form-group">
+						<input type="text" name ="searchKeyword" class="form-control" placeholder="검색할 키워드를 적어주세요" />
+						<input type='hidden' name="page" value=1>
+					</div>
+					<button type="submit" class="btn btn-primary">검색하기</button>
+				</form>
+			</div>
+		</div> <!-- ./ keyword(foreign) -->	
+	</div>	
+			
 	<div class="row">
 		
 		<!-- main section -->
 		<div class="col-md-9">
-			
-			<!-- 배너 및 광고 -->
-			<div class="row text-center" id="bannerImg">
-				<img src="../../resources/img/banner.png" alt="banner" />
-			</div>
 			
 			<!-- 국내기사 // 해외기사 탭 -->
 			<ul class="nav nav-tabs">
@@ -49,7 +155,7 @@
 					<div class="row">
 						<div class="col-md-8"></div>
 						<div class="col-md-3">
-							<button type="button" id="subscribeBtn2" class="btn btn-primary">구독하기</button>
+							<button type="button" id="subscribeBtn2" class="btn btn-primary">스크랩하기</button>
 						</div>
 						<div class="col-md-1"></div>
 					</div>
@@ -106,7 +212,7 @@
 					
 						<div class="col-md-8"></div>
 						<div class="col-sm-3">
-							<button type="button" id="subscribeBtn" class="btn btn-primary">구독하기</button>
+							<button type="button" id="subscribeBtn" class="btn btn-primary">스크랩하기</button>
 						</div>
 						<div class="col-md-1"></div>
 						
@@ -192,70 +298,10 @@
 				</form>
 				
 			</div> <!-- ./submitEmail -->
+			
 			<br />		
-			<!-- keyword 검색 체크박스 -->				
-			<div class="row text-center" id="searchNews"> <!-- 해외기사 -->
-				<h4>관련 기사 검색</h4>
-				<div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
-					<form role="form" action="">
-						<div class="form-group">
-							<input type="text" name ="searchKeyword" class="form-control" placeholder="검색할 키워드를 적어주세요" />
-							<input type='hidden' name="page" value=1>
-						</div>
-						<button type="submit" class="btn btn-primary">검색하기</button>
-					</form>
-				</div>
-			</div> <!-- ./ keyword(foreign) -->
+					
 			
-			<!-- 인기기사 테이블 -->
-			<c:if test = "${tab eq 'news/tab1'}">
-				<div class="row text-center">
-					<h4>인기 국내기사 목록</h4>
-				</div>
-				<c:forEach items="${demPopularNews}" var ="b" begin="0" end="4" varStatus="idx">	
-					<div class="row" id="favoriteNewsTable">
-					<div class="col-sm-5">
-						<img src="../../../../resources/img/news/${idx.index+10}.png" alt="" width = "100" height = "100"/>
-					</div>
-					<div class="col-sm-7">
-						<a href = "${b.DOMESTIC_SCRAP_URL }" target="_blank"><p>${b.DOMESTIC_SCRAP_TITLE}</p></a>
-					</div>
-					</div>
-				</c:forEach>
-			</c:if>
-			
-			<c:if test = "${tab eq 'tab1'}">
-				<div class="row text-center">
-					<h4>인기 국내기사 목록</h4>
-				</div>
-				<c:forEach items="${demPopularNews}" var ="b" begin="0" end="4" varStatus="idx">	
-					<div class="row" id="favoriteNewsTable">
-					<div class="col-sm-5">
-						<img src="../../../../resources/img/news/${idx.index+10}.png" alt="" width = "100" height = "100"/>
-					</div>
-					<div class="col-sm-7">
-						<a href = "${b.DOMESTIC_SCRAP_URL }" target="_blank"><p>${b.DOMESTIC_SCRAP_TITLE}</p></a>
-					</div>
-					</div>
-				</c:forEach>
-			</c:if>
-			
-			<c:if test = "${tab eq 'tab2'}">
-			<div class="row text-center">
-				<h4>인기 해외기사 목록</h4>
-			</div>
-				<c:forEach items="${demPopularNews}" var ="b">	
-					<div class="row" id="favoriteNewsTable">
-					<div class="col-sm-5">
-						<img src="${b.ABROAD_SCRAP_IMG_URL}" alt="" height = "100" width = "100" />
-					</div>
-					<div class="col-sm-7">
-						<a href = "${b.ABROAD_SCRAP_URL }" target="_blank"><p>${b.ABROAD_SCRAP_TITLE}</p></a>
-					</div>
-					</div>
-				</c:forEach>
-			</c:if>
-			<!-- ./favoriteNewsTable -->
 			 
 			<!-- google adsense -->
 			<div class="row text-center">
