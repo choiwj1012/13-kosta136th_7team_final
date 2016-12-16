@@ -182,7 +182,7 @@
 			$('.navbar-nav').append('<li><a href="#" id="signoutBtn">로그아웃</a></li>');
 		}
 	});
-	</script>		
-
+	</script>
+	
 <%@ include file="include/footer.jsp" %>
 		
