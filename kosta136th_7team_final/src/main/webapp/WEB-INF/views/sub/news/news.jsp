@@ -7,41 +7,221 @@
 </header>
 
 <%@ include file="../../include/grandNav.jsp" %>
-<div class="container">
 
+
+<div class="container">
+	
+	<!-- 광고 배너 위치 -->
+	<div class="row text-center" id="bannerImg">
+		<img src="../../resources/img/banner.png" alt="광고" />
+	</div>
+			
+	<!-- 인기기사 테이블 -->
+	<c:if test = "${tab eq 'news/tab1'}">
+	
+		<div class="panel panel-blue text-center" id="favoriteWrapper">
+			
+			<div class="panel-heading" id="favoriteHeader">
+				<h4>인기 국내기사 목록</h4>
+			</div>
+			
+			<div class="panel-body pan" id="favoriteNewsWrapper">
+			
+				<c:forEach items="${demPopularNews}" var ="b" begin="0" end="2" varStatus="idx">
+							
+					<div class="col-sm-4" id="favoriteNewsTable">
+					
+						<div class="row" id="favorite_img">
+							<img src="../../../../resources/img/news/${idx.index+10}.png" alt="인기기사 이미지" />
+						</div>
+						
+						<div class="row">
+							<a href = "${b.DOMESTIC_SCRAP_URL }" target="_blank">
+								<p>${b.DOMESTIC_SCRAP_TITLE}</p>
+							</a>
+						</div>
+						
+					</div>
+					
+				</c:forEach>
+			
+			</div>
+			
+		</div>
+		
+	</c:if>
+	
+	<c:if test = "${tab eq 'tab1'}">
+		
+		<div class="row text-center">
+			
+			<h4>인기 국내기사 목록</h4>
+		
+			<c:forEach items="${demPopularNews}" var ="b" begin="0" end="2" varStatus="idx">	
+				
+				<div class="col-sm-4" id="favoriteNewsTable">
+					
+					<div class="col-sm-5">
+						<img src="../../../../resources/img/news/${idx.index+10}.png" alt="" width = "100" height = "100"/>
+					</div>
+					
+					<div class="col-sm-7">
+						<a href = "${b.DOMESTIC_SCRAP_URL }" target="_blank"><p>${b.DOMESTIC_SCRAP_TITLE}</p></a>
+					</div>
+					
+				</div>
+				
+			</c:forEach>
+		
+		</div>
+		
+	</c:if>
+	
+	<c:if test = "${tab eq 'tab2'}">
+		
+		<div class="row text-center">
+			<h4>인기 해외기사 목록</h4>
+		</div>
+		
+		<c:forEach items="${demPopularNews}" begin="0" end="2" var ="b">	
+		
+			<div class="col-sm-4" id="favoriteNewsTable">
+			
+				<div class="col-sm-5">
+					<img src="${b.ABROAD_SCRAP_IMG_URL}" alt="" height = "100" width = "100" />
+				</div>
+				
+				<div class="col-sm-7">
+					<a href = "${b.ABROAD_SCRAP_URL }" target="_blank"><p>${b.ABROAD_SCRAP_TITLE}</p></a>
+				</div>
+				
+			</div>
+			
+		</c:forEach>
+		
+	</c:if>
+	<!-- ./favoriteNewsTable -->
+		
+	<div class="clearfix"></div>	
+		
+	<!-- keyword 검색 체크박스 -->
+	<div class="row">					
+		<div class="row text-center" id="searchNews">
+			<h4>관련 기사 검색</h4>
+			<div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
+				<form role="form" action="">
+					<div class="form-group">
+						<input type="text" name ="searchKeyword" class="form-control" placeholder="검색할 키워드를 적어주세요" />
+						<input type='hidden' name="page" value=1>
+					</div>
+					<button type="submit" class="btn btn-primary">검색하기</button>
+				</form>
+			</div>
+		</div> <!-- ./ keyword(foreign) -->	
+	</div>	
+			
 	<div class="row">
 		
 		<!-- main section -->
 		<div class="col-md-9">
 			
-			<!-- 배너 및 광고 -->
-			<div class="row text-center" id="bannerImg">
-				<img src="../../resources/img/banner.png" alt="banner" />
-			</div>
 			<!-- 국내기사 // 해외기사 탭 -->
 			<ul class="nav nav-tabs">
 				<li><a href="/news/tab1?page=1" class="tablinks" onclick="openCity(event, 'korArticle')">국내기사</a></li>
   				<li><a href="/news/tab2?page=1" class="tablinks" onclick="openCity(event, 'engArticle')">해외기사</a></li>
 			</ul>
+					
+			<!-- 국내기사  -->
+			<div id="korArticle" class="tabcontent">
+				
+				<c:forEach items="${newsList}" var ="b" begin="0" end="9" varStatus="idx">
+					
+					<div class="row" id="newsTable">
+				
+						<div class="col-md-3" id="imgSrc">
+							<img src= "../../../../resources/img/news/${idx.index}.png" alt="기사더미이미지" />
+						</div>
+						
+						<div class="col-md-8" id="etcAttr">
+							<h4><a href = "${b.link}" target="_blank">${b.title}</a></h4>
+							<p>${b.pubDate }</p>
+							<p>${b.description }</p>
+						</div>
+						
+						<div class="col-md-1"></div>
+													
+					</div>
+					
+					<div class="row">
+						<div class="col-md-8"></div>
+						<div class="col-md-3">
+							<button type="button" id="subscribeBtn2" class="btn btn-primary">스크랩하기</button>
+						</div>
+						<div class="col-md-1"></div>
+					</div>
+					
+					<hr />
+					
+				</c:forEach>
+							
+			</div>
 			
+			<script>
+           
+                $(document).ready(function(){
+                    
+                    $(document).on('click', '#subscribeBtn2', function(){
+                        
+                       var imgSrc = $(this).parent().parent().children('#imgSrc').children('img').attr('src');
+                       var link = $(this).parent().parent().children('#etcAttr').children(':eq(0)').children('a').attr('href');
+                       var title =    $(this).parent().parent().children('#etcAttr').children(':eq(0)').children('a').text(); 
+                       var pubDate = $(this).parent().parent().children('#etcAttr').children(':eq(1)').text();
+                       var description = $(this).parent().parent().children('#etcAttr').children(':eq(2)').text(); 
+
+                       korSubscribe(link, title, pubDate, description);
+                    
+                    });
+                    
+                });
+                
+           	</script>
+           			
+			<!-- 해외 기사  -->
 			<div id="engArticle" class="tabcontent">
 
 				<c:forEach items="${abrNewsList}" var ="b">
+				
 					<div class="row" id="newsTable">
+					
 						<div class="col-sm-3" id="imgSrc">
 							<img src=${b.imgSrc} width="150" height="200" alt="" />
 						</div>
-						<div class="col-sm-7" id="etcAttr">
-							<h3><a href = ${b.link} target="_blank">${b.title}</a></h3>
+						
+						<div class="col-sm-8" id="etcAttr">
+							<h4><a href = ${b.link} target="_blank">${b.title}</a></h4>
 							<p>${b.date}</p>
 							<p>${b.author}</p>
 							<p>${b.description }</p>
 						</div>
-						<div class="col-sm-2">
-							<button type="button" id="subscribeBtn" class="btn btn-primary">구독하기</button>
-						</div>				
+						
+						<div class="col-sm-1"></div>
+														
 					</div>
+					
+					<div class="row">
+					
+						<div class="col-md-8"></div>
+						<div class="col-sm-3">
+							<button type="button" id="subscribeBtn" class="btn btn-primary">스크랩하기</button>
+						</div>
+						<div class="col-md-1"></div>
+						
+					</div>
+					
+					<hr />
+					
 				</c:forEach>
+				
 			</div>					
 
 			<script>
@@ -56,14 +236,7 @@
 	                    var date = $(this).parent().parent().children('#etcAttr').children(':eq(1)').text(); 
 	                    var author = $(this).parent().parent().children('#etcAttr').children(':eq(2)').text(); 
 	                    var description = $(this).parent().parent().children('#etcAttr').children(':eq(3)').text(); 
-	                     
-	                    alert(imgSrc);
-	                    alert(link);
-	                    alert(title);
-	                    alert(date);
-	                    alert(author);
-	                    alert(description);
-	                    
+	            	                    
 	                    engSubscribe(imgSrc, link, title, date, author, description);
 	                 
 	                 });
@@ -71,46 +244,8 @@
 	             });
 	             
 		    </script>
-
-			<div id="korArticle" class="tabcontent">
-				<c:forEach items="${newsList}" var ="b" begin="0" end="9" varStatus="idx">
-					<div class="row" id="newsTable">
-						<div class="col-sm-3" id="imgSrc">
-							<img src= "../../../../resources/img/news/${idx.index}.png" width = "150" height = "150" alt="" />
-						</div>
-						<div class="col-sm-7" id="etcAttr">
-							<h3><a href = "${b.link}" target="_blank">${b.title}</a></h3>
-							<p>${b.pubDate }</p>
-							<p>${b.description }</p>
-						</div>
-						<div class="col-sm-2">
-							    <button type="button" id="subscribeBtn2" class="btn btn-primary">구독하기</button>
-						</div>		
-							
-					</div>
-				</c:forEach>
-				
-				<script>
-            
-                 $(document).ready(function(){
-                     
-                     $(document).on('click', '#subscribeBtn2', function(){
-                         
-                        var imgSrc = $(this).parent().parent().children('#imgSrc').children('img').attr('src');
-                        var link = $(this).parent().parent().children('#etcAttr').children(':eq(0)').children('a').attr('href');
-                        var title =    $(this).parent().parent().children('#etcAttr').children(':eq(0)').children('a').text(); 
-                        var pubDate = $(this).parent().parent().children('#etcAttr').children(':eq(1)').text();
-                        var description = $(this).parent().parent().children('#etcAttr').children(':eq(2)').text(); 
-
-                        korSubscribe(link, title, pubDate, description);
-                     
-                     });
-                     
-                 });
-                 
-            	</script>
-            	
-			</div>
+        	
+			<!-- 페이징처리 -->		
 			<div class="row text-center">
 				<ul class="pagination">
 					<c:if test = "${searchTF > 0}">
@@ -163,70 +298,10 @@
 				</form>
 				
 			</div> <!-- ./submitEmail -->
+			
 			<br />		
-			<!-- keyword 검색 체크박스 -->				
-			<div class="row text-center" id="searchNews"> <!-- 해외기사 -->
-				<h4>관련 기사 검색</h4>
-				<div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
-					<form role="form" action="">
-						<div class="form-group">
-							<input type="text" name ="searchKeyword" class="form-control" placeholder="검색할 키워드를 적어주세요" />
-							<input type='hidden' name="page" value=1>
-						</div>
-						<button type="submit" class="btn btn-primary">검색하기</button>
-					</form>
-				</div>
-			</div> <!-- ./ keyword(foreign) -->
+					
 			
-			<!-- 인기기사 테이블 -->
-			<c:if test = "${tab eq 'news/tab1'}">
-				<div class="row text-center">
-					<h4>인기 국내기사 목록</h4>
-				</div>
-				<c:forEach items="${demPopularNews}" var ="b" begin="0" end="4" varStatus="idx">	
-					<div class="row" id="favoriteNewsTable">
-					<div class="col-sm-5">
-						<img src="../../../../resources/img/news/${idx.index+10}.png" alt="" width = "100" height = "100"/>
-					</div>
-					<div class="col-sm-7">
-						<a href = "${b.DOMESTIC_SCRAP_URL }" target="_blank"><p>${b.DOMESTIC_SCRAP_TITLE}</p></a>
-					</div>
-					</div>
-				</c:forEach>
-			</c:if>
-			
-			<c:if test = "${tab eq 'tab1'}">
-				<div class="row text-center">
-					<h4>인기 국내기사 목록</h4>
-				</div>
-				<c:forEach items="${demPopularNews}" var ="b" begin="0" end="4" varStatus="idx">	
-					<div class="row" id="favoriteNewsTable">
-					<div class="col-sm-5">
-						<img src="../../../../resources/img/news/${idx.index+10}.png" alt="" width = "100" height = "100"/>
-					</div>
-					<div class="col-sm-7">
-						<a href = "${b.DOMESTIC_SCRAP_URL }" target="_blank"><p>${b.DOMESTIC_SCRAP_TITLE}</p></a>
-					</div>
-					</div>
-				</c:forEach>
-			</c:if>
-			
-			<c:if test = "${tab eq 'tab2'}">
-			<div class="row text-center">
-				<h4>인기 해외기사 목록</h4>
-			</div>
-				<c:forEach items="${demPopularNews}" var ="b">	
-					<div class="row" id="favoriteNewsTable">
-					<div class="col-sm-5">
-						<img src="${b.ABROAD_SCRAP_IMG_URL}" alt="" height = "100" width = "100" />
-					</div>
-					<div class="col-sm-7">
-						<a href = "${b.ABROAD_SCRAP_URL }" target="_blank"><p>${b.ABROAD_SCRAP_TITLE}</p></a>
-					</div>
-					</div>
-				</c:forEach>
-			</c:if>
-			<!-- ./favoriteNewsTable -->
 			 
 			<!-- google adsense -->
 			<div class="row text-center">

@@ -38,29 +38,30 @@
 	
 	<!-- 채팅창 온오프 버튼 -->
 	<div id="chatBtn">
-	 	<i class="fa fa-comment" aria-hidden="true" id="chatBtn_icon"></i>
+	 	<img src="../../resources/img/message.png" alt="chat_icon" id="chat_icon"/>
 	</div>
 	
 	<!-- 채팅 기능 추가구현 -->
 	<div id="chatroom">
-		<iframe id="chat" src="http://52.78.224.181:3000/public/index.html" frameborder="none"></iframe>
+		<iframe id="chat" src="http://52.78.224.181:3000/public/index.html" ></iframe>
 	</div>
 	
 	<script>
 		
 		$(document).ready(function(){
 				
-			$('#chatBtn > i').on('click', function(){
+			$('#chat_icon').on('click', function(){
 			
 				var chatroomLocation = $('#chatroom').css('right');
 				
-				if(chatroomLocation == '-340px'){
+				if(chatroomLocation == '-400px'){
 					
 					$('#chatroom').animate({'right' : '0px'});
 					
 				} else {
 					
-					$('#chatroom').animate({'right' : '-340px'});
+					$('#chatroom').animate({'right' : '-400px'});
+					
 					
 				}
 				
