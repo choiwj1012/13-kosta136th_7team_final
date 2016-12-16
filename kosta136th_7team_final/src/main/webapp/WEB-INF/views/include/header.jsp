@@ -16,7 +16,7 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 		<script src="../../../resources/js/common.js"></script>
 		
-		<script src="../../../resources/js/googleAnlytics.js"></script>
+		<script src="../../../resources/js/googleAnalytics.js"></script>
 		
 		<!--[if lt IE 9]>
 	        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
