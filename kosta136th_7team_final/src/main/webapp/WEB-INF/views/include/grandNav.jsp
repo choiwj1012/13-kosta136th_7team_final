@@ -5,7 +5,7 @@
 
 	<nav id="mainNav" class="navbar navbar-default navbar-static-top navbar-default">
 	
-		<div class="container">
+		<div class="container-fluid">
 		
 			<div class="navbar-header">
 			
