@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="../../../resources/css/marketPrice.css" />	
 	<script src="https://code.highcharts.com/stock/highstock.js"></script>
 	<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>		<!-- marketPrice 페이지 css -->
+	<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 	<script src="../../../resources/js/marketPrice_chart.js"></script>				<!-- 차트 구현 js -->
 	<script src="../../../resources/js/marketPrice_chart_customizing.js"></script>	<!-- 디자인 커스터마이징 js -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>	<!-- !! -->
@@ -23,6 +24,7 @@
 
 			<!-- 비트코인 그래프 표시  -->
 			<div id="market_price_graph" class="col-md-8 visible">
+				<div id="chart_information"></div>
 				<div id="chart"></div>
 			</div>
 
@@ -42,9 +44,9 @@
 					<li class="market_price_tab"><a data-toggle="tab" href="#market_price">MarketPrice</a></li>
 					
 					<!-- 실화폐 환율 -->							
-					<li id="drop-box">
+					<li id="drop-box_moneyType">
 						<!-- dropdown은 목록 선택시 뷰에 보여지는 목록이 변하지 않아 직관적이지 못함 따라서 select로 변경함 -->
-	                    <select id="combo-box" class="input-large form-control">
+	                    <select id="combo-box_moneyType" class="input-large form-control">
 		                    <option class="ratebtn" id="PRICE_USD" value="PRICE_USD" selected="selected"> USD </option>
 		                    <option class="ratebtn" id="PRICE_CNY" value="PRICE_CNY"> CNY </option>
 		                    <option class="ratebtn" id="PRICE_EUR" value="PRICE_EUR"> EUR </option>
@@ -54,19 +56,30 @@
 	                	</select>
 					</li>
 					
+					<li id="drop-box_sortingType">
+						<!-- dropdown은 목록 선택시 뷰에 보여지는 목록이 변하지 않아 직관적이지 못함 따라서 select로 변경함 -->
+	                    <select id="combo-box_sortingType" class="input-large form-control">
+		                    <option class="ratebtn" id="label_sorting" value="Label" selected="selected"> 라벨순 </option>
+		                    <option class="ratebtn" id="name_sorting" value="Name"> 이름순 </option>
+		                    <option class="ratebtn" id="price_sorting" value="Price"> 높은시세순</option>
+		                    <option class="ratebtn" id="volume_24h_sorting" value="Volume_24h"> 24시간거래량순 </option>
+	                	</select>
+					</li>
+					
 				</ul>
 				
 				<div class="tab-content">
 					<!-- 첫 탭 화면에 표시되는 정보 (비트코인 환율) -->
 					<div id="bitcoin_price" class="tab-pane fade in active">
 
-						<table id="marketPriceList" class="table table-hover">
+						<table id="marketPriceList" class="table table-hover" cellspacing="0">
+							<!-- <table id="example" class="display" cellspacing="0" width="100%"> -->
 							<thead>
 								<tr id="test">
-									<th>Label</th>
-									<th>Name</th>
-									<th>Price</th>
-									<th>Volume_24h</th>
+									<th id="label_th">Label</th>
+									<th id="name_th">Name</th>
+									<th id="price_th">Price</th>
+									<th id="price_volume_24h">Volume_24h</th>
 								</tr>
 							</thead>
 							

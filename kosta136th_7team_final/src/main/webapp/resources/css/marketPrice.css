@@ -31,10 +31,17 @@ h3 {
 	
 }
 
+#chart_information {
+	
+	min-height: 56px;
+	background-color: #1c2022;
+	
+}
+
 #chart {
 	
-	min-height: 900px;
 	position: relative;
+	min-height: 900px;
 	
 }
 
@@ -121,7 +128,6 @@ ul.nav.nav-tabs {
 	scrollbar-arrow-color: #2a2a2a;
 	scrollbar-face-color: #333333;
 	
-	
 }
 
 thead {
@@ -137,7 +143,7 @@ thead {
 	
 }
 
-#combo-box {
+#combo-box_moneyType, #combo-box_sortingType {
 	
 	background: #262a2c;
 	border: 1px solid #33aadd;
@@ -145,7 +151,7 @@ thead {
 	
 }
 
-#drop-box {
+#drop-box_moneyType, #drop-box_sortingType {
 	
 	max-height: 43px;
 	
