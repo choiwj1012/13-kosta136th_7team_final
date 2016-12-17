@@ -1,14 +1,17 @@
-//chart를 그리는 javascript 코드
-//방법1
-
 $(document).ready(function () {
+	var money_type = $("#combo-box_moneyType").find(":selected").val();
+	var sorting_type = $("#combo-box_sortingType").find(":selected").val();
+	
 	// 처음 시작시 PRICE_BTC값이 나타나는 쿼리
+<<<<<<< HEAD
 	var url = "/rate/bitrate?money_type=PRICE_USD&sorting_type=Volume_24h";
+=======
+	var url = "/rate/bitrate?money_type=" + money_type + "&sorting_type=" + sorting_type;
+>>>>>>> 1ec43bdbffc67a6b02c0a0a0d797d77473491f07
 	
 		$.getJSON(url, function (data) {
 		
 			var str = "";
-
 				$.each(data, function(){
 //					.reverse()
 	        	    str += "<tr class='table_row' id='table_price_row'>";
@@ -147,13 +150,12 @@ $(document).ready(function () {
 		
 	});
 	
-	var money_type = "PRICE_BTC";
-	var sorting_type = "Volume_24h";	//default 정렬 기준은 24시간 거래량 기준.
+	//default 정렬 기준은 24시간 거래량 기준.
 	//비트코인환율
 	$("#combo-box_moneyType").on('change', function(){
 		
 		money_type = $(this).find(":selected").val();
-		
+		sorting_type = $("#combo-box_sortingType").find(":selected").val();
 		$.ajax({
 			
 			url: "/rate/bitrate/",				//목적지 URI	//Controller로 보낸다.
@@ -169,7 +171,7 @@ $(document).ready(function () {
 					
 					var str = "";
 				                                                                                                      
-	                $.each(data.reverse(), function(){
+	                $.each(data, function(){
 	               	    
 	               	    str += "<tr class='table_row' id='table_price_row'>";
 	                    str += "<td>" + this.label + "</td>";
@@ -210,6 +212,7 @@ $(document).ready(function () {
 			success:  function () {				//성공시 return된 객체를
 				
 				var url = "/rate/bitrate?money_type=" + money_type + "&sorting_type=" + sorting_type;		//MarketPriceDataController로 부터 받은 데이터를 처리한다.
+
 				
 				$.getJSON(url,  function (data) {
 					
