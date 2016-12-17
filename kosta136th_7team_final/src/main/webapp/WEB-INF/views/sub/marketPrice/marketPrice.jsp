@@ -76,10 +76,10 @@
 							<!-- <table id="example" class="display" cellspacing="0" width="100%"> -->
 							<thead>
 								<tr id="test">
-									<th id="label_th">Label</th>
-									<th id="name_th">Name</th>
-									<th id="price_th">Price</th>
-									<th id="price_volume_24h">Volume_24h</th>
+									<th id="label_th">라벨</th>
+									<th id="name_th">이름</th>
+									<th id="price_th">현재시세</th>
+									<th id="price_volume_24h">24시간거래량</th>
 								</tr>
 							</thead>
 							
