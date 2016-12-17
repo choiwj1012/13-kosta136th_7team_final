@@ -57,4 +57,24 @@ public class DealerServiceImpl implements DealerService{
 		
 	}
 
+	@Override
+	public void likeEvent(String likeCheck, String disLikeCheck, int dealerNum) throws Exception {
+		
+		dao.likeEvent(likeCheck, disLikeCheck, dealerNum);
+		
+	}
+
+	@Override
+	public List<Dealer> allList() throws Exception {
+
+		return dao.allList();
+		
+	}
+
+	@Override
+	public List<Dealer> allListSearch(SearchDealer sd) throws Exception {
+		
+		return dao.allListSearch(sd);
+	}
+
 }

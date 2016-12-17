@@ -49,7 +49,7 @@ public class DealerDAOImpl implements DealerDAO{
 
 	@Override
 	public int score(int dealerNum) throws Exception {
-		
+		System.out.println(dealerNum);
 		return session.selectOne(namespace + ".score", dealerNum);
 		
 	}
@@ -59,6 +59,34 @@ public class DealerDAOImpl implements DealerDAO{
 		
 		session.update(namespace + ".update", dealer);
 		
+	}
+
+	@Override
+	public void likeEvent(String likeCheck, String disLikeCheck, int dealerNum) throws Exception {
+		System.out.println(likeCheck);
+		System.out.println(disLikeCheck);
+		System.out.println(dealerNum);
+		if(likeCheck.equals("checked")) {
+			System.out.println("요기까지오니");
+			session.update(namespace + ".like", dealerNum);
+		} else if(disLikeCheck.equals("checked")) {
+			
+			session.update(namespace + ".dislike", dealerNum);
+		}
+
+	}
+
+	@Override
+	public List<Dealer> allList() throws Exception {
+		
+		return session.selectList(namespace + ".allList");
+		
+	}
+
+	@Override
+	public List<Dealer> allListSearch(SearchDealer sd) throws Exception {
+		
+		return session.selectList(namespace + ".searchList", sd);
 	}
 	
 	
