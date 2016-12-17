@@ -6,37 +6,6 @@
 
 <head>
 	<link rel="stylesheet" href="../../resources/css/btcInfoLand.css" />
-	<script src="../../resources/js/wookmark.js"></script>
-	<style>
-	
-		#container div{
-			width:300px;
-			background: #fff;
-			border:2px solid #aaa;
-			padding: 15px;
-			padding-bottom: 15px;
-			margin: 15px;
-		}
-		
-		#container div img{
-			width: 100%;
-			border-bottom: 1px solid #ccc;
-			padding-bottom: 15px;
-			margin-bottom: 5px;
-		}
-		
-		#container div h2{
-			font-size : 1.2em;
-		}
-		
-		#container div p{
-			font-family:"맑은 고딕", 돋움;
-			color:#333;
-			margin:0;
-			padding:10px;		
-		}
-		
-	</style>
 </head>
 
 <%@ include file="../../include/grandNav.jsp"%>
@@ -100,54 +69,81 @@
 
 </div>
 	
+	
 <!-- Dealer Page List Area -->
-<div id="container">
+<div class="clearfix" role="main">
 
-	<div>
-		<a href="/btcInfoLand_board_list"><img src="../../resources/img/dealer_test_img01.jpg"></a>	
-		<p><span class="label label-primary glyphicon glyphicon-heart"> 20,345</span></p>		
-		<h3>초보님을 위한 비트코인 시작하기~</h3>		
-		<p>@webtohouse</p>		
-		<span class="label label-primary">#실시간시세</span> 
-		<span class="label label-primary">#Bitcoin</span> 
-		<span class="label label-primary">#비트코인초보</span>	
-	</div>
+	<ul id="container">
 	
-	<div>
-		<a href="/btcInfoLand_board_list"><img src="../../resources/img/dealer_test_img02.jpg"></a>	
-		<p><span class="label label-primary glyphicon glyphicon-heart"> 20,345</span></p>		
-		<h3>초보님을 위한 비트코인 시작하기~</h3>		
-		<p>@webtohouse</p>		
-		<span class="label label-primary">#실시간시세</span> 
-		<span class="label label-primary">#Bitcoin</span> 
-		<span class="label label-primary">#비트코인초보</span>	
-	</div>
-	
-	<div>
-		<a href="/btcInfoLand_board_list"><img src="../../resources/img/dealer_test_img03.jpg"></a>	
-		<p><span class="label label-primary glyphicon glyphicon-heart"> 20,345</span></p>		
-		<h3>초보님을 위한 비트코인 시작하기~</h3>		
-		<p>@webtohouse</p>		
-		<span class="label label-primary">#실시간시세</span> 
-		<span class="label label-primary">#Bitcoin</span> 
-		<span class="label label-primary">#비트코인초보</span>	
-	</div>
-	
-	<div>
-		<a href="/btcInfoLand_board_list"><img src="../../resources/img/dealer_test_img03.jpg"></a>	
-		<p><span class="label label-primary glyphicon glyphicon-heart"> 20,345</span></p>		
-		<h3>초보님을 위한 비트코인 시작하기~</h3>		
-		<p>@webtohouse</p>		
-		<span class="label label-primary">#실시간시세</span> 
-		<span class="label label-primary">#Bitcoin</span> 
-		<span class="label label-primary">#비트코인초보</span>	
-	</div>
+		<li>
+			<a href="/btcInfoLand_board_list"><img src="../../resources/img/dealer_test_img01.jpg"></a>	
+			<p><span class="label label-primary glyphicon glyphicon-heart"> 20,345</span></p>		
+			<h3>초보님을 위한 비트코인 시작하기~</h3>		
+			<p>@webtohouse</p>		
+			<span class="label label-primary">#실시간시세</span> 
+			<span class="label label-primary">#Bitcoin</span> 
+			<span class="label label-primary">#비트코인초보</span>	
+		</li>
 		
-</div>
+		<li>
+			<a href="/btcInfoLand_board_list"><img src="../../resources/img/dealer_test_img02.jpg"></a>	
+			<p><span class="label label-primary glyphicon glyphicon-heart"> 20,345</span></p>		
+			<h3>초보님을 위한 비트코인 시작하기~</h3>		
+			<p>@webtohouse</p>		
+			<span class="label label-primary">#실시간시세</span> 
+			<span class="label label-primary">#Bitcoin</span> 
+			<span class="label label-primary">#비트코인초보</span>	
+		</li>
+		
+		<li >
+			<a href="/btcInfoLand_board_list"><img src="../../resources/img/dealer_test_img03.jpg"></a>	
+			<p><span class="label label-primary glyphicon glyphicon-heart"> 20,345</span></p>		
+			<h3>초보님을 위한 비트코인 시작하기~</h3>		
+			<p>@webtohouse</p>		
+			<span class="label label-primary">#실시간시세</span> 
+			<span class="label label-primary">#Bitcoin</span> 
+			<span class="label label-primary">#비트코인초보</span>	
+		</li>
+		
+		<li>
+			<a href="/btcInfoLand_board_list"><img src="../../resources/img/dealer_test_img01.jpg"></a>	
+			<p><span class="label label-primary glyphicon glyphicon-heart"> 20,345</span></p>		
+			<h3>초보님을 위한 비트코인 시작하기~</h3>		
+			<p>@webtohouse</p>		
+			<span class="label label-primary">#실시간시세</span> 
+			<span class="label label-primary">#Bitcoin</span> 
+			<span class="label label-primary">#비트코인초보</span>	
+		</li>
+		
+		<li>
+			<a href="/btcInfoLand_board_list"><img src="../../resources/img/dealer_test_img02.jpg"></a>	
+			<p><span class="label label-primary glyphicon glyphicon-heart"> 20,345</span></p>		
+			<h3>초보님을 위한 비트코인 시작하기~</h3>		
+			<p>@webtohouse</p>		
+			<span class="label label-primary">#실시간시세</span> 
+			<span class="label label-primary">#Bitcoin</span> 
+			<span class="label label-primary">#비트코인초보</span>	
+		</li>
+		
+		<li>
+			<a href="/btcInfoLand_board_list"><img src="../../resources/img/dealer_test_img03.jpg"></a>	
+			<p><span class="label label-primary glyphicon glyphicon-heart"> 20,345</span></p>		
+			<h3>초보님을 위한 비트코인 시작하기~</h3>		
+			<p>@webtohouse</p>		
+			<span class="label label-primary">#실시간시세</span> 
+			<span class="label label-primary">#Bitcoin</span> 
+			<span class="label label-primary">#비트코인초보</span>	
+		</li>
 
+	</ul>	
+	
+</div>
+<script src="../../resources/js/wookmark.js"></script>
 <script>
 
-	$('#container').wookmark();
+	(function() {
+		var wookmark = new Wookmark('#container'); 
+	})();
 	
 </script>
 <%@ include file="../../include/footer.jsp"%>
