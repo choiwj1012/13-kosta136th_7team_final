@@ -192,10 +192,10 @@ public class MarketPriceDataController {
 	
 	// 비트코인 화폐 환율
 	@RequestMapping(value = "/bitrate", method = RequestMethod.GET)
-	public ArrayList<MarketPriceOutPut> bitCoinRate(@RequestParam("money_type") String money_type, HttpServletResponse response) throws Exception {
-		
-		List<MarketPrice> bitCoinList = marketPriceService.coinRateList();
-		
+	public ArrayList<MarketPriceOutPut> bitCoinRate(@RequestParam("money_type") String money_type, @RequestParam("array") String array, HttpServletResponse response) throws Exception {
+
+		List<MarketPrice> bitCoinList = marketPriceService.coinRateList(array, money_type);
+
 		ArrayList<MarketPriceOutPut> marketPriceList = new ArrayList<MarketPriceOutPut>();
 		
 		for(int i=0; i<bitCoinList.size(); i++){
@@ -255,9 +255,9 @@ public class MarketPriceDataController {
 			marketPrice.setVolume_24h(volume_24h_out);
 			
 			marketPriceList.add(marketPrice);
-	
+
 			}
-		
+			
 			return marketPriceList;
 
 }

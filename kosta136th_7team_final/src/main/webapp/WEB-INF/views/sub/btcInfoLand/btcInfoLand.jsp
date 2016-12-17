@@ -40,16 +40,15 @@
 			<!-- 검색 -->
 			<div class="search_group">
 				<div class="form-group col-xs-2">
-					<select class="form-control" id="sel1">
-						<option>선택</option>
-						<option>딜러명</option>
-						<option>제목</option>
-						<option>제목+본문</option>
+					<select name="searchType" class="form-control" id="sel1">
+						<option value = "n">선택</option>
+						<option value = "c">딜러명</option>
+						<option value = "t">제목</option>
 					</select>
 				</div>
 				<form>
 					<div class="input-group col-xs-6">
-						<input type="text" class="form-control" placeholder="Search">
+						<input type="text" name="keyword" class="form-control" placeholder="Search" value="${dst.keyword}">
 						<div class="input-group-btn">
 							<button class="btn btn-default" type="submit">
 								<i class="glyphicon glyphicon-search"></i>
