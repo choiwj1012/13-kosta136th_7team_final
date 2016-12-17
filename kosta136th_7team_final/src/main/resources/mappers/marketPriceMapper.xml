@@ -43,7 +43,7 @@
  				* 
 			FROM 
  				MARKET 
-			ORDER BY LABEL DESC; 
+			ORDER BY LABEL ASC; 
 		
  		]]> 
 		</select>
@@ -54,7 +54,7 @@
  				* 
  			FROM 
  				MARKET 
- 			ORDER BY NAME DESC; 
+ 			ORDER BY NAME ASC; 
 		
  		]]> 
 		</select>

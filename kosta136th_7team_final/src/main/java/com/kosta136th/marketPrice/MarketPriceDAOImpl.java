@@ -31,17 +31,17 @@ public class MarketPriceDAOImpl implements MarketPriceDAO{
 	}	
 	
 	@Override
-	public List<MarketPrice> coinRateList(String array, String money_type) throws Exception {
+	public List<MarketPrice> coinRateList(String sorting_type, String money_type) throws Exception {
 		
-		if(array.equals("Label")) {
+		if(sorting_type.equals("Label")) {
 			
 			return sqlSession.selectList(namespace + ".bitcoinListLABEL");
 			
-		} else if(array.equals("Name")) {
+		} else if(sorting_type.equals("Name")) {
 			
 			return sqlSession.selectList(namespace + ".bitcoinListNAME");
 			
-		} else if(array.equals("Price")) {
+		} else if(sorting_type.equals("Price")) {
 			
 			if(money_type.equals("PRICE_BTC")) {
 				
