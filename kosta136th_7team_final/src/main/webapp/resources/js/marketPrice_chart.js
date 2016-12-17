@@ -9,8 +9,8 @@ $(document).ready(function () {
 		
 			var str = "";
 
-				$.each(data.reverse(), function(){
-	            
+				$.each(data, function(){
+//					.reverse()
 	        	    str += "<tr class='table_row' id='table_price_row'>";
 	                str += "<td>" + this.label + "</td>";
 	                str += "<td>" + this.name + "</td>";
@@ -22,7 +22,23 @@ $(document).ready(function () {
 			$("#bitrate").html(str);
       
 		});
+	$(".array").click(function(){
+		
+		var array = $(this).text();
+		var money_type = $("#combo-box").find(":selected").val();
+		
+			$.ajax({
+			
+			url: "/rate/bitrate/",				//목적지 URI	//Controller로 보낸다.
+			//async : false,						//동기방식
+			type: 'get',							//get 타입 (post타입 등이 있음)
+			data: {"money_type" : money_type, "array" : array},
+				  //money_type을 넘긴다.
+			success:  function () {		
+			}
+			});
 	
+	});
 	
 	$(document).on("click", "#table_price_row", function(){
 		
@@ -216,7 +232,7 @@ $(document).ready(function () {
 					
 					var str = "";
 				                                                                                                      
-	                $.each(data.reverse(), function(){
+	                $.each(data, function(){
 	               	    
 	               	    str += "<tr class='table_row' id='table_price_row'>";
 	                    str += "<td>" + this.label + "</td>";

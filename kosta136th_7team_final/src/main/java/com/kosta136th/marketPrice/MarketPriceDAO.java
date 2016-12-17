@@ -8,7 +8,7 @@ public interface MarketPriceDAO {
 	
 	public List<MarketPriceChart> chart(String money_type) throws Exception;
 
-	public List<MarketPrice> coinRateList() throws Exception;
+	public List<MarketPrice> coinRateList(String array, String money_type) throws Exception;
 
 	public List<MarketPrice> oneChart(OneChart oneChart) throws Exception;
 
