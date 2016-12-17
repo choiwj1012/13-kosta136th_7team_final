@@ -3,7 +3,7 @@
 
 $(document).ready(function () {
 	// 처음 시작시 PRICE_BTC값이 나타나는 쿼리
-	var url = "/rate/bitrate?money_type=PRICE_BTC";
+	var url = "/rate/bitrate?money_type=PRICE_USD&sorting_type=Volume_24h";
 	
 		$.getJSON(url, function (data) {
 		
@@ -22,23 +22,6 @@ $(document).ready(function () {
 			$("#bitrate").html(str);
       
 		});
-	$(".array").click(function(){
-		
-		var array = $(this).text();
-		var money_type = $("#combo-box").find(":selected").val();
-		
-			$.ajax({
-			
-			url: "/rate/bitrate/",				//목적지 URI	//Controller로 보낸다.
-			//async : false,						//동기방식
-			type: 'get',							//get 타입 (post타입 등이 있음)
-			data: {"money_type" : money_type, "array" : array},
-				  //money_type을 넘긴다.
-			success:  function () {		
-			}
-			});
-	
-	});
 	
 	$(document).on("click", "#table_price_row", function(){
 		

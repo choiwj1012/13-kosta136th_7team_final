@@ -8,12 +8,10 @@
 	<link rel="stylesheet" href="../../../resources/css/marketPrice.css" />	
 	<script src="https://code.highcharts.com/stock/highstock.js"></script>
 	<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>		<!-- marketPrice 페이지 css -->
-	<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 	<script src="../../../resources/js/marketPrice_chart.js"></script>				<!-- 차트 구현 js -->
 	<script src="../../../resources/js/marketPrice_chart_customizing.js"></script>	<!-- 디자인 커스터마이징 js -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>	<!-- !! -->
 	<title>BitCoin MarketPrice</title>
-
 </head>
 
 <body>
@@ -32,7 +30,7 @@
 			<div id="market_price_list" class="col-md-4 visible tabs">	<!-- visible tabs -->
 				
 				<div id="title_bar">
-					<h3 class="text-center">BitCoin MarketPrice</h3>
+					<h3 class="text-center">BitCoin 시세 정보</h3>
 				</div>	
 					
 				<!-- 비트코인과 실화폐 환율 탭 네비 -->
@@ -59,10 +57,10 @@
 					<li id="drop-box_sortingType">
 						<!-- dropdown은 목록 선택시 뷰에 보여지는 목록이 변하지 않아 직관적이지 못함 따라서 select로 변경함 -->
 	                    <select id="combo-box_sortingType" class="input-large form-control">
-		                    <option class="ratebtn" id="label_sorting" value="Label" selected="selected"> 라벨순 </option>
+		                    <option class="ratebtn" id="volume_24h_sorting" value="Volume_24h" selected="selected"> 24시간거래량순 </option>
+		                    <option class="ratebtn" id="label_sorting" value="Label"> 라벨순 </option>
 		                    <option class="ratebtn" id="name_sorting" value="Name"> 이름순 </option>
 		                    <option class="ratebtn" id="price_sorting" value="Price"> 높은시세순</option>
-		                    <option class="ratebtn" id="volume_24h_sorting" value="Volume_24h"> 24시간거래량순 </option>
 	                	</select>
 					</li>
 					
@@ -76,19 +74,10 @@
 							<!-- <table id="example" class="display" cellspacing="0" width="100%"> -->
 							<thead>
 								<tr id="test">
-<<<<<<< HEAD
 									<th id="label_th">라벨</th>
 									<th id="name_th">이름</th>
 									<th id="price_th">현재시세</th>
 									<th id="price_volume_24h">24시간거래량</th>
-=======
-
-									<th id="label_th">Label</th>
-									<th id="name_th">Name</th>
-									<th id="price_th">Price</th>
-									<th id="price_volume_24h">Volume_24h</th>
-
->>>>>>> eb6b45839a61507e9a0825407b65cc9fababd95e
 								</tr>
 							</thead>
 							
