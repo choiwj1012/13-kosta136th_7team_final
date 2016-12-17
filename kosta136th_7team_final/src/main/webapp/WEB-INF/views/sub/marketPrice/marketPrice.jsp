@@ -53,7 +53,7 @@
 		                    <option class="ratebtn" id="PRICE_BTC" value="PRICE_BTC"> BTC </option>
 	                	</select>
 					</li>
-					
+	
 				</ul>
 				
 				<div class="tab-content">
@@ -63,10 +63,10 @@
 						<table id="marketPriceList" class="table table-hover">
 							<thead>
 								<tr id="test">
-									<th>Label</th>
-									<th>Name</th>
-									<th>Price</th>
-									<th>Volume_24h</th>
+									<th class="array">Label</th>
+									<th class="array">Name</th>
+									<th class="array">Price</th>
+									<th class="array">Volume_24h</th>
 								</tr>
 							</thead>
 							
