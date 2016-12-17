@@ -3,12 +3,11 @@
 
 $(document).ready(function () {
 	// 처음 시작시 PRICE_BTC값이 나타나는 쿼리
-	var url = "/rate/bitrate?money_type=PRICE_BTC";
+	var url = "/rate/bitrate?money_type=PRICE_BTC&array=Volume_24h";
 	
 		$.getJSON(url, function (data) {
 		
 			var str = "";
-
 				$.each(data, function(){
 //					.reverse()
 	        	    str += "<tr class='table_row' id='table_price_row'>";
@@ -179,7 +178,7 @@ $(document).ready(function () {
 			
 			success:  function () {				//성공시 return된 객체를
 				
-				var url = "/rate/bitrate?money_type=" + money_type;		//MarketPriceDataController로 부터 받은 데이터를 처리한다.
+				var url = "/rate/bitrate?money_type=" + money_type + "&array=Volume24_h";		//MarketPriceDataController로 부터 받은 데이터를 처리한다.
 				
 				$.getJSON(url,  function (data) {
 					

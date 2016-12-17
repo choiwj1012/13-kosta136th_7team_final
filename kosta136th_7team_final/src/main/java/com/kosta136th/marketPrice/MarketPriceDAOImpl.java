@@ -33,8 +33,6 @@ public class MarketPriceDAOImpl implements MarketPriceDAO{
 	@Override
 	public List<MarketPrice> coinRateList(String array, String money_type) throws Exception {
 		
-System.out.println(array);
-System.out.println(money_type);
 		if(array.equals("Label")) {
 			
 			return sqlSession.selectList(namespace + ".bitcoinListLABEL");
