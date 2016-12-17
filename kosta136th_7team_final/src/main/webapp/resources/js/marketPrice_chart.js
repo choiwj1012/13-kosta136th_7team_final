@@ -27,7 +27,7 @@ $(document).ready(function () {
 	$(document).on("click", "#table_price_row", function(){
 		
 		var coinName = $(this).children(':eq(1)').text();
-		var moneyType = $("#combo-box").find(":selected").val();
+		var moneyType = $("#combo-box_moneyType").find(":selected").val();
 		
 		var money_name_option;
 		if(moneyType == "PRICE_BTC") {
@@ -47,10 +47,10 @@ $(document).ready(function () {
 		
 		var options = {
 
-				title: {
-					//차트 제목 설정
-					text: '비트코인 시세정보 차트'
-		          },
+//				title: {
+//					//차트 제목 설정
+//					text: '비트코인 시세정보 차트'
+//		          },
 				
 				rangeSelector: {
 					
@@ -148,9 +148,10 @@ $(document).ready(function () {
 		
 	});
 	
-	var money_type = "PRICE_BTC";	
+	var money_type = "PRICE_BTC";
+	var sorting_type = "Volume_24h";	//default 정렬 기준은 24시간 거래량 기준.
 	//비트코인환율
-	$("#combo-box").on('change', function(){
+	$("#combo-box_moneyType").on('change', function(){
 		
 		money_type = $(this).find(":selected").val();
 		
@@ -159,11 +160,57 @@ $(document).ready(function () {
 			url: "/rate/bitrate/",				//목적지 URI	//Controller로 보낸다.
 			//async : false,						//동기방식
 			type: 'get',							//get 타입 (post타입 등이 있음)
-			data: {"money_type" : money_type},		//money_type을 넘긴다.
+			data: {"money_type" : money_type, "sorting_type" : sorting_type},		//money_type을 넘긴다.
 			
 			success:  function () {				//성공시 return된 객체를
 				
-				var url = "/rate/bitrate?money_type=" + money_type;		//MarketPriceDataController로 부터 받은 데이터를 처리한다.
+				var url = "/rate/bitrate?money_type=" + money_type + "&sorting_type=" + sorting_type;		//MarketPriceDataController로 부터 받은 데이터를 처리한다.
+				
+				$.getJSON(url,  function (data) {
+					
+					var str = "";
+				                                                                                                      
+	                $.each(data.reverse(), function(){
+	               	    
+	               	    str += "<tr class='table_row' id='table_price_row'>";
+	                    str += "<td>" + this.label + "</td>";
+	                    str += "<td>" + this.name + "</td>";
+		                str += "<td>" + this.price + "</td>";
+		                str += "<td>" + this.volume_24h + "</td>";
+	                    str += "</tr>"
+	                    
+	                });       
+
+	                $("#bitrate").html(str);
+
+			  });
+				
+			}
+			
+		});
+						
+	});
+	
+	
+	/* 정렬 타입 선택 콤보박스 메소드 */
+	// 디폴트 상태 : 24시간 거래량 순
+		
+	
+	$("#combo-box_sortingType").on('change', function(){
+		
+		money_type = $("#combo-box_moneyType").find(":selected").val();
+		sorting_type = $(this).find(":selected").val();
+		
+		$.ajax({
+			
+			url: "/rate/bitrate/",				//목적지 URI	//Controller로 보낸다.
+			//async : false,						//동기방식
+			type: 'get',							//get 타입 (post타입 등이 있음)
+			data: {"money_type" : money_type, "sorting_type" : sorting_type},		//money_type을 넘긴다.
+			
+			success:  function () {				//성공시 return된 객체를
+				
+				var url = "/rate/bitrate?money_type=" + money_type + "&sorting_type=" + sorting_type;		//MarketPriceDataController로 부터 받은 데이터를 처리한다.
 				
 				$.getJSON(url,  function (data) {
 					
@@ -201,10 +248,10 @@ $(document).ready(function () {
 	// default 상세일 때
 	var options = {
 
-				title: {
-					//차트 제목 설정
-					text: '비트코인 시세정보 차트'
-		          },
+//				title: {
+//					//차트 제목 설정
+//					text: '비트코인 시세정보 차트'
+//		          },
 				
 				rangeSelector: {
 					
@@ -253,7 +300,7 @@ $(document).ready(function () {
 	
 	
 	var money_type = "PRICE_USD";
-	$("#combo-box").on('change', function(){
+	$("#combo-box_moneyType").on('change', function(){
 
 		money_type = $(this).find(":selected").val();		//선택된 값을 가져옴.
 		
@@ -276,10 +323,10 @@ $(document).ready(function () {
 		
 		var options = {
 
-				title: {
-					//차트 제목 설정
-					text: '비트코인 시세정보 차트'
-		          },
+//				title: {
+//					//차트 제목 설정
+//					text: '비트코인 시세정보 차트'
+//		          },
 				
 				rangeSelector: {
 					
