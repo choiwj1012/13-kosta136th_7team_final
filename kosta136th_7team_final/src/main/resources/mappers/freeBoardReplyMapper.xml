@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "com.kosta136th.mapper.freeBoardReplyMapper">
+
+	<select id="list" resultType="com.kosta136th.freeBoard.FreeBoardReply">
+		SELECT * FROM
+			FREEBAORD_REPLY		
+		WHERE 
+		FREEBOARD_NUM = #{freeBoard_Num}
+		ORDER BY REPLY_NUM DESC
+	</select>
+
+	<insert id="create">
+		INSERT INTO 
+			FREEBOARD_REPLY (FREEBOARD_NUM, REPLYTEXT)
+		VALUES 
+			(#{freeBoard_Num},#{replytext})
+	</insert>
+
+	<update id="update">
+		UPDATE 
+			FREEBOARD_REPLY 
+		SET 
+			REPLYTEXT = #{replytext}, UPDATEDATE = NOW()
+		WHERE
+			REPLY_NUM = #{reply_Num}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM
+			FREEBOARD_REPLY 
+		WHERE 
+			REPLY_NUM = #{reply_Num}
+	</delete>
+
+
+	<select id="listPage" resultType="com.kosta136th.freeBoard.FreeBoardReply">
+		SELECT * FROM
+			FREEBOARD_REPLY
+		where	
+			FREEBOARD_NUM = #{freeBoard_Num}
+		ORDER BY REPLY_NUM DESC
+		LIMIT #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+
+	<select id="count" resultType="int">
+		SELECT 
+			COUNT(freeBoard_Num) 
+		FROM 
+			FREEBOARD_REPLY 
+		WHERE 
+			FREEBOARD_NUM = #{freeBoard_Num}
+	</select>
+	
+	<select id="getFreeBoard_Num" resultType="int">
+	
+		SELECT 
+			FREEBOARD_NUM 
+		FROM 
+			FREEBOARD_REPLY 
+		where 
+			REPLY_NUM = #{reply_Num}
+		
+	</select>
+	
+	
+</mapper>

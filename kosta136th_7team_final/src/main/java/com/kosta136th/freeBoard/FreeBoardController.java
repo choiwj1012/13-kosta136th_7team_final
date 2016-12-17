@@ -6,52 +6,71 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import com.kosta136th.freeBoard.FreeBoard;
-import com.kosta136th.freeBoard.FreeBoardService;
 
-@Controller
-@RequestMapping("/freeBoard/*")
+import com.kosta136th.freeBoard.FreeBoard;
+import com.kosta136th.freeBoard.Criteria;
+import com.kosta136th.freeBoard.PageMaker;
+import com.kosta136th.freeBoard.FreeBoardService;
+@Controller("freeBoardController")
 public class FreeBoardController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(FreeBoardController.class);
 	
 	@Inject
 	private FreeBoardService service;
-	
-	@RequestMapping(value = "/board_write", method = RequestMethod.GET)
-	public void registerGET(FreeBoard board, Model model) throws Exception {
-		
-		logger.info("register get...");
+
+	@RequestMapping("/sub/freeboard/board_list")
+	public String getFreeBoardList() {
+		return "/sub/freeboard/board_list";
 	}
 	
-	@RequestMapping(value = "/board_write", method = RequestMethod.POST)
-	  public String registPOST(FreeBoard board, RedirectAttributes rttr) throws Exception {
+	@RequestMapping("/sub/freeboard/write")
+	public String getFreeBoardWrite() {
+		return "/sub/freeboard/board_write";
+	}
+	
+	@RequestMapping("/sub/freeboard/board_write")
+	public String registerGET(FreeBoard freeBoard, Model model) throws Exception {
+		System.out.println("여기까지오니 123");
+		System.out.println(freeBoard.getTitle());
+		System.out.println(freeBoard.getContent());
 
-	    logger.info("regist post ...........");
-	    logger.info(board.toString());
+		try {
+			service.regist(freeBoard);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		 
+		return "/sub/freeboard/board_list";
+		
+	}
+/*	@RequestMapping(value = "/free/board_write", method = RequestMethod.POST)*/
+/*	@RequestMapping(value = "/free/board_write", method = RequestMethod.GET)
+	  public String registPOST(FreeBoard freeBoard, RedirectAttributes rttr) throws Exception {
 
-	    service.regist(board);
-
+	    service.regist(freeBoard);
+	    System.out.println("여기지오니");
 	    rttr.addFlashAttribute("msg", "success");
-	    return "redirect:/freeboard/board_list";
-	  }
+	    return "redirect:/sub/freeboard/board_list";
+	  }*/
 
-	  @RequestMapping(value = "/board_list", method = RequestMethod.GET)
+	  @RequestMapping(value = "/free/board_list", method = RequestMethod.GET)
 	  public void listAll(Model model) throws Exception {
 
-	    logger.info("show all list......................");
 	    model.addAttribute("board_list", service.listAll());
 	  }
 
-//	  @RequestMapping(value = "/read", method = RequestMethod.GET)
-//	  public void read(@RequestParam("bno") int bno, Model model) throws Exception {
-//
-//	    model.addAttribute(service.read(bno));
-//	  }
-//
+	  @RequestMapping(value = "/free/board_read", method = RequestMethod.GET)
+	  public void read(@RequestParam("freeBoard_Num") int freeBoard_Num, Model model) throws Exception {
+
+	    model.addAttribute(service.read(freeBoard_Num));
+	  }
+
 //	  @RequestMapping(value = "/remove", method = RequestMethod.POST)
 //	  public String remove(@RequestParam("bno") int bno, RedirectAttributes rttr) throws Exception {
 //
@@ -61,15 +80,15 @@ public class FreeBoardController {
 //
 //	    return "redirect:/board/listAll";
 //	  }
-//
+
 //	  @RequestMapping(value = "/modify", method = RequestMethod.GET)
 //	  public void modifyGET(int bno, Model model) throws Exception {
 //
 //	    model.addAttribute(service.read(bno));
 //	  }
-//
+
 //	  @RequestMapping(value = "/modify", method = RequestMethod.POST)
-//	  public String modifyPOST(BoardVO board, RedirectAttributes rttr) throws Exception {
+//	  public String modifyPOST(FreeBoard board, RedirectAttributes rttr) throws Exception {
 //
 //	    logger.info("mod post............");
 //
@@ -78,36 +97,34 @@ public class FreeBoardController {
 //
 //	    return "redirect:/board/listAll";
 //	  }
-//
-//	  @RequestMapping(value = "/listCri", method = RequestMethod.GET)
-//	  public void listAll(Criteria cri, Model model) throws Exception {
-//
-//	    logger.info("show list Page with Criteria......................");
-//
-//	    model.addAttribute("list", service.listCriteria(cri));
-//	  }
-//
-//	  @RequestMapping(value = "/listPage", method = RequestMethod.GET)
-//	  public void listPage(@ModelAttribute("cri") Criteria cri, Model model) throws Exception {
-//
-//	    logger.info(cri.toString());
-//
-//	    model.addAttribute("list", service.listCriteria(cri));
-//	    PageMaker pageMaker = new PageMaker();
-//	    pageMaker.setCri(cri);
-//	    // pageMaker.setTotalCount(131);
-//
-//	    pageMaker.setTotalCount(service.listCountCriteria(cri));
-//
-//	    model.addAttribute("pageMaker", pageMaker);
-//	  }
-//
-//	  @RequestMapping(value = "/readPage", method = RequestMethod.GET)
-//	  public void read(@RequestParam("bno") int bno, @ModelAttribute("cri") Criteria cri, Model model) throws Exception {
-//
-//	    model.addAttribute(service.read(bno));
-//	  }
-//
+
+	  @RequestMapping(value = "/board_listCri", method = RequestMethod.GET)
+	  public void listAll(Criteria cri, Model model) throws Exception {
+
+
+	    model.addAttribute("board_list", service.listCriteria(cri));
+	  }
+
+	  @RequestMapping(value = "/board_listPage", method = RequestMethod.GET)
+	  public void listPage(@ModelAttribute("cri") Criteria cri, Model model) throws Exception {
+
+
+	    model.addAttribute("list", service.listCriteria(cri));
+	    PageMaker pageMaker = new PageMaker();
+	    pageMaker.setCri(cri);
+	    // pageMaker.setTotalCount(131);
+
+	    pageMaker.setTotalCount(service.listCountCriteria(cri));
+
+	    model.addAttribute("pageMaker", pageMaker);
+	  }
+
+	  @RequestMapping(value = "/board_readPage", method = RequestMethod.GET)
+	  public void read(@RequestParam("freeBoard_Num") int freeBoard_Num, @ModelAttribute("cri") Criteria cri, Model model) throws Exception {
+
+	    model.addAttribute(service.read(freeBoard_Num));
+	  }
+
 //	  @RequestMapping(value = "/removePage", method = RequestMethod.POST)
 //	  public String remove(@RequestParam("bno") int bno, Criteria cri, RedirectAttributes rttr) throws Exception {
 //
@@ -121,9 +138,9 @@ public class FreeBoardController {
 //	  }
 //
 //	  @RequestMapping(value = "/modifyPage", method = RequestMethod.GET)
-//	  public void modifyPagingGET(@RequestParam("bno") int bno, @ModelAttribute("cri") Criteria cri, Model model)
+//	  public void modifyPagingGET(@RequestParam("freeBoard_Num") int freeBoard_Num, @ModelAttribute("cri") Criteria cri, Model model)
 //	      throws Exception {
 //
-//	    model.addAttribute(service.read(bno));
+//	    model.addAttribute(service.read(freeBoard_Num));
 //	  }
 }
