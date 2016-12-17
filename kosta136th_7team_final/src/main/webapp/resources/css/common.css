@@ -11,6 +11,11 @@
 }
 
 /* header navigation*/
+#main_logo_image{
+	width:150px;
+	height:10px;
+}
+
 #mainNav{
 	border : none;
 	background-color: #333333;
@@ -21,7 +26,6 @@
 }
 
 .navbar-nav>li>a{
-	margin-top : 8px; 
 	color : white !important;
 }
 
