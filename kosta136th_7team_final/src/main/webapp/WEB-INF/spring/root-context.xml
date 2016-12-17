@@ -50,5 +50,6 @@
 	
 	<context:component-scan base-package="com.kosta136th.persistenceTEST"></context:component-scan>	
 	<context:component-scan base-package="com.kosta136th.user"></context:component-scan>
-	<context:component-scan base-package="com.kosta136th.freeBoard"></context:component-scan>	
+	<context:component-scan base-package="com.kosta136th.freeBoard"></context:component-scan>
+	<context:component-scan base-package="com.kosta136th.dealer"></context:component-scan>	
 </beans>

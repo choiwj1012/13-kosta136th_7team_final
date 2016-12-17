@@ -28,9 +28,9 @@ public class MarketPriceServiceImpl implements MarketPriceService{
 	}
 	
 	@Override
-	public List<MarketPrice> coinRateList() throws Exception {
+	public List<MarketPrice> coinRateList(String array, String money_type) throws Exception {
 		
-		return dao.coinRateList();
+		return dao.coinRateList(array, money_type);
 
 	}
 

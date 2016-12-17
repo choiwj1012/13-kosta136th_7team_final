@@ -55,6 +55,7 @@
 		                    <option class="ratebtn" id="PRICE_BTC" value="PRICE_BTC"> BTC </option>
 	                	</select>
 					</li>
+<<<<<<< HEAD
 					
 					<li id="drop-box_sortingType">
 						<!-- dropdown은 목록 선택시 뷰에 보여지는 목록이 변하지 않아 직관적이지 못함 따라서 select로 변경함 -->
@@ -66,6 +67,9 @@
 	                	</select>
 					</li>
 					
+=======
+	
+>>>>>>> e6063ebef7b82b9287a36668df2c4a77cc1e4e89
 				</ul>
 				
 				<div class="tab-content">
@@ -76,10 +80,17 @@
 							<!-- <table id="example" class="display" cellspacing="0" width="100%"> -->
 							<thead>
 								<tr id="test">
+<<<<<<< HEAD
 									<th id="label_th">Label</th>
 									<th id="name_th">Name</th>
 									<th id="price_th">Price</th>
 									<th id="price_volume_24h">Volume_24h</th>
+=======
+									<th class="array">Label</th>
+									<th class="array">Name</th>
+									<th class="array">Price</th>
+									<th class="array">Volume_24h</th>
+>>>>>>> e6063ebef7b82b9287a36668df2c4a77cc1e4e89
 								</tr>
 							</thead>
 							

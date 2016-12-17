@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace = "com.kosta136th.mapper.dealerMapper">
+			
+	<select id="check" resultType="com.kosta136th.dealer.Dealer">
+		SELECT USER.USER_EMAIL, USER.USER_NICKNAME, REGISTER_TYPE.USER_NUM, REGISTER_TYPE.REGISTER_TYPE_CODE FROM REGISTER_TYPE  
+		JOIN USER ON REGISTER_TYPE.USER_NUM = USER.USER_NUM 
+		WHERE REGISTER_TYPE_CODE  = 'D';
+	</select>
+		<insert id="insert">
+		insert into DEALER_PAGE (CATEGORY, USER_NUM)
+		values(#{category},#{user_num})
+	</insert>
+	
+	<select id="list" resultType="com.kosta136th.dealer.Dealer">
+		SELECT USER_NUM
+		FROM DEALER_PAGE
+	</select>
+	
+	<select id="read" resultType="com.kosta136th.dealer.Dealer">
+		SELECT
+			USER.USER_NICKNAME, CATEGORY
+		FROM
+			DEALER_PAGE
+		JOIN USER ON USER.USER_NUM = DEALER_PAGE.USER_NUM
+
+		WHERE DEALER_PAGE_NUM = #{dealerNum};
+	</select>
+	
+	<delete id="delete">
+		DELETE FROM DEALER_PAGE WHERE DEALER_PAGE_NUM = #{dealerNum}
+	</delete>
+	
+	<select id="score" resultType="int">
+		SELECT LIKE_COUNT - DISLIKE_COUNT FROM DEALER_PAGE WHERE DEALER_PAGE_NUM = #{dealerNum}
+	</select>
+	
+	<update id="update">
+		UPDATE DEALER_PAGE SET CATEGORY =#{category}
+		WHERE DEALER_PAGE_NUM = #{dealerNum}
+	</update>
+	</mapper>

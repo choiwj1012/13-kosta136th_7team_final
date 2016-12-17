@@ -31,10 +31,49 @@ public class MarketPriceDAOImpl implements MarketPriceDAO{
 	}	
 	
 	@Override
-	public List<MarketPrice> coinRateList() throws Exception {
+	public List<MarketPrice> coinRateList(String array, String money_type) throws Exception {
+		
+System.out.println(array);
+System.out.println(money_type);
+		if(array.equals("Label")) {
+			
+			return sqlSession.selectList(namespace + ".bitcoinListLABEL");
+			
+		} else if(array.equals("Name")) {
+			
+			return sqlSession.selectList(namespace + ".bitcoinListNAME");
+			
+		} else if(array.equals("Price")) {
+			
+			if(money_type.equals("PRICE_BTC")) {
+				
+				return sqlSession.selectList(namespace + ".bitcoinListPRICE", money_type);
+				
+			} else if (money_type.equals("PRICE_USD")) {
+				
+				return sqlSession.selectList(namespace + ".bitcoinListPRICE", money_type);
+				
+			} else if (money_type.equals("PRICE_CNY")) {
+				
+				return sqlSession.selectList(namespace + ".bitcoinListPRICE", money_type);
+				
+			} else if (money_type.equals("PRICE_EUR")) {
+				
+				return sqlSession.selectList(namespace + ".bitcoinListPRICE", money_type);
+				
+			} else if (money_type.equals("PRICE_GBP")) {
+				
+				return sqlSession.selectList(namespace + ".bitcoinListPRICE", money_type);
+				
+			} else if (money_type.equals("PRICE_RUR")) {
+				
+				return sqlSession.selectList(namespace + ".bitcoinListPRICE", money_type);
+				
+			}
+			
+		}
 		
 		return sqlSession.selectList(namespace + ".bitcoinList");
-
 		
 	}
 
