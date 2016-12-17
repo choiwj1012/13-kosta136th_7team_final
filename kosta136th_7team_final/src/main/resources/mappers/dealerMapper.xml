@@ -42,4 +42,41 @@
 		UPDATE DEALER_PAGE SET CATEGORY =#{category}
 		WHERE DEALER_PAGE_NUM = #{dealerNum}
 	</update>
+
+	<update id="like">
+		UPDATE DEALER_PAGE SET LIKE_COUNT = LIKE_COUNT + 10 WHERE DEALER_PAGE_NUM = #{dealerNum}
+	</update>
+	
+	<update id="dislike">
+		UPDATE DEALER_PAGE SET DISLIKE_COUNT = DISLIKE_COUNT + 10 WHERE DEALER_PAGE_NUM = #{dealerNum}
+	</update>
+	
+	<select id="allList" resultType="com.kosta136th.dealer.Dealer">
+		SELECT USER.USER_NICKNAME, CATEGORY, LIKE_COUNT
+		FROM DEALER_PAGE
+		JOIN USER ON USER.USER_NUM = DEALER_PAGE.USER_NUM
+	</select>
+	<select id ="searchList" resultType="com.kosta136th.dealer.Dealer">
+		<![CDATA[
+			SELECT USER.USER_NICKNAME, CATEGORY, LIKE_COUNT
+			FROM DEALERPAGE
+			JOIN USER ON USER>USER_NUM = DEALER_PAGE.USER_NUM
+		]]>
+			<include refid="search"></include>
+		<![CDATA[
+			ORDER BY LIKE_COUNT DESC
+		]]>			
+		
+	</select>
+	
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				AND CATEGORY like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'w'.toString()">
+				AND USER.USER_NICKNAME like CONCAT('%', #{keyword}, '%')
+			</if>
+		</if>		
+	</sql>
 	</mapper>
