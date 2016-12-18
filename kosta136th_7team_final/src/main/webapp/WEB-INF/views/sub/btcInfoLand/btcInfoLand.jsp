@@ -142,4 +142,6 @@
 	</ul>	
 	
 </div> -->
-
+	<%@ include file="../../include/chatting.jsp" %>
+	</body>
+</html>

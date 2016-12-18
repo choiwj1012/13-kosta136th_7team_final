@@ -10,7 +10,7 @@
 		<div class="modal-content">
 		
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<button type="button" class="close" data-dismiss="modal" id = "my-alert">&times;</button>
 				<h2><span class="glyphicon glyphicon-lock"></span>회원가입</h2>
 			</div>
 			
@@ -30,12 +30,12 @@
 					
 					<div class="form-group">
 						<label for="signup_password">비밀번호</label>
-						<input type="password" class="form-control" id="signup_password" placeholder="비밀번호를 입력하세요"/>
+						<input type="password" class="form-control" id="signup_password" placeholder="비밀번호를 입력하세요" onkeyup="passwordTypeCheck();"/>
 					</div>
 					
 					<div class="form-group">
 						<label for="signup_check_password">비밀번호체크</label>
-						<input type="password" class="form-control" id="signup_check_password" placeholder="비밀번호를 재입력하세요"/>
+						<input type="password" class="form-control" id="signup_check_password" placeholder="비밀번호를 재입력하세요" onkeyup="passwordEqualCheck();"/>
 					</div>
 					
 					<div class="form-group">
@@ -51,7 +51,8 @@
 					<div class="form-group">
 						<label for="signup_authentication">인증번호</label>
 						<input type="text" class="form-control" id="signup_authentication" placeholder="인증번호를 입력하세요"/>
-						<button type="button" id = "check_authentication_btn" class="btn btn-primary">인증</button>
+						<button type="button" id = "send_authentication_btn" class="btn btn-primary">인증번호발급받기</button>
+						<button type="button" id = "check_authentication_btn" class="btn btn-primary">인증번호확인</button>
 					</div>
 					
 					<div class="row text-center">
@@ -101,15 +102,16 @@
 				<div class="form-group">
 					<label for="signin_password" id = "signinPassword">비밀번호</label>
 					<input type="password" class="form-control" id="signin_password" placeholder="비밀번호를 입력하세요" />
-					<button type="submit" id = "issue_password_btn" class="btn btn-primary">
-							새 비밀번호<span class="glyphicon glyphicon-ok"></span>
-					</button>
+					
 				</div>
         						
 				<div class="row text-center">
 					<div class="col-sm-12">
 						<button type="submit" id = "signin_email_btn" class="btn btn-primary">
 							로그인하기 <span class="glyphicon glyphicon-ok"></span>
+						</button>
+						<button type="submit" id = "issue_password_btn" class="btn btn-primary">
+							새 비밀번호<span class="glyphicon glyphicon-ok"></span>
 						</button>
 					</div>
 				</div>
@@ -124,295 +126,6 @@
 
 </div> <!-- ./modal (signin) -->
 
-<!-- 안녕하세요, 여기부터는 자바스크립트입니다 -->
-
-<!-- 이메일로 로그인 버튼을 클릭했을 때 작동하는 스크립트입니다. -->
-<script>
-	$(document).ready(function(){
-		$('body').on('click', '#signin_email_btn', function(e){
-			e.preventDefault();
-			e.stopPropagation();
-			
-			var email = $('#signin_email').val();			
-			var password = $('#signin_password').val();
-			if ((email == '')||(password == '')){
-				alert('입력하지 않은 값이 있습니다.');
-				return;	
-			}
-			
-			var regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-			var isEmailType = regex.test(email);	
-			if (!isEmailType){
-				alert('올바른 이메일 형식이 아닙니다');
-				return;
-			}
-
-			regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[~`!@#$%^&*()_+-={}\[\]:;<,>.?/|\\])[A-Za-z\d~`!@#$%^&*()_+-={}\[\]:;<,>.?/|\\]{8,16}$/;
-			var isPasswordType = regex.test(password);
-		  	if (!isPasswordType){
-		  		alert("비밀번호(8~16자)는 반드시 한 개 이상의 영문, 숫자, 특수문자를 전부 포함하고 있어야 합니다");
-		  		return;
-		  	}
-			
-			$.ajax({
-				type : 'POST',
-				url : '/requestSigninEmail',
-				async : false,
-				headers : {
-					"Content-Type": "application/json",
-					"X-HTTP-Method-Override" : "POST"
-				},
-				dataType : 'text',
-			    data : JSON.stringify({ 
-			    	'email' : $('#signin_email').val(),
-			    	'password' : $('#signin_password').val()
-			    }),
-			    success : function(data) {
-			         					
-			    }
-			});
-			
-			var isSignin = requestSigninSessionAttribute();
-			if (isSignin == false){
-				alert("로그인에 실패하였습니다");
-				$('#signupBtn').remove();
-			    $('#signinBtn').remove();
-			    $('#myPage').remove();
-			    $('#signoutBtn').remove();
-				$('.nav').append('<li><a href="#" id="signupBtn" data-toggle="modal" data-target="#signup">회원가입</a></li>');
-	        	$('.nav').append('<li><a href="#" id="signinBtn" data-toggle="modal" data-target="#signin">로그인</a></li>'); 
-	        }
-			
-		    if (isSignin == true){
-		    	$('#signupBtn').remove();
-			    $('#signinBtn').remove();
-			    $('#myPage').remove();
-			    $('#signoutBtn').remove();
-			    $('.nav').append('<li><a href="/myPage" id = "myPage">마이페이지</a></li>');
-			    $('.nav').append('<li><a href="#" id="signoutBtn">로그아웃</a></li>');
-				$('#signin').modal('hide');
-	        }
-
-		});
-	});
-</script>
-
-<!-- 서버에서 로그인 된 상태면 true-->
-<!-- 서버에서 로그아웃 된 상태면 false를 반환하는 메서드 -->
-<!-- 로그인, 로그아웃 메뉴를 바꾸는 부분도 이곳으로 옮기려 하였으나 오류 때문에 일단. -->
-<script>
-			function requestSigninSessionAttribute(){
-				
-				var isSignin = false;
-				
-				$.ajax({
-					type : 'POST',
-					url : '/requestSigninSessionAttribute',
-					async : false,
-					dataType: 'json',
-				    success : function(result) {
-						
-						if (result["email"] != null && result ["nickname"] != null){
-							signinSession.email = result["email"];
-							signinSession.nickname = result["nickname"];
-							isSignin = true;
-						}else{
-							signinSession.email = null;
-							singinSession.nickname = null;
-							isSignin = false;
-						}
-				    }
-				});
-				
-				return isSignin;		       	
-			}
-</script>
-
-<!-- 이메일로 가입 버튼을 클릭했을 때 작동하는 스크립트입니다. -->
-<script>
-	$(document).ready(function(){
-		$('#signup_email_btn').on('click', function(e){
-			
-			e.preventDefault();
-
-			var email = $('#signup_email').val();
-			var password = $('#signup_password').val();
-			var nickname = $('#signup_nickname').val();
-			var authentication = $('#signup_authentication').val();
-		  	var checkPassword = $('#signup_check_password').val();
-
-			if ((email == '')||(password == '')||(nickname == '')||(authentication == '')||(checkPassword == '')){
-				alert('입력하지 않은 값이 있습니다.');
-				return;	
-			}
-			
-			var regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-			var isEmailType = regex.test(email);
-	
-			if (!isEmailType){
-				alert('올바른 이메일 형식이 아닙니다');
-				return;
-			}
-
-			regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[~`!@#$%^&*()_+-={}\[\]:;<,>.?/|\\])[A-Za-z\d~`!@#$%^&*()_+-={}\[\]:;<,>.?/|\\]{8,16}$/;
-		  	var isPasswordType = regex.test(password);
-		  			  	
-		  	if (password != checkPassword){
-		  		alert('비밀번호가 일치하지 않습니다');
-		  		return;
-		  	}	
-		  	
-		  	if (!isPasswordType){
-		  		alert("비밀번호(8~16자)는 반드시 한 개 이상의 영문, 숫자, 특수문자를 전부 포함하고 있어야 합니다");
-		  		return;
-		  	}
-			
-			if (!isSignupEmailUnique){
-		  		alert('이메일 중복검사를 해 주세요');
-		  		return;
-		  	}
-		  	
-		  	if (!isAuthenticate){
-		  		alert('인증번호를 발급받으세요');
-		  		return;
-		  	}
-		  	
-			var registerMap = {};
-			registerMap["user"] = [$('#signup_email').val(), $('#signup_password').val(), 
-				$('#signup_nickname').val(),
-				$(':radio[name="register_type_code"]:checked').val()];
-			registerMap["authentication"] = [$('#signup_authentication').val()];
-			$.ajax({
-				type : 'POST',
-				url : '/requestSignupEmail',
-				async : false,
-				headers : {
-					"Content-Type": "application/json",
-					"X-HTTP-Method-Override" : "POST"
-				},
-				dataType : 'json',
-			    data : JSON.stringify(registerMap),	
-			    success : function(data) {
-				    alert(data);
-			    }
-			});
-			
-			var isSignin = requestSigninSessionAttribute();
-
-			if (isSignin == false){
-				$('#signupBtn').remove();
-			    $('#signinBtn').remove();
-			    $('#myPage').remove();
-			    $('#signoutBtn').remove();
-				$('.nav').append('<li><a href="#" id="signupBtn" data-toggle="modal" data-target="#signup">회원가입</a></li>');
-	        	$('.nav').append('<li><a href="#" id="signinBtn" data-toggle="modal" data-target="#signin">로그인</a></li>'); 
-	        }
-			
-		    if (isSignin == true){
-		    	$('#signupBtn').remove();
-			    $('#signinBtn').remove();
-			    $('#myPage').remove();
-			    $('#signoutBtn').remove();
-			    $('.nav').append('<li><a href="/myPage" id = "myPage">마이페이지</a></li>');
-			    $('.nav').append('<li><a href="#" id="signoutBtn">로그아웃</a></li>');
-				$('#signup').modal('hide');
-	        }
-		    
-		});
-	});
-</script>
-
-<!-- 네이버로 가입 버튼을 클릭했을 때 작동하는 스크립트입니다. -->
-<script>
-	$(document).ready(function(){
-		$('#signup_naver_img').on('click', function(e){
-			
-			e.preventDefault();
-			
-			var isSignin;
-			
-			$.ajax({
-				type : 'POST',
-				url : '/requestSignupNaver',
-				async : false,
-				data : {
-					"currentPage" : document.location.href
-				},
-			    success : function(data) {
-					location.href = data; 	
-			    }
-			});
-			
-		});
-	});
-</script>
-
-<!-- 네이버로 로그인 버튼을 클릭했을 때 작동하는 스크립트입니다. -->
-<script>
-	$(document).ready(function(){
-		$('#signin_naver_img').on('click', function(e){
-			
-			e.preventDefault();
-			
-			var isSignin;
-			
-			$.ajax({
-				type : 'POST',
-				url : '/requestSigninNaver',
-				async : false,
-				data : {
-					"currentPage" : document.location.href
-				},
-			    success : function(data) {
-					location.href = data; 				    	
-			    }
-			});
-			
-		});
-	});
-</script>
-
-<!-- 로그아웃 버튼을 클릭했을 때 작동하는 스크립트입니다. -->
-<script>
-	$(document).ready(function(){
-
-		$('body').on('click', '#signoutBtn', function(e){
-
-			e.preventDefault();
-			e.stopPropagation();
-			
-			$.ajax({
-				type : 'POST',
-				async : false,
-				url : '/requestSignout',
-			    success : function(data) {
-
-			    }
-			});
-			
-			var isSignin = requestSigninSessionAttribute();
-			
-			if (isSignin == false){
-				$('#signupBtn').remove();
-			    $('#signinBtn').remove();
-			    $('#myPage').remove();
-				$('.nav').append('<li><a href="#" id="signupBtn" data-toggle="modal" data-target="#signup">회원가입</a></li>');
-	        	$('.nav').append('<li><a href="#" id="signinBtn" data-toggle="modal" data-target="#signin">로그인</a></li>');
-	        	this.parentNode.removeChild(this);
-	        }
-			
-		    if (isSignin == true){
-		    	$('#signupBtn').remove();
-			    $('#signinBtn').remove();
-			    $('#myPage').remove();
-			    $('.nav').append('<li><a href="/myPage" id = "myPage">마이페이지</a></li>');
-	        }
-			
-		});
-	});
-</script>
-
-<!-- 이메일 중복 검사 버튼 클릭했을 때 작동하는 스크립트 -->
 <script>
 			$(document).ready(function(){
 
@@ -430,54 +143,92 @@
 						return;
 					}
 					
-					$.ajax({
-								url : '/requestCheckEmailDuplication',
-								method : 'post',
-								async : false,
-								data : {
-										'email' : $('#signup_email').val(),
-									},
-								success : function(data){
-									email_state = data;
-									if (email_state === "0"){
-										alert('이미 가입된 이메일입니다');
-									}else if(email_state === "1"){
-										alert('사용할 수 있는 이메일입니다');
-										isSignupEmailUnique = true;
-									}else{
-										alert('오류가 발생했습니다');
-									} 
-								}
-					});
 					
+					$.ajax({
+						url : '/requestCheckEmailDuplication',
+						method : 'post',
+						async : false,
+						data : {
+								'email' : $('#signup_email').val(),
+							},
+						success : function(data){
+							email_state = data;
+							if (email_state === "0"){
+								alert('이미 가입된 이메일입니다');
+							}else if(email_state === "1"){
+								alert('사용할 수 있는 이메일입니다');
+								isSignupEmailUnique = true;
+							}else{
+								alert('오류가 발생했습니다');
+							} 
+						}
+					});
 				});
 			});
+</script>
+	
+	  <script>
+
+        function passwordTypeCheck()
+        {
+        	var password = $('#signup_password').val();
+       		regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[~`!@#$%^&*()_+-={}\[\]:;<,>.?/|\\])[A-Za-z\d~`!@#$%^&*()_+-={}\[\]:;<,>.?/|\\]{8,16}$/;
+   		  	var isPasswordType = regex.test(password);
+   		  	if (!isPasswordType)
+   		  	{
+   		  		alert("비밀번호(8~16자)는 반드시 한 개 이상의 영문, 숫자, 특수문자를 전부 포함하고 있어야 합니다");
+   		  		
+   		  	}
+        }
+      </script>
+      
+      <script>
+
+        function passwordEqualCheck()
+        {
+        	var password = $('#signup_password').val();
+        	var checkPassword = $('#signup_check_password').val();
+        	if (password != checkPassword){
+		  		alert('비밀번호가 일치하지 않습니다');
+		  	}else
+		  		{
+		  			isPassword = true;
+		  		}
+        }
 	</script>
 	
-	<!-- 회원 가입 email에 글자를 입력했다(키업 이벤트) -->
+		<!-- 회원 가입 email에 글자를 입력했다(키업 이벤트) -->
 	<script>
 	$(document).ready(function(){
 		$(document).on('keyup', '#signup_email', function(){
 			
-			isSignupEmailUnique = false;
+			isEmailUnique = false;
 			isAuthenticate = false;
+			
+		});
+		
+		$(document).on('click', '#my-alert', function(){
+			 $('.modal-body').find('textarea,input').val('');
+			 $('#signup_authentication').prop('readonly', false);
 			
 		});
 	});
 	</script>
-	
-	<!-- 인증 버튼 클릭했을 때 작동하는 스크립트 -->
-<script>
+      
+      	<!-- 인증번호발급받기 버튼 클릭했을 때 작동하는 스크립트 -->
+	<script>
 			$(document).ready(function(){
 
-				$(document).on('click', '#check_authentication_btn',function(e){
+				$(document).on('click', '#send_authentication_btn',function(e){
 					
 					e.preventDefault();
-					
+					$('#signup_authentication').prop('readonly', false);
 					if (!isSignupEmailUnique){
-						alert('이메일이 가입되어 있는지 확인하세요');
+						alert('이메일체크를 해주세요');
+						$("#signup_email").focus();
 						return;
 					}
+			    	alert('인증번호 발송');
 			    	
 					isAuthenticate = false;
 					
@@ -486,12 +237,18 @@
 								method : 'post',
 								async : false,
 								data : {
-										'email' : $('#signup_email').val()
+										'USER_EMAIL' : $('#signup_email').val()
 									},
 								success : function(data){
-									authenticate_state = data;
-									alert(data);
-									isAuthenticate = true;
+									if(data != "error")
+									{
+										alert("메일로 인증번호가 전송되었습니다.");
+										authenticationCode = data;
+									}
+									else
+									{
+										alert("에러발생!!!");
+									}
 								}
 					}); 
 					
@@ -499,57 +256,199 @@
 			});
 	</script>
 	
-	<!-- 새 비밀번호 발급 버튼을 클릭했을 때 작동하는 스크립트입니다. -->
+	
+	<!-- 인증 버튼 클릭했을 때 작동하는 스크립트 -->
+	<script>
+	$(document).ready(function(){
+			
+		$(document).on('click', '#check_authentication_btn', function(){
+			var signup_authentication = $('#signup_authentication').val();
+			if(signup_authentication == authenticationCode)
+				{
+					alert("입력한 값과 전송한 값이 일치함" +"\n"
+							+ "전송된 값 : " + authenticationCode + "\n"
+							+ "입력한 값 : " + signup_authentication + "\n");
+					isAuthenticate = true;
+					$('#signup_authentication').prop('readonly', true);
+				}
+			else
+				{
+					alert("입력한 값과 전송한 값이 불일치함" +"\n"
+						+ "전송된 값 : " + authenticationCode + "\n"
+						+ "입력한 값 : " + signup_authentication + "\n");
+					
+				}
+			
+		});
+	});
+	</script>
+<!-- 이메일로 가입 버튼을 클릭했을 때 작동하는 스크립트입니다. -->
 <script>
 	$(document).ready(function(){
-		$('#issue_password_btn').on('click', function(e){
+		$('#signup_email_btn').on('click', function(e){
 			
 			e.preventDefault();
-			
+			e.stopPropagation();
+			var email = $('#signup_email').val();
+			var password = $('#signup_password').val();
+			var nickname = $('#signup_nickname').val();
+			var authentication = $('#signup_authentication').val();
+
+			if (email == '' || isSignupEmailUnique == false)
+			{
+				alert("이메일을 입력해 주세요");
+				$("#signup_email").focus();
+				return;
+				
+			}
+			else if(password == '' || isPassword == false)
+			{
+				alert("비밀번호를 입력해 주세요");
+				$("#signup_password").focus();
+				return;
+			}
+			else if((nickname == ''))
+			{
+				alert("닉네임을 입력해 주세요");
+				$("#signup_nickname").focus();
+				return;
+			}
+			else if(authentication == '' || isAuthenticate == false)
+			{
+				alert("인증코드를 입력해 주세요");
+				$("#signup_authentication").focus();
+				return;
+			}
+		  	
+			var registerMap = {};
+			registerMap["user"] = [$('#signup_email').val(), $('#signup_password').val(), 
+				$('#signup_nickname').val(),
+				$(':radio[name="register_type_code"]:checked').val()];
 			$.ajax({
 				type : 'POST',
-				url : '/requestIssuePassword',
+				url : '/requestSignupEmail',
 				async : false,
-				data : {
-						'email' : $('#signin_email').val(),
-					},
+				headers : {
+					"Content-Type": "application/json",
+					"X-HTTP-Method-Override" : "POST"
+				},
+				dataType : 'text',
+			    data : JSON.stringify(registerMap),	
 			    success : function(data) {
-			    	alert(data);
+				    if(data == "true")
+			    	{
+				    	$('#signup').modal('hide');
+				    	$('.modal-body').find('textarea,input').val('');
+						$('#signup_authentication').prop('readonly', false);
+			    	}
 			    }
 			});
-			
-			
+		    
 		});
 	});
 </script>
 
-<!-- 닉네임 중복 검사 버튼 클릭했을 때 작동하는 스크립트 -->
-<!-- 일단은 넣어두고, 컨트롤러에도 만들어 놓지만  -->
-<!-- 닉네임 중복 검사는 기획 단계에서 없어졌다 -->
-<!-- <script>
-			$(document).ready(function(){
-
-				$(document).on('click', '#check_nickname_btn',function(){
+<!-- 이메일로 로그인 버튼을 클릭했을 때 작동하는 스크립트입니다. -->
+<script>
+	$(document).ready(function(){
+		$('body').on('click', '#signin_email_btn', function(e){
+			e.preventDefault();
+			e.stopPropagation();
 			
-					$.ajax({
-								url : '/requestCheckNicknameDuplication',
-								method : 'post',
-								async : false,
-								data : {
-										nickname : $('#signup_nickname').val()
-									},
-								success : function(data){
-									nickname_state = data;
-									if (nickname_state === "0"){
-										alert('이미 사용중인 닉네임입니다');
-									}else if(nickname_state === "1"){
-										alert('사용할 수 있는 닉네임입니다');
-									}else{
-										alert('오류가 발생했습니다');
-									} 
-								}
-					});
-					
-				});
+			var email = $('#signin_email').val();			
+			var password = $('#signin_password').val();
+			if ((email == '')||(password == ''))
+			{
+				alert('입력하지 않은 값이 있습니다.');
+				return;	
+			}
+			else if (email == '')
+			{
+				alert("이메일을 확인해주세요");
+				return;	
+			}
+			else if (password == '')
+			{
+				alert('입력하지 않은 값이 있습니다.');
+				return;	
+			}
+			$.ajax({
+				type : 'POST',
+				url : '/requestSigninEmail',
+				async : false,
+				dataType : 'text',
+			    data : 
+			    { 
+			    	'USER_EMAIL' : email,
+			    	'USER_PASSWORD' : password
+			    },
+			    success : function(data) {
+				    if(data == "true")
+			    	{
+				    	alert("로그인성공");
+				    	$('#signupBtn').remove();
+					    $('#signinBtn').remove();
+					    $('#myPage').remove();
+					    $('#signoutBtn').remove();
+					    $('.nav').append('<li><a href="/myPage" id = "myPage">마이페이지</a></li>');
+					    $('.nav').append('<li><a href="#" id="signoutBtn">로그아웃</a></li>');
+						$('#signin').modal('hide');
+						location.reload();
+			    	}
+				    else
+			    	{
+				    	alert("로그인에 실패하였습니다");
+						$('#signupBtn').remove();
+					    $('#signinBtn').remove();
+					    $('#myPage').remove();
+					    $('#signoutBtn').remove();
+						$('.nav').append('<li><a href="#" id="signupBtn" data-toggle="modal" data-target="#signup">회원가입</a></li>');
+			        	$('.nav').append('<li><a href="#" id="signinBtn" data-toggle="modal" data-target="#signin">로그인</a></li>'); 
+			    	}
+			         					
+			    }
 			});
-	</script> -->
+
+		});
+	});
+</script>
+
+
+<!-- 로그아웃 버튼을 클릭했을 때 작동하는 스크립트입니다. -->
+<script>
+	$(document).ready(function(){
+		
+		$('body').on('click', '#signoutBtn', function(e){
+			
+			e.preventDefault();
+			e.stopPropagation();
+			
+			var email = '<c:out value="${login.USER_EMAIL}"/>';
+			var registerType = '<c:out value="${login.REGISTER_TYPE_CODE}"/>';
+			alert("로그아웃 버튼 클릭시 이메일 : " + email + "\n"
+					+"가입유형코드 : " + registerType);
+			$.ajax({
+				type : 'POST',
+				async : false,
+				url : '/requestSignout',
+				data : {USER_EMAIL : email},
+				dataType : 'text',
+			    success : function(data) {
+			    	
+			    	if (data == "true"){
+			    		$('#signupBtn').remove();
+					    $('#signinBtn').remove();
+					    $('#myPage').remove();
+					    $('#signoutBtn').remove();
+						$('.nav').append('<li><a href="#" id="signupBtn" data-toggle="modal" data-target="#signup">회원가입</a></li>');
+			        	$('.nav').append('<li><a href="#" id="signinBtn" data-toggle="modal" data-target="#signin">로그인</a></li>'); 
+			        	
+			        }
+				    
+			
+			    }
+			});
+			
+		});
+	});
+</script>
