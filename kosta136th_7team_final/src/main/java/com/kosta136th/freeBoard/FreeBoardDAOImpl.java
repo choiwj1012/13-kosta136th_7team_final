@@ -18,7 +18,7 @@ public class FreeBoardDAOImpl implements FreeBoardDAO {
 	@Inject
 	private SqlSession session;
 	
-	private static String namespace = "com.kosta136th.mapper.FreeBoardMapper";
+	private static String namespace = "com.kosta136th.mapper.freeBoardMapper";
 
 	@Override
 	public void create(FreeBoard vo) throws Exception {
@@ -42,7 +42,14 @@ public class FreeBoardDAOImpl implements FreeBoardDAO {
 	
 	@Override
 	  public List<FreeBoard> listAll() throws Exception {
-	    return session.selectList(namespace + ".listAll");
+		
+		System.out.println("listALl dao");
+	    try {
+	    	session.selectList(namespace + ".listAll");
+	    }catch(Exception e) {
+	    	e.printStackTrace();
+	    }
+		return session.selectList(namespace + ".listAll");
 	  }
 
 	  @Override

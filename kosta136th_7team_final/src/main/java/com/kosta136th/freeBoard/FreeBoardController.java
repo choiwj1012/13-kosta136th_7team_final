@@ -1,5 +1,7 @@
 package com.kosta136th.freeBoard;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -25,7 +27,9 @@ public class FreeBoardController {
 	private FreeBoardService service;
 
 	@RequestMapping("/sub/freeboard/board_list")
-	public String getFreeBoardList() {
+	public String getFreeBoardList(Model model) throws Exception {
+		System.out.println("TEST 123123");
+		model.addAttribute("board_list", service.listAll());
 		return "/sub/freeboard/board_list";
 	}
 	
@@ -45,7 +49,15 @@ public class FreeBoardController {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		 
+		List<FreeBoard> fb  = service.listAll();
+		
+		if(fb != null) {
+			System.out.println("data insert sc");
+		}
+		
+		System.out.println("return setting1");
+		model.addAttribute("board_list", fb);
+		System.out.println("return setting2");
 		return "/sub/freeboard/board_list";
 		
 	}
@@ -59,7 +71,7 @@ public class FreeBoardController {
 	    return "redirect:/sub/freeboard/board_list";
 	  }*/
 
-	  @RequestMapping(value = "/free/board_list", method = RequestMethod.GET)
+	  @RequestMapping(value = "/sub/free/board_list", method = RequestMethod.GET)
 	  public void listAll(Model model) throws Exception {
 
 	    model.addAttribute("board_list", service.listAll());

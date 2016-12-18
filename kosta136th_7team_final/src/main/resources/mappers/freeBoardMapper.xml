@@ -22,15 +22,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="listAll" resultType="com.kosta136th.freeBoard.FreeBoard">
-		<![CDATA[
+		
 		SELECT
-			FREEBOARD_NUM, TITLE, CONTENT, WRITER, REGDATE, VIEWCNT
+			FREEBOARD_NUM, TITLE, CONTENT, WRITER, REGDATE, VIEW_COUNT
 		FROM 
 			FREEBOARD
 		WHERE
 			FREEBOARD_NUM > 0
 		ORDER BY FREEBOARD_NUM DESC, REGDATE DESC
-		]]>
+		
 	</select>
 	
 	<update id="updateViewCnt">
