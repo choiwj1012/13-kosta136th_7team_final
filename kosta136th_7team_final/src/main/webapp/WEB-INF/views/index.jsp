@@ -182,10 +182,6 @@
 		
 	});
 	</script>
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> refs/remotes/origin/master
 <%@ include file="include/footer.jsp" %>
 		

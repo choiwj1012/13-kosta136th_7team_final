@@ -15,127 +15,8 @@ public class UserDAOImpl implements UserDAO{
 
 	@Inject
 	private SqlSession session;
-<<<<<<< HEAD
 
 	private static String namespace = "com.kosta136th.mapper.UserMapper";
-=======
-	
-	private static String namespace = "com.kosta136th.mapper.UserMapper";
-	
-	@Override
-	public User signinEmail(User signinEmailVO) throws Exception {
-		
-		//DAO의 반환은 DTO
-		User signinSessionDTO = null;
-		
-		signinEmailVO.setPassword(encryptPasswordSHA256(signinEmailVO.getPassword()));
-
-		try {
-			//이메일에 해당하는 회원 정보를 찾아
-			signinSessionDTO = session.selectOne(namespace + ".getLoginProfileByEmail", signinEmailVO);
-			//회원정보를 로그인 시간에 넣는다
-			session.insert(namespace + ".insertUserLoginRecord", signinSessionDTO);
-		} catch(Exception e){
-			e.printStackTrace();
-		}
-				
-		return signinSessionDTO;
-		
-	}
-	
-	//쓸 필드가 이메일 뿐이므로 네이버 로그인은 딱히 객체를 만들 필요가 없어.
-	@Override
-	public User signinNaver(String NaverEmail) throws Exception {
-		//DAO의 반환은 DTO
-		User signinSessionDTO = null;
-
-		try{
-			signinSessionDTO = session.selectOne(namespace+".getLoginProfileByNaver", NaverEmail);
-			session.insert(namespace + ".insertUserLoginRecord", signinSessionDTO);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return signinSessionDTO;	
-	}
-	
-	@Override
-	public boolean signupEmail(User signupEmailVO, String register_type_code) throws Exception {
-
-		int affectedRows = 0;
-		boolean signupSuccess = false;
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("signupVO", signupEmailVO);
-		map.put("register_type_code", register_type_code);
-		
-		signupEmailVO.setPassword(encryptPasswordSHA256(signupEmailVO.getPassword()));
-		
-		try{
-			affectedRows = session.insert(namespace + ".insertLoginProfileByEmail", signupEmailVO);
-			//가입과 동시에 로그인
-			session.insert(namespace + ".insertUserLoginRecord", signupEmailVO);
-			session.insert(namespace + ".insertRegisterType", map);
-		}catch(Exception e){
-			e.printStackTrace();
-			affectedRows = 0;			
-		}
-		
-		if (affectedRows > 0){
-			signupSuccess = true;
-		}else{
-			signupSuccess = false;
-		}
-		
-		return signupSuccess;
-	}
-	
-	@Override
-	public boolean signupNaver(User signupNaverVO) throws Exception {
-		int affectedRows = 0;
-		boolean signupSuccess = false;
-		
-		Map <String, Object> map = new HashMap <String, Object>();
-		map.put("signupVO", signupNaverVO);
-		map.put("register_type_code", "n");
-		
-		try{
-			affectedRows = session.insert(namespace + ".insertLoginProfileByNaver", signupNaverVO);
-			//가입과 동시에 로그인
-			session.insert(namespace + ".insertUserLoginRecord", signupNaverVO);
-			session.insert(namespace + ".insertRegisterType", map);
-		}catch(Exception e){
-			e.printStackTrace();
-			affectedRows = 0;
-		}
-		
-		if (affectedRows > 0){
-			signupSuccess = true;
-		}else{
-			signupSuccess = false;
-		}
-		
-		return signupSuccess;
-	}
-
-	@Override
-	public String encryptPasswordSHA256(String password) throws Exception {
-		
-		String encryptedPassword;
-
-		MessageDigest digest = null;
-		digest = MessageDigest.getInstance("SHA-256");
-		byte[] hash = digest.digest(password.getBytes("UTF-8"));
-		
-		for (int i = 0; i < hash.length; i++){
-			System.out.print(hash[i]);
-		}
-		
-		encryptedPassword = DatatypeConverter.printHexBinary(hash);
-		
-		return encryptedPassword;
-	}
->>>>>>> refs/remotes/origin/master
 
 	@Override
 	public String checkEmailDuplication(String email) throws Exception {
@@ -181,7 +62,6 @@ public class UserDAOImpl implements UserDAO{
 		return result;
 	}
 
-<<<<<<< HEAD
 	public String encryptPasswordSHA256(String password) throws Exception {
 
 		String encryptedPassword;
@@ -194,14 +74,6 @@ public class UserDAOImpl implements UserDAO{
 		
 		return encryptedPassword;
 	}
-=======
-	@Override
-	public boolean updateUserPassword(User userVO) throws Exception {
-		int affectedRows = 0;
-		boolean updateUserPasswordSuccess = false;
-
-		userVO.setPassword(encryptPasswordSHA256(userVO.getPassword()));
->>>>>>> refs/remotes/origin/master
 
 	@Override
 	public LoginInfo signinEmail(User user) throws Exception {
@@ -233,16 +105,8 @@ public class UserDAOImpl implements UserDAO{
 		boolean updateUserSignoutSuccess = false;
 		
 		try{
-<<<<<<< HEAD
 			String login_num = session.selectOne(namespace + ".selectUserLogoutRecord", user);
 			affectedRows = session.update(namespace + ".updateUserLogoutRecord", login_num);
-=======
-
-			String login_num = session.selectOne(namespace + ".selectUserLogoutRecord", signoutVO);
-
-			affectedRows = session.update(namespace + ".updateUserLogoutRecord", login_num);
-
->>>>>>> refs/remotes/origin/master
 		}catch(Exception e){
 			e.printStackTrace();
 			affectedRows = 0;

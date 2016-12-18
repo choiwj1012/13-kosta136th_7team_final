@@ -348,43 +348,13 @@
 	});
 </script>
 
-<<<<<<< HEAD
 <!-- 이메일로 로그인 버튼을 클릭했을 때 작동하는 스크립트입니다. -->
-=======
-<!-- 네이버로 가입 버튼을 클릭했을 때 작동하는 스크립트입니다. -->
-<script>
-	$(document).ready(function(){
-		$('#signup_naver_img').on('click', function(e){
-			
-			e.preventDefault();
-			
-			var isSignin;
-			
-			$.ajax({
-				type : 'POST',
-				url : '/requestSignupNaver',
-				async : false,
-				data : {
-					"currentPage" : document.location.href
-				},
-			    success : function(data) {
-					location.href = data; 	
-			    }
-			});
-			
-		});
-	});
-</script>
-
-<!-- 네이버로 로그인 버튼을 클릭했을 때 작동하는 스크립트입니다. -->
->>>>>>> refs/remotes/origin/master
 <script>
 	$(document).ready(function(){
 		$('body').on('click', '#signin_email_btn', function(e){
 			e.preventDefault();
 			e.stopPropagation();
 			
-<<<<<<< HEAD
 			var email = $('#signin_email').val();			
 			var password = $('#signin_password').val();
 			if ((email == '')||(password == ''))
@@ -402,15 +372,10 @@
 				alert('입력하지 않은 값이 있습니다.');
 				return;	
 			}
-=======
-			var isSignin;
-			
->>>>>>> refs/remotes/origin/master
 			$.ajax({
 				type : 'POST',
 				url : '/requestSigninEmail',
 				async : false,
-<<<<<<< HEAD
 				dataType : 'text',
 			    data : 
 			    { 
@@ -444,16 +409,6 @@
 			    }
 			});
 
-=======
-				data : {
-					"currentPage" : document.location.href
-				},
-			    success : function(data) {
-					location.href = data; 				    	
-			    }
-			});
-			
->>>>>>> refs/remotes/origin/master
 		});
 	});
 </script>
