@@ -71,9 +71,9 @@
 		</select>
 		
 		<select id="oneChart" resultType="com.kosta136th.marketPrice.MarketPrice">
-		SELECT TIMESTAMP, ${moneyType}
+		SELECT TIMESTAMP, ${money_type}
 		FROM MARKET_PRICE
-		WHERE NAME = #{coinName}
+		WHERE NAME = #{coin_type}
 
 		</select>
 		
