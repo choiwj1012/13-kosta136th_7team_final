@@ -19,4 +19,10 @@ public interface DealerDAO {
 	public int score(int dealerNum) throws Exception;
 
 	public void update(Dealer dealer) throws Exception;
+
+	public void likeEvent(String likeCheck, String disLikeCheck, int dealerNum) throws Exception;
+
+	public List<Dealer> allList() throws Exception;
+
+	public List<Dealer> allListSearch(SearchDealer sd) throws Exception;
 }

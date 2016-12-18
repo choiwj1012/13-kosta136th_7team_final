@@ -57,8 +57,8 @@
 		            <div class="collapse navbar-collapse navbar-right">
 		                <ul class="nav navbar-nav">
 		       	 			<li><a href="/marketPrice">실시간 시세</a></li>
-							<li><a href="/news">최신 뉴스</a></li>
-							<li><a href="/btcInfoLand">BTC정보광장</a></li>
+							<li><a href="/news">비트코인 최신기사</a></li>
+							<li><a href="/btcInfoLand">비트리버 커뮤니티</a></li>
 							<li><a href="/board_list">자유게시판</a></li>
 		                </ul>
 		            </div>
@@ -83,10 +83,10 @@
 		
 				<div class="col-md-12 text-center" id="bg-first">
 					<img id="bg-first_logo" alt="logo_image" src="../../resources/img/logo_first_section.png">
-					<p>Lorem ipsum dolor sit amet, consectetur </p>
-					<p>adipiscing elit. Aenean euismod bibendum </p>
-					<p>laoreet. Proin gravida dolor sit amet lacus </p>
-					<p>accumsan et viverra justo commodo.</p>
+					<p> 비트리버는 비트코인 정보공유를 위해 제작되었습니다 </p>
+					<p> 비트리버는 실시간으로 시세를 볼 수 있습니다 </p>
+					<p> 비트리버는 국내외 기사들을 수집할 수 있습니다</p>
+					<p> 비트코인 전문가들을 통한 정보를 참고하여 투자하십시오 </p>
 				</div>
 							
 			</div>
@@ -103,21 +103,30 @@
 			<div class="row second-content">
 			
 				<div class="col-md-4">
-					<img alt="서비스소개" src="../../resources/img/graph_update_black_resize.png">
+					<a href="/marketPrice"><img alt="서비스소개" src="../../resources/img/graph_update_black_resize.png"></a>
 					<h3>실시간 시세</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br>Aenean euismod bibendum laoreet.<br> Proin gravida dolor sit amet lacus <br>accumsan et viverra justo</p>
+					<p>비트코인 화폐들의 실시간 시세를 보실 수 있습니다 
+						<br> 주요 화폐들의 환율도 보실 수 있습니다
+						<br> 시간 & 종류별로 화폐들의 그래프를 보실 수 있습니다
+					</p>
 				</div>
 				
 				<div class="col-md-4">
-					<img alt="서비스소개" src="../../resources/img/news_update_black_resize.png">
-					<h3>비트코인 기사</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br>Aenean euismod bibendum laoreet.<br> Proin gravida dolor sit amet lacus <br>accumsan et viverra justo</p>
+					<a href="/news"><img alt="서비스소개" src="../../resources/img/news_update_black_resize.png"></a>
+					<h3>최신 기사</h3>
+					<p>비트코인과 관련된 국내외 기사들만 선별하여 볼 수 있습니다 
+						<br> 원하는 기사를 스크랩하여 필요한 정보를 저장하세요
+						<br> 다른사람들이 어떤 기사에 관심이 있는지 알 수 있습니다
+					</p>
 				</div>	
 					
 				<div class="col-md-4">
-					<img alt="서비스소개" src="../../resources/img/bitcoin_light_black_psy_resize.png">
-					<h3>정보게시판</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br>Aenean euismod bibendum laoreet.<br> Proin gravida dolor sit amet lacus <br>accumsan et viverra justo</p>
+					<a href="/btcInfoLand"><img alt="서비스소개" src="../../resources/img/bitcoin_light_black_psy_resize.png"></a>
+					<h3>비트리버 커뮤니티</h3>
+					<p>비트코인 커뮤니티에서 여러사람들의 의견을 참고하세요 
+						<br> 전문가들이 비트코인에 관한 투자의견을 제시합니다
+						<br> 전문가들의 의견을 공유하고 소통하세요 
+					</p>
 				</div>	
 					
 			</div>
@@ -156,33 +165,23 @@
 			</div>
 		</div>
 	</section>
-	
-	<script>
-		var signinSession = { 'email' : '',
-							'nickname' : ''};
-		var isSignupEmailUnique = false;
-		var isAuthenticate = false;
-	</script>
-	
-	<c:if test="${not empty signinSessionDTO}">
-		<script>
-			signinSession.email = 
-				'${signinSessionDTO.email}';
-			signinSession.nickname = '${signinSessionDTO.nickname}';
-		</script>
-	</c:if>
-	
 	<script>
 	$(document).ready(function(){
-		if (signinSession.email === '' || signinSession.nickname === ''){
+		loginCheck = "${empty login}"
+		if(loginCheck == "true")
+		{
 			$('.navbar-nav').append('<li><a href="#" id="signupBtn" data-toggle="modal" data-target="#signup">회원가입</a></li>');
-			$('.navbar-nav').append('<li><a href="#" id="signinBtn" data-toggle="modal" data-target="#signin">로그인</a></li>');	
-		} else {
+			$('.navbar-nav').append('<li><a href="#" id="signinBtn" data-toggle="modal" data-target="#signin">로그인</a></li>');
+	
+		}
+		else
+		{
 			$('.navbar-nav').append('<li><a href="/myPage" id = "myPage">마이페이지</a></li>');
 			$('.navbar-nav').append('<li><a href="#" id="signoutBtn">로그아웃</a></li>');
 		}
+		
 	});
 	</script>
-	
+
 <%@ include file="include/footer.jsp" %>
 		

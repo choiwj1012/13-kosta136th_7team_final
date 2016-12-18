@@ -21,6 +21,28 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+<<<<<<< HEAD
 	<context:component-scan base-package="com.kosta136th" />
+=======
+	<context:component-scan base-package="com.kosta136th.main" />
+ 	<context:component-scan base-package="com.kosta136th.scrap" />
+	<context:component-scan base-package="com.kosta136th.user"/>
+	<context:component-scan base-package="com.kosta136th.marketPrice"/>
+	<context:component-scan base-package="com.kosta136th.freeBoard"/>
+	
+	<beans:bean id="loginInterceptor" class="com.kosta136th.user.LoginInterceptor"></beans:bean>
+	<beans:bean id="logoutInterceptor" class="com.kosta136th.user.LogoutInterceptor"></beans:bean>
+	<interceptors>
+		<interceptor>
+			<mapping path="/requestSigninEmail" />
+			<beans:ref bean="loginInterceptor" />
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/requestSignout" />
+			<beans:ref bean="logoutInterceptor" />
+		</interceptor>
+	</interceptors>
+>>>>>>> refs/remotes/origin/master
 
 </beans:beans>
