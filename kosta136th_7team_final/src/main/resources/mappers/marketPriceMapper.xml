@@ -29,16 +29,47 @@
 		<select id="bitcoinList" resultType="com.kosta136th.marketPrice.MarketPrice">
 		<![CDATA[
 			SELECT
-				LABEL, NAME, PRICE_BTC, PRICE_USD, PRICE_CNY, PRICE_EUR, PRICE_GBP, PRICE_RUR, VOLUME_24H
+				*
 			FROM
-				MARKET_PRICE
-			ORDER BY MARKET_PRICE_NUM DESC LIMIT 450;
+				MARKET
+			ORDER BY VOLUME_24H DESC;
 		
 		]]>
-	
 		</select>
 		
-
+		<select id="bitcoinListLABEL" resultType="com.kosta136th.marketPrice.MarketPrice">
+		<![CDATA[
+			SELECT 
+ 				* 
+			FROM 
+ 				MARKET 
+			ORDER BY LABEL ASC; 
+		
+ 		]]> 
+		</select>
+		
+		<select id="bitcoinListNAME" resultType="com.kosta136th.marketPrice.MarketPrice">
+		<![CDATA[
+ 			SELECT 
+ 				* 
+ 			FROM 
+ 				MARKET 
+ 			ORDER BY NAME ASC; 
+		
+ 		]]> 
+		</select>
+		
+				<select id="bitcoinListPRICE" resultType="com.kosta136th.marketPrice.MarketPrice">
+		<![CDATA[
+ 			SELECT 
+ 				* 
+ 			FROM 
+ 				MARKET 
+ 			ORDER BY ${value} DESC; 
+		
+ 		]]> 
+		</select>
+		
 		<select id="oneChart" resultType="com.kosta136th.marketPrice.MarketPrice">
 		SELECT TIMESTAMP, ${moneyType}
 		FROM MARKET_PRICE

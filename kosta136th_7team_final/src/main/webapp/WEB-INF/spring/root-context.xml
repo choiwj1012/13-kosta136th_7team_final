@@ -37,6 +37,12 @@
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
 	</bean>	
+	
+	<bean id="transactionManager"
+        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+	
 	<context:component-scan base-package="com.kosta136th.marketPrice" />
 	<task:scheduler id="gsScheduler" pool-size="10"/>
 	<task:executor id="gsTaskExecutor" pool-size="7200000"/>
@@ -44,5 +50,6 @@
 	
 	<context:component-scan base-package="com.kosta136th.persistenceTEST"></context:component-scan>	
 	<context:component-scan base-package="com.kosta136th.user"></context:component-scan>
-	<context:component-scan base-package="com.kosta136th.freeBoard"></context:component-scan>	
+	<context:component-scan base-package="com.kosta136th.freeBoard"></context:component-scan>
+	<context:component-scan base-package="com.kosta136th.dealer"></context:component-scan>	
 </beans>

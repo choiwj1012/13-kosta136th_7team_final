@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <footer id="footer">
+	
 	<div class="container-fluid text-center">
 		<div class="row">
 
@@ -29,12 +30,14 @@
 						<li role="presentation"><a role="menuitem" tabindex="-1" href="/btcInfoLand">BTC 정보광장</a></li>
 						<li role="presentation"><a role="menuitem" tabindex="-1" href="/board_list">게시판</a></li>
 					</ul>
-					
 				</div>
 			</div>
 			
 		</div>
 	</div>
+	
+	<%@ include file="chatting.jsp" %>
+	
 </footer>
 </body>
 </html>
