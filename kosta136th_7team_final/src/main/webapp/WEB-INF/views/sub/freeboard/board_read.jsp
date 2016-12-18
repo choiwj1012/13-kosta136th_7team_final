@@ -31,7 +31,7 @@
 
 		<form role="form" method="post">
 
-			<input type='hidden' name='bno' value="${boardVO.bno}">
+			<input type='hidden' name='bno' value="${freeBoard.freeboard_Num}">
 
 		</form>
 

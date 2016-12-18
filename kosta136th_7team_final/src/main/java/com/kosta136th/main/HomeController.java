@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@Controller
+@Controller("homeController")
 public class HomeController {
 	
 	// landing page (index.jsp)
@@ -112,6 +112,8 @@ public class HomeController {
 	// BTC 정보광장 딜러 전문소식 상세보기 Mapping
 	@RequestMapping(value = "/btcInfoLand_board_read", method = RequestMethod.GET)
 	public String btcInfoLandBoardRead(){
+		
+		System.out.println("TEST");
 		
 		return "sub/btcInfoLand/btcInfoLand_board_read";
 		

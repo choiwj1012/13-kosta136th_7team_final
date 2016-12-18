@@ -17,13 +17,14 @@ public class DealerController {
 
 	@Inject
 	DealerService service;
-	
+	//딜러페이지 저장뷰 불러오기
 	@RequestMapping(value = "/dealerPageSave", method = RequestMethod.GET)
 	public void DealerPageSaveLoad() throws Exception {
 		
 		
 		
 	}
+	//딜러페이지 저장
 	@RequestMapping(value = "/dealerPageSave", method = RequestMethod.POST)
 	public String DealerPageSave(HttpSession session, RedirectAttributes rttr) throws Exception {
 		Dealer dealer = new Dealer();
@@ -61,7 +62,7 @@ public class DealerController {
 		}
 		return "sub/btcInfoLand";
 	}
-	
+	//딜러페이지 읽기
 	@RequestMapping(value = "/dealerPageRead", method = RequestMethod.GET)
 	public void dealerPageRead(Model model) throws Exception {
 //		 @RequestParam("dealerNum") 
@@ -77,7 +78,7 @@ public class DealerController {
 		
 //		model.addAttribute(service.read(dealerNum));
 	}
-	
+	//딜러 페이지 삭제
 	@RequestMapping(value = "dealerPageRemove", method = RequestMethod.POST)
 	public String dealerPageRemove(Model model) throws Exception {
 		
@@ -89,14 +90,14 @@ public class DealerController {
 		
 		
 	}
-	
+	//딜러 정보 업데이트
 //	@RequestMapping(value = "dealerPageUpdate", method = RequestMethod.GET)
 //	public void dealerPageUpdateLoad(Model model) throws Exception {
 //		int dealerNum;
 //		model.addAttribute(service.read(dealerNum));
 		
 //	}
-	
+	//딜러 정보 업데이트
 	@RequestMapping(value = "dealerPageUpdate", method = RequestMethod.POST)
 	public String dealerPageUpdate(Model model) throws Exception {
 		
@@ -106,6 +107,41 @@ public class DealerController {
 		service.modify(dealer);
 		
 		return "redirect:/sub/btcInfoLand";
+		
+	}
+	//추천 신고
+	@RequestMapping(value = "dealerPageButtoncheck", method = RequestMethod.GET)
+	public void dealerPageButtonCheck(Model model) throws Exception {
+		
+		String likeCheck = "noCheck";
+		String disLikeCheck = "checked";
+		int dealerNum = 3;
+		
+		service.likeEvent(likeCheck, disLikeCheck, dealerNum);
+		
+	}
+	
+	@RequestMapping(value = "dealerPageList", method = RequestMethod.GET)
+	public void dealerPageList(Model model) throws Exception {
+		
+//		model.addAttribute("allList", service.allList());
+		List<Dealer> dealerList = service.allList();
+		
+		for (int i = 0; i < dealerList.size(); i++) {
+		
+			System.out.println(dealerList.get(i).getUser_nickName());
+			System.out.println(dealerList.get(i).getCategory());
+			System.out.println(dealerList.get(i).getLike_count());
+			
+		}
+		
+	}
+	
+	@RequestMapping(value = "/searchList", method = RequestMethod.GET)
+	public void searchList(SearchDealer sd, Model model) throws Exception {
+		
+		service.allListSearch(sd);
+		
 		
 	}
 }

@@ -6,84 +6,36 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService{
+
 	@Inject
 	private UserDAO userDAO;
 	
 	@Override
-	public User signinEmail(User loginEmailDTO) throws Exception {
-		User loginSessionDTO;
-		loginSessionDTO = userDAO.signinEmail(loginEmailDTO);
-		return loginSessionDTO;
-	}
-
-	@Override
-	public boolean signupEmail(User loginEmailDTO, String register_type_code) throws Exception {
-		
-		boolean signupSuccess;
-		
-		signupSuccess = userDAO.signupEmail(loginEmailDTO, register_type_code);
-		
-		return signupSuccess;
-		
-	}
-
-	@Override
-	public String checkEmailDuplication(String email) throws Exception{
-		
+	public String checkEmailDuplication(String email) throws Exception {
 		String email_state;
 		
 		email_state = userDAO.checkEmailDuplication(email);
 	
 		return email_state;
 	}
-	
-	@Override
-	public String checkNicknameDuplication(String nickname) throws Exception{
-		
-		String nickname_state;
-		
-		nickname_state = userDAO.checkNicknameDuplication(nickname);
-		
-		return nickname_state;
-	}
 
 	@Override
-	public User signinNaver(String email) throws Exception {
+	public String signupEmail(User userInfo, String register_type_code) throws Exception {
+		String signupSuccess = null;
 		
-		User loginSessionDTO;
-		
-		loginSessionDTO = userDAO.signinNaver(email);
-		
-		return loginSessionDTO;
-	}
-
-	@Override
-	public boolean signupNaver(User signinNaverVO) throws Exception {
-		
-		boolean signupSuccess;
-		
-		signupSuccess = userDAO.signupNaver(signinNaverVO);
+		signupSuccess = userDAO.signupEmail(userInfo, register_type_code);
 		
 		return signupSuccess;
 	}
 
 	@Override
-	public boolean updateUserPassword(User userVO) throws Exception {
-
-		boolean updateUserPasswordSuccess;
-		
-		updateUserPasswordSuccess = userDAO.updateUserPassword(userVO);
-		
-		return updateUserPasswordSuccess;
+	public LoginInfo signinEmail(User user) throws Exception {
+		return userDAO.signinEmail(user);
 	}
 
 	@Override
-	public boolean signout(User signoutVO) throws Exception {
-		
-		boolean updateUserSignoutSuccess;
-		
-		updateUserSignoutSuccess = userDAO.signout(signoutVO);
-		
-		return updateUserSignoutSuccess;
+	public boolean signout(User user) throws Exception {
+		return userDAO.signout(user);
 	}
+	
 }

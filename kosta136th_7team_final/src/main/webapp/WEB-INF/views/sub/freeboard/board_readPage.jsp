@@ -31,82 +31,70 @@
 
 		<form role="form" method="post">
 
-			<input type='hidden' name='bno' value="${boardVO.bno}">
-
+			<input type='hidden' name='bno' value="${freeBoard.freeBoard_Num}">
+			<input type='hidden' name='page' value="${cri.page}"> <input
+				type='hidden' name='perPageNum' value="${cri.perPageNum}">
 		</form>
 
 
 		<!-- 중앙 게시판 영역 -->
 		<div class="col-lg-6" align="center">
 			<!-- 광고이미지 -->
-			<img class="center_img" src="../../resources/img/AD.gif"
-				alt="Holder image">
 			<!-- center side article -->
-			<form action="" class="form-horizontal" align="left">
-
+			<div class="box-body">
 				<div class="form-group">
-					<!-- 글 제목이 삽입됨 -->
-					<label for="exampleInputEmail1">제목</label> <input type="text"
+					<label for="exampleInputEmail1">Title</label> <input type="text"
 						name='title' class="form-control" value="${freeBoard.title}"
 						readonly="readonly">
 				</div>
-
 				<div class="form-group">
-					<!-- 글 작성자가 삽입됨 -->
-					<label for="exampleInputEmail1">작성자</label> <input type="text"
-						name="writer" class="form-control" value="${freeBoard.writer}"
-						readonly="readonly">
-				</div>
-
-
-				<div class="form-group">
-					<!-- <label for="content" class="col-sm-2">내용:</label>
-					<input type="content" class="form-control" id="content">
-					<div class="col-sm-10"> -->
-					<!-- 글 내용이 들어 갑니다. -->
 					<label for="exampleInputPassword1">Content</label>
 					<textarea class="form-control" name="content" rows="3"
 						readonly="readonly">${freeBoard.content}</textarea>
 				</div>
+				<div class="form-group">
+					<label for="exampleInputEmail1">Writer</label> <input type="text"
+						name="writer" class="form-control" value="${freeBoard.writer}"
+						readonly="readonly">
+				</div>
+			</div>
 		</div>
+
 	</div>
 
-	<div class="buttons" align="right" id="buttons">
-		<!-- <button type="submit" class="btn btn-warning"
-			onclick="location.href='/board_update'">수정</button> -->
+		
+		<div class="box-footer">
+			<button type="submit" class="btn btn-primary">GO LIST</button>
+		</div>
+
 		<!-- ++ -->
-		<!-- <button type="submit" class="btn btn-danger">삭제</button> -->
-		<button type="button" class="btn btn-primary">목록</button>
+
+	<script>
+		$(document).ready(function() {
+
+			var formObj = $("form[role='form']");
+
+			console.log(formObj);
+
+			/* $(".btn-warning").on("click", function(){
+				formObj.attr("action", "/board/modify");
+				formObj.attr("method", "get");		
+				formObj.submit();
+			});
 			
-		<!-- ++ -->
-	</div>
-	
-					<script>
-				
-$(document).ready(function(){
-	
-	var formObj = $("form[role='form']");
-	
-	console.log(formObj);
-	
-	/* $(".btn-warning").on("click", function(){
-		formObj.attr("action", "/board/modify");
-		formObj.attr("method", "get");		
-		formObj.submit();
-	});
-	
-	$(".btn-danger").on("click", function(){
-		formObj.attr("action", "/board/remove");
-		formObj.submit();
-	}); */
-	
-	$(".btn-primary").on("click", function(){
-		self.location = "/sub/freeboard/board_";
-	});
-	
-});
+			$(".btn-danger").on("click", function(){
+				formObj.attr("action", "/board/remove");
+				formObj.submit();
+			}); */
 
-</script>
+			$(".btn-primary").on("click", function(){
+				formObj.attr("method", "get");
+				formObj.attr("action", "/freeboard/board_listPage");
+				formObj.submit();
+			});
+
+		});
+	</script>
 
 	<!-- </form>
 	</div> -->
