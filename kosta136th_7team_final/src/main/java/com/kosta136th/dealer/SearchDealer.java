@@ -1,5 +1,8 @@
 package com.kosta136th.dealer;
 
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
+
 public class SearchDealer {
 
 	private String searchType;
@@ -22,5 +25,5 @@ public class SearchDealer {
 		this.searchType = searchType;
 		this.keyword = keyword;
 	}
-
+	
 }

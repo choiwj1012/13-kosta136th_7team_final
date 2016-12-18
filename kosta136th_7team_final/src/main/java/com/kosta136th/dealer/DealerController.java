@@ -140,8 +140,7 @@ public class DealerController {
 	@RequestMapping(value = "/searchList", method = RequestMethod.GET)
 	public void searchList(SearchDealer sd, Model model) throws Exception {
 		
-		service.allListSearch(sd);
-		
+		model.addAttribute("list", service.allListSearch(sd));
 		
 	}
 }

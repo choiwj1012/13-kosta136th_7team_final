@@ -103,7 +103,7 @@ public class MarketPriceDataController {
                     
                     MarketPriceSave marketPrice = new MarketPriceSave();
                     marketPrice.setLabel((String) marketsObject.get("Label"));
-                    marketPrice.setName((String) marketsObject.get("Name"));;
+                    marketPrice.setName((String) marketsObject.get("Name"));
                     marketPrice.setPrice_btc_result(price_btc_out);
                     marketPrice.setPrice_usd_result(price_usd_out);
                     marketPrice.setPrice_cny_result(price_cny_out);
@@ -111,7 +111,7 @@ public class MarketPriceDataController {
                     marketPrice.setPrice_gbp_result(price_gbp_out);
                     marketPrice.setPrice_rur_result(price_rur_out);
                     marketPrice.setVolume_24h_result(volume_24h_out);
-                    marketPrice.setTimestamp((Long) marketsObject.get("Timestamp"));;
+                    marketPrice.setTimestamp((Long) marketsObject.get("Timestamp"));
                     
                     marketPriceService.rateSave(marketPrice);
                 }
