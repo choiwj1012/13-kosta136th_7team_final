@@ -21,6 +21,9 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+<<<<<<< HEAD
+	<context:component-scan base-package="com.kosta136th" />
+=======
 	<context:component-scan base-package="com.kosta136th.main" />
  	<context:component-scan base-package="com.kosta136th.scrap" />
 	<context:component-scan base-package="com.kosta136th.user"/>
@@ -40,5 +43,6 @@
 			<beans:ref bean="logoutInterceptor" />
 		</interceptor>
 	</interceptors>
+>>>>>>> refs/remotes/origin/master
 
 </beans:beans>
