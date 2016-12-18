@@ -6,6 +6,9 @@ $(document).ready(function () {
 	// 처음 시작시 PRICE_BTC값이 나타나는 쿼리
 	var url = "/rate/bitrate?money_type=" + money_type + "&sorting_type=" + sorting_type;
 	
+	
+	
+	
 	$.getJSON(url, function (data) {
 	
 		var str = "";
@@ -18,16 +21,20 @@ $(document).ready(function () {
                 str += "<td>" + this.volume_24h + "</td>";
             	str += "</tr>";
 			}); 
-	
+		
+		//리스트 출력
 		$("#bitrate").html(str);
 		
+		//차트 상단 정보 출력
 		var usd_btc_price= $("#table_price_row").eq(0).children(':eq(2)').text();
-		
 		chartInfo(usd_btc_price , "USD", "BTC");
 		
+		// btc 로우를 selected 상태로 만듬
+		$(".table_row").eq(0).addClass("selected");		
+		
 	});
-
-	//실화폐 환율
+	
+	//실화폐 환율탭 클릭 시
 	$(".market_price_tab").click(function(){
 		
 		var url = "/rate/rateList";		//MarketPriceDataController로 부터 받은 데이터를 처리한다.
@@ -58,13 +65,34 @@ $(document).ready(function () {
 	//비트코인환율
 	$("#combo-box_moneyType").on('change', function(){
 		
-		money_type = $(this).find(":selected").val();
+		var selectedRowIndex = $(".table_row.selected").index();
+		var coin_label_type = $(".table_row.selected").children(':eq(0)').text();			// "LTC"형식 : chart_info에 사용
+		var coin_type = $(".table_row.selected").children(":eq(1)").text();	// "Litecoin"형식 : chart출력에 사용
+		money_type = $(this).find(":selected").val();					//"PRICE_BTC" 형식
 		sorting_type = $("#combo-box_sortingType").find(":selected").val();
+		
+		// money_name_option는 화폐 종류 그래프에 출력할 값을 저장하는 변수(USD, CNY, BTC...)
+		var money_name_option;
+		if(money_type == "PRICE_USD") {
+			money_name_option = "USD";
+		} else if (money_type == "PRICE_CNY") {
+			money_name_option = "CNY";
+		} else if (money_type == "PRICE_EUR") {
+			money_name_option = "EUR";
+		} else if (money_type == "PRICE_GBP") {
+			money_name_option = "GBP";
+		} else if (money_type == "PRICE_RUR") {
+			money_name_option = "RUR";
+		} else if (money_type == "PRICE_BTC") {
+			money_name_option = "BTC";
+		} 
+		
+		
 		$.ajax({
 			
 			url: "/rate/bitrate/",				//목적지 URI	//Controller로 보낸다.
-			//async : false,						//동기방식
-			type: 'get',							//get 타입 (post타입 등이 있음)
+			//async : false,					//동기방식
+			type: 'get',						//get 타입 (post타입 등이 있음)
 			data: {"money_type" : money_type, "sorting_type" : sorting_type},		//money_type을 넘긴다.
 			
 			success:  function () {				//성공시 return된 객체를
@@ -85,10 +113,83 @@ $(document).ready(function () {
 	                    str += "</tr>"
 	                    
 	                });       
-
 	                $("#bitrate").html(str);
-
+	                
+	                // money_type 변경이전 selected 되어있던 row
+	                // money_type 변경이후 동일 row를 selected.
+	                $(".table_row").eq(selectedRowIndex).addClass("selected");
+	                // selected된 row의 price를 불러옴
+	                var price_info = $(".table_row.selected").children(':eq(2)').text();
+	                chartInfo(price_info , money_name_option, coin_label_type);
 			  });
+				
+			}
+			
+		});
+		
+		var options = {
+
+				rangeSelector: {
+					
+					//기간 버튼 설정
+					buttons: [
+						{
+		                    type: 'hour',
+		                    count: 12,
+		                    text: '12h'
+		                }, {
+		                    type: 'day',
+		                    count: 1,
+		                    text: '1D'
+		                }, {
+		                    type: 'day',
+		                    count: 3,
+		                    text: '3D'
+		                }, {
+		                    type: 'day',
+		                    count: 7,
+		                    text: '1w'
+		                }, {
+		                    type: 'all',
+		                    count: 1,
+		                    text: 'All'
+		                }],
+					//기간 버튼 Default 값 설정 //0: 가장 첫 기간버튼, 1: 두 번째 기간버튼, 2: 세...
+					selected: 4,
+		          },
+				
+				chart: {
+					// 뿌려줄 View단의 id 설정
+					renderTo : 'chart',
+					// 그래프 타입(디자인) 설정
+					// type : 'area'
+				},
+				
+				series : [{
+					name: money_name_option,
+		            tooltip: {
+		            valueDecimals: 3,
+		            type: 'area'
+		            }
+				}]			
+			};
+		
+		$.ajax({
+			
+			url : "/rate/oneChart/",
+			type : 'get',
+			data : {"coin_type" : coin_type, "money_type" : money_type},
+			
+			success : function() {
+				
+				var url = "/rate/oneChart?coin_type=" + coin_type + "&money_type=" + money_type;
+
+				$.getJSON(url, function(data) {
+					
+					options.series[0].data = data;
+					var chart = new Highcharts.stockChart(options);
+					
+				});
 				
 			}
 			
@@ -205,8 +306,9 @@ $(document).ready(function () {
 		  
 		});
 		
-		
-$(document).on("click", "#table_price_row", function(){
+	
+	// 코인리스트 row를 클릭했을 때
+	$(document).on("click", "#table_price_row", function(){
 		
 		var coin_label_type = $(this).children(':eq(0)').text();
 		var coin_type = $(this).children(':eq(1)').text();
@@ -236,11 +338,6 @@ $(document).on("click", "#table_price_row", function(){
 		//차트 코드
 		var options = {
 
-//				title: {
-//					//차트 제목 설정
-//					text: '비트코인 시세정보 차트'
-//		          },
-				
 				rangeSelector: {
 					
 					//기간 버튼 설정
@@ -308,104 +405,18 @@ $(document).on("click", "#table_price_row", function(){
 			
 		});
 		
+		$(this).addClass("selected").siblings().removeClass("selected");
+		
 	});
 	
 	
 	
-	$("#combo-box_moneyType").on('change', function(){
-		
-		var coin_type = $(this).children(':eq(1)').text();
-		var money_type = $(this).find(":selected").val();		//선택된 값을 가져옴.
-		
-		// money_name_option는 화폐 종류 그래프에 출력할 값을 저장하는 변수(USD, CNY, BTC...)
-		var money_name_option;
-		if(money_type == "PRICE_USD") {
-			money_name_option = "USD";
-		} else if (money_type == "PRICE_CNY") {
-			money_name_option = "CNY";
-		} else if (money_type == "PRICE_EUR") {
-			money_name_option = "EUR";
-		} else if (money_type == "PRICE_GBP") {
-			money_name_option = "GBP";
-		} else if (money_type == "PRICE_RUR") {
-			money_name_option = "RUR";
-		} else if (money_type == "PRICE_BTC") {
-			money_name_option = "BTC";
-		} 
-		
-		
-		var options = {
-
-				rangeSelector: {
-					
-					//기간 버튼 설정
-					buttons: [
-						{
-		                    type: 'hour',
-		                    count: 12,
-		                    text: '12h'
-		                }, {
-		                    type: 'day',
-		                    count: 1,
-		                    text: '1D'
-		                }, {
-		                    type: 'day',
-		                    count: 3,
-		                    text: '3D'
-		                }, {
-		                    type: 'day',
-		                    count: 7,
-		                    text: '1w'
-		                }, {
-		                    type: 'all',
-		                    count: 1,
-		                    text: 'All'
-		                }],
-					//기간 버튼 Default 값 설정 //0: 가장 첫 기간버튼, 1: 두 번째 기간버튼, 2: 세...
-					selected: 4,
-		          },
-				
-				chart: {
-					// 뿌려줄 View단의 id 설정
-					renderTo : 'chart',
-					// 그래프 타입(디자인) 설정
-					// type : 'area'
-				},
-				
-				series : [{
-					name: money_name_option,
-		            tooltip: {
-		            valueDecimals: 3,
-		            type: 'area'
-		            }
-				}]			
-			};
-		
-		$.ajax({
-			
-			url : "/rate/oneChart/",
-			type : 'get',
-			data : {"coin_type" : coin_type, "money_type" : money_type},
-			
-			success : function() {
-				
-				var url = "/rate/oneChart?coin_type=" + coin_type + "&money_type=" + money_type;
-
-				$.getJSON(url, function(data) {
-					
-					options.series[0].data = data;
-					var chart = new Highcharts.stockChart(options);
-					
-				});
-				
-			}
-			
-		});
-			
-	});
+	
 	
 });
 
+
+// chart_info 에 뿌려줄 코인정보는 coin_label_type으로 뿌려준다.
 function chartInfo(price_info, money_type, coin_label_type) {
 	
 	var price_info_round = Number(price_info).toFixed(3);

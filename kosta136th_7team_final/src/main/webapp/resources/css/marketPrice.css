@@ -28,6 +28,7 @@ ul#chart_info > li {
 	
 	color: #33cccc;
 	font-size: 45px;
+	min-width: 300px;
 	
 }
 
@@ -35,7 +36,7 @@ ul#chart_info > li {
 	
 	margin-left: 20px;
 	color: #EEE;
-	font-size: 20px;
+	font-size: 25px;
 	
 }
 
@@ -163,6 +164,52 @@ thead {
 	
 }
 
+/* 테이블 상단바 */
+.table>tbody>tr{
+	
+	border-top: 1px solid #262a2c;
+	
+}
+
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+	
+	color: #a6b6bc;
+	border: none;
+	/* border-bottom: 1px solid #262a2c; */
+	
+}
+
+
+.table>tbody#bitrate>tr:hover, .table>tbody#rate>tr:hover{
+	
+	background: #3e4244;
+	cursor: pointer;
+	
+}
+
+
+.table>tbody#bitrate>tr:active, .table>tbody#rate>tr:active{
+	
+	background: #3e4244;
+	cursor: pointer;
+	
+}
+
+tr.table_row.selected > td:nth-child(1) {
+	
+	border-left: 4px solid #33bbcc
+	
+}
+
+tr.table_row.selected >td {
+	
+	background: #4e5254;
+	color: #eee;
+	
+}
+
+
 #bitrate {
 	
 	max-height: 600px;
@@ -185,38 +232,6 @@ thead {
 	border: 1px solid #33aadd;
 	color: #ddd;
 	font-size
-	
-}
-
-
-/* 테이블 상단바 */
-.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
-	
-	border-top: 1px solid #262a2c;
-	
-}
-
-
-.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
-	
-	color: #a6b6bc;
-	border-bottom: 1px solid #262a2c;
-	
-}
-
-
-.table>tbody#bitrate>tr:hover, .table>tbody#rate>tr:hover{
-	
-	background: #3e4244;
-	cursor: pointer;
-	
-}
-
-
-.table>tbody#bitrate>tr:active, .table>tbody#rate>tr:active{
-	
-	background: #3e4244;
-	cursor: pointer;
 	
 }
 

@@ -194,10 +194,7 @@ public class MarketPriceDataController {
 	// 비트코인 화폐 환율
 	@RequestMapping(value = "/bitrate", method = RequestMethod.GET)
 	public ArrayList<MarketPriceOutPut> bitCoinRate(@RequestParam("money_type") String money_type, @RequestParam("sorting_type") String sorting_type, HttpServletResponse response) throws Exception {
-<<<<<<< HEAD
-=======
-		
->>>>>>> bd98eabd582cba000eb89313452335759b9a51ba
+
 		List<MarketPrice> bitCoinList = marketPriceService.coinRateList(sorting_type, money_type);
 
 		ArrayList<MarketPriceOutPut> marketPriceList = new ArrayList<MarketPriceOutPut>();
