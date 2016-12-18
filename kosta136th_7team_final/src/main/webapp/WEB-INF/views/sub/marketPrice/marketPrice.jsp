@@ -22,7 +22,9 @@
 
 			<!-- 비트코인 그래프 표시  -->
 			<div id="market_price_graph" class="col-md-8 visible">
-				<div id="chart_information"></div>
+				<ul id="chart_info">
+					
+				</ul>
 				<div id="chart"></div>
 			</div>
 
@@ -41,6 +43,16 @@
 					<!-- 비트코인 환율 -->
 					<li class="market_price_tab"><a data-toggle="tab" href="#market_price">MarketPrice</a></li>
 					
+	
+					<li id="drop-box_sortingType">
+						<!-- dropdown은 목록 선택시 뷰에 보여지는 목록이 변하지 않아 직관적이지 못함 따라서 select로 변경함 -->
+	                    <select id="combo-box_sortingType" class="input-large form-control">
+		                    <option class="ratebtn" id="volume_24h_sorting" value="Volume_24h" selected="selected"> 24시간거래량순 </option>
+		                    <option class="ratebtn" id="label_sorting" value="Label"> 라벨순 </option>
+		                    <option class="ratebtn" id="name_sorting" value="Name"> 이름순 </option>
+		                    <option class="ratebtn" id="price_sorting" value="Price"> 높은시세순</option>
+	                	</select>
+					</li>
 					<!-- 실화폐 환율 -->							
 					<li id="drop-box_moneyType">
 						<!-- dropdown은 목록 선택시 뷰에 보여지는 목록이 변하지 않아 직관적이지 못함 따라서 select로 변경함 -->
@@ -51,16 +63,6 @@
 		                    <option class="ratebtn" id="PRICE_GBP" value="PRICE_GBP"> GBP </option>
 		                    <option class="ratebtn" id="PRICE_RUR" value="PRICE_RUR"> RUR </option>
 		                    <option class="ratebtn" id="PRICE_BTC" value="PRICE_BTC"> BTC </option>
-	                	</select>
-					</li>
-	
-					<li id="drop-box_sortingType">
-						<!-- dropdown은 목록 선택시 뷰에 보여지는 목록이 변하지 않아 직관적이지 못함 따라서 select로 변경함 -->
-	                    <select id="combo-box_sortingType" class="input-large form-control">
-		                    <option class="ratebtn" id="volume_24h_sorting" value="Volume_24h" selected="selected"> 24시간거래량순 </option>
-		                    <option class="ratebtn" id="label_sorting" value="Label"> 라벨순 </option>
-		                    <option class="ratebtn" id="name_sorting" value="Name"> 이름순 </option>
-		                    <option class="ratebtn" id="price_sorting" value="Price"> 높은시세순</option>
 	                	</select>
 					</li>
 					
@@ -76,7 +78,7 @@
 								<tr id="test">
 									<th id="label_th">라벨</th>
 									<th id="name_th">이름</th>
-									<th id="price_th">현재시세</th>
+									<th id="price_th">시세</th>
 									<th id="price_volume_24h">24시간거래량</th>
 								</tr>
 							</thead>
@@ -93,11 +95,11 @@
 					<table id="exchange" class="table table-hover">
 						<thead>
 							<tr>
-								<th>Id</th>
-								<th>Name</th>
-								<th>Rate</th>
-								<th>Ask</th>
-								<th>Bid</th>
+								<th>환율ID</th>
+								<th>환율기준</th>
+								<th>시세</th>
+								<th>매도</th>
+								<th>매수</th>
 							</tr>
 						</thead>
 						<tbody id="rate">

@@ -158,10 +158,10 @@
         		   // 기간 설정
         		   rangeSelector: {
         		      buttonTheme: {
-        		         fill: '#262a2c',
+        		         fill: '#202426',
         		         stroke: '#000000',
         		         style: {
-        		            color: '#33CCCC'
+        		            color: '#888'
         		         },
         		         states: {
         		            hover: {

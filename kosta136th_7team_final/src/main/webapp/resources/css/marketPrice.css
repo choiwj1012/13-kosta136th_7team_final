@@ -9,6 +9,37 @@ body, .container-fluid {
 	
 }
 
+ul#chart_info {
+	
+	margin: 0;
+	background-color: #181b1d;
+	max-height: 56px;
+	
+}
+
+ul#chart_info > li {
+	
+	display: inline;
+	max-height: 56px;
+	
+}
+
+#price_info {
+	
+	color: #33cccc;
+	font-size: 45px;
+	
+}
+
+#money_type_info, #coin_type_info {
+	
+	margin-left: 20px;
+	color: #EEE;
+	font-size: 20px;
+	
+}
+
+
 /* 글자는 흰색으로 출력 */
 h3 {
 	color: #eeeeee;
@@ -16,14 +47,15 @@ h3 {
 
 #mainNav {
 
-	background: #161a1c;
+	background: #101416;
 	margin: 0;
-	height: 70px;
+	height: 65px;
 	
 }
 
 /*** 시세그래프 ***/
 /* 그래프차트 공백 제거 */
+
 #market_price_graph, h3.text-center  {
 	
 	margin: 0;
@@ -31,17 +63,10 @@ h3 {
 	
 }
 
-#chart_information {
-	
-	min-height: 56px;
-	background-color: #1c2022;
-	
-}
-
 #chart {
 	
 	position: relative;
-	min-height: 900px;
+	min-height: 844px; 
 	
 }
 
@@ -81,6 +106,8 @@ ul.nav-tabs>li>a {
 	border: none;
 	border-top: 3px solid #2e3234;
 	border-radius: 0;
+	height: 50px;
+	font-size: 17px;
 	
 }
 
@@ -143,19 +170,24 @@ thead {
 	
 }
 
+/* li */
+#drop-box_moneyType, #drop-box_sortingType{
+	
+	height: 50px;
+	float: right;
+}
+
+/* combo-box */
 #combo-box_moneyType, #combo-box_sortingType {
 	
+	height: 50px;
 	background: #262a2c;
 	border: 1px solid #33aadd;
 	color: #ddd;
+	font-size
 	
 }
 
-#drop-box_moneyType, #drop-box_sortingType {
-	
-	max-height: 43px;
-	
-}
 
 /* 테이블 상단바 */
 .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
@@ -174,6 +206,14 @@ thead {
 
 
 .table>tbody#bitrate>tr:hover, .table>tbody#rate>tr:hover{
+	
+	background: #3e4244;
+	cursor: pointer;
+	
+}
+
+
+.table>tbody#bitrate>tr:active, .table>tbody#rate>tr:active{
 	
 	background: #3e4244;
 	cursor: pointer;

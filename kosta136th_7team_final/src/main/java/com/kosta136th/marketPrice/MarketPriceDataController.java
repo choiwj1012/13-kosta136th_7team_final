@@ -102,8 +102,9 @@ public class MarketPriceDataController {
                     BigDecimal volume_24h_out = volume_24h.divide(ex, 6, BigDecimal.ROUND_DOWN);
                     
                     MarketPriceSave marketPrice = new MarketPriceSave();
+                    
                     marketPrice.setLabel((String) marketsObject.get("Label"));
-                    marketPrice.setName((String) marketsObject.get("Name"));;
+                    marketPrice.setName((String) marketsObject.get("Name"));
                     marketPrice.setPrice_btc_result(price_btc_out);
                     marketPrice.setPrice_usd_result(price_usd_out);
                     marketPrice.setPrice_cny_result(price_cny_out);
@@ -111,7 +112,7 @@ public class MarketPriceDataController {
                     marketPrice.setPrice_gbp_result(price_gbp_out);
                     marketPrice.setPrice_rur_result(price_rur_out);
                     marketPrice.setVolume_24h_result(volume_24h_out);
-                    marketPrice.setTimestamp((Long) marketsObject.get("Timestamp"));;
+                    marketPrice.setTimestamp((Long) marketsObject.get("Timestamp"));
                     
                     marketPriceService.rateSave(marketPrice);
                 }
@@ -193,7 +194,6 @@ public class MarketPriceDataController {
 	// 비트코인 화폐 환율
 	@RequestMapping(value = "/bitrate", method = RequestMethod.GET)
 	public ArrayList<MarketPriceOutPut> bitCoinRate(@RequestParam("money_type") String money_type, @RequestParam("sorting_type") String sorting_type, HttpServletResponse response) throws Exception {
-		System.out.println(sorting_type);
 		List<MarketPrice> bitCoinList = marketPriceService.coinRateList(sorting_type, money_type);
 
 		ArrayList<MarketPriceOutPut> marketPriceList = new ArrayList<MarketPriceOutPut>();
@@ -219,7 +219,14 @@ public class MarketPriceDataController {
 			BigDecimal volume_24h_out = volume_24h.divide(ex, 6, BigDecimal.ROUND_DOWN);
 
 			MarketPriceOutPut marketPrice = new MarketPriceOutPut();
-			marketPrice.setLabel(bitCoinList.get(i).getLabel());
+			
+			// 라벨의 "/BTC"를 제거하는 코드 
+			String beforeLabel = bitCoinList.get(i).getLabel();
+			String removeString = "/BTC";
+			int removeStringNum = beforeLabel.indexOf(removeString);
+			String afterLabel = beforeLabel.substring(0, (beforeLabel.substring(removeStringNum).indexOf("/")+removeStringNum));
+
+			marketPrice.setLabel(afterLabel);
 			marketPrice.setName(bitCoinList.get(i).getName());;
 			
 			if (money_type.equals("PRICE_BTC")) {
@@ -328,11 +335,11 @@ public class MarketPriceDataController {
 	}
 	
 	@RequestMapping(value = "oneChart", method = RequestMethod.GET)
-	public JSONArray selectChart(@RequestParam("coinName") String coinName, @RequestParam("moneyType") String moneyType, HttpServletResponse response) throws Exception{
+	public JSONArray selectChart(@RequestParam("coin_type") String coin_type, @RequestParam("money_type") String money_type, HttpServletResponse response) throws Exception{
 		
 		OneChart oneChart = new OneChart();
-		oneChart.setCoinName(coinName);
-		oneChart.setMoneyType(moneyType);
+		oneChart.setCoin_type(coin_type);
+		oneChart.setMoney_type(money_type);
 		
 		List<MarketPrice> selectOneChart =  marketPriceService.oneChart(oneChart);
 		JSONArray ChartArray = new JSONArray();
@@ -346,32 +353,32 @@ public class MarketPriceDataController {
 			MarketPrice marketPrice = new MarketPrice();
 			timestamp = selectOneChart.get(i).getTimestamp();
 			
-			if(moneyType.equals("PRICE_BTC")) {
+			if(money_type.equals("PRICE_BTC")) {
 
 				marketPrice.setPrice_btc(selectOneChart.get(i).getPrice_btc());
 				perPrice = marketPrice.getPrice_btc();
 				
-			} else if(moneyType.equals("PRICE_USD")) {
+			} else if(money_type.equals("PRICE_USD")) {
 				
 				marketPrice.setPrice_usd(selectOneChart.get(i).getPrice_usd());
 				perPrice = marketPrice.getPrice_usd();
 				
-			} else if(moneyType.equals("PRICE_CNY")) {
+			} else if(money_type.equals("PRICE_CNY")) {
 				
 				marketPrice.setPrice_cny(selectOneChart.get(i).getPrice_cny());
 				perPrice = marketPrice.getPrice_cny();
 				
-			} else if(moneyType.equals("PRICE_EUR")) {
+			} else if(money_type.equals("PRICE_EUR")) {
 
 				marketPrice.setPrice_eur(selectOneChart.get(i).getPrice_eur());
 				perPrice = marketPrice.getPrice_eur();
 				
-			} else if(moneyType.equals("PRICE_GBP")) {
+			} else if(money_type.equals("PRICE_GBP")) {
 
 				marketPrice.setPrice_gbp(selectOneChart.get(i).getPrice_gbp());
 				perPrice = marketPrice.getPrice_gbp();
 
-			} else if(moneyType.equals("PRICE_RUR")) {
+			} else if(money_type.equals("PRICE_RUR")) {
 
 				marketPrice.setPrice_rur(selectOneChart.get(i).getPrice_rur());
 				perPrice = marketPrice.getPrice_rur();
