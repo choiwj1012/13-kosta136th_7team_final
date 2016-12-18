@@ -10,34 +10,27 @@
 <section>
  
   <div class="container">
-	
-	<div class="container">
-		
-		<div class="page-header col-sm-3">
-      		<h1>My Page</h1>
-    	</div>
-    	
-    	<div class="col-sm-9">
-    		<!-- 배너 및 광고 -->
-			<div class="row text-center" id="bannerImg">
-				<img src="../../resources/img/banner.png" alt="banner" />
-			</div>	
-    	</div>
-    	
-	</div>
     
     <div class="row">
       
       <div class="col-sm-3">
+      
+      	<div class="page-header">
+      		<h1>My Page</h1>
+    	</div>
+      
       	<ul>
-      		<li><a href="/myPage">스크랩 기사목록</a></li>
-    		<li><a href="/manageMyBoard">게시판 글관리</a></li>
+      		<li><a href="/myPage">나의 스크랩 기사목록</a></li>
+    		<li><a href="/manageMyBoard">나의 댓글 관리</a></li>
     		<li><a href="/manageMyInfo">회원정보 관리</a></li>
-    		<li><a href="/manageMyBitcoin">내 비트코인 확인</a></li>
-      	</ul>  
+    		<li><a href="/manageDealer">딜러정보 관리</a></li>
+    		<li><a href="/withDraw">회원탈퇴</a></li>
+      	</ul>
+      	  
       </div>
 
       <div class="col-sm-9">
+      
         <div class="row">
         	
         	<h2>스크랩 기사 목록</h2>
