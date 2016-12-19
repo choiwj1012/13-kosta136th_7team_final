@@ -49,7 +49,7 @@
 		                </button>
 		                
 		                <a class="navbar-brand" href="/">
-		                	<img id="main_logo_image" src="../../resources/img/logo_header.png" alt="bitriver_logo" />
+		                	<img id="main_logo_image" src="../../resources/img/144x58px_BitRiver_black02.png" alt="bitriver_logo" />
 		                </a>
 		                
 		            </div>
