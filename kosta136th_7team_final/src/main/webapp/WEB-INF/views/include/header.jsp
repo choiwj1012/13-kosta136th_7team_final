@@ -5,10 +5,11 @@
 		<meta charset="UTF-8">
   		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
   		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-		
+		<meta http-equiv="page-enter" content="blendTrans(duration=0.3)">
+		<meta http-equiv="page-exit" content="blendTrans(duration=0.3)">
 		<title>비트리버 사이트에 오신것을 환영합니다 !</title>
 		
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+		<link rel="stylesheet" href="../../../resources/bootstrap/css/bootstrap.css">
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="../../../resources/css/common.css">
 		
