@@ -26,9 +26,10 @@ ul#chart_info > li {
 
 #price_info {
 	
-	color: #33cccc;
+	color: #33bbcc;
 	font-size: 45px;
 	min-width: 300px;
+	
 	
 }
 
@@ -77,7 +78,7 @@ h3 {
 #title_bar {
 	
 	padding: 15px;
-	background: #282b2d;
+	background: #202426;
 	
 }
 
@@ -90,52 +91,43 @@ h3 {
 }
 
 
-/* 탭 버튼 */
-/* .nav-tabs>li.active>a .nav-tabs>li.hover>a {
-	
-	padding: 0;
-	color: #FFF; 
-	cursor: default;
-	background-color: #3e4244;
-	border: none;
-	border-top: 5px solid #eee;
-} */
-
 ul.nav-tabs>li>a {
 	
 	color: #ddd;
 	border: none;
 	border-top: 3px solid #2e3234;
 	border-radius: 0;
-	height: 50px;
-	font-size: 17px;
+	height: 45px;
+	font-size: 16px;
 	
 }
 
-.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+ul.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
 	
 	color: #FFF; 
 	cursor: default;
-	background-color: #2e3234;
+	background-color: #262a2c;
 	border: none;
 	border-top: 3px solid #33AADD;
+	transition: all 0.2s ease;
 	
 }
 
 /* focus, hover시 css */
-.nav-tabs>li>a:hover{
+ul.nav-tabs>li>a:hover{
 	
 	color: #FFF; 
 	background-color: #3e4244;
 	border: none;
 	border-top: 3px solid #eee;
+	transition: all 0.3s ease;
 	
 }
 
 /* 버튼과 리스트 구분선 */
 ul.nav.nav-tabs {
 	
-	background: #282b2d;
+	background: #202426;
 	border-bottom: 1px ;
 	
 }
@@ -158,13 +150,12 @@ ul.nav.nav-tabs {
 	
 }
 
-thead {
+thead > tr.label_bar {
 	
-	table-layout: fixed;
+	background-color: #262a2c;
 	
 }
 
-/* 테이블 상단바 */
 .table>tbody>tr{
 	
 	border-top: 1px solid #262a2c;
@@ -185,20 +176,15 @@ thead {
 	
 	background: #3e4244;
 	cursor: pointer;
+	transition: all 0.3s ease;
 	
 }
 
-
-.table>tbody#bitrate>tr:active, .table>tbody#rate>tr:active{
-	
-	background: #3e4244;
-	cursor: pointer;
-	
-}
 
 tr.table_row.selected > td:nth-child(1) {
 	
-	border-left: 4px solid #33bbcc
+	border-left: 10px solid #33bbcc;
+	transition: all 0.3s ease;
 	
 }
 
@@ -206,6 +192,7 @@ tr.table_row.selected >td {
 	
 	background: #4e5254;
 	color: #eee;
+	transition: all 0.3s ease;
 	
 }
 
@@ -220,18 +207,34 @@ tr.table_row.selected >td {
 /* li */
 #drop-box_moneyType, #drop-box_sortingType{
 	
-	height: 50px;
+	height: 45px;
 	float: right;
 }
 
 /* combo-box */
 #combo-box_moneyType, #combo-box_sortingType {
 	
-	height: 50px;
-	background: #262a2c;
-	border: 1px solid #33aadd;
+	height: 40px;
+	background: #202426;
+	border: 1px solid #2e3234;
 	color: #ddd;
 	font-size
+	
+}
+
+#combo-box_moneyType:hover, #combo-box_sortingType:hover {
+	
+	background: #282c2e;
+	border: 1px solid #ddd;
+	color: #eee;
+	
+}
+
+#combo-box_moneyType:focus, #combo-box_sortingType:focus {
+	
+	background: #262a2c;
+	border: 1px solid #33aadd;
+	color: #eee;
 	
 }
 
