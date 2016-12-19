@@ -75,7 +75,7 @@
 						<table id="marketPriceList" class="table table-hover" cellspacing="0">
 							<!-- <table id="example" class="display" cellspacing="0" width="100%"> -->
 							<thead>
-								<tr id="test">
+								<tr class="label_bar">
 									<th id="label_th">라벨</th>
 									<th id="name_th">이름</th>
 									<th id="price_th">시세</th>
@@ -94,7 +94,7 @@
 					<div id="market_price">
 					<table id="exchange" class="table table-hover">
 						<thead>
-							<tr>
+							<tr class="label_bar">
 								<th>환율ID</th>
 								<th>환율기준</th>
 								<th>시세</th>
