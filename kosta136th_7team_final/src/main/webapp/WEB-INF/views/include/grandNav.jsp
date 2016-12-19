@@ -5,7 +5,7 @@
 
 	<nav id="mainNav" class="navbar navbar-default navbar-static-top navbar-default">
 	
-		<div id ="navbar-container" class="container">
+		<div id="nav_container" class="container">
 		
 			<div class="navbar-header">
 			
@@ -14,7 +14,7 @@
 				</button>
 				
 				<a href="/" class="navbar-brand">
-					<img id="main_logo_image" src="../../resources/img/144x58px_BitRiver_black02.png" alt="bitriver_logo" />
+					<img id="main_logo_image" src="../../resources/img/140x56_BitRiver_black.png" alt="bitriver_logo" />
 				</a>
 				
 			</div>

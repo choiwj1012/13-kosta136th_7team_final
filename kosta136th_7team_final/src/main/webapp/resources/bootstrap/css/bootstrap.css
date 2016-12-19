@@ -1586,7 +1586,7 @@ pre code {
 }
 @media (min-width: 1200px) {
   .container {
-    width: 1540px;
+    width: 1170px;
   }
 }
 .container-fluid {
@@ -5889,7 +5889,6 @@ button.close {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1040;
   background-color: #000;
 }
 .modal-backdrop.fade {
