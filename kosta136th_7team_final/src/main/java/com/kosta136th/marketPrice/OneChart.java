@@ -2,20 +2,20 @@ package com.kosta136th.marketPrice;
 
 public class OneChart {
 
-	private String coinName;
-	private String moneyType;
+	private String coin_type;
+	private String money_type;
 	
-	public String getCoinName() {
-		return coinName;
+	public String getCoin_type() {
+		return coin_type;
 	}
-	public void setCoinName(String coinName) {
-		this.coinName = coinName;
+	public void setCoin_type(String coinName) {
+		this.coin_type = coinName;
 	}
-	public String getMoneyType() {
-		return moneyType;
+	public String getMoney_type() {
+		return money_type;
 	}
-	public void setMoneyType(String moneyType) {
-		this.moneyType = moneyType;
+	public void setMoney_type(String money_type) {
+		this.money_type = money_type;
 	}
 	
 }

@@ -83,10 +83,19 @@ public class HomeController {
 	
 	
 	// 마이페이지 유저 비트코인 지갑 보기 경로 (준비중 페이지로 변경)
-	@RequestMapping(value = "/manageMyBitcoin", method = RequestMethod.GET)
-	public String manageMyBitcoin(){
+	@RequestMapping(value = "/manageDealer", method = RequestMethod.GET)
+	public String manageDealer(){
 		
-		return "sub/myPage/manageMyBitcoin";
+		return "sub/myPage/manageDealer";
+		
+	}
+	
+	
+	// 마이페이지 유저 비트코인 지갑 보기 경로 (준비중 페이지로 변경)
+	@RequestMapping(value = "/userWithdraw", method = RequestMethod.GET)
+	public void userWithdraw(){
+		
+		System.out.println("회원탈퇴요청");
 		
 	}
 	
