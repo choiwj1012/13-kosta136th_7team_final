@@ -84,9 +84,9 @@ public class DealerDAOImpl implements DealerDAO{
 	}
 
 	@Override
-	public List<Dealer> allListSearch(SearchDealer sd) throws Exception {
+	public List<Dealer> allListSearch(SearchDealer searchDealer) throws Exception {
 		
-		return session.selectList(namespace + ".searchList", sd);
+		return session.selectList(namespace + ".searchList", searchDealer);
 	}
 	
 	

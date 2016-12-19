@@ -39,18 +39,18 @@
 		<div class="form-group col-xs-2">
 			<select name="searchType" class="form-control" id="sel1">
 				<option value = "n">선택</option>
-				<option value = "c">딜러명</option>
+				<option value = "w">딜러명</option>
 				<option value = "t">제목</option>
 			</select>
 		</div>
 		<form>
 			<div class="input-group col-xs-6">
-				<input type="text" name="keyword" class="form-control" placeholder="Search" value="${dst.keyword}">
+				<input type="text" name="keyword" id="keywordInput" class="form-control" placeholder="Search">
 				<div class="input-group-btn">
-					<button class="btn btn-default" type="submit">
+					<button class="btn btn-default" id="searchBtn" type="submit">
 						<i class="glyphicon glyphicon-search"></i>
 					</button>
-				<button class="btn btn-default" type="submit">
+				<button class="btn btn-default" id="newBtn" type="submit">
 					딜러 페이지 등록
 				</button>
 				</div>
@@ -72,76 +72,7 @@
 	</div>
 
 </div>
-	
-	
-<!-- Dealer Page List Area -->
-<!-- <div class="clearfix" role="main">
 
-	<ul id="container">
-	
-		<li>
-			<a href="/btcInfoLand_board_list"><img src="../../resources/img/dealer_test_img01.jpg"></a>	
-			<p><span class="label label-primary glyphicon glyphicon-heart"> 20,345</span></p>		
-			<h3>초보님을 위한 비트코인 시작하기~</h3>		
-			<p>@webtohouse</p>		
-			<span class="label label-primary">#실시간시세</span> 
-			<span class="label label-primary">#Bitcoin</span> 
-			<span class="label label-primary">#비트코인초보</span>	
-		</li>
-		
-		<li>
-			<a href="/btcInfoLand_board_list"><img src="../../resources/img/dealer_test_img02.jpg"></a>	
-			<p><span class="label label-primary glyphicon glyphicon-heart"> 20,345</span></p>		
-			<h3>초보님을 위한 비트코인 시작하기~</h3>		
-			<p>@webtohouse</p>		
-			<span class="label label-primary">#실시간시세</span> 
-			<span class="label label-primary">#Bitcoin</span> 
-			<span class="label label-primary">#비트코인초보</span>	
-		</li>
-		
-		<li >
-			<a href="/btcInfoLand_board_list"><img src="../../resources/img/dealer_test_img03.jpg"></a>	
-			<p><span class="label label-primary glyphicon glyphicon-heart"> 20,345</span></p>		
-			<h3>초보님을 위한 비트코인 시작하기~</h3>		
-			<p>@webtohouse</p>		
-			<span class="label label-primary">#실시간시세</span> 
-			<span class="label label-primary">#Bitcoin</span> 
-			<span class="label label-primary">#비트코인초보</span>	
-		</li>
-		
-		<li>
-			<a href="/btcInfoLand_board_list"><img src="../../resources/img/dealer_test_img01.jpg"></a>	
-			<p><span class="label label-primary glyphicon glyphicon-heart"> 20,345</span></p>		
-			<h3>초보님을 위한 비트코인 시작하기~</h3>		
-			<p>@webtohouse</p>		
-			<span class="label label-primary">#실시간시세</span> 
-			<span class="label label-primary">#Bitcoin</span> 
-			<span class="label label-primary">#비트코인초보</span>	
-		</li>
-		
-		<li>
-			<a href="/btcInfoLand_board_list"><img src="../../resources/img/dealer_test_img02.jpg"></a>	
-			<p><span class="label label-primary glyphicon glyphicon-heart"> 20,345</span></p>		
-			<h3>초보님을 위한 비트코인 시작하기~</h3>		
-			<p>@webtohouse</p>		
-			<span class="label label-primary">#실시간시세</span> 
-			<span class="label label-primary">#Bitcoin</span> 
-			<span class="label label-primary">#비트코인초보</span>	
-		</li>
-		
-		<li>
-			<a href="/btcInfoLand_board_list"><img src="../../resources/img/dealer_test_img03.jpg"></a>	
-			<p><span class="label label-primary glyphicon glyphicon-heart"> 20,345</span></p>		
-			<h3>초보님을 위한 비트코인 시작하기~</h3>		
-			<p>@webtohouse</p>		
-			<span class="label label-primary">#실시간시세</span> 
-			<span class="label label-primary">#Bitcoin</span> 
-			<span class="label label-primary">#비트코인초보</span>	
-		</li>
-
-	</ul>	
-	
-</div> -->
 	<%@ include file="../../include/chatting.jsp" %>
 	</body>
 </html>

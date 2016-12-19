@@ -4,7 +4,9 @@
       var page = 1;
       var isLoading = false;
       var $loaderCircle = $('#loaderCircle');
-
+      var search_type = $("#sel1").find(":selected").val();
+      var key = $("keywordInput").text();
+      
       var options = {
             autoResize : true,
             offset : 30,
@@ -46,15 +48,15 @@
       // AJAX로 API에 데이터 요청함
       function loadData() {
 
-        var apiURL = 'http://www.wookmark.com/api/json/popular';
+        var apiURL = 'dealer/dealerPageList';
 
         isLoading = true;
         $loaderCircle.show();
 
         $.ajax({
           url : apiURL,
-          dataType : 'jsonp',
-          data : {page : page},
+          type : 'get',
+          data : {"page" : page, "search_type" : search_type, "key" : key},
           success : onLoadData
         });
 
@@ -72,18 +74,28 @@
         // HTML 뷰에 뿌려줌
         var html = '';
         var image;
+		var str = "";
+		$.each(data, function(){
+//			.reverse()
+    	    str += "<li>";
+            str += "<p>" + this.user_nickName + "</p>";
+            str += "<p>" + this.category + "</p>";
+            str += "<p>" + this.like_count + "</p>";
+        	str += "</li>";
+		}); 
+//        for(var i=0; i<data.length; i++) {
+//        	
+//          image = data[i];
+//          html += '<li>';
+////          html += '  <img src="'+image.preview+'" width="400" height="'+Math.round(image.height/image.width*200)+'">';
+//          html += '  <p>'+image.User_nickName+'</p>';
+//          html += '  <p>'+image.Category+'</p>';
+//          html += '  <p>'+image.Like_count+'</p>';
+//          html += '</li>';
 
-        for(var i=0; i<data.length; i++) {
+//        }
 
-          image = data[i];
-          html += '<li>';
-          html += '  <img src="'+image.preview+'" width="400" height="'+Math.round(image.height/image.width*200)+'">';
-          html += '  <p>'+image.title+'</p>';
-          html += '</li>';
-
-        }
-
-        $(container).append(html);
+        $("#container").append(str);
 
         applyLayout();
 

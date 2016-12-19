@@ -22,6 +22,6 @@ public interface DealerService {
 
 	public List<Dealer> allList() throws Exception;
 	
-	public List<Dealer> allListSearch(SearchDealer sd) throws Exception;
+	public List<Dealer> allListSearch(SearchDealer searchDealer) throws Exception;
 
 }
