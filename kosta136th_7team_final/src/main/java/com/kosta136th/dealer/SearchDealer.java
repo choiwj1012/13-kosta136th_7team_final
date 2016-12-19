@@ -25,5 +25,8 @@ public class SearchDealer {
 		this.searchType = searchType;
 		this.keyword = keyword;
 	}
+	public SearchDealer() {
+		
+	}
 	
 }

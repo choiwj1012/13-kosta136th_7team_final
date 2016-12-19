@@ -72,9 +72,9 @@ public class DealerServiceImpl implements DealerService{
 	}
 
 	@Override
-	public List<Dealer> allListSearch(SearchDealer sd) throws Exception {
+	public List<Dealer> allListSearch(SearchDealer searchDealer) throws Exception {
 		
-		return dao.allListSearch(sd);
+		return dao.allListSearch(searchDealer);
 	}
 
 }

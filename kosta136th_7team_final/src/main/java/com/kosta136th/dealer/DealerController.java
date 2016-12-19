@@ -3,16 +3,18 @@ package com.kosta136th.dealer;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-@Controller
+@RestController
+@RequestMapping("/dealer/*")
 public class DealerController {
 
 	@Inject
@@ -122,9 +124,8 @@ public class DealerController {
 	}
 	
 	@RequestMapping(value = "dealerPageList", method = RequestMethod.GET)
-	public void dealerPageList(Model model) throws Exception {
+	public List<Dealer> dealerPageList(HttpServletResponse response) throws Exception {
 		
-//		model.addAttribute("allList", service.allList());
 		List<Dealer> dealerList = service.allList();
 		
 		for (int i = 0; i < dealerList.size(); i++) {
@@ -135,12 +136,29 @@ public class DealerController {
 			
 		}
 		
+		return dealerList;
 	}
 	
 	@RequestMapping(value = "/searchList", method = RequestMethod.GET)
-	public void searchList(SearchDealer sd, Model model) throws Exception {
+	public List<Dealer> searchList(@RequestParam("page") int page, @RequestParam("search_type") 
+	String search_type, @RequestParam("key") String key, HttpServletResponse response) throws Exception {
 		
-		model.addAttribute("list", service.allListSearch(sd));
+		SearchDealer searchDealer = new SearchDealer();
+		
+		searchDealer.setSearchType(search_type);
+		searchDealer.setKeyword(key);
+		
+		List<Dealer> dealerList = service.allListSearch(searchDealer);
+		
+		for (int i = 0; i < dealerList.size(); i++) {
+			
+			System.out.println(dealerList.get(i).getUser_nickName());
+			System.out.println(dealerList.get(i).getCategory());
+			System.out.println(dealerList.get(i).getLike_count());
+			
+		}
+		
+		return  dealerList;
 		
 	}
 }
