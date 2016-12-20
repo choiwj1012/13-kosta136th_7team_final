@@ -5,7 +5,7 @@
       var isLoading = false;
       var $loaderCircle = $('#loaderCircle');
       var search_type = $("#sel1").find(":selected").val();
-//      var key = $("keywordInput").text();
+      var lastdno = "";
       
       var options = {
             autoResize : true,
@@ -32,7 +32,9 @@
 
         var wookmark = undefined;
         var container = '#container';
-
+        
+        lastdno = $(".scrolling:last").attr("data-dno");
+        
         imagesLoaded(container, function () {
 
           if (wookmark === undefined) {
@@ -45,20 +47,30 @@
         });
 
       };
-
+      
       // AJAX로 API에 데이터 요청함
       function loadData() {
 
-        var apiURL = 'dealer/searchList';
-
+        var apiURL = 'dealer/dealerPageList';
+        
         isLoading = true;
         $loaderCircle.show();
-
+       
         $.ajax({
-          url : apiURL,
-          type : 'get',
-          data : {"page" : page, "search_type" : search_type},
-          success : onLoadData
+        	
+        	type : 'post',  // 요청 method 방식 
+            url : apiURL,// 요청할 서버의 url
+            headers : { 
+                "Content-Type" : "application/json",
+                "X-HTTP-Method-Override" : "POST"
+            },
+            dataType : 'json', // 서버로부터 되돌려받는 데이터의 타입을 명시하는 것이다.
+            data : JSON.stringify({ // 서버로 보낼 데이터 명시 
+                dno : lastdno
+            }),
+        
+            success : onLoadData
+          
         });
 
       };
@@ -77,13 +89,17 @@
         var image;
 		var str = "";
 		
-		$.each(data, function(){
-    	    str += "<li>";
-            str += "<p>" + this.user_nickName + "</p>";
-            str += "<p>" + this.category + "</p>";
-            str += "<p>" + this.like_count + "</p>";
-        	str += "</li>";
-		}); 
+		if(data != null){
+			
+			$.each(data, function(){
+	    	    str += "<li>";
+	    	    str += "<p class=" + "'scrolling'"  + "data-dno='"+ this.dealer_page_num + "'>" + this.dealer_page_num + "</p>";
+	            str += "<p>" + this.user_nickName + "</p>";
+	            str += "<p>" + this.category + "</p>";
+	            str += "<p>" + this.like_count + "</p>";
+	        	str += "</li>";
+			}); 
+		
 		
 //        for(var i=0; i<data.length; i++) {      	
 //          image = data[i];
@@ -94,15 +110,20 @@
 //          html += '  <p>'+image.Like_count+'</p>';
 //          html += '</li>';
 //        }
-
+			
+//		$(".listToChange").empty();
         $("#container").append(str);
-
+     
         applyLayout();
-
-      };
-
+        
+		} else {
+			alert("없어 샹");
+		}
+		
+    };
+      
       $(document).bind('scroll', onScroll);
 
       loadData();
-
+           
 })(jQuery);

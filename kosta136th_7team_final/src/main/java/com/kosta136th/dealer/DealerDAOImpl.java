@@ -86,6 +86,12 @@ public class DealerDAOImpl implements DealerDAO{
 		
 		return session.selectList(namespace + ".searchList", searchDealer);
 	}
+
+	@Override
+	public List<Dealer> downList(int bnoToStart) throws Exception {
+		
+		return session.selectList(namespace + ".downList", bnoToStart);
+	}
 	
 	
 

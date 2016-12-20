@@ -63,8 +63,13 @@
 <!-- API TEST -->
 <div role="main">
 
-	<ul id="container" class="tiles-wrap animated">
-	
+	<ul id="container" class="tiles-wrap animated listToChange">
+		<c:forEach items="${list}" var = "dealer">
+			<li class = "scrolling" data-dno="${dealer.dealer_page_num}">${dealer.dealer_page_num}</li>
+			<li>${dealer.user_nickName}</li>
+			<li>${dealer.category}</li>
+			<li>${dealer.like_count}</li>
+		</c:forEach>
 	</ul>
 	
 	<div id="loader">
