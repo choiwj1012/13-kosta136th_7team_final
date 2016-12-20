@@ -52,10 +52,30 @@
 	</update>
 	
 	<select id="allList" resultType="com.kosta136th.dealer.Dealer">
-		SELECT USER.USER_NICKNAME, CATEGORY, LIKE_COUNT
+		<![CDATA[
+		SELECT USER.USER_NICKNAME, CATEGORY, LIKE_COUNT, DEALER_PAGE_NUM
 		FROM DEALER_PAGE
 		JOIN USER ON USER.USER_NUM = DEALER_PAGE.USER_NUM
+		ORDER BY DEALER_PAGE_NUM ASC
+		LIMIT 0, 15;
+		]]>
 	</select>
+	
+	<select id="downList" resultType="com.kosta136th.dealer.Dealer">
+		<![CDATA[
+		
+		SELECT USER.USER_NICKNAME, CATEGORY, LIKE_COUNT, DEALER_PAGE_NUM
+		FROM DEALER_PAGE
+		JOIN USER ON USER.USER_NUM = DEALER_PAGE.USER_NUM
+		WHERE DEALER_PAGE_NUM <= #{bnoToStart}
+		AND DEALER_PAGE_NUM > #{bnoToStart}-20
+		ORDER BY DEALER_PAGE_NUM ASC
+		
+		]]>
+
+	</select>
+	
+	
 	<select id ="searchList" resultType="com.kosta136th.dealer.Dealer">
 		<![CDATA[
 			SELECT USER.USER_NICKNAME, CATEGORY, LIKE_COUNT

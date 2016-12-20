@@ -99,16 +99,6 @@ public class HomeController {
 		
 	}
 	
-	
-	// BTC 정보광장 Index Mapping
-	@RequestMapping(value = "/btcInfoLand", method = RequestMethod.GET)
-	public String btcInfoLand(){
-		
-		return "sub/btcInfoLand/btcInfoLand";
-		
-	}
-
-	
 	// BTC 정보광장 딜러 전문소식 Mapping
 	@RequestMapping(value = "/btcInfoLand_board_list", method = RequestMethod.GET)
 	public String btcInfoLandBoardList(){
