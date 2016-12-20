@@ -63,11 +63,9 @@ public class DealerDAOImpl implements DealerDAO{
 
 	@Override
 	public void likeEvent(String likeCheck, String disLikeCheck, int dealerNum) throws Exception {
-		System.out.println(likeCheck);
-		System.out.println(disLikeCheck);
-		System.out.println(dealerNum);
+
 		if(likeCheck.equals("checked")) {
-			System.out.println("요기까지오니");
+			
 			session.update(namespace + ".like", dealerNum);
 		} else if(disLikeCheck.equals("checked")) {
 			

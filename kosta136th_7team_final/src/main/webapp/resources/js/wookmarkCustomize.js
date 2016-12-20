@@ -5,7 +5,7 @@
       var isLoading = false;
       var $loaderCircle = $('#loaderCircle');
       var search_type = $("#sel1").find(":selected").val();
-      var key = $("keywordInput").text();
+//      var key = $("keywordInput").text();
       
       var options = {
             autoResize : true,
@@ -49,7 +49,7 @@
       // AJAX로 API에 데이터 요청함
       function loadData() {
 
-        var apiURL = 'dealer/dealerPageList';
+        var apiURL = 'dealer/searchList';
 
         isLoading = true;
         $loaderCircle.show();
@@ -57,7 +57,7 @@
         $.ajax({
           url : apiURL,
           type : 'get',
-          data : {"page" : page, "search_type" : search_type, "key" : key},
+          data : {"page" : page, "search_type" : search_type},
           success : onLoadData
         });
 
