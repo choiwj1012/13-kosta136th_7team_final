@@ -24,4 +24,6 @@ public interface DealerService {
 	
 	public List<Dealer> allListSearch(SearchDealer searchDealer) throws Exception;
 
+	public List<Dealer> downList(int bnoToStart) throws Exception;
+
 }
