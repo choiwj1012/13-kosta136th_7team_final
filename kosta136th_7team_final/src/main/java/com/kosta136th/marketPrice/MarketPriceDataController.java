@@ -46,7 +46,7 @@ public class MarketPriceDataController {
             String command = "";
             
             //apiURL = "https://www.worldcoinindex.com/apiservice/json?key=TSd9QUg1uE9PRE3JSFP88IWvJ";
-            apiURL = "https://www.worldcoinindex.com/apiservice/json?key=3GJ2UwUK92ikwWvZOZ0xtKXlA";
+            //apiURL = "https://www.worldcoinindex.com/apiservice/json?key=3GJ2UwUK92ikwWvZOZ0xtKXlA";
             
             URL url = new URL(apiURL);
             HttpURLConnection con = (HttpURLConnection)url.openConnection();

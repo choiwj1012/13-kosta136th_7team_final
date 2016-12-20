@@ -343,7 +343,7 @@ $(document).ready(function () {
 		                    text: '1D'
 		                }, {
 		                    type: 'day',
-		                    count: 3,
+		                     count: 3,
 		                    text: '3D'
 		                }, {
 		                    type: 'day',
@@ -412,9 +412,12 @@ function chartInfo(price_info, money_type, coin_label_type) {
 	
 	var price_info_round = Number(price_info).toFixed(3);
 	
-	var str = "<li id='price_info'>" + price_info_round + "</li>"
-	str += "<li id='money_type_info'>" + money_type + "</li>"
-	str += "<li id='coin_type_info'>" + coin_label_type + "</li>";
+//	var str = "<li id='price_info'>" + price_info_round + "</li>"
+//	str += "<li id='money_type_info'>" + money_type + "</li>"
+//	str += "<li id='coin_type_info'>" + coin_label_type + "</li>";
+	var str = "<div id='price_info'>" + price_info_round + "</div>"
+	str += "<div id='money_type_info'>" + money_type + "</div>"
+	str += "<div id='coin_type_info'>" + coin_label_type + "</div>";
 	
 	$("#chart_info").html(str);
 }
