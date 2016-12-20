@@ -77,4 +77,10 @@ public class DealerServiceImpl implements DealerService{
 		return dao.allListSearch(searchDealer);
 	}
 
+	@Override
+	public List<Dealer> downList(int bnoToStart) throws Exception {
+		
+		return dao.downList(bnoToStart);
+	}
+
 }

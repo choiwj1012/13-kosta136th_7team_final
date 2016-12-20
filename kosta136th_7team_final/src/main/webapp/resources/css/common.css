@@ -10,19 +10,37 @@
 	height:100%;
 }
 
+body, .container-fluid {
+	
+	margin-top: 68px;
+	padding: 0;
+	
+}
+
 /* header navigation*/
 #main_logo_image{
-	width:150px;
-	height:10px;
+	
+	margin-top: 4px;
+	margin-left: 160px;
+	width:140px;
+	height:56px;
 }
 
 #mainNav{
 	border : none;
-	background-color: #333333;
+	background-color: rgba(0, 0, 0, 0.8);
 }
 
 #mainNav>ul>li>a:hover{
 	background-color: #33CCCC;
+}
+
+div#nav_container{
+	
+	margin-right: 160px;
+	margin-left: 160px;
+	padding: 0;
+	
 }
 
 .navbar-nav>li>a{
