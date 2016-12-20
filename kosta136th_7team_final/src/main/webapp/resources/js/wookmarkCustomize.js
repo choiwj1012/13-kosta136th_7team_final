@@ -6,6 +6,7 @@
       var $loaderCircle = $('#loaderCircle');
       var search_type = $("#sel1").find(":selected").val();
       var lastdno = "";
+
       
       var options = {
             autoResize : true,
@@ -21,6 +22,8 @@
           // 윈도우 브라우저의 높이가 100 남았을때 데이터를 추가로 받는다
           var closeToBottom = ($(window).scrollTop() + $(window).height() > $(document).height() - 100);
           if (closeToBottom) {
+        	  
+        	  
             loadData();
           }
         }
@@ -32,8 +35,8 @@
 
         var wookmark = undefined;
         var container = '#container';
-        
         lastdno = $(".scrolling:last").attr("data-dno");
+        
         
         imagesLoaded(container, function () {
 
@@ -111,7 +114,7 @@
 //          html += '</li>';
 //        }
 			
-//		$(".listToChange").empty();
+		$(".listToChange").empty();
         $("#container").append(str);
      
         applyLayout();
