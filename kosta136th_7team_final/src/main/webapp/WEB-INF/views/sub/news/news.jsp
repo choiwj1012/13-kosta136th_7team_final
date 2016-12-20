@@ -170,12 +170,18 @@
 	            
 	            $(document).on('click', '#subscribeBtn2', function(){
 	                
-	               var imgSrc = $(this).parent().parent().children('#imgSrc').children('img').attr('src');
-	               var link = $(this).parent().parent().children('#etcAttr').children(':eq(0)').children('a').attr('href');
-	               var title =    $(this).parent().parent().children('#etcAttr').children(':eq(0)').children('a').text(); 
-	               var pubDate = $(this).parent().parent().children('#etcAttr').children(':eq(1)').text();
-	               var description = $(this).parent().parent().children('#etcAttr').children(':eq(2)').text(); 
+	               var imgSrc = $(this).parent().parent().parent().children("#newsTable").children('#imgSrc').children('img').attr('src');
+	               var link = $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(0)').children('a').attr('href');
+	               var title =    $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(0)').children('a').text(); 
+	               var pubDate = $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(1)').text();
+	               var description = $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(2)').text(); 
 	
+	               alert(imgSrc);
+	               alert(link);
+	               alert(title);
+	               alert(pubDate);
+	               alert(description);
+	               
 	               korSubscribe(link, title, pubDate, description);
 	            
 	            });
@@ -229,15 +235,22 @@
             	 
                  $(document).on('click', '#subscribeBtn', function(){
                      
-                 	var imgSrc = $(this).parent().parent().children('#imgSrc').children('img').attr('src');
-                    var link = $(this).parent().parent().children('#etcAttr').children(':eq(0)').children('a').attr('href');
-                    var title =	$(this).parent().parent().children('#etcAttr').children(':eq(0)').children('a').text(); 
-                    var date = $(this).parent().parent().children('#etcAttr').children(':eq(1)').text(); 
-                    var author = $(this).parent().parent().children('#etcAttr').children(':eq(2)').text(); 
-                    var description = $(this).parent().parent().children('#etcAttr').children(':eq(3)').text(); 
-            	                    
+                 	var imgSrc = $(this).parent().parent().parent().children("#newsTable").children('#imgSrc').children('img').attr('src');
+                    var link = $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(0)').children('a').attr('href');
+                    var title =	$(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(0)').children('a').text(); 
+                    var date = $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(1)').text(); 
+                    var author = $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(2)').text(); 
+                    var description = $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(3)').text(); 
+            	   
+                   alert(imgSrc);
+  	               alert(link);
+  	               alert(title);
+  	               alert(date);
+  	               alert(author);
+  	               alert(description);
+                    
                     engSubscribe(imgSrc, link, title, date, author, description);
-                 
+               
                  });
                  
              });
