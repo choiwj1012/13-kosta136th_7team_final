@@ -191,7 +191,11 @@ public class NewsController {
 	//해외기사 스크랩
 	@RequestMapping(value = "/addAbroadScrap", method = RequestMethod.POST)
 	public String addAbroadScrap(@RequestBody AbroadScrap vo) throws Exception{
-		vo.setUser_num(4);
+
+		int userNum = demService.getUserNumber(vo.getEmail());
+		System.out.println(userNum);
+		vo.setUser_num(userNum);
+		System.out.println(vo.toString());
 		abrService.addAbroadScrap(vo);
 		
 		return "sub/news/news/tab2";
@@ -200,14 +204,15 @@ public class NewsController {
 	//국내기사 스크랩
 	@RequestMapping(value = "/addDemesticScrap", method = RequestMethod.POST)
 	public String addDemesticScrap(@RequestBody DemesticScrap vo) throws Exception{
-		vo.setUser_num(5);
+		int userNum = demService.getUserNumber(vo.getEmail());
+		vo.setUser_num(userNum);
 		vo.setKeyword("비트코인");
 		demService.addDemesticScrap(vo);
 		
 		return "sub/news/news/tab1";
 	}
 	
-	//국내기사 스크랩
+	//구독신청
 	@ResponseBody
 	@RequestMapping(value = "/getEmail", method = RequestMethod.POST)
 	public String getEmail(@RequestBody String email, Model model) throws Exception{

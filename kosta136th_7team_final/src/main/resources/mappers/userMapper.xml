@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INSERT INTO LOGIN(USER_NUM, LOGIN_DATE, LOGOUT_DATE) VALUES((SELECT USER_NUM FROM USER WHERE USER_EMAIL = #{USER_EMAIL}), NOW(), NOW())
 	</insert>
 	
-	<select resultType = "java.lang.String" id = "selectUserLogoutRecord">
+	<select id = "selectUserLogoutRecord" resultType = "java.lang.String" >
 		SELECT LOGIN_NUM FROM LOGIN WHERE USER_NUM = (SELECT USER_NUM FROM USER WHERE USER_EMAIL = #{USER_EMAIL}) AND LOGIN_DATE = LOGOUT_DATE ORDER BY LOGOUT_DATE DESC LIMIT 1
 	</select>
 	
@@ -37,5 +37,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id = "getRegisterTypeCode" resultType = "java.lang.String">
 		SELECT REGISTER_TYPE_CODE FROM REGISTER_TYPE WHERE USER_NUM = #{USER_NUM};
 	</select>
+	
+	<update id = "updateUserPassword">
+		UPDATE USER SET USER_PASSWORD = #{USER_PASSWORD} WHERE USER_EMAIL = #{USER_EMAIL};
+	</update>
 
 </mapper>

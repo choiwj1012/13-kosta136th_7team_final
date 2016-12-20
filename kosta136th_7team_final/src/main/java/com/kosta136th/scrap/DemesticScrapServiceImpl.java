@@ -131,6 +131,11 @@ public class DemesticScrapServiceImpl implements DemesticScrapService{
 		return dao.popularNews();
 	}
 
+	@Override
+	public int getUserNumber(String email) throws Exception {
+		return dao.getUserNumber(email);
+	}
+
 
 
 }

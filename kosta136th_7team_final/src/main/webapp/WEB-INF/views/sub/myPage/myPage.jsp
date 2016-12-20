@@ -21,10 +21,7 @@
       
       	<ul>
       		<li><a href="/myPage">나의 스크랩 기사목록</a></li>
-    		<li><a href="/manageMyBoard">나의 댓글 관리</a></li>
     		<li><a href="/manageMyInfo">회원정보 관리</a></li>
-    		<li><a href="/manageDealer">딜러정보 관리</a></li>
-    		<li><a href="/withDraw">회원탈퇴</a></li>
       	</ul>
       	  
       </div>

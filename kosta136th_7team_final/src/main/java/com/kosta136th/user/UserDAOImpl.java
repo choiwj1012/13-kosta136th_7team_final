@@ -120,5 +120,28 @@ public class UserDAOImpl implements UserDAO{
 		return updateUserSignoutSuccess;
 	}
 
+	@Override
+	public boolean updateUserPassword(User user) throws Exception {
+		int affectedRows = 0;
+		boolean updateUserPasswordSuccess = false;
+		
+		user.setUSER_PASSWORD(encryptPasswordSHA256(user.getUSER_PASSWORD()));
+
+		try{
+			affectedRows = session.insert(namespace + ".updateUserPassword", user);
+		}catch(Exception e){
+			e.printStackTrace();
+			affectedRows = 0;
+		}
+		
+		if (affectedRows > 0){
+			updateUserPasswordSuccess = true;
+		}else{
+			updateUserPasswordSuccess = false;
+		}
+		
+		return updateUserPasswordSuccess;
+	}
+
 
 }

@@ -29,5 +29,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INSERT INTO GUEST(GUEST_EMAIL) VALUES(#{email});
 	</insert>
 
+	<select id = "getUserNum" resultType = "java.lang.Integer" >
+		SELECT USER_NUM FROM USER WHERE USER_EMAIL = (#{email});
+	</select>
 	
 </mapper>

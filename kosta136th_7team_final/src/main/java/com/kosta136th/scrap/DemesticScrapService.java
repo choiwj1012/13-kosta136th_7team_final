@@ -10,6 +10,8 @@ public interface DemesticScrapService {
 
 	public List<DemesticPopular> popularNews() throws Exception;
 
+	public int getUserNumber(String email) throws Exception;
+
 	
 
 }

@@ -219,7 +219,7 @@ public class UserController {
 			LoginInfo loginInfo = null;
 			try { 
 				loginInfo = userService.signinEmail(user);
-				if(loginInfo == null)
+				if(loginInfo.getUSER_EMAIL() == null)
 				{
 					result = "false";
 					return result;
@@ -269,8 +269,39 @@ public class UserController {
 			}
 			
 			return result;
-			
-		
-			
 		}
+		
+		//임시 비밀번호 발송
+				@RequestMapping(value = "/requestIssuePassword", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+				@ResponseBody
+				public String requestIssuePassword(@ModelAttribute User user){
+					try {
+						String registerPassword = issueTemporaryPassword();					
+						String recipient = user.getUSER_EMAIL();
+
+						//db에 수정된 password를 입력한다
+						user.setUSER_PASSWORD(registerPassword);
+						boolean result = userService.updateUserPassword(user);
+						System.out.println(result);
+						if(result)
+						{
+							//메일을 보낸다
+							String subject = "인증번호가 발송되었습니다";
+							String body = "인증번호는 " + registerPassword + "입니다";
+							sendEmail(recipient, subject, body);
+							
+							return "메일이 발송되었습니다";
+						}
+						else
+						{
+							return "메일 발송실패.";
+						}
+						
+					}
+					catch (Exception e) 
+					{
+						e.printStackTrace();
+						return "오류가 발생했습니다.";
+					}
+				}
 }

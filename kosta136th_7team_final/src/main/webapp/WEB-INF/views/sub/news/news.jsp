@@ -130,36 +130,40 @@
 		<div id="korArticle" class="tabcontent">
 			
 			<c:forEach items="${newsList}" var ="b" begin="0" end="9" varStatus="idx">
-				
-				<div class="row" id="newsTable">
 			
-					<div class="col-md-3" id="imgSrc">
-						<img src= "../../../../resources/img/news/${idx.index}.png" alt="기사더미이미지" />
-					</div>
-					
-					<div class="col-md-8" id="etcAttr">
-						<h3><a href = "${b.link}" target="_blank">${b.title}</a></h3>
-						<p>${b.pubDate }</p>
-						<p>${b.description }</p>
-					</div>
-					
-					<div class="col-md-1"></div>
-												
-				</div>
-				
 				<div class="row">
 				
-					<div class="col-md-9"></div>
+					<div class="row" id="newsTable">
+			
+						<div class="col-md-3" id="imgSrc">
+							<img src= "../../../../resources/img/news/${idx.index}.png" alt="기사더미이미지" />
+						</div>
+						
+						<div class="col-md-8" id="etcAttr">
+							<h3><a href = "${b.link}" target="_blank">${b.title}</a></h3>
+							<p>${b.pubDate }</p>
+							<p>${b.description }</p>
+						</div>
+						
+						<div class="col-md-1"></div>
+													
+					</div>
+				
+					<div class="row">
 					
-					<div class="col-md-2">
-						<button type="button" id="subscribeBtn2" class="btn btn-primary">스크랩하기</button>
+						<div class="col-md-9"></div>
+						
+						<div class="col-md-2">
+							<button type="button" id="subscribeBtn2" class="btn btn-primary">스크랩하기</button>
+						</div>
+						
+						<div class="col-md-1"></div>
 					</div>
 					
-					<div class="col-md-1"></div>
+					<hr/>
+					
 				</div>
-				
-				<hr />
-				
+						
 			</c:forEach>
 						
 		</div>
@@ -170,13 +174,13 @@
 	            
 	            $(document).on('click', '#subscribeBtn2', function(){
 	                
-	               var imgSrc = $(this).parent().parent().children('#imgSrc').children('img').attr('src');
-	               var link = $(this).parent().parent().children('#etcAttr').children(':eq(0)').children('a').attr('href');
-	               var title =    $(this).parent().parent().children('#etcAttr').children(':eq(0)').children('a').text(); 
-	               var pubDate = $(this).parent().parent().children('#etcAttr').children(':eq(1)').text();
-	               var description = $(this).parent().parent().children('#etcAttr').children(':eq(2)').text(); 
-	
-	               korSubscribe(link, title, pubDate, description);
+				var imgSrc = $(this).parent().parent().parent().children("#newsTable").children('#imgSrc').children('img').attr('src');
+                   var link = $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(0)').children('a').attr('href');
+                   var title =    $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(0)').children('a').text(); 
+                   var pubDate = $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(1)').text();
+                   var description = $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(2)').text(); 
+                   
+                   korSubscribe(link, title, pubDate, description);
 	            
 	            });
 	            
@@ -190,34 +194,38 @@
 
 			<c:forEach items="${abrNewsList}" var ="b">
 			
-				<div class="row" id="newsTable">
-				
-					<div class="col-sm-3" id="imgSrc">
-						<img src=${b.imgSrc} width="150" height="200" alt="" />
-					</div>
-					
-					<div class="col-sm-8" id="etcAttr">
-						<h3><a href = ${b.link} target="_blank">${b.title}</a></h3>
-						<p>${b.date}</p>
-						<p>${b.author}</p>
-						<p>${b.description }</p>
-					</div>
-					
-					<div class="col-sm-1"></div>
-													
-				</div>
-				
 				<div class="row">
 				
-					<div class="col-md-9"></div>
-					<div class="col-sm-2">
-						<button type="button" id="subscribeBtn" class="btn btn-primary">스크랩하기</button>
-					</div>
-					<div class="col-md-1"></div>
-					
-				</div>
+					<div class="row" id="newsTable">
 				
-				<hr />
+						<div class="col-sm-3" id="imgSrc">
+							<img src=${b.imgSrc} width="150" height="200" alt="" />
+						</div>
+						
+						<div class="col-sm-8" id="etcAttr">
+							<h3><a href = ${b.link} target="_blank">${b.title}</a></h3>
+							<p>${b.date}</p>
+							<p>${b.author}</p>
+							<p>${b.description }</p>
+						</div>
+						
+						<div class="col-sm-1"></div>
+														
+					</div>
+					
+					<div class="row">
+					
+						<div class="col-md-9"></div>
+						<div class="col-sm-2">
+							<button type="button" id="subscribeBtn" class="btn btn-primary">스크랩하기</button>
+						</div>
+						<div class="col-md-1"></div>
+						
+					</div>
+					
+					<hr/>
+				
+				</div>		
 				
 			</c:forEach>
 			
@@ -229,14 +237,15 @@
             	 
                  $(document).on('click', '#subscribeBtn', function(){
                      
-                 	var imgSrc = $(this).parent().parent().children('#imgSrc').children('img').attr('src');
-                    var link = $(this).parent().parent().children('#etcAttr').children(':eq(0)').children('a').attr('href');
-                    var title =	$(this).parent().parent().children('#etcAttr').children(':eq(0)').children('a').text(); 
-                    var date = $(this).parent().parent().children('#etcAttr').children(':eq(1)').text(); 
-                    var author = $(this).parent().parent().children('#etcAttr').children(':eq(2)').text(); 
-                    var description = $(this).parent().parent().children('#etcAttr').children(':eq(3)').text(); 
-            	                    
-                    engSubscribe(imgSrc, link, title, date, author, description);
+                	 var imgSrc = $(this).parent().parent().parent().children("#newsTable").children('#imgSrc').children('img').attr('src');
+                     var link = $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(0)').children('a').attr('href');
+                     var title =    $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(0)').children('a').text(); 
+                     var date = $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(1)').text(); 
+                     var author = $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(2)').text(); 
+                     var description = $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(3)').text(); 
+                    
+                     
+                     engSubscribe(imgSrc, link, title, date, author, description);
                  
                  });
                  
@@ -360,58 +369,79 @@
 
 	function engSubscribe(imgSrc, link, title, date, author, description)
 	{
+		var email = '<c:out value="${login.USER_EMAIL}"/>';
+	
+		if(email == '')
+		{
+			alert("로그인을 해주세요");
+		}
+		else
+		{
+			alert("외국기사스크랩버튼 클릭됨" + "\n"
+					+ "email : " + email + "\n"
+					+ "imgsrc : " + imgSrc+ "\n" 
+					+ "link : " + link+ "\n"
+					+ "title : " + title + "\n"
+					+ "date : " + date + "\n"
+					+ "author : " + author + "\n"
+					+ "description : " + description);
+			$.ajax({
+				type : 'post',
+				url : '/addAbroadScrap',
+				headers :{
+					"Content-Type" : "application/json",
+					"X-HTTP-Method_Overrride" : "POST",
+				},
+				dataType : 'text',
+				data : JSON.stringify({
+					email : email,
+					imgSrc : imgSrc,
+					link : link,
+					title : title,
+					date : date,
+					author : author,
+					description : description
+				}),
+				
+			});
+		}
 		
-		alert("외국기사스크랩버튼 클릭됨" + "\n"
-				+ "imgsrc : " + imgSrc+ "\n" 
-				+ "link : " + link+ "\n"
-				+ "title : " + title + "\n"
-				+ "date : " + date + "\n"
-				+ "author : " + author + "\n"
-				+ "description : " + description);
-		
-		$.ajax({
-			type : 'post',
-			url : '/addAbroadScrap',
-			headers :{
-				"Content-Type" : "application/json",
-				"X-HTTP-Method_Overrride" : "POST",
-			},
-			dataType : 'text',
-			data : JSON.stringify({
-				imgSrc : imgSrc,
-				link : link,
-				title : title,
-				date : date,
-				author : author,
-				description : description
-			}),
-			
-		});
 	}
 	
 	function korSubscribe(link, title, pubDate, description)
 	{
-		alert("한국기사스크랩버튼 클릭됨" + "\n"
-				+ "link : " + link + "\n"
-				+ "title : " + title + "\n"
-				+ "date : " + pubDate + "\n"
-				+ "date : " + description);
-		 $.ajax({
-			type : 'post',
-			url : '/addDemesticScrap',
-			headers :{
-				"Content-Type" : "application/json",
-				"X-HTTP-Method_Overrride" : "POST",
-			},
-			dataType : 'text',
-			data : JSON.stringify({
-				link : link,
-				title : title,
-				pubDate : pubDate,
-				description : description
-			})
-			
-		});
+		var email = '<c:out value="${login.USER_EMAIL}"/>';
+		if(email == '')
+		{
+			alert("로그인을 해주세요");
+		}
+		else
+		{
+			alert("한국기사스크랩버튼 클릭됨" + "\n"
+					+ "email : " + email + "\n"
+					+ "link : " + link + "\n"
+					+ "title : " + title + "\n"
+					+ "date : " + pubDate + "\n"
+					+ "date : " + description);
+			 $.ajax({
+				type : 'post',
+				url : '/addDemesticScrap',
+				headers :{
+					"Content-Type" : "application/json",
+					"X-HTTP-Method_Overrride" : "POST",
+				},
+				dataType : 'text',
+				data : JSON.stringify({
+					email : email,
+					link : link,
+					title : title,
+					pubDate : pubDate,
+					description : description
+				})
+				
+			});
+		}
+		
 	}
 	
 	function getEmail()

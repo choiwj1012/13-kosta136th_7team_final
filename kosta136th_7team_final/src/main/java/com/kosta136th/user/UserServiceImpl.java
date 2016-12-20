@@ -37,5 +37,15 @@ public class UserServiceImpl implements UserService{
 	public boolean signout(User user) throws Exception {
 		return userDAO.signout(user);
 	}
+
+	@Override
+	public boolean updateUserPassword(User user) throws Exception {
+		boolean updateUserPasswordSuccess;
+		
+		updateUserPasswordSuccess = userDAO.updateUserPassword(user);
+		
+		return updateUserPasswordSuccess;
+		
+	}
 	
 }
