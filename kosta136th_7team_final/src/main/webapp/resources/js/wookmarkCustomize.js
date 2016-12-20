@@ -75,25 +75,16 @@
         var html = '';
         var image;
 		var str = "";
+		
 		$.each(data, function(){
-//			.reverse()
-    	    str += "<li>";
-            str += "<p>" + this.user_nickName + "</p>";
-            str += "<p>" + this.category + "</p>";
-            str += "<p>" + this.like_count + "</p>";
-        	str += "</li>";
-		}); 
-//        for(var i=0; i<data.length; i++) {
-//        	
-//          image = data[i];
-//          html += '<li>';
-////          html += '  <img src="'+image.preview+'" width="400" height="'+Math.round(image.height/image.width*200)+'">';
-//          html += '  <p>'+image.User_nickName+'</p>';
-//          html += '  <p>'+image.Category+'</p>';
-//          html += '  <p>'+image.Like_count+'</p>';
-//          html += '</li>';
 
-//        }
+    	    str += "<li>";
+            str += "	<p>" + this.user_nickName + "</p>";
+            str += "	<p>" + this.category + "</p>";
+            str += "	<p>" + this.like_count + "</p>";
+        	str += "</li>";
+        	
+		}); 
 
         $("#container").append(str);
 

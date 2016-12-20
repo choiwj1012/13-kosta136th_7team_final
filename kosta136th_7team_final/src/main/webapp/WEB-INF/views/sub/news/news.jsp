@@ -130,36 +130,40 @@
 		<div id="korArticle" class="tabcontent">
 			
 			<c:forEach items="${newsList}" var ="b" begin="0" end="9" varStatus="idx">
-				
-				<div class="row" id="newsTable">
 			
-					<div class="col-md-3" id="imgSrc">
-						<img src= "../../../../resources/img/news/${idx.index}.png" alt="기사더미이미지" />
-					</div>
-					
-					<div class="col-md-8" id="etcAttr">
-						<h3><a href = "${b.link}" target="_blank">${b.title}</a></h3>
-						<p>${b.pubDate }</p>
-						<p>${b.description }</p>
-					</div>
-					
-					<div class="col-md-1"></div>
-												
-				</div>
-				
 				<div class="row">
 				
-					<div class="col-md-9"></div>
-					
-					<div class="col-md-2">
-						<button type="button" id="subscribeBtn2" class="btn btn-primary">스크랩하기</button>
+					<div class="row" id="newsTable">
+				
+						<div class="col-md-3" id="imgSrc">
+							<img src= "../../../../resources/img/news/${idx.index}.png" alt="기사더미이미지" />
+						</div>
+						
+						<div class="col-md-8" id="etcAttr">
+							<h3><a href = "${b.link}" target="_blank">${b.title}</a></h3>
+							<p>${b.pubDate }</p>
+							<p>${b.description }</p>
+						</div>
+						
+						<div class="col-md-1"></div>
+													
 					</div>
 					
-					<div class="col-md-1"></div>
+					<div class="row">
+					
+						<div class="col-md-9"></div>
+						
+						<div class="col-md-2">
+							<button type="button" id="subscribeBtn2" class="btn btn-primary">스크랩하기</button>
+						</div>
+						
+						<div class="col-md-1"></div>
+					</div>
+					
+					<hr />
+					
 				</div>
-				
-				<hr />
-				
+						
 			</c:forEach>
 						
 		</div>
@@ -196,35 +200,39 @@
 
 			<c:forEach items="${abrNewsList}" var ="b">
 			
-				<div class="row" id="newsTable">
-				
-					<div class="col-sm-3" id="imgSrc">
-						<img src=${b.imgSrc} width="150" height="200" alt="" />
-					</div>
-					
-					<div class="col-sm-8" id="etcAttr">
-						<h3><a href = ${b.link} target="_blank">${b.title}</a></h3>
-						<p>${b.date}</p>
-						<p>${b.author}</p>
-						<p>${b.description }</p>
-					</div>
-					
-					<div class="col-sm-1"></div>
-													
-				</div>
-				
 				<div class="row">
-				
-					<div class="col-md-9"></div>
-					<div class="col-sm-2">
-						<button type="button" id="subscribeBtn" class="btn btn-primary">스크랩하기</button>
-					</div>
-					<div class="col-md-1"></div>
 					
+					<div class="row" id="newsTable">
+				
+						<div class="col-sm-3" id="imgSrc">
+							<img src=${b.imgSrc} width="150" height="200" alt="" />
+						</div>
+						
+						<div class="col-sm-8" id="etcAttr">
+							<h3><a href = ${b.link} target="_blank">${b.title}</a></h3>
+							<p>${b.date}</p>
+							<p>${b.author}</p>
+							<p>${b.description }</p>
+						</div>
+						
+						<div class="col-sm-1"></div>
+														
+					</div>
+					
+					<div class="row">
+					
+						<div class="col-md-9"></div>
+						<div class="col-sm-2">
+							<button type="button" id="subscribeBtn" class="btn btn-primary">스크랩하기</button>
+						</div>
+						<div class="col-md-1"></div>
+						
+					</div>
+					
+					<hr />
+							
 				</div>
-				
-				<hr />
-				
+						
 			</c:forEach>
 			
 		</div>					
