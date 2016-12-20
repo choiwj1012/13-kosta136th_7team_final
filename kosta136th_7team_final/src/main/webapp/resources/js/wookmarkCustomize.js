@@ -88,19 +88,7 @@
         var html = '';
         var image;
 		var str = "";
-		
-<<<<<<< HEAD
-		$.each(data, function(){
 
-    	    str += "<li>";
-            str += "	<p>" + this.user_nickName + "</p>";
-            str += "	<p>" + this.category + "</p>";
-            str += "	<p>" + this.like_count + "</p>";
-        	str += "</li>";
-        	
-		}); 
-
-=======
 		if(data != null){
 			
 			$.each(data, function(){
@@ -124,7 +112,7 @@
 //        }
 			
 //		$(".listToChange").empty();
->>>>>>> a30923e9b27af6eae24c3a54281ad50b4f47293c
+
         $("#container").append(str);
      
         applyLayout();
