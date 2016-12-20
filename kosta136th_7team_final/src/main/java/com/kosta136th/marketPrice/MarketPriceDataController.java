@@ -36,7 +36,7 @@ public class MarketPriceDataController {
     private MarketPriceService marketPriceService;
     
 
-    @Scheduled(fixedDelay = 12000000)
+    @Scheduled(fixedDelay = 5400000)
     @RequestMapping(value = "/rateSave", method = RequestMethod.GET)
     public void rateSave() {
         
@@ -259,7 +259,7 @@ public class MarketPriceDataController {
 				System.out.println("입력한 값이 없습니다.");
 						
 			}
-
+			
 			marketPrice.setVolume_24h(volume_24h_out);
 			
 			marketPriceList.add(marketPrice);

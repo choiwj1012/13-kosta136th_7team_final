@@ -141,18 +141,21 @@ public class DealerController {
 	
 	@RequestMapping(value = "/searchList", method = RequestMethod.GET)
 	public List<Dealer> searchList(@RequestParam("page") int page, @RequestParam("search_type") 
-	String search_type, @RequestParam("key") String key, HttpServletResponse response) throws Exception {
-		
+	String search_type, HttpServletResponse response) throws Exception {
+//		, "key" : key  @RequestParam("key") String key,
 		SearchDealer searchDealer = new SearchDealer();
 		
 		searchDealer.setSearchType(search_type);
-		searchDealer.setKeyword(key);
 		
+//		searchDealer.setKeyword(key);
+		System.out.println(searchDealer.getSearchType());
+		System.out.println(searchDealer.getKeyword());
 		List<Dealer> dealerList = service.allListSearch(searchDealer);
 		
 		for (int i = 0; i < dealerList.size(); i++) {
 			
 			System.out.println(dealerList.get(i).getUser_nickName());
+			
 			System.out.println(dealerList.get(i).getCategory());
 			System.out.println(dealerList.get(i).getLike_count());
 			
