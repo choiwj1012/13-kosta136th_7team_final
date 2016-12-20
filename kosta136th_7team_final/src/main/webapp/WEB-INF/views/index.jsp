@@ -73,8 +73,39 @@
 	</header>
 		
 	<section class="bg-chart">
-		<div id="chart_usd" class="col-md-6"></div>
-		<div id="chart_cny" class="col-md-6"></div>
+		
+		<div class="col-md-offset-1 col-md-10 text-center">
+			
+			<div class="col-sm-12">
+				<div id="USD_Bitcoin_info">USD / Bitcoin</div>
+				<div id="USD_Bitcoin"></div>
+			</div>
+			<div class="col-lg-6">
+				<div class="col-sm-6">	
+					<div id="USD_Litecoin_info">USD / Litecoin</div>				
+					<div id="USD_Litecoin"></div>
+				</div>
+				<div class="col-sm-6">
+					<div id="USD_Ethereum_info">USD / Ethereum</div>				
+					<div id="USD_Ethereum"></div>
+				</div>
+			</div>
+			
+			
+			<div class="col-lg-6">
+				<div class="col-sm-6">
+					<div id="USD_Monero_info">USD / Monero</div>				
+					<div id="USD_Monero"></div>
+				</div>
+				<div class="col-sm-6">
+					<div id="USD_Factom_info">USD / Factom</div>				
+					<div id="USD_Factom"></div>
+				</div>
+			</div>
+			
+		</div>
+		
+		
 	</section>
 		
 	<section class="bg-first">
@@ -134,34 +165,33 @@
 	</section>
 	
 	<section class="bg-third">
-		<div class="container text-center">
+		
+		<div class="container-fluid text-center">
+			
 			<div class="row">
 				
+				<h2 id="email_title">비트코인 정보를 이메일로 받아보세요</h2>
+			
+				<form role="form">
+			
+					<div class="form-group">
+						<input type="email" id="email" class="form-control" placeholder="이메일 주소를 입력해 주세요">
+					</div>
+
+					<input type="submit" class="btn btn-default" onclick="getEmail()" value="구독신청">
 				
-				<div class="col-md-12">
-					
-					<h3>비트코인 정보를 이메일로 받아보세요</h3>
-					
-					<form role="form">
-					
-						<div class="form-group">
-							<input type="email" class="form-control" placeholder="이메일 주소를 입력해 주세요">
-						</div>
-	
-						<button type="submit" class="btn btn-default"> 구독신청 </button>
-						
-					</form>
-					
-				</div>
-				
-			</div>
+				</form>				
+			 
+			</div>		
+							
 		</div>
+		
 	</section>
 	
 	<section class="bg-fourth">
 		<div class="container-fluid">
 			<div class="row">
-				<img src="../../resources/img/logos_resize.png" alt="" id="logos"/>
+				<img src="../../resources/img/1920x370_company_logo.png" alt="" id="logos"/>
 			</div>
 		</div>
 	</section>

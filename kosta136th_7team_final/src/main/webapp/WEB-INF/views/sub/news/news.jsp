@@ -308,7 +308,7 @@
 				<div class="form-group">
 					<input type="email" id="email" placeholder="이메일 주소를 입력해 주세요">
 				</div>
-				<input type="submit" id="getEmailBtn" class="btn btn-primary" onclick="getEmail()" value = "구독신청하기"/>
+				<input type="submit" id="getEmailBtn" class="btn btn-primary" onclick="getEmail()" value = "구독신청"/>
 			</form>
 			
 		</div> <!-- ./submitEmail -->

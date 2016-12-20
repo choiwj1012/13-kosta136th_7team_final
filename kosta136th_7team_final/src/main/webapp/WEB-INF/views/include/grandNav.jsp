@@ -3,7 +3,7 @@
 
 <body>
 
-	<nav id="mainNav" class="navbar navbar-default navbar-static-top navbar-default">
+	<nav id="mainNav" class="navbar navbar-default navbar-static-top navbar-fixed-top">
 	
 		<div id="nav_container" class="container">
 		

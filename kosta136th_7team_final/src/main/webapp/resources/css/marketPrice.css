@@ -4,32 +4,47 @@
 body, .container-fluid {
 	
 	background: #333;
-	margin: 0;
+	margin-top: 68px;
 	padding: 0;
 	
 }
 
-ul#chart_info {
+div#chart_info_title {
 	
 	margin: 0;
 	background-color: #181b1d;
-	max-height: 56px;
+	height: 30px;
+	color: #555;
 	
 }
 
-ul#chart_info > li {
+
+div#chart_info {
 	
-	display: inline;
-	max-height: 56px;
+	background-color: #181b1d;
+	height: 50px;
 	
 }
 
 #price_info {
 	
+	margin-top: -20px;
+	padding-left: 40px;
+	height: 56px;	
+	width: 240px;
 	color: #33bbcc;
-	font-size: 45px;
-	min-width: 300px;
+	font-size: 60px;
+	display: inline-block;
 	
+}
+
+#money_type_info, #coin_type_info {
+	
+	height: 56ox;
+	color: #ddd;
+	size: 50px;
+	font-size: 30px;
+	display: inline-block;
 	
 }
 
@@ -37,7 +52,7 @@ ul#chart_info > li {
 	
 	margin-left: 20px;
 	color: #EEE;
-	font-size: 25px;
+	font-size: 30px;
 	
 }
 
@@ -55,6 +70,14 @@ h3 {
 	
 }
 
+#chart_info_title {
+	
+	padding-left: 40px; 
+	font-size: 20px;
+	
+}
+
+
 /*** 시세그래프 ***/
 /* 그래프차트 공백 제거 */
 
@@ -68,7 +91,7 @@ h3 {
 #chart {
 	
 	position: relative;
-	min-height: 844px; 
+	min-height: 820px; 
 	
 }
 
@@ -98,7 +121,7 @@ ul.nav-tabs>li>a {
 	border-top: 3px solid #2e3234;
 	border-radius: 0;
 	height: 45px;
-	font-size: 16px;
+	font-size: 14px;
 	
 }
 

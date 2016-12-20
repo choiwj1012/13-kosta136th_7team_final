@@ -10,6 +10,13 @@
 	height:100%;
 }
 
+body, .container-fluid {
+	
+	margin-top: 68px;
+	padding: 0;
+	
+}
+
 /* header navigation*/
 #main_logo_image{
 	
@@ -21,7 +28,7 @@
 
 #mainNav{
 	border : none;
-	background-color: #333333;
+	background-color: rgba(0, 0, 0, 0.8);
 }
 
 #mainNav>ul>li>a:hover{
