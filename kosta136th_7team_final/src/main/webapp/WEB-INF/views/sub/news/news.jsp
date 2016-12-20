@@ -130,8 +130,7 @@
 		<div id="korArticle" class="tabcontent">
 			
 			<c:forEach items="${newsList}" var ="b" begin="0" end="9" varStatus="idx">
-<<<<<<< HEAD
-			
+
 				<div class="row">
 				
 					<div class="row" id="newsTable">
@@ -152,29 +151,6 @@
 				
 					<div class="row">
 					
-=======
-			
-				<div class="row">
-				
-					<div class="row" id="newsTable">
-				
-						<div class="col-md-3" id="imgSrc">
-							<img src= "../../../../resources/img/news/${idx.index}.png" alt="기사더미이미지" />
-						</div>
-						
-						<div class="col-md-8" id="etcAttr">
-							<h3><a href = "${b.link}" target="_blank">${b.title}</a></h3>
-							<p>${b.pubDate }</p>
-							<p>${b.description }</p>
-						</div>
-						
-						<div class="col-md-1"></div>
-													
-					</div>
-					
-					<div class="row">
-					
->>>>>>> refs/remotes/origin/master
 						<div class="col-md-9"></div>
 						
 						<div class="col-md-2">
@@ -184,11 +160,7 @@
 						<div class="col-md-1"></div>
 					</div>
 					
-<<<<<<< HEAD
-					<hr/>
-=======
 					<hr />
->>>>>>> refs/remotes/origin/master
 					
 				</div>
 						
@@ -202,30 +174,14 @@
 	            
 	            $(document).on('click', '#subscribeBtn2', function(){
 	                
-<<<<<<< HEAD
-				var imgSrc = $(this).parent().parent().parent().children("#newsTable").children('#imgSrc').children('img').attr('src');
+				   var imgSrc = $(this).parent().parent().parent().children("#newsTable").children('#imgSrc').children('img').attr('src');
                    var link = $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(0)').children('a').attr('href');
                    var title =    $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(0)').children('a').text(); 
                    var pubDate = $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(1)').text();
                    var description = $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(2)').text(); 
                    
                    korSubscribe(link, title, pubDate, description);
-=======
-	               var imgSrc = $(this).parent().parent().parent().children("#newsTable").children('#imgSrc').children('img').attr('src');
-	               var link = $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(0)').children('a').attr('href');
-	               var title =    $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(0)').children('a').text(); 
-	               var pubDate = $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(1)').text();
-	               var description = $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(2)').text(); 
-	
-	               alert(imgSrc);
-	               alert(link);
-	               alert(title);
-	               alert(pubDate);
-	               alert(description);
-	               
-	               korSubscribe(link, title, pubDate, description);
->>>>>>> refs/remotes/origin/master
-	            
+       
 	            });
 	            
 	        });
@@ -239,15 +195,9 @@
 			<c:forEach items="${abrNewsList}" var ="b">
 			
 				<div class="row">
-<<<<<<< HEAD
 				
 					<div class="row" id="newsTable">
 				
-=======
-					
-					<div class="row" id="newsTable">
-				
->>>>>>> refs/remotes/origin/master
 						<div class="col-sm-3" id="imgSrc">
 							<img src=${b.imgSrc} width="150" height="200" alt="" />
 						</div>
@@ -273,17 +223,10 @@
 						
 					</div>
 					
-<<<<<<< HEAD
-					<hr/>
-				
-				</div>		
-				
-=======
 					<hr />
 							
 				</div>
 						
->>>>>>> refs/remotes/origin/master
 			</c:forEach>
 			
 		</div>					
@@ -294,7 +237,6 @@
             	 
                  $(document).on('click', '#subscribeBtn', function(){
                      
-<<<<<<< HEAD
                 	 var imgSrc = $(this).parent().parent().parent().children("#newsTable").children('#imgSrc').children('img').attr('src');
                      var link = $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(0)').children('a').attr('href');
                      var title =    $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(0)').children('a').text(); 
@@ -305,24 +247,6 @@
                      
                      engSubscribe(imgSrc, link, title, date, author, description);
                  
-=======
-                 	var imgSrc = $(this).parent().parent().parent().children("#newsTable").children('#imgSrc').children('img').attr('src');
-                    var link = $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(0)').children('a').attr('href');
-                    var title =	$(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(0)').children('a').text(); 
-                    var date = $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(1)').text(); 
-                    var author = $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(2)').text(); 
-                    var description = $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(3)').text(); 
-            	   
-                   alert(imgSrc);
-  	               alert(link);
-  	               alert(title);
-  	               alert(date);
-  	               alert(author);
-  	               alert(description);
-                    
-                    engSubscribe(imgSrc, link, title, date, author, description);
-               
->>>>>>> refs/remotes/origin/master
                  });
                  
              });
