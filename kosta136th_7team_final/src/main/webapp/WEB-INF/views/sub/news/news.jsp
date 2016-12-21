@@ -8,35 +8,41 @@
 
 <%@ include file="../../include/grandNav.jsp" %>
 
+<!-- keyword 검색 체크박스 -->
+	<div class="row text-center" id="searchNews">
+
+		<form class="form-horizontal" role="form" action="">
+	
+			<div class="col-sm-1">
+				<!-- <img src="../../../resources/img/news/search_blue.png" id="searchIcon" alt="검색돋보기" /> -->
+				기사 검색
+			</div>
+	
+			<div class="col-sm-10 form-group">
+				<input type="text" id="searchInputBox" name="searchKeyword" class="form-control" placeholder="검색할 키워드를 적어주세요" />
+				<input type="hidden" name="page" value=1>	
+			</div>
+			
+			<div class="col-sm-1" id="searchBox">
+				<button type="submit" class="btn btn-primary">검색하기</button>
+			</div>
+	
+		</form>
+	
+	</div>
+	
 <div id="news_title">Bitcoin News Page</div>
 
 <!-- 메인 콘텐츠 영역 -->	
 <div class="container-fluid" id="mainWrapper">
 	
+	
+	
+	
 	<!-- 중간 컨텐츠 영역 -->
-	<div class="col-md-offset-1 col-md-8">
+	<div id="main_content" class="col-md-offset-1 col-md-9">
 		
-		<!-- keyword 검색 체크박스 -->
-		<div class="row text-center" id="searchNews">
-
-			<form class="form-horizontal" role="form" action="">
 		
-				<div class="col-sm-1">
-					<img src="../../../resources/img/news/search_blue.png" id="searchIcon" alt="검색돋보기" />
-				</div>
-		
-				<div class="col-sm-10 form-group">
-					<input type="text" id="searchInputBox" name="searchKeyword" class="form-control" placeholder="검색할 키워드를 적어주세요" />
-					<input type="hidden" name="page" value=1>	
-				</div>
-				
-				<div class="col-sm-1" id="searchBox">
-					<button type="submit" class="btn btn-primary">검색하기</button>
-				</div>
-		
-			</form>
-		
-		</div>
 		
 		
 		<!-- 인기기사 테이블 -->
@@ -50,7 +56,7 @@
 						
 						<div class="panel panel-default">
 							
-							<img src="../../../../resources/img/news/${idx.index+10}.png" alt="인기기사 이미지" />
+							<img src="../../../../resources/img/news/${idx.index+10}.jpg" alt="인기기사 이미지" />
 							
 							<div class="panel-body">
 								<p>
@@ -76,7 +82,7 @@
 											
 						<div class="panel panel-default">
 						
-							<img src="../../../../resources/img/news/${idx.index+10}.png" alt="인기기사 이미지" />
+							<img src="../../../../resources/img/news/${idx.index+10}.jpg" alt="인기기사 이미지" />
 							
 							<div class="panel-body">
 								<p>
@@ -138,7 +144,7 @@
 					<div class="row" id="newsTable">
 			
 						<div class="col-md-3" id="imgSrc">
-							<img src= "../../../../resources/img/news/${idx.index}.png" alt="기사더미이미지" />
+							<img src= "../../../../resources/img/news/${idx.index}.jpg" alt="기사더미이미지" />
 						</div>
 						
 						<div class="col-md-8" id="etcAttr">
@@ -304,7 +310,7 @@
 		
 						
 	<!-- side section -->
-	<div class="col-offset-md-1 col-md-2 text-center">
+	<div id="side_content" class="col-md-2 text-center">
 		
 		<!-- 광고영역 -->
 		<div class="row text-center">
