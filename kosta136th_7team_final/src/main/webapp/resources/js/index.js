@@ -1,11 +1,11 @@
+
 $(document).ready(function() {
-	
-	var options = { 	
+	var options = {
 		videoId: 'H9P_wkq08XA', 
-		//videoId: 'ml1r92_r36c',
+		//videoId: 'TYa9JNicEts',
 		start: 10
 	};
 
 	$('#wrapper').tubular(options);
 	
-}); 
+});

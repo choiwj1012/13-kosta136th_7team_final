@@ -367,6 +367,52 @@
 
 <script>
 
+	function korSubscribe(link, title, pubDate, description)
+	{
+		var email = '<c:out value="${login.USER_EMAIL}"/>';
+		if(email == '')
+		{
+			alert("로그인을 해주세요");
+		}
+		else
+		{
+			alert("한국기사스크랩버튼 클릭됨" + "\n"
+					+ "email : " + email + "\n"
+					+ "link : " + link + "\n"
+					+ "title : " + title + "\n"
+					+ "date : " + pubDate + "\n"
+					+ "date : " + description);
+			 $.ajax({
+				type : 'post',
+				url : '/addDemesticScrap',
+				headers :{
+					"Content-Type" : "application/json",
+					"X-HTTP-Method_Overrride" : "POST",
+				},
+				dataType : 'text',
+				data : JSON.stringify({
+					email : email,
+					link : link,
+					title : title,
+					pubDate : pubDate,
+					description : description
+				}),
+				success : function(data) {
+			    	if(data == "true")
+		    		{
+		    			alert("스크랩 성공");
+		    		}
+			    	else
+		    		{
+		    			alert("스크랩 삭제")
+		    		}
+			    }
+				
+			});
+		}
+		
+	}
+
 	function engSubscribe(imgSrc, link, title, date, author, description)
 	{
 		var email = '<c:out value="${login.USER_EMAIL}"/>';
@@ -402,42 +448,18 @@
 					author : author,
 					description : description
 				}),
+				success : function(data) {
+			    	if(data == "true")
+		    		{
+		    			alert("스크랩 성공");
+		    		}
+			    	
+			    	else
+		    		{
+		    			alert("스크랩 삭제");
+		    		}
+			    }
 				
-			});
-		}
-		
-	}
-	
-	function korSubscribe(link, title, pubDate, description)
-	{
-		var email = '<c:out value="${login.USER_EMAIL}"/>';
-		if(email == '')
-		{
-			alert("로그인을 해주세요");
-		}
-		else
-		{
-			alert("한국기사스크랩버튼 클릭됨" + "\n"
-					+ "email : " + email + "\n"
-					+ "link : " + link + "\n"
-					+ "title : " + title + "\n"
-					+ "date : " + pubDate + "\n"
-					+ "date : " + description);
-			 $.ajax({
-				type : 'post',
-				url : '/addDemesticScrap',
-				headers :{
-					"Content-Type" : "application/json",
-					"X-HTTP-Method_Overrride" : "POST",
-				},
-				dataType : 'text',
-				data : JSON.stringify({
-					email : email,
-					link : link,
-					title : title,
-					pubDate : pubDate,
-					description : description
-				})
 				
 			});
 		}
@@ -451,6 +473,7 @@
 		if( pattern.test(email) ) 
 		{
 			alert("메일 주소가 올바르게 입력되었습니다." + email);
+			
 			$.ajax({
 				type : 'post',
 				url : '/getEmail',
@@ -460,6 +483,13 @@
 				},
 				dataType : 'text',
 				data : JSON.stringify(email),
+				success : function(data) 
+				{
+			    	if(data == "true")
+		    		{
+		    			alert("구독 성공");
+		    		}
+			    }
 			});
 		} 
 		else 
