@@ -56,10 +56,10 @@
 		
 		            <div class="collapse navbar-collapse navbar-right">
 		                <ul class="nav navbar-nav">
-		       	 			<li><a href="/marketPrice">실시간 시세</a></li>
-							<li><a href="/news">비트코인 최신기사</a></li>
-							<li><a href="/btcInfoLand">비트리버 커뮤니티</a></li>
-							<li><a href="/board_list">자유게시판</a></li>
+		       	 			<li><a href="/marketPrice">시세</a></li>
+							<li><a href="/news">비트코인뉴스</a></li>
+							<li><a href="/btcInfoLand">리버커뮤니티</a></li>
+							<li><a href="/board_list">프리보드</a></li>
 		                </ul>
 		            </div>
 		            
@@ -168,18 +168,20 @@
 		
 		<div class="container-fluid text-center">
 			
-			<div class="row">
+			<!-- <div class="row"> -->
+			<div id="box">
 				
-				<h2 id="email_title">비트코인 정보를 이메일로 받아보세요</h2>
+				<span id="email_title">매일 새로운 정보를 이메일로 구독하세요</span>
 			
 				<form role="form">
-			
-					<div class="form-group">
-						<input type="email" id="email" class="form-control" placeholder="이메일 주소를 입력해 주세요">
+					<div class="col-sm-10">
+						<div class="form-group">
+							<input type="email" id="email" class="form-control" placeholder="이메일 주소를 입력해 주세요">
+						</div>
 					</div>
-
-					<input type="submit" class="btn btn-default" onclick="getEmail()" value="구독신청">
-				
+					<div class="col-sm-2">
+						<input type="submit" class="btn btn-default" onclick="getEmail()" value="구독신청">
+					</div>
 				</form>				
 			 
 			</div>		
@@ -190,8 +192,8 @@
 	
 	<section class="bg-fourth">
 		<div class="container-fluid">
-			<div class="row">
-				<img src="../../resources/img/1920x370_company_logo.png" alt="" id="logos"/>
+			<div  class="row">
+				<img  src="../../resources/img/1920x370_company_logo.png" alt="" id="logos" />
 			</div>
 		</div>
 	</section>

@@ -8,33 +8,41 @@
 
 <%@ include file="../../include/grandNav.jsp" %>
 
+<!-- keyword 검색 체크박스 -->
+	<div class="row text-center" id="searchNews">
+
+		<form class="form-horizontal" role="form" action="">
+	
+			<div class="col-sm-1">
+				<!-- <img src="../../../resources/img/news/search_blue.png" id="searchIcon" alt="검색돋보기" /> -->
+				기사 검색
+			</div>
+	
+			<div class="col-sm-10 form-group">
+				<input type="text" id="searchInputBox" name="searchKeyword" class="form-control" placeholder="검색할 키워드를 적어주세요" />
+				<input type="hidden" name="page" value=1>	
+			</div>
+			
+			<div class="col-sm-1" id="searchBox">
+				<button type="submit" class="btn btn-primary">검색하기</button>
+			</div>
+	
+		</form>
+	
+	</div>
+	
+<div id="news_title">Bitcoin News Page</div>
+
 <!-- 메인 콘텐츠 영역 -->	
 <div class="container-fluid" id="mainWrapper">
 	
+	
+	
+	
 	<!-- 중간 컨텐츠 영역 -->
-	<div class="col-md-offset-1 col-md-8">
+	<div id="main_content" class="col-md-offset-1 col-md-9">
 		
-		<!-- keyword 검색 체크박스 -->
-		<div class="row text-center" id="searchNews">
-
-			<form class="form-horizontal" role="form" action="">
 		
-				<div class="col-sm-1">
-					<img src="../../../resources/img/news/search_blue.png" id="searchIcon" alt="검색돋보기" />
-				</div>
-		
-				<div class="col-sm-10 form-group">
-					<input type="text" id="searchInputBox" name="searchKeyword" class="form-control" placeholder="검색할 키워드를 적어주세요" />
-					<input type="hidden" name="page" value=1>	
-				</div>
-				
-				<div class="col-sm-1" id="searchBox">
-					<button type="submit" class="btn btn-primary">검색하기</button>
-				</div>
-		
-			</form>
-		
-		</div>
 		
 		
 		<!-- 인기기사 테이블 -->
@@ -48,7 +56,7 @@
 						
 						<div class="panel panel-default">
 							
-							<img src="../../../../resources/img/news/${idx.index+10}.png" alt="인기기사 이미지" />
+							<img src="../../../../resources/img/news/${idx.index+10}.jpg" alt="인기기사 이미지" />
 							
 							<div class="panel-body">
 								<p>
@@ -74,7 +82,7 @@
 											
 						<div class="panel panel-default">
 						
-							<img src="../../../../resources/img/news/${idx.index+10}.png" alt="인기기사 이미지" />
+							<img src="../../../../resources/img/news/${idx.index+10}.jpg" alt="인기기사 이미지" />
 							
 							<div class="panel-body">
 								<p>
@@ -136,7 +144,7 @@
 					<div class="row" id="newsTable">
 			
 						<div class="col-md-3" id="imgSrc">
-							<img src= "../../../../resources/img/news/${idx.index}.png" alt="기사더미이미지" />
+							<img src= "../../../../resources/img/news/${idx.index}.jpg" alt="기사더미이미지" />
 						</div>
 						
 						<div class="col-md-8" id="etcAttr">
@@ -299,9 +307,10 @@
 		
 	</div>	
 		
+		
 						
 	<!-- side section -->
-	<div class="col-offset-md-1 col-md-2 text-center">
+	<div id="side_content" class="col-md-2 text-center">
 		
 		<!-- 광고영역 -->
 		<div class="row text-center">
@@ -311,7 +320,7 @@
 		<br />
 		
 		<!-- 구독신청 -->
-		<div class="text-center" id="submitEmail">
+		<!-- <div class="text-center" id="submitEmail">
 			<h4>지금 최신정보를 받아보세요 !</h4>				
 			<form role="form">
 				<div class="form-group">
@@ -320,7 +329,8 @@
 				<input type="submit" id="getEmailBtn" class="btn btn-primary" onclick="getEmail()" value = "구독신청"/>
 			</form>
 			
-		</div> <!-- ./submitEmail -->
+		</div> --> <!-- ./submitEmail -->
+		
 		
 		<br />
 		
@@ -338,6 +348,7 @@
 
 	</div>
 		
+	
 </div>
 
 <script>
@@ -499,5 +510,29 @@
 		
 	}
 </script>
-
+<section id="email_section">
+		
+	<div class="container-fluid text-center">
+		
+		<!-- <div class="row"> -->
+		<div id="box">
+			
+			<span id="email_title">매일 새로운 정보를 이메일로 구독하세요</span>
+		
+			<form role="form">
+				<div class="col-sm-10">
+					<div class="form-group">
+						<input type="email" id="email" class="form-control" placeholder="이메일 주소를 입력해 주세요">
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<input type="submit" class="btn btn-default" onclick="getEmail()" value="구독신청">
+				</div>
+			</form>				
+		 
+		</div>		
+						
+	</div>
+		
+</section>
 <%@ include file="../../include/footer.jsp" %>		
