@@ -61,11 +61,19 @@ $(document).ready(function () {
 							// type : 'area'
 						},
 						
+						navigator: {
+				            enabled: false
+				        },
+				        
+				        scrollbar: {
+				            enabled: false
+				        },
+						
 						series : [{
 							name : money_type,
 				            tooltip: {
 				            	valueDecimals: 3
-				            }
+				            },
 						
 						}]
 						

@@ -1581,12 +1581,17 @@ pre code {
 }
 @media (min-width: 992px) {
   .container {
-    width: 970px;
+    width: 920px;
   }
 }
 @media (min-width: 1200px) {
   .container {
     width: 1170px;
+  }
+}
+@media (min-width: 1600px) {
+  .container {
+    width: 1556px;
   }
 }
 .container-fluid {

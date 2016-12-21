@@ -29,7 +29,6 @@ body, .container-fluid {
 #main_logo_image{
 	
 	margin-top: 4px;
-	margin-left: 160px;
 	width:140px;
 	height:56px;
 }
@@ -43,13 +42,6 @@ body, .container-fluid {
 	background-color: #33CCCC;
 }
 
-div#nav_container{
-	
-	margin-right: 160px;
-	margin-left: 160px;
-	padding: 0;
-	
-}
 
 .navbar-nav>li>a{
 	color : white !important;
@@ -86,10 +78,11 @@ div#nav_container{
 	text-decoration:none;	
 }
 
+
 /* footer */
 #footer{
 	color:#fff;
-	background-color: #333333;
+	background-color: #323232;
 }
 
 #footer_logo_img{
@@ -99,7 +92,30 @@ div#nav_container{
 
 #footer_content{
 	margin-top:20px;
+	/* height: 300px; */
 }
+
+#footer_content > p {
+
+	color: #ddd;
+	text-align: left;
+	
+}
+
+#footer_row {
+	
+	padding-top: 60px;
+	padding-bottom: 60px
+	
+}
+
+#footer_content > p {
+	
+	font-size: 17px;
+	font-weight: 100;
+	
+}
+
 
 span.footer_copyright {
 	color: #7f7f7f;

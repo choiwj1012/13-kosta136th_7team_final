@@ -8,6 +8,8 @@
 
 <%@ include file="../../include/grandNav.jsp" %>
 
+<div id="news_title">Bitcoin News Page</div>
+
 <!-- 메인 콘텐츠 영역 -->	
 <div class="container-fluid" id="mainWrapper">
 	
@@ -299,6 +301,7 @@
 		
 	</div>	
 		
+		
 						
 	<!-- side section -->
 	<div class="col-offset-md-1 col-md-2 text-center">
@@ -311,7 +314,7 @@
 		<br />
 		
 		<!-- 구독신청 -->
-		<div class="text-center" id="submitEmail">
+		<!-- <div class="text-center" id="submitEmail">
 			<h4>지금 최신정보를 받아보세요 !</h4>				
 			<form role="form">
 				<div class="form-group">
@@ -320,7 +323,8 @@
 				<input type="submit" id="getEmailBtn" class="btn btn-primary" onclick="getEmail()" value = "구독신청"/>
 			</form>
 			
-		</div> <!-- ./submitEmail -->
+		</div> --> <!-- ./submitEmail -->
+		
 		
 		<br />
 		
@@ -338,6 +342,7 @@
 
 	</div>
 		
+	
 </div>
 
 <script>
@@ -469,5 +474,29 @@
 		
 	}
 </script>
-
+<section id="email_section">
+		
+	<div class="container-fluid text-center">
+		
+		<!-- <div class="row"> -->
+		<div id="box">
+			
+			<span id="email_title">매일 새로운 정보를 이메일로 구독하세요</span>
+		
+			<form role="form">
+				<div class="col-sm-10">
+					<div class="form-group">
+						<input type="email" id="email" class="form-control" placeholder="이메일 주소를 입력해 주세요">
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<input type="submit" class="btn btn-default" onclick="getEmail()" value="구독신청">
+				</div>
+			</form>				
+		 
+		</div>		
+						
+	</div>
+		
+</section>
 <%@ include file="../../include/footer.jsp" %>		
