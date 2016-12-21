@@ -29,10 +29,10 @@ public class Dealer {
 	public void setUser_email(String user_email) {
 		this.user_email = user_email;
 	}
-	public int getDealer_page_numl() {
+	public int getDealer_page_num() {
 		return dealer_page_num;
 	}
-	public void setDealer_page_numl(int dealer_page_num) {
+	public void setDealer_page_num(int dealer_page_num) {
 		this.dealer_page_num = dealer_page_num;
 	}
 	public int getUser_num() {

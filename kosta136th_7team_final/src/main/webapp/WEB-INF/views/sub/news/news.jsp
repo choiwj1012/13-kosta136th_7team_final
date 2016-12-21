@@ -130,7 +130,7 @@
 		<div id="korArticle" class="tabcontent">
 			
 			<c:forEach items="${newsList}" var ="b" begin="0" end="9" varStatus="idx">
-			
+
 				<div class="row">
 				
 					<div class="row" id="newsTable">
@@ -160,7 +160,7 @@
 						<div class="col-md-1"></div>
 					</div>
 					
-					<hr/>
+					<hr />
 					
 				</div>
 						
@@ -174,14 +174,14 @@
 	            
 	            $(document).on('click', '#subscribeBtn2', function(){
 	                
-				var imgSrc = $(this).parent().parent().parent().children("#newsTable").children('#imgSrc').children('img').attr('src');
+				   var imgSrc = $(this).parent().parent().parent().children("#newsTable").children('#imgSrc').children('img').attr('src');
                    var link = $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(0)').children('a').attr('href');
                    var title =    $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(0)').children('a').text(); 
                    var pubDate = $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(1)').text();
                    var description = $(this).parent().parent().parent().children("#newsTable").children('#etcAttr').children(':eq(2)').text(); 
                    
                    korSubscribe(link, title, pubDate, description);
-	            
+       
 	            });
 	            
 	        });
@@ -223,10 +223,10 @@
 						
 					</div>
 					
-					<hr/>
-				
-				</div>		
-				
+					<hr />
+							
+				</div>
+						
 			</c:forEach>
 			
 		</div>					
@@ -317,7 +317,7 @@
 				<div class="form-group">
 					<input type="email" id="email" placeholder="이메일 주소를 입력해 주세요">
 				</div>
-				<input type="submit" id="getEmailBtn" class="btn btn-primary" onclick="getEmail()" value = "구독신청하기"/>
+				<input type="submit" id="getEmailBtn" class="btn btn-primary" onclick="getEmail()" value = "구독신청"/>
 			</form>
 			
 		</div> <!-- ./submitEmail -->
