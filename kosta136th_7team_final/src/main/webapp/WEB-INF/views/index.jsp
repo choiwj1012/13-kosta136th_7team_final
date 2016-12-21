@@ -8,7 +8,7 @@
 	<script src="https://code.highcharts.com/stock/highstock.js"></script>			<!-- 차트 API js -->
 	<script src="../../../resources/js/index_chart.js"></script>				<!-- 차트 구현 js -->
 	<script src="../../../resources/js/marketPrice_chart_customizing.js"></script>	<!-- 디자인 커스터마이징 js -->
-	<script src="../../resources/js/index.js"></script>
+	<!-- <script src="../../resources/js/index.js"></script> -->
 </head>
 <body id="page-top">
 	
@@ -212,6 +212,29 @@
 		
 	});
 	</script>
-
+ 	<script>
+		$(document).ready(function() {
+			var email = '<c:out value="${login.USER_EMAIL}"/>';
+			if(email == "pcj9027@naver.com")
+			{
+				var options = {
+						//videoId: 'H9P_wkq08XA', 
+						videoId: 'TYa9JNicEts',
+						start: 10
+					};
+			}
+			else
+			{
+				var options = {
+						videoId: 'H9P_wkq08XA', 
+						//videoId: 'TYa9JNicEts',
+						start: 10
+					};
+			}
+		
+			$('#wrapper').tubular(options);
+			
+		});
+	</script> 
 <%@ include file="include/footer.jsp" %>
 		

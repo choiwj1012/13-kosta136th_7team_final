@@ -12,6 +12,10 @@ public interface DemesticScrapService {
 
 	public int getUserNumber(String email) throws Exception;
 
+	public String demScrapCheck(DemesticScrap vo) throws Exception;
+
+	public void removeDemesticScrap(DemesticScrap vo) throws Exception;
+
 	
 
 }
