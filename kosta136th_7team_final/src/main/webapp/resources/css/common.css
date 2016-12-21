@@ -2,6 +2,14 @@
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
 /* header wrapper */
+
+.row {
+	
+	margin-left: 0; 	
+	margin-right: 0;
+}
+
+
 #header{
 	position: relative;
 	top:0;
