@@ -58,7 +58,7 @@ public class HomeController {
 		
 	}
 	
-<<<<<<< HEAD
+
 	// 마이페이지 수정 경로
 	@RequestMapping(value = "/myPage", method = RequestMethod.GET)
 	public String myPage(){
@@ -85,9 +85,6 @@ public class HomeController {
 		
 	}
 	
-	
-=======
->>>>>>> 4a16405995437ab60fa46c3e810c02106f3a3c07
 	// 마이페이지 유저 비트코인 지갑 보기 경로 (준비중 페이지로 변경)
 	@RequestMapping(value = "/manageDealer", method = RequestMethod.GET)
 	public String manageDealer(){
