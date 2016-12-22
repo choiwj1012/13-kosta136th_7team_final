@@ -1,6 +1,7 @@
 package com.kosta136th.dealer;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +26,7 @@ public class DealerController {
 	
 	// BTC 정보광장 Index Mapping
 	@RequestMapping(value = "/btcInfoLand", method = RequestMethod.GET)
-	public String btcInfoLand(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception{
+	public String btcInfoLand(HttpSession session, @ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception{
 
 		model.addAttribute("list", service.allListSearch(cri));
 		
@@ -35,6 +36,12 @@ public class DealerController {
 		pageMaker.setTotalCount(service.listSearchCount(cri));
 		
 		model.addAttribute("pageMaker", pageMaker);
+		
+		String email = (String) ( 
+				( (Map<String,Object>)( session.getAttribute("login") ) )
+				.get("USER_EMAIL")
+				);
+		System.out.println(email);
 		
 		return "sub/btcInfoLand/btcInfoLand";
 		
@@ -51,9 +58,12 @@ public class DealerController {
 	@RequestMapping(value = "/dealerPageSave", method = RequestMethod.POST)
 	public String DealerPageSave(Dealer dealer, HttpSession session, RedirectAttributes rttr) throws Exception {
 
-//		String id = ((User)(session.getAttribute("sadlfkjauhgoijhglkfa"))).getUSER_EMAIL();
+		
 		boolean check = true;
-		String dealer_join_id = "DEALER1@GMAIL.COM";
+		String dealer_join_id = (String) ( 
+				( (Map<String,Object>)( session.getAttribute("login") ) )
+				.get("USER_EMAIL")
+				);
 //		QWER@NAVER.COM
 		// 세션에서받아온 아이디를 스트링형 변수에저장된것을 괄호 안에 저장해줘야함
 		List<Dealer> dealerList = service.userTypeCheck();
@@ -94,8 +104,9 @@ public class DealerController {
 	}
 	//딜러페이지 읽기
 	@RequestMapping(value = "/btcInfoLand_board_list", method = RequestMethod.GET)
-	public void dealerPageRead(@RequestParam("dealer_page_num") int dealer_page_num, @ModelAttribute("cri") SearchCriteria cri,Model model) throws Exception {
+	public void dealerPageRead(HttpSession session, @RequestParam("dealer_page_num") int dealer_page_num, @ModelAttribute("cri") SearchCriteria cri,Model model) throws Exception {
 
+		
 		//내공
 		Dealer dealer = new Dealer();
 		
@@ -157,9 +168,12 @@ public class DealerController {
 	//추천 신고
 	@RequestMapping(value = "dealerPageButtoncheck", method = RequestMethod.GET)
 	@ResponseBody
-	public void dealerPageButtonCheck(@RequestParam("likeCheck") String likeCheck, @RequestParam("disLikeCheck") String disLikeCheck,
+	public void dealerPageButtonCheck(HttpSession session, @RequestParam("likeCheck") String likeCheck, @RequestParam("disLikeCheck") String disLikeCheck,
 			@RequestParam("dealerNum") int dealerNum, @ModelAttribute("cri") SearchCriteria cri, HttpServletResponse response) throws Exception {
-		
+		String email = (String) ( 
+				( (Map<String,Object>)( session.getAttribute("login") ) )
+				.get("USER_EMAIL")
+				);
 		service.likeEvent(likeCheck, disLikeCheck, dealerNum);
 
 	}
