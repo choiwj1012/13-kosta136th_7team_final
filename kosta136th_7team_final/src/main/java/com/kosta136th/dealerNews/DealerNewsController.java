@@ -46,15 +46,16 @@ public class DealerNewsController {
 			if (pageMaker.getCurrentPage() < 1){
 				pageMaker.setCurrentPage(1);
 			}
+			
 			int totalPage = (int)Math.ceil((double)getDealerNewsListSize() / pageMaker.getPerPageNum());
 			if (pageMaker.getCurrentPage() > totalPage){
 				pageMaker.setCurrentPage(totalPage);
 			}
-			
+				
 			//DealerNews의
 			//limit(currentPage로부터 min(perPageNum, getDealerNewsListSize() - 1 )만큼 출력)한다.
 			int startDealerNewsIndex = (pageMaker.getCurrentPage() - 1)
-									* (pageMaker.getPerPageNum()); //0부터 시작이다.
+									* (pageMaker.getPerPageNum()); //0부터 시작이 아니다.
 			int howMuch = Math.min(pageMaker.getPerPageNum(), 
 					(getDealerNewsListSize() - 1) - startDealerNewsIndex + 1);
 			
@@ -192,7 +193,7 @@ public class DealerNewsController {
 		System.out.println("올 때 글 정보 : " + pageMaker.toString());
 		
 		DealerNews previousNews = dealerNewsService.getPreviousNews(pageMaker);
-		
+
 		if (previousNews != null){
 			pageMaker.setDealer_news_num(
 					previousNews.getDealer_news_num());
@@ -219,7 +220,7 @@ public class DealerNewsController {
 		System.out.println("올 때 글 정보 : " + pageMaker.toString());
 
 		DealerNews nextNews = dealerNewsService.getNextNews(pageMaker);
-		
+
 		if (nextNews != null){
 			pageMaker.setDealer_news_num(
 					nextNews.getDealer_news_num());

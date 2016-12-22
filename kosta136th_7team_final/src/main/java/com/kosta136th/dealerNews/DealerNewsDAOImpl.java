@@ -47,7 +47,6 @@ public class DealerNewsDAOImpl implements DealerNewsDAO{
 						totalPage);
 		int firstPage = (int)Math.max(1, lastPage - pageMaker.getPerPageNum() + 1);
 		
-		
 		pageMaker.setLastPage(lastPage);
 		pageMaker.setFirstPage(firstPage);
 		
