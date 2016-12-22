@@ -53,7 +53,7 @@ public class DealerController {
 
 //		String id = ((User)(session.getAttribute("sadlfkjauhgoijhglkfa"))).getUSER_EMAIL();
 		boolean check = true;
-		String dealer_join_id = "DEALER2@GMAIL.COM";
+		String dealer_join_id = "DEALER1@GMAIL.COM";
 //		QWER@NAVER.COM
 		// 세션에서받아온 아이디를 스트링형 변수에저장된것을 괄호 안에 저장해줘야함
 		List<Dealer> dealerList = service.userTypeCheck();
@@ -97,10 +97,20 @@ public class DealerController {
 	public void dealerPageRead(@RequestParam("dealer_page_num") int dealer_page_num, @ModelAttribute("cri") SearchCriteria cri,Model model) throws Exception {
 
 		//내공
-		model.addAttribute("score", service.score(dealer_page_num));
+		Dealer dealer = new Dealer();
 		
+		String nickName = service.read(dealer_page_num).getUser_nickName();
+		String category = service.read(dealer_page_num).getCategory();
+		int dealerNum = service.read(dealer_page_num).getDealer_page_num();
+		
+		dealer.setScore(service.score(dealer_page_num));
+		dealer.setCategory(category);
+		dealer.setUser_nickName(nickName);
+		dealer.setDealer_page_num(dealerNum);
 		//딜러정보
-		model.addAttribute(service.read(dealer_page_num));
+		model.addAttribute(dealer);
+		
+
 		
 	}
 	//딜러 페이지 삭제
@@ -132,7 +142,7 @@ public class DealerController {
 	//딜러 정보 업데이트
 	@RequestMapping(value = "/dealerPageUpdate", method = RequestMethod.POST)
 	public String dealerPageUpdate(Dealer dealer, SearchCriteria cri, RedirectAttributes rttr) throws Exception {
-		System.out.println(dealer.getDealer_page_num());
+		
 		service.modify(dealer);
 		
 		rttr.addAttribute("page", cri.getPage());
