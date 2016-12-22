@@ -17,13 +17,14 @@
 					<div class="box-body">
 						<div class="form-group">
 							<label for="exampleInputEmail1">페이지 제목</label> <input type="text"
-								name='title' class="form-control" placeholder="페이지 제목을 써주세요">
+								name='category' class="form-control" placeholder="페이지 제목을 써주세요">
 						</div>
 					</div>
 					<!-- /.box-body -->
 
 					<div class="box-footer">
 						<button type="submit" class="btn btn-primary">등록</button>
+						<button type="submit" class="btn btn-primary" id="saveCancel">취소</button>
 					</div>
 				</form>
 
@@ -37,4 +38,16 @@
 </section>
 <!-- /.content -->
 
+<script>
+	$(document).ready(
+			
+			function() {
 
+				$('#saveCancel').on("click", function(event) {
+
+					self.location = "btcInfoLand";
+
+				});
+
+			});
+</script>

@@ -48,6 +48,7 @@
 				</div>
 			</div>
 		<button class="btn btn-default" id="newBtn">딜러 페이지 등록</button>
+		<button id = "mypage">내 딜러 페이지</button>
 	</div>
 
 </div>

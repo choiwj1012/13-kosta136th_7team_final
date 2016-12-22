@@ -48,7 +48,7 @@
 	<update id="update">
 		UPDATE DEALER_PAGE SET CATEGORY =#{category}
 		WHERE
-		DEALER_PAGE_NUM = #{dealerNum}
+		DEALER_PAGE_NUM = #{dealer_page_num}
 	</update>
 
 	<update id="like">
