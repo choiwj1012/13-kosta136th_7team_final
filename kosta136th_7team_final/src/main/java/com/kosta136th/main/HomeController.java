@@ -4,8 +4,12 @@ import java.util.Locale;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.kosta136th.dealer.PageMaker;
+import com.kosta136th.dealer.SearchCriteria;
 
 @Controller("homeController")
 public class HomeController {
@@ -54,6 +58,36 @@ public class HomeController {
 		
 	}
 	
+<<<<<<< HEAD
+	// 마이페이지 수정 경로
+	@RequestMapping(value = "/myPage", method = RequestMethod.GET)
+	public String myPage(){
+		
+		return "sub/myPage/myPage";
+		
+	}
+	
+	
+	// 마이페이지 유저 스크랩 리스트 경로
+	@RequestMapping(value = "/manageMyBoard", method = RequestMethod.GET)
+	public String manageMyBoard(){
+		
+		return "sub/myPage/manageMyBoard";
+		
+	}
+	
+	
+	// 마이페이지 유저 정보 수정 경로
+	@RequestMapping(value = "/manageMyInfo", method = RequestMethod.GET)
+	public String manageMyInfo(){
+		
+		return "sub/myPage/manageMyInfo";
+		
+	}
+	
+	
+=======
+>>>>>>> 4a16405995437ab60fa46c3e810c02106f3a3c07
 	// 마이페이지 유저 비트코인 지갑 보기 경로 (준비중 페이지로 변경)
 	@RequestMapping(value = "/manageDealer", method = RequestMethod.GET)
 	public String manageDealer(){

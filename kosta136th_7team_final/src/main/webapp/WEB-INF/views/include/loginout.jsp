@@ -442,7 +442,7 @@
 			e.preventDefault();
 			e.stopPropagation();
 			
-			var email = '<c:out value="${login.USER_EMAIL}"/>';
+			var email = '<c:out value="${login.USER_EMAIL}"/>';					//세션에담긴것
 			var registerType = '<c:out value="${login.REGISTER_TYPE_CODE}"/>';
 			alert("로그아웃 버튼 클릭시 이메일 : " + email + "\n"
 					+"가입유형코드 : " + registerType);
