@@ -57,53 +57,7 @@ public class HomeController {
 		return "sub/freeboard/board_update";
 		
 	}
-	
-<<<<<<< HEAD
-	// 마이페이지 수정 경로
-	@RequestMapping(value = "/myPage", method = RequestMethod.GET)
-	public String myPage(){
 		
-		return "sub/myPage/myPage";
-		
-	}
-	
-	
-	// 마이페이지 유저 스크랩 리스트 경로
-	@RequestMapping(value = "/manageMyBoard", method = RequestMethod.GET)
-	public String manageMyBoard(){
-		
-		return "sub/myPage/manageMyBoard";
-		
-	}
-	
-	
-	// 마이페이지 유저 정보 수정 경로
-	@RequestMapping(value = "/manageMyInfo", method = RequestMethod.GET)
-	public String manageMyInfo(){
-		
-		return "sub/myPage/manageMyInfo";
-		
-	}
-	
-	
-=======
->>>>>>> 4a16405995437ab60fa46c3e810c02106f3a3c07
-	// 마이페이지 유저 비트코인 지갑 보기 경로 (준비중 페이지로 변경)
-	@RequestMapping(value = "/manageDealer", method = RequestMethod.GET)
-	public String manageDealer(){
-		
-		return "sub/myPage/manageDealer";
-		
-	}
-	
-	
-	// 마이페이지 유저 비트코인 지갑 보기 경로 (준비중 페이지로 변경)
-	@RequestMapping(value = "/userWithdraw", method = RequestMethod.GET)
-	public void userWithdraw(){
-		
-		System.out.println("회원탈퇴요청");
-		
-	}
 	
 	// BTC 정보광장 딜러 전문소식 Mapping
 	@RequestMapping(value = "/btcInfoLand_board_list", method = RequestMethod.GET)
