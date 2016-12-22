@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -49,12 +50,14 @@ public class DealerController {
 	//딜러페이지 저장
 	@RequestMapping(value = "/dealerPageSave", method = RequestMethod.POST)
 	public String DealerPageSave(Dealer dealer, HttpSession session, RedirectAttributes rttr) throws Exception {
+
 //		String id = ((User)(session.getAttribute("sadlfkjauhgoijhglkfa"))).getUSER_EMAIL();
 		boolean check = true;
-		String dealer_join_id = "DEALER1@GMAIL.COM";
+		String dealer_join_id = "DEALER2@GMAIL.COM";
+//		QWER@NAVER.COM
 		// 세션에서받아온 아이디를 스트링형 변수에저장된것을 괄호 안에 저장해줘야함
 		List<Dealer> dealerList = service.userTypeCheck();
-		
+
 		for(int i = 0 ; i <dealerList.size(); i++) {
 			
 			if(dealer_join_id.equals(dealerList.get(i).getUser_email())) {
@@ -76,9 +79,9 @@ public class DealerController {
 			}
 			
 			if(check == true) {
-			dealer.setCategory("박성용멍청이");
-			service.regist(dealer);
-			rttr.addFlashAttribute("result", "success");
+
+				service.regist(dealer);
+				rttr.addFlashAttribute("result", "success");
 			}
 			
 		} else {
@@ -101,9 +104,9 @@ public class DealerController {
 		
 	}
 	//딜러 페이지 삭제
-	@RequestMapping(value = "dealerPageRemove", method = RequestMethod.POST)
-	public String dealerPageRemove(@RequestParam("dealer_page_num") int dealer_page_num, SearchCriteria cri, RedirectAttributes rttr) throws Exception {
-		
+	@RequestMapping(value = "/dealerPageRemove", method = RequestMethod.POST)
+	public String dealerPageRemove(@RequestParam("dealerNum") int dealer_page_num, SearchCriteria cri, RedirectAttributes rttr) throws Exception {
+
 		service.remove(dealer_page_num);
 		
 		rttr.addAttribute("page", cri.getPage());
@@ -115,27 +118,31 @@ public class DealerController {
 		
 		return "redirect:/sub/btcInfoLand/btcInfoLand";
 		
-		
 	}
+	
 	//딜러 정보 업데이트
-	@RequestMapping(value = "dealerPageUpdate", method = RequestMethod.GET)
-	public void dealerPageUpdateLoad(@RequestParam("dealer_page_num") int dealer_page_num, @ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
+	@RequestMapping(value = "/dealerPageUpdate", method = RequestMethod.GET)
+	public void dealerPageUpdateLoad(@RequestParam("dealerNum") int dealer_page_num, @ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
 		
 		model.addAttribute(service.read(dealer_page_num));
 		
 	}
+	
+	
 	//딜러 정보 업데이트
-	@RequestMapping(value = "dealerPageUpdate", method = RequestMethod.POST)
+	@RequestMapping(value = "/dealerPageUpdate", method = RequestMethod.POST)
 	public String dealerPageUpdate(Dealer dealer, SearchCriteria cri, RedirectAttributes rttr) throws Exception {
-		
-		dealer.setCategory("바뀌었습니까");
-		dealer.setDealer_page_num(2);
+		System.out.println(dealer.getDealer_page_num());
 		service.modify(dealer);
+		
+		rttr.addAttribute("page", cri.getPage());
+		rttr.addAttribute("perPageNum", cri.getPerPageNum());
+		rttr.addAttribute("searchType", cri.getSearchType());
+		rttr.addAttribute("keyword", cri.getKeyword());
 		
 		rttr.addFlashAttribute("result", "success");
 		
 		return "redirect:/sub/btcInfoLand/btcInfoLand";
-		
 	}
 	//추천 신고
 	@RequestMapping(value = "dealerPageButtoncheck", method = RequestMethod.GET)

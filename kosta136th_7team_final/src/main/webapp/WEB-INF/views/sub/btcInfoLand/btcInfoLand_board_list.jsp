@@ -7,18 +7,8 @@
 <head>
 	<link rel="stylesheet" href="../../resources/css/btcInfoLand.css" />
 </head>
-<form role="form" action="modifyPage" method="post">
-
-	<input type='hidden' name='bno' value="${dealer.dealer_page_num}"> <input
-		type='hidden' name='page' value="${cri.page}"> <input
-		type='hidden' name='perPageNum' value="${cri.perPageNum}">
-	<input type='hidden' name='searchType' value="${cri.searchType}">
-	<input type='hidden' name='keyword' value="${cri.keyword}">
-
-</form>
 
 <body id="page-top">
-
 	<div id="main_img">
 		<div class="row">
 			<div class="col-lg-3 visible"></div>
@@ -47,10 +37,20 @@
 			</div>
 		</div>
 	</div>
+	
 	<div class="container" id="first_section">
 		<div class="row">
 			<div class="col-sm-12 dealer_infoarea">
 				<div class="col-sm-6">
+<form role="form" action="dealerPageUpdate" method="post">
+
+	<input type='hidden' name='dealerNum' value="${dealer.dealer_page_num}"> 
+	<input type='hidden' name='page' value="${cri.page}"> 
+	<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
+	<input type='hidden' name='searchType' value="${cri.searchType}">
+	<input type='hidden' name='keyword' value="${cri.keyword}">
+	
+</form>
 					<div class="dealer_photoshot">
 						<img src="../../resources/img/dealer_test_img01.jpg">
 					</div>
@@ -72,8 +72,9 @@
 							aria-valuemin="0" aria-valuemax="100" style="width: <c:out value="${dealer.score}"/>%">
 							<c:out value="${dealer.score}"/>point</div>
 					</div>
-					<div class="vote_use"><button id="modify">딜러 타이틀 수정</button></div>
-					<div><button id = "remove">딜러페이지 삭제</button></div>
+					<div class="vote_use">
+					<button id="modify" type="submit">딜러 타이틀 수정</button></div>
+					<div><button id ="remove" type="submit">딜러페이지 삭제</button></div>
 				</div>
 			</div>
 			<!-- end of col-sm-4 column -->
@@ -193,23 +194,38 @@
 </body>
 
 <script>
-$(document).ready(
-		function() {
-			var dealerNum = ${dealer.dealer_page_num}
-			$('#report').on("click",function(event) {
-					var likeCheck = 'noCheck';
-					var disLikeCheck = 'checked';
-					
+$(document).ready(function() {			
+	
+	var dealerNum = ${dealer.dealer_page_num}
+	
+// 		$('#remove').on("click", function(event) {
+// 			$.ajax({
+// 					url: "/sub/btcInfoLand/dealerPageRemove",
+// 					type: 'post',
+// 					data: {"dealerNum" : dealerNum},					
+// 					success:  function (data) {
+// 						self.location = "btcInfoLand";
+// 					}
+						
+// 				});
+
+// 		});
+			
+		$('#report').on("click",function(event) {
+			var likeCheck = 'noCheck';
+			var disLikeCheck = 'checked';
+						
 				$.ajax({
 					url: "/sub/btcInfoLand/dealerPageButtoncheck",
 					type: 'get',
 					data: {"likeCheck" : likeCheck, "disLikeCheck" : disLikeCheck, "dealerNum" : dealerNum},
 					success:  function (data) {
-						self.location = "btcInfoLand_board_list?page = " + ${cri.page} + "&dealer_page_num=" + ${dealer.dealer_page_num};
+						self.location = "btcInfoLand_board_list?page=${cri.page}&perPageNum=${cri.perPageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}&dealer_page_num=${dealer.dealer_page_num}";
+						
 					}
-					
+						
 				});
-
+	
 			});
 
 			$('#recommend').on("click", function(event) {
@@ -222,21 +238,23 @@ $(document).ready(
 					type: 'get',
 					data: {"likeCheck" : likeCheck, "disLikeCheck" : disLikeCheck, "dealerNum" : dealerNum},
 					success:  function (data) {
-						self.location = "btcInfoLand_board_list?page = " + ${cri.page} + "&dealer_page_num=" + ${dealer.dealer_page_num}; 
+						self.location = "btcInfoLand_board_list?page=${cri.page}&perPageNum=${cri.perPageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}&dealer_page_num=${dealer.dealer_page_num}"; 
 
 					}
 				
 				});
 			});
+
 			var formObj = $("form[role='form']");
-			$('#remove').on("click", function(event) {
-				formObj.attr("action", "/sub/btcInfoLand/dealerPageRemove");
+
+			$("#modify").on("click", function() {
+				formObj.attr("action", "dealerPageUpdate");
+				formObj.attr("method", "get");
 				formObj.submit();
 			});
 			
-			$('#modify').on("click", function(event) {
-				formObj.attr("action", "/sub/btcInfoLand/dealerPageUpdate");
-				formObj.attr("method", "get");
+			$("#remove").on("click", function() {
+				formObj.attr("action", "/sub/btcInfoLand/dealerPageRemove");
 				formObj.submit();
 			});
 
