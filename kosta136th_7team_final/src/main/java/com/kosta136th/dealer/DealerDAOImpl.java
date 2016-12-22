@@ -16,9 +16,9 @@ public class DealerDAOImpl implements DealerDAO{
 	private static String namespace = "com.kosta136th.mapper.dealerMapper";
 
 	@Override
-	public List<Dealer> check() throws Exception {
+	public List<Dealer> userTypeCheck() throws Exception {
 		
-		return session.selectList(namespace + ".check");
+		return session.selectList(namespace + ".userTypeCheck");
 	}
 
 	@Override
@@ -29,28 +29,28 @@ public class DealerDAOImpl implements DealerDAO{
 	}
 
 	@Override
-	public List<Dealer> list() throws Exception {
+	public List<Dealer> dealerPageDuplicationCheck() throws Exception {
 		
-		return session.selectList(namespace + ".list");
+		return session.selectList(namespace + ".dealerPageDuplicationCheck");
 	}
 
 	@Override
-	public Dealer read(int dealerNum) throws Exception {
+	public Dealer read(int dealer_page_num) throws Exception {
 		
-		return session.selectOne(namespace + ".read", dealerNum);
+		return session.selectOne(namespace + ".read", dealer_page_num);
 	}
 
 	@Override
-	public void remove(int dealerNum) throws Exception {
+	public void remove(int dealer_page_num) throws Exception {
 		
-		session.delete(namespace + ".delete", dealerNum);
+		session.delete(namespace + ".delete", dealer_page_num);
 		
 	}
 
 	@Override
-	public int score(int dealerNum) throws Exception {
-		System.out.println(dealerNum);
-		return session.selectOne(namespace + ".score", dealerNum);
+	public int score(int dealer_page_num) throws Exception {
+		
+		return session.selectOne(namespace + ".score", dealer_page_num);
 		
 	}
 
@@ -63,7 +63,7 @@ public class DealerDAOImpl implements DealerDAO{
 
 	@Override
 	public void likeEvent(String likeCheck, String disLikeCheck, int dealerNum) throws Exception {
-
+		
 		if(likeCheck.equals("checked")) {
 			
 			session.update(namespace + ".like", dealerNum);
@@ -75,24 +75,15 @@ public class DealerDAOImpl implements DealerDAO{
 	}
 
 	@Override
-	public List<Dealer> allList() throws Exception {
-		
-		return session.selectList(namespace + ".allList");
-		
-	}
+	public List<Dealer> allListSearch(SearchCriteria cri) throws Exception {
 
-	@Override
-	public List<Dealer> allListSearch(SearchDealer searchDealer) throws Exception {
-		
-		return session.selectList(namespace + ".searchList", searchDealer);
-	}
-
-	@Override
-	public List<Dealer> downList(int bnoToStart) throws Exception {
-		
-		return session.selectList(namespace + ".downList", bnoToStart);
+		return session.selectList(namespace + ".searchList", cri);
 	}
 	
-	
+	@Override
+	public int listSearchCount(SearchCriteria cri) throws Exception {
+		
+		return session.selectOne(namespace + ".listSearchCount", cri);
+	}
 
 }

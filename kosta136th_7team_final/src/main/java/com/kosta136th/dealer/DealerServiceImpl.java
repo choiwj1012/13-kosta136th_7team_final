@@ -13,9 +13,9 @@ public class DealerServiceImpl implements DealerService{
 	DealerDAO dao;
 	
 	@Override
-	public List<Dealer> check() throws Exception {
+	public List<Dealer> userTypeCheck() throws Exception {
 		
-		return dao.check();
+		return dao.userTypeCheck();
 	}
 
 	@Override
@@ -26,28 +26,28 @@ public class DealerServiceImpl implements DealerService{
 	}
 
 	@Override
-	public List<Dealer> list() throws Exception {
+	public List<Dealer> dealerPageDuplicationCheck() throws Exception {
 		
-		return dao.list();
+		return dao.dealerPageDuplicationCheck();
 	}
 
 	@Override
-	public Dealer read(int dealerNum) throws Exception {
+	public Dealer read(int dealer_page_num) throws Exception {
 		
-		return dao.read(dealerNum);
+		return dao.read(dealer_page_num);
 	}
 
 	@Override
-	public void remove(int dealerNum) throws Exception {
+	public void remove(int dealer_page_num) throws Exception {
 		
-		dao.remove(dealerNum);
+		dao.remove(dealer_page_num);
 		
 	}
 
 	@Override
-	public int score(int dealerNum) throws Exception {
+	public int score(int dealer_page_num) throws Exception {
 		
-		return dao.score(dealerNum);
+		return dao.score(dealer_page_num);
 	}
 
 	@Override
@@ -64,23 +64,17 @@ public class DealerServiceImpl implements DealerService{
 		
 	}
 
-	@Override
-	public List<Dealer> allList() throws Exception {
 
-		return dao.allList();
+	@Override
+	public List<Dealer> allListSearch(SearchCriteria cri) throws Exception {
 		
+		return dao.allListSearch(cri);
 	}
-
+	
 	@Override
-	public List<Dealer> allListSearch(SearchDealer searchDealer) throws Exception {
+	public int listSearchCount(SearchCriteria cri) throws Exception {
 		
-		return dao.allListSearch(searchDealer);
-	}
-
-	@Override
-	public List<Dealer> downList(int bnoToStart) throws Exception {
-		
-		return dao.downList(bnoToStart);
+		return dao.listSearchCount(cri);
 	}
 
 }

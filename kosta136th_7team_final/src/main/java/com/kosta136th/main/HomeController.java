@@ -4,8 +4,12 @@ import java.util.Locale;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.kosta136th.dealer.PageMaker;
+import com.kosta136th.dealer.SearchCriteria;
 
 @Controller("homeController")
 public class HomeController {
@@ -53,7 +57,6 @@ public class HomeController {
 		return "sub/freeboard/board_update";
 		
 	}
-	
 	
 	// 마이페이지 수정 경로
 	@RequestMapping(value = "/myPage", method = RequestMethod.GET)

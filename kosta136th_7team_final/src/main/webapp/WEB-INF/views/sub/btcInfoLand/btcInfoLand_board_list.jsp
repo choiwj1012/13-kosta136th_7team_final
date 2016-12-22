@@ -7,7 +7,15 @@
 <head>
 	<link rel="stylesheet" href="../../resources/css/btcInfoLand.css" />
 </head>
+<form role="form" action="modifyPage" method="post">
 
+	<input type='hidden' name='bno' value="${dealer.dealer_page_num}"> <input
+		type='hidden' name='page' value="${cri.page}"> <input
+		type='hidden' name='perPageNum' value="${cri.perPageNum}">
+	<input type='hidden' name='searchType' value="${cri.searchType}">
+	<input type='hidden' name='keyword' value="${cri.keyword}">
+
+</form>
 
 <body id="page-top">
 
@@ -46,16 +54,13 @@
 					<div class="dealer_photoshot">
 						<img src="../../resources/img/dealer_test_img01.jpg">
 					</div>
-					<div class="dealer_room_title">초보님을 위한 비트코인 시작하기~</div>
-					<div class="dealer_position_title">전문분야 :</div>
-					<div class="position_iteam">
-						<span>비트코인</span><span>/</span><span>비트코인</span>
-					</div>
+					<div class="dealer_room_title">${dealer.category}</div>
+					<div class="dealer_position_title">${dealer.user_nickName}</div>
 					<div class="btngrp">
-						<button type="button" class="btn btn-danger">
+						<button type="button" class="btn btn-danger" id= "report">
 							<span class="glyphicon glyphicon-bullhorn"> 신고하기</span>
 						</button>
-						<button type="button" class="btn btn-primary">
+						<button type="button" class="btn btn-primary" id="recommend">
 							<span class="glyphicon glyphicon glyphicon-heart"> 추천하기</span>
 						</button>
 					</div>
@@ -63,19 +68,12 @@
 				<div class="col-sm-6 border_left_none">
 					<div class="dealer_point">딜러 내공지수</div>
 					<div class="progress">
-						<div class="progress-bar" role="progressbar" aria-valuenow="70"
-							aria-valuemin="0" aria-valuemax="100" style="width: 70%">
-							70 Point</div>
+						<div class="progress-bar" role="progressbar" aria-valuenow="<c:out value="${dealer.score}"/>"
+							aria-valuemin="0" aria-valuemax="100" style="width: <c:out value="${dealer.score}"/>%">
+							<c:out value="${dealer.score}"/>point</div>
 					</div>
-					<div class="vote_use">현재 참여자<span>(12명)</span></div>
-					<div>
-						<span class="label label-primary">홍길동</span> 
-						<span class="label label-primary">슈퍼보드</span>
-						<span class="label label-primary">순시리</span>
-						<span class="label label-primary">초코정</span> 
-						<span class="label label-primary">올레올레</span>
-						<span class="label label-primary">최순득</span>
-					</div>
+					<div class="vote_use"><button id="modify">딜러 타이틀 수정</button></div>
+					<div><button id = "remove">딜러페이지 삭제</button></div>
 				</div>
 			</div>
 			<!-- end of col-sm-4 column -->
@@ -202,5 +200,56 @@
 	</div>
 	
 </body>
+
+<script>
+$(document).ready(
+		function() {
+			var dealerNum = ${dealer.dealer_page_num}
+			$('#report').on("click",function(event) {
+					var likeCheck = 'noCheck';
+					var disLikeCheck = 'checked';
+					
+				$.ajax({
+					url: "/sub/btcInfoLand/dealerPageButtoncheck",
+					type: 'get',
+					data: {"likeCheck" : likeCheck, "disLikeCheck" : disLikeCheck, "dealerNum" : dealerNum},
+					success:  function (data) {
+						self.location = "btcInfoLand_board_list?page = " + ${cri.page} + "&dealer_page_num=" + ${dealer.dealer_page_num};
+					}
+					
+				});
+
+			});
+
+			$('#recommend').on("click", function(event) {
+				
+				var likeCheck = 'checked';
+				var disLikeCheck = 'noCheck';
+				
+				$.ajax({
+					url: "/sub/btcInfoLand/dealerPageButtoncheck",
+					type: 'get',
+					data: {"likeCheck" : likeCheck, "disLikeCheck" : disLikeCheck, "dealerNum" : dealerNum},
+					success:  function (data) {
+						self.location = "btcInfoLand_board_list?page = " + ${cri.page} + "&dealer_page_num=" + ${dealer.dealer_page_num}; 
+
+					}
+				
+				});
+			});
+			var formObj = $("form[role='form']");
+			$('#remove').on("click", function(event) {
+				formObj.attr("action", "/sub/btcInfoLand/dealerPageRemove");
+				formObj.submit();
+			});
+			
+			$('#modify').on("click", function(event) {
+				formObj.attr("action", "/sub/btcInfoLand/dealerPageUpdate");
+				formObj.attr("method", "get");
+				formObj.submit();
+			});
+
+		});
+</script>
 
 <%@ include file="../../include/footer.jsp"%>
