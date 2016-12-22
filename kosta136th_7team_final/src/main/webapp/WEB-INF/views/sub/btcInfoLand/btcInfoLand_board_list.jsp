@@ -181,6 +181,14 @@
 <%-- 	<c:if test = "${not empty login}"> --%>
 		<script>
 			//로그인 되어 있으면
+			var login = {
+							user_email : '${login.USER_EMAIL}',
+							register_type_code : '${login.REGISTER_TYPE_CODE}'
+			}
+			
+			alert(login.user_email);
+			alert(login.register_type_code);
+			
 // 			var login = '${login.REGISTER_TYPE_CODE}';
 		</script>
 <%-- 	</c:if> --%>
