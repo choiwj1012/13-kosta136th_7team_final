@@ -8,7 +8,7 @@
 	<script src="https://code.highcharts.com/stock/highstock.js"></script>			<!-- 차트 API js -->
 	<script src="../../../resources/js/index_chart.js"></script>				<!-- 차트 구현 js -->
 	<script src="../../../resources/js/marketPrice_chart_customizing.js"></script>	<!-- 디자인 커스터마이징 js -->
-	<script src="../../resources/js/index.js"></script>
+	<!-- <script src="../../resources/js/index.js"></script> -->
 </head>
 <body id="page-top">
 	
@@ -49,17 +49,24 @@
 		                </button>
 		                
 		                <a class="navbar-brand" href="/">
-		                	<img id="main_logo_image" src="../../resources/img/logo_header.png" alt="bitriver_logo" />
+		                	<img id="main_logo_image" src="../../resources/img/140x56_BitRiver_black.png" alt="bitriver_logo" />
 		                </a>
 		                
 		            </div>
 		
 		            <div class="collapse navbar-collapse navbar-right">
 		                <ul class="nav navbar-nav">
+<<<<<<< HEAD
 		       	 			<li><a href="/marketPrice">실시간 시세</a></li>
 							<li><a href="/news">비트코인 최신기사</a></li>
 							<li><a href="sub/btcInfoLand/btcInfoLand">비트리버 커뮤니티</a></li>
 							<li><a href="/board_list">자유게시판</a></li>
+=======
+		       	 			<li><a href="/marketPrice">시세</a></li>
+							<li><a href="/news">비트코인뉴스</a></li>
+							<li><a href="/btcInfoLand">리버커뮤니티</a></li>
+							<li><a href="/board_list">프리보드</a></li>
+>>>>>>> 4a16405995437ab60fa46c3e810c02106f3a3c07
 		                </ul>
 		            </div>
 		            
@@ -73,8 +80,39 @@
 	</header>
 		
 	<section class="bg-chart">
-		<div id="chart_usd" class="col-md-6"></div>
-		<div id="chart_cny" class="col-md-6"></div>
+		
+		<div class="col-md-offset-1 col-md-10 text-center">
+			
+			<div class="col-sm-12">
+				<div id="USD_Bitcoin_info">USD / Bitcoin</div>
+				<div id="USD_Bitcoin"></div>
+			</div>
+			<div class="col-lg-6">
+				<div class="col-sm-6">	
+					<div id="USD_Litecoin_info">USD / Litecoin</div>				
+					<div id="USD_Litecoin"></div>
+				</div>
+				<div class="col-sm-6">
+					<div id="USD_Ethereum_info">USD / Ethereum</div>				
+					<div id="USD_Ethereum"></div>
+				</div>
+			</div>
+			
+			
+			<div class="col-lg-6">
+				<div class="col-sm-6">
+					<div id="USD_Monero_info">USD / Monero</div>				
+					<div id="USD_Monero"></div>
+				</div>
+				<div class="col-sm-6">
+					<div id="USD_Factom_info">USD / Factom</div>				
+					<div id="USD_Factom"></div>
+				</div>
+			</div>
+			
+		</div>
+		
+		
 	</section>
 		
 	<section class="bg-first">
@@ -134,34 +172,35 @@
 	</section>
 	
 	<section class="bg-third">
-		<div class="container text-center">
-			<div class="row">
+		
+		<div class="container-fluid text-center">
+			
+			<!-- <div class="row"> -->
+			<div id="box">
 				
-				
-				<div class="col-md-12">
-					
-					<h3>비트코인 정보를 이메일로 받아보세요</h3>
-					
-					<form role="form">
-					
+				<span id="email_title">매일 새로운 정보를 이메일로 구독하세요</span>
+			
+				<form role="form">
+					<div class="col-sm-10">
 						<div class="form-group">
-							<input type="email" class="form-control" placeholder="이메일 주소를 입력해 주세요">
+							<input type="email" id="email" class="form-control" placeholder="이메일 주소를 입력해 주세요">
 						</div>
-	
-						<button type="submit" class="btn btn-default"> 구독신청 </button>
-						
-					</form>
-					
-				</div>
-				
-			</div>
+					</div>
+					<div class="col-sm-2">
+						<input type="submit" class="btn btn-default" onclick="getEmail()" value="구독신청">
+					</div>
+				</form>				
+			 
+			</div>		
+							
 		</div>
+		
 	</section>
 	
 	<section class="bg-fourth">
 		<div class="container-fluid">
-			<div class="row">
-				<img src="../../resources/img/logos_resize.png" alt="" id="logos"/>
+			<div  class="row">
+				<img  src="../../resources/img/1920x370_company_logo.png" alt="" id="logos" />
 			</div>
 		</div>
 	</section>
@@ -182,6 +221,29 @@
 		
 	});
 	</script>
-
+ 	<script>
+		$(document).ready(function() {
+			var email = '<c:out value="${login.USER_EMAIL}"/>';
+			if(email == "pcj9027@naver.com")
+			{
+				var options = {
+						//videoId: 'H9P_wkq08XA', 
+						videoId: 'TYa9JNicEts',
+						start: 10
+					};
+			}
+			else
+			{
+				var options = {
+						videoId: 'H9P_wkq08XA', 
+						//videoId: 'TYa9JNicEts',
+						start: 10
+					};
+			}
+		
+			$('#wrapper').tubular(options);
+			
+		});
+	</script> 
 <%@ include file="include/footer.jsp" %>
 		

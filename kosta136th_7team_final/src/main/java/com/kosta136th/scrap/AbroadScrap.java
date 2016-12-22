@@ -3,20 +3,24 @@ package com.kosta136th.scrap;
 public class AbroadScrap {
 	
 	private int user_num;
+	private String email;
 	private String link;
 	private String author;
 	private String title;
 	private String date;
 	private String description;
 	private String imgSrc;
-	
-	
-	
 	public int getUser_num() {
 		return user_num;
 	}
 	public void setUser_num(int user_num) {
 		this.user_num = user_num;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getLink() {
 		return link;
@@ -56,10 +60,9 @@ public class AbroadScrap {
 	}
 	@Override
 	public String toString() {
-		return "AbroadScrap [user_num=" + user_num + ", link=" + link + ", author=" + author + ", title=" + title
-				+ ", date=" + date + ", description=" + description + ", imgSrc=" + imgSrc + "]";
+		return "AbroadScrap [user_num=" + user_num + ", email=" + email + ", link=" + link + ", author=" + author
+				+ ", title=" + title + ", date=" + date + ", description=" + description + ", imgSrc=" + imgSrc + "]";
 	}
-	
 	
 	
 

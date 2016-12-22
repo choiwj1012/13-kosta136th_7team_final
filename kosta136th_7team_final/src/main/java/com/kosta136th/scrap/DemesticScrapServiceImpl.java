@@ -100,17 +100,7 @@ public class DemesticScrapServiceImpl implements DemesticScrapService{
 
 
 
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (XmlPullParserException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
@@ -129,6 +119,24 @@ public class DemesticScrapServiceImpl implements DemesticScrapService{
 	public List<DemesticPopular> popularNews() throws Exception{
 		
 		return dao.popularNews();
+	}
+
+	@Override
+	public int getUserNumber(String email) throws Exception {
+		return dao.getUserNumber(email);
+	}
+
+	@Override
+	public String demScrapCheck(DemesticScrap vo) throws Exception {
+		
+		return dao.demScrapCheck(vo);
+	}
+
+	@Override
+	public void removeDemesticScrap(DemesticScrap vo) throws Exception {
+		dao.removeDemesticScrap(vo);
+		return;
+		
 	}
 
 

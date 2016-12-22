@@ -11,5 +11,7 @@ public interface UserDAO {
 	public LoginInfo signinEmail(User user) throws Exception;
 
 	public boolean signout(User user) throws Exception;
+
+	public boolean updateUserPassword(User user) throws Exception;
 	
 }

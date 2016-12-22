@@ -10,6 +10,12 @@ public interface DemesticScrapService {
 
 	public List<DemesticPopular> popularNews() throws Exception;
 
+	public int getUserNumber(String email) throws Exception;
+
+	public String demScrapCheck(DemesticScrap vo) throws Exception;
+
+	public void removeDemesticScrap(DemesticScrap vo) throws Exception;
+
 	
 
 }

@@ -3,9 +3,9 @@
 
 <body>
 
-	<nav id="mainNav" class="navbar navbar-default navbar-static-top navbar-default">
+	<nav id="mainNav" class="navbar navbar-default navbar-static-top navbar-fixed-top">
 	
-		<div class="container">
+		<div id="nav_container" class="container">
 		
 			<div class="navbar-header">
 			
@@ -14,17 +14,24 @@
 				</button>
 				
 				<a href="/" class="navbar-brand">
-					<img id="main_logo_image" src="../../resources/img/logo_header.png" alt="bitriver_logo" />
+					<img id="main_logo_image" src="../../resources/img/140x56_BitRiver_black.png" alt="bitriver_logo" />
 				</a>
 				
 			</div>
 			
 			<div class="collapse navbar-collapse navbar-right">
 				<ul class="nav navbar-nav">
+<<<<<<< HEAD
 					<li><a href="/marketPrice">실시간 시세</a></li>
 					<li><a href="/news">비트코인 최신기사</a></li>
 					<li><a href="sub/btcInfoLand/btcInfoLand">비트리버 커뮤니티</a></li>
 					<li><a href="/board_list">자유게시판</a></li>
+=======
+					<li><a href="/marketPrice">시세</a></li>
+					<li><a href="/news">비트코인뉴스</a></li>
+					<li><a href="/btcInfoLand">리버커뮤니티</a></li>
+					<li><a href="/board_list">프리보드</a></li>
+>>>>>>> 4a16405995437ab60fa46c3e810c02106f3a3c07
 				</ul>
 			</div>
 			

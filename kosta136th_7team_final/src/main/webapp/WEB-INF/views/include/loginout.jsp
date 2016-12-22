@@ -30,12 +30,12 @@
 					
 					<div class="form-group">
 						<label for="signup_password">비밀번호</label>
-						<input type="password" class="form-control" id="signup_password" placeholder="비밀번호를 입력하세요" onkeyup="passwordTypeCheck();"/>
+						<input type="password" class="form-control" id="signup_password" placeholder="비밀번호를 입력하세요" onblur="passwordTypeCheck();"/>
 					</div>
 					
 					<div class="form-group">
 						<label for="signup_check_password">비밀번호체크</label>
-						<input type="password" class="form-control" id="signup_check_password" placeholder="비밀번호를 재입력하세요" onkeyup="passwordEqualCheck();"/>
+						<input type="password" class="form-control" id="signup_check_password" placeholder="비밀번호를 재입력하세요"/>
 					</div>
 					
 					<div class="form-group">
@@ -129,11 +129,13 @@
 <script>
 			$(document).ready(function(){
 
+				isSignupEmailUnique = false;
+				isAuthenticate = false;
+				isPassword = false;
+				
 				$(document).on('click', '#check_email_btn',function(e){
 					
 					e.preventDefault();
-			    	isSignupEmailUnique = false;
-					isAuthenticate = false;
 					
 					var email = $('#signup_email').val();
 					var regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
@@ -223,12 +225,18 @@
 					
 					e.preventDefault();
 					$('#signup_authentication').prop('readonly', false);
+					var email = $('#signup_email').val();
+					if(email == '')
+					{
+					 alert('이메일을 입력해주세요');
+					 $("#signup_email").focus();
+						return;
+					}
 					if (!isSignupEmailUnique){
 						alert('이메일체크를 해주세요');
 						$("#signup_email").focus();
 						return;
 					}
-			    	alert('인증번호 발송');
 			    	
 					isAuthenticate = false;
 					
@@ -291,32 +299,47 @@
 			e.stopPropagation();
 			var email = $('#signup_email').val();
 			var password = $('#signup_password').val();
+        	var checkPassword = $('#signup_check_password').val();
 			var nickname = $('#signup_nickname').val();
 			var authentication = $('#signup_authentication').val();
 
-			if (email == '' || isSignupEmailUnique == false)
+			if (email == '')
 			{
 				alert("이메일을 입력해 주세요");
 				$("#signup_email").focus();
 				return;
 				
 			}
-			else if(password == '' || isPassword == false)
+			else if (isSignupEmailUnique == false)
 			{
-				alert("비밀번호를 입력해 주세요");
-				$("#signup_password").focus();
+				alert("이메일체크를 해주세요.");
 				return;
 			}
-			else if((nickname == ''))
+			else if(password == '')
+			{
+				alert("비밀번호를 입력해 주세요");
+				return;
+			}
+			else if(password != checkPassword)
+			{
+				alert("비밀번호를 확인 해주세요");
+				return;
+			}
+			else if(nickname == '')
 			{
 				alert("닉네임을 입력해 주세요");
 				$("#signup_nickname").focus();
 				return;
 			}
-			else if(authentication == '' || isAuthenticate == false)
+			else if(authentication == '')
 			{
 				alert("인증코드를 입력해 주세요");
 				$("#signup_authentication").focus();
+				return;
+			}
+			else if(isAuthenticate == false)
+			{
+				alert("인증번호확인을 해주세요");
 				return;
 			}
 		  	
@@ -357,19 +380,14 @@
 			
 			var email = $('#signin_email').val();			
 			var password = $('#signin_password').val();
-			if ((email == '')||(password == ''))
-			{
-				alert('입력하지 않은 값이 있습니다.');
-				return;	
-			}
-			else if (email == '')
+			if (email == '')
 			{
 				alert("이메일을 확인해주세요");
 				return;	
 			}
 			else if (password == '')
 			{
-				alert('입력하지 않은 값이 있습니다.');
+				alert('비밀번호를 입력해주세요');
 				return;	
 			}
 			$.ajax({
@@ -403,7 +421,8 @@
 					    $('#myPage').remove();
 					    $('#signoutBtn').remove();
 						$('.nav').append('<li><a href="#" id="signupBtn" data-toggle="modal" data-target="#signup">회원가입</a></li>');
-			        	$('.nav').append('<li><a href="#" id="signinBtn" data-toggle="modal" data-target="#signin">로그인</a></li>'); 
+			        	$('.nav').append('<li><a href="#" id="signinBtn" data-toggle="modal" data-target="#signin">로그인</a></li>');
+			        	location.reload();
 			    	}
 			         					
 			    }
@@ -441,13 +460,95 @@
 					    $('#myPage').remove();
 					    $('#signoutBtn').remove();
 						$('.nav').append('<li><a href="#" id="signupBtn" data-toggle="modal" data-target="#signup">회원가입</a></li>');
-			        	$('.nav').append('<li><a href="#" id="signinBtn" data-toggle="modal" data-target="#signin">로그인</a></li>'); 
-			        	
+			        	$('.nav').append('<li><a href="#" id="signinBtn" data-toggle="modal" data-target="#signin">로그인</a></li>');
+			        	location.reload();
 			        }
 				    
 			
 			    }
 			});
+			
+		});
+	});
+</script>
+
+<script>
+	$(document).ready(function(){
+		$('#issue_password_btn').on('click', function(e){
+			
+			e.preventDefault();
+			
+			if (confirm("새 비밀번호 발송시 기존의 비밀번호는 삭제되고 임시 비밀번호가 발생됩니다. \n 로그인후 꼭 마이페이지에서 비밀번호를 변경해주세요.") == true)
+			{
+				//확인
+				
+				if($('#signin_email').val() != '')
+				{
+					$.ajax({
+						type : 'POST',
+						url : '/requestIssuePassword',
+						async : false,
+						data : {
+								'USER_EMAIL' : $('#signin_email').val(),
+							},
+					    success : function(data) {
+					    	alert(data);
+					    }
+					});
+				}
+				else
+				{
+					alert("이메일을 입력해주세요.");
+				}
+				
+			}
+			else
+			{   //취소
+				alert("새비밀번호취소");
+			    return;
+			}
+			
+			
+			
+		});
+	});
+</script>
+
+
+<!-- 네이버로 가입 버튼을 클릭했을 때 작동하는 스크립트입니다. -->
+<script>
+	$(document).ready(function(){
+		$('#signup_naver_img').on('click', function(e){
+			
+			e.preventDefault();
+			
+			$.ajax({
+				type : 'POST',
+				url : '/requestSignupNaver',
+			    success : function(data) {
+			    	window.open(data);
+			    }
+			});
+			
+			var isSignin = requestSigninSessionAttribute();
+
+			if (isSignin == false){
+				$('#signupBtn').remove();
+			    $('#signinBtn').remove();
+			    $('#myPage').remove();
+			    $('#signoutBtn').remove();
+				$('.nav').append('<li><a href="#" id="signupBtn" data-toggle="modal" data-target="#signup">회원가입</a></li>');
+	        	$('.nav').append('<li><a href="#" id="signinBtn" data-toggle="modal" data-target="#signin">로그인</a></li>'); 
+	        }
+			
+		    if (isSignin == true){
+		    	$('#signupBtn').remove();
+			    $('#signinBtn').remove();
+			    $('#myPage').remove();
+			    $('#signoutBtn').remove();
+			    $('.nav').append('<li><a href="/myPage" id = "myPage">마이페이지</a></li>');
+			    $('.nav').append('<li><a href="#" id="signoutBtn">로그아웃</a></li>');
+	        }
 			
 		});
 	});

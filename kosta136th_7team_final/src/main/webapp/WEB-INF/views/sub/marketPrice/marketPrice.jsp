@@ -22,9 +22,11 @@
 
 			<!-- 비트코인 그래프 표시  -->
 			<div id="market_price_graph" class="col-md-8 visible">
-				<ul id="chart_info">
+				
+				<div id="chart_info_title">시간별 현재시세</div>	
+				<div id="chart_info">
 					
-				</ul>
+				</div>
 				<div id="chart"></div>
 			</div>
 
@@ -32,16 +34,16 @@
 			<div id="market_price_list" class="col-md-4 visible tabs">	<!-- visible tabs -->
 				
 				<div id="title_bar">
-					<h3 class="text-center">BitCoin 시세 정보</h3>
+					<h3 class="text-center">시세 정보 리스트</h3>
 				</div>	
 					
 				<!-- 비트코인과 실화폐 환율 탭 네비 -->
 				<ul class="nav nav-tabs">
 					
-					<li class="market_price_tab active"><a data-toggle="tab" href="#bitcoin_price">BitCoin</a></li>
+					<li class="market_price_tab active"><a data-toggle="tab" href="#bitcoin_price">비트코인</a></li>
 											
 					<!-- 비트코인 환율 -->
-					<li class="market_price_tab"><a data-toggle="tab" href="#market_price">MarketPrice</a></li>
+					<li class="market_price_tab"><a data-toggle="tab" href="#market_price">실화폐</a></li>
 					
 	
 					<li id="drop-box_sortingType">

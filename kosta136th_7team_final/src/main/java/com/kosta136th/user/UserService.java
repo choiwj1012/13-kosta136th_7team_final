@@ -10,4 +10,6 @@ public interface UserService {
 
 	public boolean signout(User user) throws Exception;
 
+	public boolean updateUserPassword(User user) throws Exception;
+
 }

@@ -8,4 +8,10 @@ public interface DemesticScrapDAO {
 
 	void addDemesticScrap(DemesticScrap vo) throws Exception;
 
+	int getUserNumber(String email) throws Exception;
+
+	String demScrapCheck(DemesticScrap vo) throws Exception;
+
+	void removeDemesticScrap(DemesticScrap vo) throws Exception;
+
 }

@@ -29,5 +29,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INSERT INTO GUEST(GUEST_EMAIL) VALUES(#{email});
 	</insert>
 
+	<select id = "getUserNum" resultType = "java.lang.Integer" >
+		SELECT USER_NUM FROM USER WHERE USER_EMAIL = (#{email});
+	</select>
+	
+	<select id = "demScrapCheck" resultType = "java.lang.String" >
+		SELECT DOMESTIC_SCRAP_URL FROM DOMESTIC_SCRAP WHERE USER_NUM = #{user_num} AND DOMESTIC_SCRAP_URL = #{link};
+	</select>
+	
+	<delete id="removeDemesticScrap">
+		DELETE FROM DOMESTIC_SCRAP WHERE USER_NUM = #{user_num} AND DOMESTIC_SCRAP_URL = #{link};
+	</delete>
+	
+	<select id = "abrScrapCheck" resultType = "java.lang.String" >
+		SELECT ABROAD_SCRAP_URL FROM ABROAD_SCRAP WHERE USER_NUM = #{user_num} AND ABROAD_SCRAP_URL = #{link};
+	</select>
+	
+	<delete id="removeAbroadScrap">
+		DELETE FROM ABROAD_SCRAP WHERE USER_NUM = #{user_num} AND ABROAD_SCRAP_URL = #{link};
+	</delete>
 	
 </mapper>
