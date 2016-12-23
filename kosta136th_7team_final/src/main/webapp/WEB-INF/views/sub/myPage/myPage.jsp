@@ -39,22 +39,6 @@
     </div>
   </div>
 </section>
-<script>
-	$(document).ready(function(){
-			var email = '<c:out value="${login.USER_EMAIL}"/>';
-			alert("마이페이지 이메일 : " + email);
-			$.ajax({
-				type : 'GET',
-				async : false,
-				url : '/manageMyBoard',
-				data : 
-				{
-					USER_EMAIL : email
-					
-				},
-				dataType : 'text'
-			});
-	});
-</script>
+
 
 <%@ include file="../../include/footer.jsp" %>		

@@ -21,6 +21,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	    if (userVO != null) {
 	      System.out.println("clear login data before");
 	      session.removeAttribute(LOGIN);
+	      session.invalidate();
 	    }
 
 	    return true;

@@ -14,4 +14,6 @@ public interface DemesticScrapDAO {
 
 	void removeDemesticScrap(DemesticScrap vo) throws Exception;
 
+	List<GETDemesticScrap> demScrapList(String email) throws Exception;
+
 }

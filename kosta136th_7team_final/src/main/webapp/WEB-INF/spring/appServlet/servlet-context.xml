@@ -25,6 +25,7 @@
 	
 	<beans:bean id="loginInterceptor" class="com.kosta136th.user.LoginInterceptor"></beans:bean>
 	<beans:bean id="logoutInterceptor" class="com.kosta136th.user.LogoutInterceptor"></beans:bean>
+	<beans:bean id="authInterceptor" class="com.kosta136th.user.AuthInterceptor"></beans:bean>
 	<interceptors>
 		<interceptor>
 			<mapping path="/requestSigninEmail" />
@@ -35,6 +36,15 @@
 			<mapping path="/requestSignout" />
 			<beans:ref bean="logoutInterceptor" />
 		</interceptor>
+		
+		<interceptor>
+			<mapping path="/myPage" />
+			<mapping path="/manageMyInfo" />
+			<mapping path="/manageMyBoard" />
+			<beans:ref bean="authInterceptor" />
+		</interceptor>
+		
+		
 	</interceptors>
 
 </beans:beans>

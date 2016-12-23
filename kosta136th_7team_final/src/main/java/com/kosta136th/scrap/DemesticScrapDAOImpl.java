@@ -43,5 +43,12 @@ public class DemesticScrapDAOImpl implements DemesticScrapDAO{
 		
 	}
 
+	@Override
+	public List<GETDemesticScrap> demScrapList(String email) throws Exception {
+		int userNum = session.selectOne(namespace + ".getUserNum", email);
+		
+		return session.selectList(namespace + ".getDemScrapList", userNum);
+	}
+
 
 }

@@ -41,5 +41,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id = "updateUserPassword">
 		UPDATE USER SET USER_PASSWORD = #{USER_PASSWORD} WHERE USER_EMAIL = #{USER_EMAIL};
 	</update>
+	
+	<select id="getUserNickName" resultType="java.lang.String" >
+		SELECT USER_NICKNAME FROM USER WHERE USER_EMAIL = #{email}
+	</select>
+	
+	<update id = "changeNickName">
+		UPDATE USER SET USER_NICKNAME = #{USER_NICKNAME} WHERE USER_EMAIL = #{USER_EMAIL};
+	</update>
+	
+	<select id="getPassword" resultType="java.lang.String" >
+		SELECT USER_PASSWORD FROM USER WHERE USER_EMAIL = #{USER_EMAIL}
+	</select>
+	
+	<update id = "changePassword">
+		UPDATE USER SET USER_PASSWORD = #{CHANGE_USER_PASSWORD} WHERE USER_EMAIL = #{USER_EMAIL};
+	</update>
 
 </mapper>

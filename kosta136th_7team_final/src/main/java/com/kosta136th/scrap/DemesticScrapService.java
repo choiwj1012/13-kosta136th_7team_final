@@ -16,6 +16,8 @@ public interface DemesticScrapService {
 
 	public void removeDemesticScrap(DemesticScrap vo) throws Exception;
 
+	public List<GETDemesticScrap> demScrapList(String email) throws Exception;
+
 	
 
 }
