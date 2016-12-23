@@ -24,4 +24,6 @@ public interface DealerService {
 	
 	public int listSearchCount(SearchCriteria cri) throws Exception;
 
+	public int dealerMypage(String login) throws Exception;
+
 }
