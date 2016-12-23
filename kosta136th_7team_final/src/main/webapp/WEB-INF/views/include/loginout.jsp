@@ -520,36 +520,30 @@
 	$(document).ready(function(){
 		$('#signup_naver_img').on('click', function(e){
 			
-			e.preventDefault();
+			alert("구현중");
 			
-			$.ajax({
-				type : 'POST',
-				url : '/requestSignupNaver',
-			    success : function(data) {
-			    	window.open(data);
-			    }
-			});
-			
-			var isSignin = requestSigninSessionAttribute();
+	});
+	});
+</script>
 
-			if (isSignin == false){
-				$('#signupBtn').remove();
-			    $('#signinBtn').remove();
-			    $('#myPage').remove();
-			    $('#signoutBtn').remove();
-				$('.nav').append('<li><a href="#" id="signupBtn" data-toggle="modal" data-target="#signup">회원가입</a></li>');
-	        	$('.nav').append('<li><a href="#" id="signinBtn" data-toggle="modal" data-target="#signin">로그인</a></li>'); 
-	        }
+<!-- 네이버로 가입 버튼을 클릭했을 때 작동하는 스크립트입니다. -->
+<script>
+	$(document).ready(function(){
+		$('#signup_naver_img').on('click', function(e){
 			
-		    if (isSignin == true){
-		    	$('#signupBtn').remove();
-			    $('#signinBtn').remove();
-			    $('#myPage').remove();
-			    $('#signoutBtn').remove();
-			    $('.nav').append('<li><a href="/myPage" id = "myPage">마이페이지</a></li>');
-			    $('.nav').append('<li><a href="#" id="signoutBtn">로그아웃</a></li>');
-	        }
+			alert("구현중");
 			
-		});
+	});
+	});
+</script>
+
+<!-- 네이버로 로그인 버튼을 클릭했을 때 작동하는 스크립트입니다. -->
+<script>
+	$(document).ready(function(){
+		$('#signin_naver_img').on('click', function(e){
+			
+			alert("구현중");
+			
+	});
 	});
 </script>

@@ -1,5 +1,8 @@
 package com.kosta136th.user;
 
+import java.math.BigInteger;
+import java.net.URLEncoder;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -211,33 +214,27 @@ public class UserController {
 
 	@RequestMapping(value = "/requestSigninEmail", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	@ResponseBody
-	public String requestSigninEmail(@ModelAttribute User user, HttpSession session, HttpServletRequest request)
+	public String requestSigninEmail(@ModelAttribute User user, HttpSession session, HttpServletRequest request) throws Exception
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		String result = "false";
 		LoginInfo loginInfo = null;
-		try { 
-			loginInfo = userService.signinEmail(user);
-			if(loginInfo.getUSER_EMAIL() == null)
-			{
-				result = "false";
-				return result;
-			}
-			else
-			{
-				result = "true";
-				map.put("USER_EMAIL", loginInfo.getUSER_EMAIL());
-				map.put("REGISTER_TYPE_CODE", loginInfo.getREGISTER_TYPE_CODE());
-				request.getSession().setAttribute("userVO", map);
-			}
-
-
-		} catch (Exception e) {
+		loginInfo = userService.signinEmail(user);
+		System.out.println(loginInfo.toString());
+		if(loginInfo.getUSER_EMAIL() == null)
+		{
+			System.out.println("1");
 			result = "false";
-			e.printStackTrace();
 		}
-
+		else
+		{
+			System.out.println("2");
+			map.put("USER_EMAIL", loginInfo.getUSER_EMAIL());
+			map.put("REGISTER_TYPE_CODE", loginInfo.getREGISTER_TYPE_CODE());
+			request.getSession().setAttribute("userVO", map);
+			result = "true";
+		}
 		return result;
 	}
 
