@@ -1,3 +1,4 @@
+
 package com.kosta136th.dealer;
 
 import java.util.List;
@@ -23,6 +24,13 @@ public class DealerServiceImpl implements DealerService{
 		
 		dao.create(dealer);
 		
+//		String[] files = dealer.getFiles();
+//		
+//		if(files == null) { return; }
+//		
+//		for (String fileName : files) {
+//			dao.addAttach(fileName);
+//		}
 	}
 
 	@Override
@@ -39,7 +47,7 @@ public class DealerServiceImpl implements DealerService{
 
 	@Override
 	public void remove(int dealer_page_num) throws Exception {
-		
+//		dao.deleteAttach(dealer_page_num);
 		dao.remove(dealer_page_num);
 		
 	}
@@ -54,13 +62,26 @@ public class DealerServiceImpl implements DealerService{
 	public void modify(Dealer dealer) throws Exception {
 		
 		dao.update(dealer);
-		
+//		
+//		int dealer_page_num = dealer.getDealer_page_num();
+//		
+//		dao.deleteAttach(dealer_page_num);
+//		
+//		String[] files = dealer.getFiles();
+//		
+//		if(files == null) { return; }
+//		
+//		for (String fileName : files) {
+//			
+//			dao.replaceAttach(fileName, dealer_page_num);
+//			
+//		}
 	}
 
 	@Override
-	public void likeEvent(String likeCheck, String disLikeCheck, int dealerNum) throws Exception {
+	public void likeEvent(String likeCheck, String disLikeCheck, int dealerNum, int userNum) throws Exception {
 		
-		dao.likeEvent(likeCheck, disLikeCheck, dealerNum);
+		dao.likeEvent(likeCheck, disLikeCheck, dealerNum, userNum);
 		
 	}
 
@@ -83,5 +104,36 @@ public class DealerServiceImpl implements DealerService{
 		return dao.dealerMyPage(login);
 		
 	}
+
+	@Override
+	public int userNum_read(String email) throws Exception {
+		
+		return dao.userNum_read(email);
+	}
+
+	@Override
+	public int searchDealerUserNum(int dealerUserNum) throws Exception {
+		
+		return dao.searchDealerUserNum(dealerUserNum);
+	}
+
+	@Override
+	public List<Dealer> checkUserNum(int dealerUserNum, String likeCheck, String disLikeCheck) throws Exception {
+		
+		return dao.checkUserNum(dealerUserNum,likeCheck,disLikeCheck);
+	}
+
+	@Override
+	public List<Dealer> checkDealerPageNum(int dealerNum, String likeCheck, String disLikeCheck) throws Exception {
+		
+		return dao.checkDealerPageNum(dealerNum,likeCheck,disLikeCheck);
+	}
+
+//	@Override
+//	public List<String> getAttach(int dealer_page_num) throws Exception {
+//		
+//		return dao.getAttach(dealer_page_num);
+//	}
+	
 
 }
