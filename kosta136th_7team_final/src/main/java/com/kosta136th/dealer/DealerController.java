@@ -26,7 +26,7 @@ public class DealerController {
 	
 	// BTC 정보광장 Index Mapping
 	@RequestMapping(value = "/btcInfoLand", method = RequestMethod.GET)
-	public String btcInfoLand(HttpSession session, @ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception{
+	public String btcInfoLand(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception{
 
 		model.addAttribute("list", service.allListSearch(cri));
 		
@@ -36,13 +36,7 @@ public class DealerController {
 		pageMaker.setTotalCount(service.listSearchCount(cri));
 		
 		model.addAttribute("pageMaker", pageMaker);
-		
-		String email = (String) ( 
-				( (Map<String,Object>)( session.getAttribute("login") ) )
-				.get("USER_EMAIL")
-				);
-		System.out.println(email);
-		
+	
 		return "sub/btcInfoLand/btcInfoLand";
 		
 	}
@@ -60,11 +54,8 @@ public class DealerController {
 
 		
 		boolean check = true;
-		String dealer_join_id = (String) ( 
-				( (Map<String,Object>)( session.getAttribute("login") ) )
-				.get("USER_EMAIL")
-				);
-//		QWER@NAVER.COM
+		String dealer_join_id = (String) (( (Map<String,Object>)( session.getAttribute("login"))).get("USER_EMAIL"));
+
 		// 세션에서받아온 아이디를 스트링형 변수에저장된것을 괄호 안에 저장해줘야함
 		List<Dealer> dealerList = service.userTypeCheck();
 
@@ -170,10 +161,8 @@ public class DealerController {
 	@ResponseBody
 	public void dealerPageButtonCheck(HttpSession session, @RequestParam("likeCheck") String likeCheck, @RequestParam("disLikeCheck") String disLikeCheck,
 			@RequestParam("dealerNum") int dealerNum, @ModelAttribute("cri") SearchCriteria cri, HttpServletResponse response) throws Exception {
-		String email = (String) ( 
-				( (Map<String,Object>)( session.getAttribute("login") ) )
-				.get("USER_EMAIL")
-				);
+		String email = (String) (((Map<String,Object>)( session.getAttribute("login"))).get("USER_EMAIL"));
+			
 		service.likeEvent(likeCheck, disLikeCheck, dealerNum);
 
 	}
