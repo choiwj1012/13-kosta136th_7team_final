@@ -47,8 +47,13 @@
 
 				</div>
 			</div>
+
+	<c:if test = "${login.REGISTER_TYPE_CODE eq 'd'}">
 		<button class="btn btn-default" id="newBtn">딜러 페이지 등록</button>
+	</c:if>
+	<c:if test = "${login.REGISTER_TYPE_CODE eq 'd' && login.USER_EMAIL eq dealer.user_email}">
 		<button id = "mypage">내 딜러 페이지</button>
+		</c:if>
 	</div>
 
 </div>

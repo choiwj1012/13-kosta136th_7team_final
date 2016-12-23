@@ -9,6 +9,7 @@
 </head>
 
 <body id="page-top">
+
 	<div id="main_img">
 		<div class="row">
 			<div class="col-lg-3 visible"></div>
@@ -74,8 +75,13 @@
 							${dealer.score}point</div>
 					</div>
 					<div class="vote_use">
-					<button id="modify" type="submit">딜러 타이틀 수정</button></div>
-					<div><button id ="remove" type="submit">딜러페이지 삭제</button></div>
+				<c:if test = "${login.REGISTER_TYPE_CODE eq 'd' && login.USER_EMAIL == dealer.user_email}">
+					<button id="modify" type="submit">딜러 타이틀 수정</button>
+					<button id ="remove" type="submit">딜러페이지 삭제</button>
+				</c:if>
+						</div>
+						<div></div>
+				
 				</div>
 			</div>
 			<!-- end of col-sm-4 column -->
@@ -177,28 +183,6 @@
 				<input type = "hidden" name = "dealer_news_num" value = "" />
 				<input type = "hidden" name = "currentPage" value = "${pageMaker.currentPage}"/>
 			</form>
-			
-<%-- 	<c:if test = "${not empty login}"> --%>
-		<script>
-			//로그인 되어 있으면
-			var login = {
-							user_email : '${login.USER_EMAIL}',
-							register_type_code : '${login.REGISTER_TYPE_CODE}'
-			}
-			
-			alert(login.user_email);
-			alert(login.register_type_code);
-			
-// 			var login = '${login.REGISTER_TYPE_CODE}';
-		</script>
-<%-- 	</c:if> --%>
-	
-<%-- 	<c:if test = "${empty login}"> --%>
-		<script>
-			//로그인 안 되 있으면
-// 			var login = null;
-		</script>
-<%-- 	</c:if> --%>
 	
 </body>
 
