@@ -357,6 +357,12 @@ public class AbroadScrapServiceImpl implements AbroadScrapService{
 		dao.removeAbroadScrap(vo);
 		
 	}
+
+	@Override
+	public List<GETAbroadScrap> abrScrapList(String email) throws Exception {
+		
+		return dao.abrScrapList(email);
+	}
 }
 
 

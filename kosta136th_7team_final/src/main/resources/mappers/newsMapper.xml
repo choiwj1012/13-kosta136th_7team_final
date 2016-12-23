@@ -49,4 +49,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		DELETE FROM ABROAD_SCRAP WHERE USER_NUM = #{user_num} AND ABROAD_SCRAP_URL = #{link};
 	</delete>
 	
+	<select id="getDemScrapList" resultType="com.kosta136th.scrap.GETDemesticScrap">
+		SELECT DOMESTIC_SCRAP_URL, DOMESTIC_SCRAP_TITLE, DOMESTIC_SCRAP_DESCRIPTION, DOMESTIC_SCRAP_PUBDATE 
+		from DOMESTIC_SCRAP WHERE USER_NUM = #{userNum};
+	</select>
+	
+	<select id="getAbrScrapList" resultType="com.kosta136th.scrap.GETAbroadScrap">
+		SELECT ABROAD_SCRAP_URL, ABROAD_SCRAP_TITLE, ABROAD_SCRAP_DESCRIPTION, ABROAD_SCRAP_PUBDATE, ABROAD_SCRAP_IMG_URL, ABROAD_SCRAP_WRITER
+		from ABROAD_SCRAP WHERE USER_NUM = #{userNum};
+	</select>
+	
 </mapper>

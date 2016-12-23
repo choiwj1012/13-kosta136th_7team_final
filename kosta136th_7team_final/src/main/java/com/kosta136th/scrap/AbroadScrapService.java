@@ -10,5 +10,6 @@ public interface AbroadScrapService {
 	List<AbroadPopular> popularNews() throws Exception;
 	String abrScrapCheck(AbroadScrap vo) throws Exception;
 	void removeAbroadScrap(AbroadScrap vo) throws Exception;
+	List<GETAbroadScrap> abrScrapList(String email) throws Exception;
 
 }

@@ -1,5 +1,7 @@
 package com.kosta136th.user;
 
+import com.kosta136th.myPage.ChangePassword;
+
 public interface UserDAO {
 
 	public String checkEmailDuplication(String email) throws Exception;
@@ -13,5 +15,11 @@ public interface UserDAO {
 	public boolean signout(User user) throws Exception;
 
 	public boolean updateUserPassword(User user) throws Exception;
+
+	public String getUserNickName(String email) throws Exception;
+
+	public void changeNickName(User user) throws Exception;
+
+	public String changePassword(ChangePassword userInfo) throws Exception;
 	
 }

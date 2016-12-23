@@ -4,6 +4,8 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.kosta136th.myPage.ChangePassword;
+
 @Service
 public class UserServiceImpl implements UserService{
 
@@ -46,6 +48,24 @@ public class UserServiceImpl implements UserService{
 		
 		return updateUserPasswordSuccess;
 		
+	}
+
+	@Override
+	public String getUserNickName(String email) throws Exception {
+		
+		return userDAO.getUserNickName(email);
+	}
+
+	@Override
+	public void changeNickName(User user) throws Exception {
+		userDAO.changeNickName(user);
+		
+	}
+
+	@Override
+	public String changePassword(ChangePassword userInfo) throws Exception {
+		
+		return userDAO.changePassword(userInfo);
 	}
 	
 }

@@ -10,6 +10,8 @@ import javax.xml.bind.DatatypeConverter;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kosta136th.myPage.ChangePassword;
+
 @Repository
 public class UserDAOImpl implements UserDAO{
 
@@ -141,6 +143,36 @@ public class UserDAOImpl implements UserDAO{
 		}
 		
 		return updateUserPasswordSuccess;
+	}
+
+	@Override
+	public String getUserNickName(String email) throws Exception {
+		
+		return session.selectOne(namespace + ".getUserNickName", email);
+	}
+
+	@Override
+	public void changeNickName(User user) throws Exception {
+		session.update(namespace + ".changeNickName", user);
+		
+	}
+
+	@Override
+	public String changePassword(ChangePassword userInfo) throws Exception {
+		String result = "false";
+		String password = session.selectOne(namespace + ".getPassword", userInfo);
+		String inputPassword = encryptPasswordSHA256(userInfo.getNOW_USER_PASSWORD());
+		System.out.println("userDAOImpl.getPassword : " + password);
+		System.out.println("userDAOImpl.inputPassword : " + inputPassword);
+		if(password.equals(inputPassword))
+		{
+			userInfo.setCHANGE_USER_PASSWORD(encryptPasswordSHA256(userInfo.getCHANGE_USER_PASSWORD()));
+			session.insert(namespace + ".changePassword", userInfo);
+			result = "true";
+		}
+		
+		
+		return result;
 	}
 
 

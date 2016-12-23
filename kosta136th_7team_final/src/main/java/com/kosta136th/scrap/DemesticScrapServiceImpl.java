@@ -139,6 +139,12 @@ public class DemesticScrapServiceImpl implements DemesticScrapService{
 		
 	}
 
+	@Override
+	public List<GETDemesticScrap> demScrapList(String email) throws Exception{
+		
+		return dao.demScrapList(email);
+	}
+
 
 
 }
