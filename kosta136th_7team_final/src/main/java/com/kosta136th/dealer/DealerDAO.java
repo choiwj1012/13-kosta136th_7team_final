@@ -32,4 +32,6 @@ public interface DealerDAO {
 	public List<Dealer> allListSearch(SearchCriteria cri) throws Exception;
 
 	public int listSearchCount(SearchCriteria cri) throws Exception;
+
+	public int dealerMyPage(String login) throws Exception;
 }

@@ -26,8 +26,8 @@ public class DealerController {
 	
 	// BTC 정보광장 Index Mapping
 	@RequestMapping(value = "/btcInfoLand", method = RequestMethod.GET)
-	public String btcInfoLand(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception{
-
+	public String btcInfoLand(HttpSession session, @ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception{
+		
 		model.addAttribute("list", service.allListSearch(cri));
 		
 		PageMaker pageMaker = new PageMaker();
@@ -100,7 +100,7 @@ public class DealerController {
 		
 		//내공
 		Dealer dealer = new Dealer();
-		
+		String useremail = service.read(dealer_page_num).getUser_email();
 		String nickName = service.read(dealer_page_num).getUser_nickName();
 		String category = service.read(dealer_page_num).getCategory();
 		int dealerNum = service.read(dealer_page_num).getDealer_page_num();
@@ -109,6 +109,7 @@ public class DealerController {
 		dealer.setCategory(category);
 		dealer.setUser_nickName(nickName);
 		dealer.setDealer_page_num(dealerNum);
+		dealer.setUser_email(useremail);
 		//딜러정보
 		model.addAttribute(dealer);
 		
@@ -165,6 +166,15 @@ public class DealerController {
 			
 		service.likeEvent(likeCheck, disLikeCheck, dealerNum);
 
+	}
+	
+	@RequestMapping(value = "dealerMyPage", method = RequestMethod.GET)
+	@ResponseBody
+	public int dealerMyPage(@RequestParam("login") String login, HttpServletResponse response) throws Exception {
+		
+		 int dealer_page_num = service.dealerMypage(login);
+
+		return dealer_page_num;
 	}
 
 }

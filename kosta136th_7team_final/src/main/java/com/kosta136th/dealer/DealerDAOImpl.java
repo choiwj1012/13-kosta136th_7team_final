@@ -86,4 +86,11 @@ public class DealerDAOImpl implements DealerDAO{
 		return session.selectOne(namespace + ".listSearchCount", cri);
 	}
 
+	@Override
+	public int dealerMyPage(String login) throws Exception {
+	
+		return session.selectOne(namespace + ".dealerMyPage", login);
+		
+	}
+
 }

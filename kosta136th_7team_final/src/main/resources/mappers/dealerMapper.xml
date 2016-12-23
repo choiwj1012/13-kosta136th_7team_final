@@ -101,5 +101,15 @@
 		</if>
 
 	</select>
+	
+	<select id="dealerMyPage" resultType="int">
+		SELECT
+		DEALER_PAGE_NUM
+		FROM
+		DEALER_PAGE
+		JOIN USER ON USER.USER_NUM = DEALER_PAGE.USER_NUM
+
+		WHERE USER.USER_EMAIL = #{login}
+	</select>
 
 </mapper>

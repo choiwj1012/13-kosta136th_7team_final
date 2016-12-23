@@ -51,9 +51,11 @@
 	<c:if test = "${login.REGISTER_TYPE_CODE eq 'd'}">
 		<button class="btn btn-default" id="newBtn">딜러 페이지 등록</button>
 	</c:if>
-	<c:if test = "${login.REGISTER_TYPE_CODE eq 'd' && login.USER_EMAIL eq dealer.user_email}">
-		<button id = "mypage">내 딜러 페이지</button>
+	<c:forEach items="${list}" var="del">
+		<c:if test = "${login.REGISTER_TYPE_CODE eq 'd' && login.USER_EMAIL == del.user_email}">
+			<button id = "mypage">내 딜러 페이지</button>
 		</c:if>
+	</c:forEach>
 	</div>
 
 </div>
@@ -124,6 +126,16 @@
 </script>
 
 <script>
+
+<c:if test = "${not empty login}">
+//로그인 되어 있으면
+var login = '${login.USER_EMAIL}';
+</c:if>
+
+<c:if test = "${empty login}">
+//로그인 안 되 있으면
+var login = null;
+</c:if>
 	$(document).ready(
 			
 			function() {
@@ -143,6 +155,26 @@
 					self.location = "dealerPageSave";
 
 				});
+				
+				$('#mypage').on("click", function(event) {
+																						
+							$.ajax({
+								url: "/sub/btcInfoLand/dealerMyPage",
+								type: 'get',
+								data: {"login" : login},
+								success:  function (data) {
+									if(data == null) {
+										alert("생성하신 딜러페이지가 없습니다.");
+										self.location = "dealerPageSave";
+									} else if(data != null){
+									self.location = "btcInfoLand_board_list?dealer_page_num=" + data;
+									}
+								}
+									
+							});
 
-			});
+				});
+	});
+	
+
 </script>

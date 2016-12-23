@@ -77,4 +77,11 @@ public class DealerServiceImpl implements DealerService{
 		return dao.listSearchCount(cri);
 	}
 
+	@Override
+	public int dealerMypage(String login) throws Exception {
+		
+		return dao.dealerMyPage(login);
+		
+	}
+
 }
