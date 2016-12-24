@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class DealerNewsController {
-
+	
 	@Inject
 	private DealerNewsService dealerNewsService;
-	
+
 	/*@ModelAttribute("typeMap")
 	public Map<String, String> seachTypeMap(){
 		Map<String, String> typeMap = new HashMap<String, String>();
