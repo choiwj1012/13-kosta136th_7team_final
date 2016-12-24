@@ -32,7 +32,8 @@ public class DealerNewsFileController {
 		
 		InputStream in = null;
 		try{
-			in = new FileInputStream("C:\\Users\\kosta\\Desktop\\" + fileName);
+			in = new FileInputStream("C:\\final_project\\github\\kosta136th_7team_final\\kosta136th_7team_final\\src\\main\\webapp"
+					+ "\\resources\\imgUpload\\"+ fileName);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -42,8 +43,7 @@ public class DealerNewsFileController {
 	@RequestMapping(value = "/writeImage")
 	@ResponseBody
 	public void writeImg(MultipartFile multipartFile, Model model){
-/*		System.out.println("왔습니다");
-*/		try{
+		try{
 			multipartToFile(multipartFile);
 			
 		} catch (Exception e) {
@@ -66,7 +66,8 @@ public class DealerNewsFileController {
 			}
 			
 			//만들 파일	
-			String directory = "C:\\Users\\kosta\\Desktop\\";
+			String directory = "C:\\final_project\\github\\kosta136th_7team_final\\kosta136th_7team_final\\src\\main\\webapp"
+					+ "\\resources\\imgUpload\\";
 			File fromMultipartFile = new File(directory, nameSubmitFile);
 			
 			//'파일'로부터 '이름'의 썸네일 파일을 만들어 '경로'에 저장하고 반환하는 메소드
@@ -111,7 +112,8 @@ public class DealerNewsFileController {
 		/*파일을 아웃풋스트림으로 열고, Bytes[]들을 쓴다*/
 		File fromMultipartFile = null;
 		try {
-			fromMultipartFile = new File("C:\\Users\\kosta\\Desktop", multipartFile.getOriginalFilename());
+			fromMultipartFile = new File("C:\\final_project\\github\\kosta136th_7team_final\\kosta136th_7team_final\\src\\main\\webapp"
+					+ "\\resources\\imgUpload\\", multipartFile.getOriginalFilename());
 			fromMultipartFile.createNewFile(); 
 			FileOutputStream fos = new FileOutputStream(fromMultipartFile); 
 			fos.write(multipartFile.getBytes());

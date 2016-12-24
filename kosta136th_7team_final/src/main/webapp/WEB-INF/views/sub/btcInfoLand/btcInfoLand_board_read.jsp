@@ -287,8 +287,8 @@
 			    		div.innerHTML = $('#summernote').summernote('code');
 			    		var firstImage = div.getElementsByTagName('img')[0]
 			    		var imgSrc = firstImage ? firstImage.src : "";
+						//첫번째 그림의 주소
 			    		var imgName = imgSrc.split("=")[1];
-			    		alert('첫번째 그림의 주소는 ' + imgName);
 			    	
 			    		$.ajax({
 			    			url : '/makeThumbnail',
@@ -362,7 +362,7 @@
 				/* 끝 */
 
 				/* 본인 검사 */
-				if (login != $(this).siblings('.reply_writer').text()) {
+				if (login.USER_EMAIL != $(this).siblings('.reply_writer').text()) {
 					alert('본인이 아니면 삭제할 수 없습니다');
 					return;
 				}
@@ -529,7 +529,7 @@
 				}
 
 				$('#' + data[i].reply_num).append(
-						'<span class="reply_writer">작성자 :</span> <a href = "#" class = "reply_writer">'
+						'<span>작성자 :</span> <a href = "#" class = "reply_writer">'
 								+ data[i].writer + '</a>님');
 				$('#' + data[i].reply_num).append('&nbsp;&nbsp;');
 				$('#' + data[i].reply_num).append(
