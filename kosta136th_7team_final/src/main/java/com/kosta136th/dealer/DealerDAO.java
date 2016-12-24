@@ -26,7 +26,7 @@ public interface DealerDAO {
 	public void update(Dealer dealer) throws Exception;
 
 	//딜러 추천 / 딜러  신고 이벤트
-	public void likeEvent(String likeCheck, String disLikeCheck, int dealerNum) throws Exception;
+	public void likeEvent(String likeCheck, String disLikeCheck, int dealerNum, int dealerUserNum) throws Exception;
 
 	// 전체리스트
 	public List<Dealer> allListSearch(SearchCriteria cri) throws Exception;
@@ -34,4 +34,21 @@ public interface DealerDAO {
 	public int listSearchCount(SearchCriteria cri) throws Exception;
 
 	public int dealerMyPage(String login) throws Exception;
+
+	public int userNum_read(String email) throws Exception;
+
+	public int searchDealerUserNum(int dealerNum) throws Exception;
+
+	public List<Dealer> checkUserNum(int dealerUserNum, String likeCheck, String disLikeCheck) throws Exception;
+
+	public List<Dealer> checkDealerPageNum(int dealerNum, String likeCheck, String disLikeCheck) throws Exception;
+	
+//	public void addAttach(String fullName) throws Exception;
+//	
+//	public List<String> getAttach(int dealer_page_num) throws Exception;
+//	
+//	public void deleteAttach(int dealer_page_num) throws Exception;
+//	
+//	public void replaceAttach(String fullName, int dealer_page_num) throws Exception;
+	
 }
