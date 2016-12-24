@@ -250,6 +250,7 @@
 		   cache: false,
 	       contentType: false,
 	       processData: false,
+	       asynch: false,
 	       success: function(url) {
 	    	   $('#summernote').summernote(
 	    			   'insertImage', 
@@ -535,8 +536,9 @@ $(document).ready(function() {
 			div.innerHTML = $('#summernote').summernote('code');
 			var firstImage = div.getElementsByTagName('img')[0]
 			var imgSrc = firstImage ? firstImage.src : "";
+			//첫번째 그림의 주소
 			var imgName = imgSrc.split("=")[1];
-			alert('첫번째 그림의 주소는 ' + imgName);
+			
 			    	
 			$.ajax({
 			    url : '/makeThumbnail',
@@ -544,7 +546,7 @@ $(document).ready(function() {
 			    	dealer_news_num : 0
 			    },
 			    type : 'POST',
-			    asynch: false,
+			    async: false,
 			    success : function(){
 			    			
 			    }
