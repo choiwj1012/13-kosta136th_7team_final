@@ -177,14 +177,13 @@ public class DealerController {
 					
 				
 				if(userCheck.get(i).getUser_num() == userNum && dealerPageCheck.get(j).getDealer_page_num() == dealerNum) {
+					
 					return status;
 					}
 				}
 			}
 		}
-		
-		
-		
+
 			service.likeEvent(likeCheck, disLikeCheck, dealerNum, dealerUserNum);
 			status = "good";
 			return status;

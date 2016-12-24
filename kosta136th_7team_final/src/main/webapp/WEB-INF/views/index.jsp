@@ -154,7 +154,7 @@
 				</div>	
 					
 				<div class="col-md-4">
-					<a href="/btcInfoLand"><img alt="서비스소개" src="../../resources/img/bitcoin_light_black_psy_resize.png"></a>
+					<a href="/sub/btcInfoLand/btcInfoLand"><img alt="서비스소개" src="../../resources/img/bitcoin_light_black_psy_resize.png"></a>
 					<h3>비트리버 커뮤니티</h3>
 					<p>비트코인 커뮤니티에서 여러사람들의 의견을 참고하세요 
 						<br> 전문가들이 비트코인에 관한 투자의견을 제시합니다

@@ -271,7 +271,7 @@
 	</form>
 	
 	<!-- 댓글 입력 최종 전송폼 : #form_write -->
-	<form id="form_write" role="form" action="/writeNews">
+	<form id="form_write" action="/writeNews">
 		<input type="hidden" name="title" />
 		<input type="hidden" name="content" />
 	</form>
@@ -312,83 +312,7 @@
 		</script>
 	</c:if>
 </body>
-<script>
-	$(document).ready(function() {
-		/* var dealerNum = $
-		{
-			dealer.dealer_page_num
-		} */
-		$('#report').on("click", function(event) {
-			var likeCheck = 'noCheck';
-			var disLikeCheck = 'checked';
 
-			$.ajax({
-				url : "/sub/btcInfoLand/dealerPageButtoncheck",
-				type : 'get',
-				data : {
-					"likeCheck" : likeCheck,
-					"disLikeCheck" : disLikeCheck,
-					"dealerNum" : dealerNum
-				},
-				success : function(data) {
-					self.location = "btcInfoLand_board_list?page = " + $
-					{
-						cri.page
-					}
-					+"&dealer_page_num=" + $
-					{
-						dealer.dealer_page_num
-					}
-					;
-				}
-
-			});
-
-		});
-
-		$('#recommend').on("click", function(event) {
-
-			var likeCheck = 'checked';
-			var disLikeCheck = 'noCheck';
-
-			$.ajax({
-				url : "/sub/btcInfoLand/dealerPageButtoncheck",
-				type : 'get',
-				data : {
-					"likeCheck" : likeCheck,
-					"disLikeCheck" : disLikeCheck,
-					"dealerNum" : dealerNum
-				},
-				success : function(data) {
-					self.location = "btcInfoLand_board_list?page = " + $
-					{
-						cri.page
-					}
-					+"&dealer_page_num=" + $
-					{
-						dealer.dealer_page_num
-					}
-					;
-
-				}
-
-			});
-		});
-		var formObj = $("form[role='form']");
-		$('#remove').on("click", function(event) {
-			formObj.attr("action", "/sub/btcInfoLand/dealerPageRemove");
-			formObj.submit();
-		});
-
-		$('#modify').on("click", function(event) {
-			formObj.attr("action", "/sub/btcInfoLand/dealerPageUpdate");
-			formObj.attr("method", "get");
-			formObj.submit();
-		});
-
-	});
-</script>
-<!-- 여기는 자바스크립트! -->
 <!-- 현우님 자바스크립트 -->
 <script>
 $(document).ready(function() {			
