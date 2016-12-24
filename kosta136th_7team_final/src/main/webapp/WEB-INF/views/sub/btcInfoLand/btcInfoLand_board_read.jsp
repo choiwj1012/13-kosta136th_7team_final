@@ -529,7 +529,7 @@
 				}
 
 				$('#' + data[i].reply_num).append(
-						'<span class="reply_writer">작성자 :</span> <a href = "#" class = "reply_writer">'
+						'<span>작성자 :</span> <a href = "#" class = "reply_writer">'
 								+ data[i].writer + '</a>님');
 				$('#' + data[i].reply_num).append('&nbsp;&nbsp;');
 				$('#' + data[i].reply_num).append(
