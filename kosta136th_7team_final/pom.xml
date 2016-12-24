@@ -122,13 +122,6 @@
 			<artifactId>mariadb-java-client</artifactId>
 			<version>1.1.7</version>
 		</dependency>
-		
-		<!-- MySQL -->
-		<!-- <dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.36</version>
-		</dependency>  -->
 		 
 		<!-- MyBatis -->
 		<dependency>
@@ -195,7 +188,7 @@
         
         <!-- sun mail -->    
         <dependency>
-              <groupId>com.sun.mail</groupId>
+           <groupId>com.sun.mail</groupId>
            <artifactId>javax.mail</artifactId>
            <version>1.5.5</version>
 		</dependency>
@@ -214,25 +207,19 @@
             <version>1.5.4</version>
         </dependency>
         
-<<<<<<< HEAD
-        <dependency>
-			<groupId>commons-fileupload</groupId>
-			<artifactId>commons-fileupload</artifactId>
-			<version>1.3.1</version>
-		</dependency> 
-=======
+        <!-- file upload -->
       	<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.3.1</version>
 		</dependency>
 
+		<!-- img fix scale -->
 		<dependency>
 			<groupId>org.imgscalr</groupId>
 			<artifactId>imgscalr-lib</artifactId>
 			<version>4.2</version>
 		</dependency>
->>>>>>> refs/remotes/origin/master
                            
 	</dependencies>
     <build>
