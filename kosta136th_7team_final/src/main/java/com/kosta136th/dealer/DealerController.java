@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -160,12 +161,33 @@ public class DealerController {
 	//추천 신고
 	@RequestMapping(value = "dealerPageButtoncheck", method = RequestMethod.GET)
 	@ResponseBody
-	public void dealerPageButtonCheck(HttpSession session, @RequestParam("likeCheck") String likeCheck, @RequestParam("disLikeCheck") String disLikeCheck,
+	public String dealerPageButtonCheck(@RequestParam("login") String email, @RequestParam("likeCheck") String likeCheck, @RequestParam("disLikeCheck") String disLikeCheck,
 			@RequestParam("dealerNum") int dealerNum, @ModelAttribute("cri") SearchCriteria cri, HttpServletResponse response) throws Exception {
-		String email = (String) (((Map<String,Object>)( session.getAttribute("login"))).get("USER_EMAIL"));
-			
-		service.likeEvent(likeCheck, disLikeCheck, dealerNum);
-
+		String status = "fale";
+		int dealerUserNum = service.searchDealerUserNum(dealerNum);
+		
+		int userNum = service.userNum_read(email);
+		
+		List<Dealer> userCheck = service.checkUserNum(dealerUserNum, likeCheck, disLikeCheck);
+		
+		List<Dealer> dealerPageCheck = service.checkDealerPageNum(dealerNum, likeCheck, disLikeCheck);
+		if(userCheck.size() != 0 && dealerPageCheck.size() != 0){
+			for (int i = 0; i < userCheck.size(); i++) {
+				for (int j = 0; j < dealerPageCheck.size(); j++) {
+					
+				
+				if(userCheck.get(i).getUser_num() == userNum && dealerPageCheck.get(j).getDealer_page_num() == dealerNum) {
+					return status;
+					}
+				}
+			}
+		}
+		
+		
+		
+			service.likeEvent(likeCheck, disLikeCheck, dealerNum, dealerUserNum);
+			status = "good";
+			return status;
 	}
 	
 	@RequestMapping(value = "dealerMyPage", method = RequestMethod.GET)
@@ -176,5 +198,13 @@ public class DealerController {
 
 		return dealer_page_num;
 	}
+	
+//	@RequestMapping("/getAttach/{dealer_page_num}")
+//	@ResponseBody
+//	public List<String> getAttach(@PathVariable("dealer_page_num") int dealer_page_num) throws Exception {
+//		
+//		return service.getAttach(dealer_page_num);
+		
+//	}
 
 }

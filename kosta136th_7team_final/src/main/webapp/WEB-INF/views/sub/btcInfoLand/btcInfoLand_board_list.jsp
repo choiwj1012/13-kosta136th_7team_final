@@ -188,18 +188,34 @@
 
 <script>
 $(document).ready(function() {			
-	
+	<c:if test = "${not empty login}">
+	//로그인 되어 있으면
+	var login = '${login.USER_EMAIL}';
+	</c:if>
+
+	<c:if test = "${empty login}">
+	//로그인 안 되 있으면
+	var login = null;
+	</c:if>
 	var dealerNum = ${dealer.dealer_page_num}
 			
 		$('#report').on("click",function(event) {
+			
+			if(login == null) {
+				alert("로그인 후 이용해주세요");
+			} 
+			
 			var likeCheck = 'noCheck';
 			var disLikeCheck = 'checked';
 						
 				$.ajax({
 					url: "/sub/btcInfoLand/dealerPageButtoncheck",
 					type: 'get',
-					data: {"likeCheck" : likeCheck, "disLikeCheck" : disLikeCheck, "dealerNum" : dealerNum},
+					data: {"likeCheck" : likeCheck, "disLikeCheck" : disLikeCheck, "dealerNum" : dealerNum, "login" : login},
 					success:  function (data) {
+						if(data == "fale") {
+							alert("한번의 신고만 가능합니다.");
+						}
 						self.location = "btcInfoLand_board_list?page=${cri.page}&perPageNum=${cri.perPageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}&dealer_page_num=${dealer.dealer_page_num}";
 						
 					}
@@ -210,14 +226,21 @@ $(document).ready(function() {
 
 			$('#recommend').on("click", function(event) {
 				
+				if(login == null) {
+					alert("로그인 후 이용해주세요");
+				} 
+				
 				var likeCheck = 'checked';
 				var disLikeCheck = 'noCheck';
 				
 				$.ajax({
 					url: "/sub/btcInfoLand/dealerPageButtoncheck",
 					type: 'get',
-					data: {"likeCheck" : likeCheck, "disLikeCheck" : disLikeCheck, "dealerNum" : dealerNum},
+					data: {"likeCheck" : likeCheck, "disLikeCheck" : disLikeCheck, "dealerNum" : dealerNum, "login" : login},
 					success:  function (data) {
+						if(data == "fale") {
+							alert("한번의 추천만 가능합니다.");
+						}
 						self.location = "btcInfoLand_board_list?page=${cri.page}&perPageNum=${cri.perPageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}&dealer_page_num=${dealer.dealer_page_num}"; 
 
 					}

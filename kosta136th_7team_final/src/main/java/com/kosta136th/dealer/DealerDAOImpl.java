@@ -1,6 +1,8 @@
 package com.kosta136th.dealer;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -62,14 +64,22 @@ public class DealerDAOImpl implements DealerDAO{
 	}
 
 	@Override
-	public void likeEvent(String likeCheck, String disLikeCheck, int dealerNum) throws Exception {
+	public void likeEvent(String likeCheck, String disLikeCheck, int dealerNum, int dealerUserNum) throws Exception {
+
+		Dealer dealer = new Dealer();
+		
+		dealer.setUser_num(dealerUserNum);
+		dealer.setDealer_page_num(dealerNum);
 		
 		if(likeCheck.equals("checked")) {
 			
-			session.update(namespace + ".like", dealerNum);
+			session.update(namespace + ".like", dealer);
+			session.insert(namespace + ".likeUser", dealer);
+			
 		} else if(disLikeCheck.equals("checked")) {
 			
-			session.update(namespace + ".dislike", dealerNum);
+			session.update(namespace + ".dislike", dealer);
+			session.insert(namespace + ".dislikeUser", dealer);
 		}
 
 	}
@@ -92,5 +102,76 @@ public class DealerDAOImpl implements DealerDAO{
 		return session.selectOne(namespace + ".dealerMyPage", login);
 		
 	}
+
+	@Override
+	public int userNum_read(String email) throws Exception {
+		
+		return session.selectOne(namespace + ".userNum_read", email);
+	}
+
+	@Override
+	public int searchDealerUserNum(int dealerNum) throws Exception {
+		
+		return session.selectOne(namespace + ".searchDealerUserNum", dealerNum);
+	}
+
+	@Override
+	public List<Dealer> checkUserNum(int dealerUserNum, String likeCheck, String disLikeCheck) throws Exception {
+		Dealer dealer = new Dealer();
+		dealer.setUser_num(dealerUserNum);
+		if(likeCheck.equals("checked")) {
+			
+			return session.selectList(namespace + ".likeCheckUserNum", dealer);
+			
+		}
+		
+		return session.selectList(namespace + ".disLikeCheckUserNum", dealer);
+		
+	}
+
+	@Override
+	public List<Dealer> checkDealerPageNum(int dealerNum, String likeCheck, String disLikeCheck) throws Exception {
+		Dealer dealer = new Dealer();
+		dealer.setDealer_page_num(dealerNum);
+		if(disLikeCheck.equals("checked")) {
+			
+			return session.selectList(namespace + ".likeCheckDealerPageNum", dealer);
+			
+		}
+		return session.selectList(namespace + ".disLikeCheckDealerPageNum", dealer);
+	}
+	
+//	@Override
+//	public void addAttach(String fullName) throws Exception {
+//	
+//		session.insert(namespace + ".addAttach", fullName);
+//		
+//	}
+//	
+//	@Override
+//	public List<String> getAttach(int dealer_page_num) throws Exception {
+//		
+//		return session.selectList(namespace + ".getAttach", dealer_page_num);
+//		
+//	}
+//
+//	@Override
+//	public void deleteAttach(int dealer_page_num) throws Exception {
+//		
+//		session.delete(namespace + ".deleteAttach", dealer_page_num);
+//		
+//	}
+//
+//	@Override
+//	public void replaceAttach(String fullName, int dealer_page_num) throws Exception {
+//		
+//		Map<String, Object> paramMap = new HashMap<String, Object>();
+//		
+//		paramMap.put("dealer_page_num", dealer_page_num);
+//		paramMap.put("fullName", fullName);
+//		
+//		session.insert(namespace + ".replaceAttach", paramMap);
+//		
+//	}
 
 }
