@@ -34,6 +34,5 @@ public interface DealerService {
 
 	public List<Dealer> checkDealerPageNum(int dealerNum, String likeCheck, String disLikeCheck) throws Exception;
 	
-//	public List<String> getAttach(int dealer_page_num) throws Exception;
 
 }

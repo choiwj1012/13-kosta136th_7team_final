@@ -5,6 +5,12 @@
 
 <head>
 	<link rel="stylesheet" href="../../resources/css/btcInfoLand.css" />
+	<style type="text/css">
+		#imgtest > div > img{
+			width : 100%;
+			height : 100%;
+		}
+	</style>
 </head>
 
 <%@ include file="../../include/grandNav.jsp"%>
@@ -53,7 +59,7 @@
 	</c:if>
 	<c:forEach items="${list}" var="del">
 		<c:if test = "${login.REGISTER_TYPE_CODE eq 'd' && login.USER_EMAIL == del.user_email}">
-			<button id = "mypage">내 딜러 페이지</button>
+			<button id = "mypage" class="btn btn-default">내 딜러 페이지</button>
 		</c:if>
 	</c:forEach>
 	</div>
@@ -63,17 +69,20 @@
 <!-- API TEST -->
 <div role="main">
 
-	<ul id="container">
+	<div id="container" class = "row">
 		
-		<c:forEach items="${list}" var="dealer">
-			
-			<li>${dealer.user_nickName}</li>
-			<li><a href='btcInfoLand_board_list${pageMaker.makeSearch(pageMaker.cri.page)}&dealer_page_num=${dealer.dealer_page_num}'>${dealer.category}</a></li>
-			<li>${dealer.like_count}</li>								
-
+		<c:forEach items="${list}" var="dealer" varStatus="idx">
+		<div id="imgtest" class="col-sm-4">
+			<div class="panel panel-default"> 
+			<img src="../../../../resources/img/dealer/${idx.index+10}.jpg" alt="프로필 사진 더미" />
+			<p>${dealer.user_nickName}</p>
+			<p><a href='btcInfoLand_board_list${pageMaker.makeSearch(pageMaker.cri.page)}&dealer_page_num=${dealer.dealer_page_num}'>${dealer.category}</a></p>
+			<p>${dealer.like_count}</p>								
+			</div>
+		</div>
 		</c:forEach>
 					
-	</ul>
+	</div>
 	
 	<div class="box-footer">
 

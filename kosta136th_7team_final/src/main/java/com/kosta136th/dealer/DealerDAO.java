@@ -43,12 +43,5 @@ public interface DealerDAO {
 
 	public List<Dealer> checkDealerPageNum(int dealerNum, String likeCheck, String disLikeCheck) throws Exception;
 	
-//	public void addAttach(String fullName) throws Exception;
-//	
-//	public List<String> getAttach(int dealer_page_num) throws Exception;
-//	
-//	public void deleteAttach(int dealer_page_num) throws Exception;
-//	
-//	public void replaceAttach(String fullName, int dealer_page_num) throws Exception;
 	
 }
