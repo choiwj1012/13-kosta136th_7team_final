@@ -129,15 +129,14 @@ public class DealerNewsController {
 	}
 	
 	@RequestMapping("/writeNews/{dealerName}")
-	public String requestWriteNews(DealerNews pageMaker, Model model, HttpSession httpSession,
-			@PathVariable("dealerName") String dealerName){
+	public String requestWriteNews(DealerNews pageMaker, Model model, @PathVariable("dealerName") String dealerName){
 		
 		System.out.println("★★★★★★★★★★★★★★★★★★★★");
 		System.out.println("새로 쓴 dealerNews : " + pageMaker.toString());
 		System.out.println("★★★★★★★★★★★★★★★★★★★★");
 		System.out.println("딜러 페이지 주인 이메일 : " + dealerName);
 
-		dealerNewsService.writeNews(pageMaker, httpSession, dealerName);
+		dealerNewsService.writeNews(pageMaker, dealerName);
 
 		//글쓰기는 글쓰기 당시 글번호를 모르므로 목록 1페이지로 처리된다
 		//삭제는 글번호를 아는 상태이므로 read_to_list를 통하여 목록 화면으로 간다

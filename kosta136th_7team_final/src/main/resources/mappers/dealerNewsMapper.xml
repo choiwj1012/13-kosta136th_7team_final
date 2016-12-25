@@ -51,18 +51,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND DEL_GB = 'N' 
 	</update>
 	
-	<select id = "getNews" resultType = "com.kosta136th.dealerNews.DealerNews" parameterType = "map">
+	<select id = "getNews" resultType = "com.kosta136th.dealerNews.DealerNews">
 		SELECT 
 				*, 
 				(SELECT USER_EMAIL FROM USER WHERE USER_NUM = d.USER_NUM) AS WRITER 
 		FROM
 			 DEALER_NEWS d
 		WHERE
-			 DEALER_NEWS_NUM = #{news.dealer_news_num}
+			 DEALER_NEWS_NUM = #{dealer_news_num}
 		AND
 			 DEL_GB = 'N'
-		AND
-			 USER_NUM = (SELECT USER_NUM FROM USER WHERE USER_NICKNAME = #{dealerName}) 
 	</select>
 	
 	<select id = "getPreviousNews" resultType = "com.kosta136th.dealerNews.DealerNews" parameterType = "map">

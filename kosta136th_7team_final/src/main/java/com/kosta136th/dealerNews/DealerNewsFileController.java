@@ -15,6 +15,7 @@ import javax.inject.Inject;
 import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -40,11 +41,21 @@ public class DealerNewsFileController {
 		return IOUtils.toByteArray(in);
 	}
 	
-	@RequestMapping(value = "/writeImage")
+	@RequestMapping(value = "/writeImage/{dealer_news_num}")
 	@ResponseBody
-	public void writeImg(MultipartFile multipartFile, Model model){
+	public void writeImg(MultipartFile multipartFile, Model model,
+			@PathVariable("dealer_news_num") int dealer_news_num){
+		if (dealer_news_num == 0){
+			dealer_news_num = dealerNewsFileService.getAutoIncrementOfDealerNews();
+		}
+		String directory = "C:\\final_project\\github\\kosta136th_7team_final\\kosta136th_7team_final\\src\\main\\webapp"
+					+ "\\resources\\imgUpload\\" + dealer_news_num +"\\";
+		File folder = new File(directory);
+		if (!folder.exists()){
+			folder.mkdir();
+		}
 		try{
-			multipartToFile(multipartFile);
+			multipartToFile(multipartFile, directory);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -106,14 +117,13 @@ public class DealerNewsFileController {
 			return thumbnailFile;
 		}
 	
-	public File multipartToFile(MultipartFile multipartFile){
+	public File multipartToFile(MultipartFile multipartFile, String directory){
 		/*멀티파트파일을 파일로 변환한다 */
 		/*멀티파트파일을 getBytes로 */
 		/*파일을 아웃풋스트림으로 열고, Bytes[]들을 쓴다*/
 		File fromMultipartFile = null;
 		try {
-			fromMultipartFile = new File("C:\\final_project\\github\\kosta136th_7team_final\\kosta136th_7team_final\\src\\main\\webapp"
-					+ "\\resources\\imgUpload\\", multipartFile.getOriginalFilename());
+			fromMultipartFile = new File(directory, multipartFile.getOriginalFilename());
 			fromMultipartFile.createNewFile(); 
 			FileOutputStream fos = new FileOutputStream(fromMultipartFile); 
 			fos.write(multipartFile.getBytes());

@@ -2,14 +2,9 @@ package com.kosta136th.dealerNews;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
-
-import com.kosta136th.user.User;
 
 @Repository
 public class DealerNewsDAOImpl implements DealerNewsDAO{
@@ -22,7 +17,8 @@ public class DealerNewsDAOImpl implements DealerNewsDAO{
 	@Override
 	//첫 페이지와 끝 페이지의 정보 로부터 List의 정보를 추출
 	public List<DealerNews> getDealerNewsList(int startDealerNewsIndex, int howMuch, String dealerName) {
-		
+
+		//맵이 아닌 내부 클래스를 이용하였다
 		class paging{
 			int startDealerNewsIndex;
 			int howMuch;
@@ -69,6 +65,7 @@ public class DealerNewsDAOImpl implements DealerNewsDAO{
 	//현재 글번호에 맞추어서 페이지를 재설정 하는 메소드
 	public DealerNews getPageMakerByDealerNewsNo(DealerNews pageMaker, String dealerName){
 		
+		//맵이 아닌 내부 클래스를 이용하였다
 		class paging{
 			DealerNews pageMaker;
 			String dealerName;
@@ -110,43 +107,46 @@ public class DealerNewsDAOImpl implements DealerNewsDAO{
 	}
 
 	@Override
-	public void writeNews(DealerNews dealerNews, HttpSession httpSession, String dealerName) {
+	public void writeNews(DealerNews dealerNews, String dealerName) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("news", dealerNews);
 		map.put("dealerName", dealerName);
 		
-		System.out.println(map.toString());
-		
-		sqlSession.insert(namespace + ".writeNews", map);
-		
+		int result = sqlSession.insert(namespace + ".writeNews", map);
+
+		System.out.println("writeNews");
+		System.out.println("★★★★★★★★★★★★★★★★★★★★");				
+		System.out.println("추가된 행의 수 : " + result);
+		System.out.println("★★★★★★★★★★★★★★★★★★★★");
 	}
 	
 	@Override
 	public void deleteNews(DealerNews dealerNews, String dealerName) {
 		
-		sqlSession.update(namespace + ".deleteNews", dealerNews);
-		
+		int result = sqlSession.update(namespace + ".deleteNews", dealerNews);
 		int totalPage = (int)Math.ceil((double)getDealerNewsListSize(dealerName) / dealerNews.getPerPageNum());
 		dealerNews.setCurrentPage(Math.min(dealerNews.getCurrentPage(), totalPage));
-				
+		
+		System.out.println("deleteNews");
+		System.out.println("★★★★★★★★★★★★★★★★★★★★");				
+		System.out.println("삭제된 행의 수 : " + result);
+		System.out.println("★★★★★★★★★★★★★★★★★★★★");
 	}
 
 	@Override
 	public DealerNews getNews(DealerNews pageMaker, String dealerName) {
 		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("news", pageMaker);
-		map.put("dealerName", dealerName);
+		DealerNews news = sqlSession.selectOne(namespace + ".getNews", pageMaker);
 		
-		DealerNews news = sqlSession.selectOne(namespace + ".getNews", map);
-		
+		//만약 DB에 해당 뉴스가 있다면 읽어온다.
 		if (news != null){
 			pageMaker.setWriter(news.getWriter());
 			pageMaker.setTitle(news.getTitle());
 			pageMaker.setContent(news.getContent());
 			pageMaker.setRegi_date(news.getRegi_date());
 		}else{
+			//DB에 해당 뉴스가 없다면 null을 반환
 			pageMaker = null;
 		}
 		
@@ -154,9 +154,10 @@ public class DealerNewsDAOImpl implements DealerNewsDAO{
 		System.out.println("★★★★★★★★★★★★★★★★★★★★");
 		System.out.print("내용 읽어오기 : ");
 		if (news != null){
+			System.out.println("[게시물 정보]");
 			System.out.println(pageMaker.toString());
 		}else{
-			System.out.println("이제 존재하지 않음.");
+			System.out.println("지금 DB에 게시물이 존재하지 않는다");
 		}
 		System.out.println("★★★★★★★★★★★★★★★★★★★★");
 		
@@ -166,7 +167,12 @@ public class DealerNewsDAOImpl implements DealerNewsDAO{
 	@Override
 	public void modifyNews(DealerNews dealerNews, String dealerName) {
 		
-		sqlSession.update(namespace + ".modifyNews", dealerNews);
+		int result = sqlSession.update(namespace + ".modifyNews", dealerNews);
+		
+		System.out.println("modifyNews");
+		System.out.println("★★★★★★★★★★★★★★★★★★★★");				
+		System.out.println("수정된 행의 수 : " + result);
+		System.out.println("★★★★★★★★★★★★★★★★★★★★");
 	}
 
 	@Override
@@ -175,6 +181,9 @@ public class DealerNewsDAOImpl implements DealerNewsDAO{
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("news", dealerNews);
 		map.put("dealerName", dealerName);
+		
+		System.out.println("다음 글로 이동");
+		System.out.println("★★★★★★★★★★★★★★★★★★★★");
 		
 		return sqlSession.selectOne(namespace + ".getPreviousNews", map);
 	}
@@ -185,6 +194,9 @@ public class DealerNewsDAOImpl implements DealerNewsDAO{
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("news", dealerNews);
 		map.put("dealerName", dealerName);
+		
+		System.out.println("이전 글로 이동");
+		System.out.println("★★★★★★★★★★★★★★★★★★★★");
 		
 		return sqlSession.selectOne(namespace + ".getNextNews", map);
 	}
