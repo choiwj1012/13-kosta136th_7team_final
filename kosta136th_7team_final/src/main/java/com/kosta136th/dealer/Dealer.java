@@ -11,14 +11,7 @@ public class Dealer {
 	private String user_nickName;
 	private int score;
 	
-	private String[] files;
 	
-	public String[] getFiles() {
-		return files;
-	}
-	public void setFiles(String[] files) {
-		this.files = files;
-	}
 	public int getScore() {
 		return score;
 	}

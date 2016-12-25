@@ -168,19 +168,4 @@
 		DEALER_DISLIKE
 	</select>
 	
-<!-- 	<insert id="addAttach"> -->
-<!-- 		INSERT INTO DEALER_PHOTO(ORIGINAL_FILE_NAME, DEALER_PAGE_NUM) VALUES(#{fullName}, LAST_INSERT_ID()) -->
-<!-- 	</insert> -->
-	
-<!-- 	<select id="getAttach" resultType="string"> -->
-<!-- 		SELECT ORIGINAL_FILE_NAME FROM DEALER_PHOTO WHERE DEALER_PAGE_NUM = #{dealer_page_num} ORDER BY REGDATE -->
-<!-- 	</select> -->
-	
-<!-- 	<delete id ="deleteAttach"> -->
-<!-- 		DELETE FROM DEALER_PHOTO WHERE DEALER_PAGE_NUM = #{dealer_page_num} -->
-<!-- 	</delete> -->
-	
-<!-- 	<insert id="replaceAttach"> -->
-<!-- 		INSERT INTO DEALER_PHOTO(ORIGINAL_FILE_NAME, DEALER_PAGE_NUM) VALUES (#{fullName}, #{DEALER_PAGE_NUM}) -->
-<!-- 	</insert> -->
 </mapper>

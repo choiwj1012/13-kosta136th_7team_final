@@ -83,16 +83,16 @@
 							<img src="../../resources/img/dealer_test_img01.jpg">
 
 						</div>
+							<div class="dealer_room_title">${dealer.category}</div>
+							
+							<div class="dealer_position_title">${dealer.user_nickName}</div>
 
-						<div class="dealer_room_title">딜러 카테고리: ${dealer.category}</div>
-
-						<div class="dealer_position_title">딜러 포지션: ${dealer.user_nickName}</div>
 
 					</div>
 
 					<div class="col-sm-6 border_left_none">
 
-						<div class="dealer_point">딜러 ${dealer.user_nickName} 님의 내공지수?</div>
+						<div class="dealer_point">딜러 ${dealer.user_nickName} 님의 내공지수</div>
 
 						<div class="progress">
 
@@ -101,7 +101,7 @@
 								<span class="dealer_score">${dealer.score}point</span>
 
 							</div>
-							
+						</div>	
 							<div class="btn-group">
 								
 								<button type="button" class="btn btn-default" id="report">
@@ -130,7 +130,7 @@
 							
 							</div>
 						
-						</div>
+						
 					<!-- .border_left_none  -->
 					</div>
 				</div>

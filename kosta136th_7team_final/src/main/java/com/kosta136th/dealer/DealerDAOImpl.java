@@ -140,38 +140,5 @@ public class DealerDAOImpl implements DealerDAO{
 		}
 		return session.selectList(namespace + ".disLikeCheckDealerPageNum", dealer);
 	}
-	
-//	@Override
-//	public void addAttach(String fullName) throws Exception {
-//	
-//		session.insert(namespace + ".addAttach", fullName);
-//		
-//	}
-//	
-//	@Override
-//	public List<String> getAttach(int dealer_page_num) throws Exception {
-//		
-//		return session.selectList(namespace + ".getAttach", dealer_page_num);
-//		
-//	}
-//
-//	@Override
-//	public void deleteAttach(int dealer_page_num) throws Exception {
-//		
-//		session.delete(namespace + ".deleteAttach", dealer_page_num);
-//		
-//	}
-//
-//	@Override
-//	public void replaceAttach(String fullName, int dealer_page_num) throws Exception {
-//		
-//		Map<String, Object> paramMap = new HashMap<String, Object>();
-//		
-//		paramMap.put("dealer_page_num", dealer_page_num);
-//		paramMap.put("fullName", fullName);
-//		
-//		session.insert(namespace + ".replaceAttach", paramMap);
-//		
-//	}
 
 }
