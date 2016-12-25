@@ -104,3 +104,11 @@ div.board_card_col:hover {
 	color: #fff;
 	background-color: #ff4051;
 }
+
+
+iframe {
+	
+	overflow: inherit;
+	height: 900px;
+	width: 100%;
+}
