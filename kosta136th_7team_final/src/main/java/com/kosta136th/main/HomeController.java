@@ -57,25 +57,5 @@ public class HomeController {
 		return "sub/freeboard/board_update";
 		
 	}
-		
-	
-	// BTC 정보광장 딜러 전문소식 Mapping
-	@RequestMapping(value = "/btcInfoLand_board_list", method = RequestMethod.GET)
-	public String btcInfoLandBoardList(){
-		
-		return "sub/btcInfoLand/btcInfoLand_board_list";
-		
-	}
-
-	
-	// BTC 정보광장 딜러 전문소식 상세보기 Mapping
-	@RequestMapping(value = "/btcInfoLand_board_read", method = RequestMethod.GET)
-	public String btcInfoLandBoardRead(){
-		
-		System.out.println("TEST");
-		
-		return "sub/btcInfoLand/btcInfoLand_board_read";
-		
-	}
 	
 }

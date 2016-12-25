@@ -163,4 +163,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE REPLY_NUM = ${reply_num}
 	</update>
 	
+	<select resultType = "int" id = "getAutoIncrementOfDealerNews">
+		SELECT AUTO_INCREMENT
+		FROM  INFORMATION_SCHEMA.TABLES
+		WHERE TABLE_SCHEMA = 'bitcoin'
+		AND   TABLE_NAME = 'dealer_news'; 
+	</select>
+	
 </mapper>

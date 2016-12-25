@@ -52,15 +52,27 @@
 	</update>
 
 	<update id="like">
-		UPDATE DEALER_PAGE SET LIKE_COUNT = LIKE_COUNT + 10
-		WHERE DEALER_PAGE_NUM = #{dealerNum}
+		
+		UPDATE DEALER_PAGE SET LIKE_COUNT = LIKE_COUNT + 10 WHERE DEALER_PAGE_NUM = #{dealer_page_num};
+		
 	</update>
+
+	<insert id ="likeUser">
+		
+		INSERT INTO DEALER_LIKE(DEALER_PAGE_NUM, USER_NUM) VALUES (#{dealer_page_num}, #{user_num});
+		
+	</insert>
 
 	<update id="dislike">
-		UPDATE DEALER_PAGE SET DISLIKE_COUNT = DISLIKE_COUNT
-		+ 10 WHERE DEALER_PAGE_NUM = #{dealerNum}
-	</update>
+	
+		UPDATE DEALER_PAGE SET DISLIKE_COUNT = DISLIKE_COUNT + 10 WHERE DEALER_PAGE_NUM = #{dealer_page_num};
 
+	</update>
+	<insert id="dislikeUser">
+	
+		INSERT INTO DEALER_DISLIKE(DEALER_PAGE_NUM, USER_NUM) VALUES (#{dealer_page_num}, #{user_num});
+	
+	</insert>
 	<select id="searchList" resultType="com.kosta136th.dealer.Dealer">
 		<![CDATA[
 			SELECT USER.USER_NICKNAME, CATEGORY, LIKE_COUNT, DEALER_PAGE_NUM, USER.USER_EMAIL
@@ -111,5 +123,49 @@
 
 		WHERE USER.USER_EMAIL = #{login}
 	</select>
-
+	
+	<select id="userNum_read" resultType = "int">
+		
+		SELECT
+		USER_NUM
+		FROM
+		USER
+		WHERE USER_EMAIL = #{email}
+		
+	</select>
+	
+	<select id="searchDealerUserNum" resultType = "int">
+		SELECT
+		USER_NUM
+		FROM
+		DEALER_PAGE
+		WHERE DEALER_PAGE_NUM = #{dealerNum}
+	</select>
+	
+	<select id="likeCheckUserNum" resultType = "com.kosta136th.dealer.Dealer">
+		SELECT
+		USER_NUM
+		FROM
+		DEALER_LIKE
+	</select>
+	<select id="likeCheckDealerPageNum" resultType = "com.kosta136th.dealer.Dealer">
+		SELECT
+		DEALER_PAGE_NUM
+		FROM
+		DEALER_LIKE
+	</select>
+	
+	<select id="disLikeCheckUserNum" resultType = "com.kosta136th.dealer.Dealer">
+		SELECT
+		USER_NUM
+		FROM
+		DEALER_DISLIKE
+	</select>
+	<select id="disLikeCheckDealerPageNum" resultType = "com.kosta136th.dealer.Dealer">
+		SELECT
+		DEALER_PAGE_NUM
+		FROM
+		DEALER_DISLIKE
+	</select>
+	
 </mapper>

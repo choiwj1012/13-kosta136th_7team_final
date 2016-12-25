@@ -11,6 +11,7 @@ public class Dealer {
 	private String user_nickName;
 	private int score;
 	
+	
 	public int getScore() {
 		return score;
 	}

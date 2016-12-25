@@ -1,3 +1,4 @@
+
 package com.kosta136th.dealer;
 
 import java.util.List;
@@ -39,7 +40,7 @@ public class DealerServiceImpl implements DealerService{
 
 	@Override
 	public void remove(int dealer_page_num) throws Exception {
-		
+
 		dao.remove(dealer_page_num);
 		
 	}
@@ -54,13 +55,13 @@ public class DealerServiceImpl implements DealerService{
 	public void modify(Dealer dealer) throws Exception {
 		
 		dao.update(dealer);
-		
+
 	}
 
 	@Override
-	public void likeEvent(String likeCheck, String disLikeCheck, int dealerNum) throws Exception {
+	public void likeEvent(String likeCheck, String disLikeCheck, int dealerNum, int userNum) throws Exception {
 		
-		dao.likeEvent(likeCheck, disLikeCheck, dealerNum);
+		dao.likeEvent(likeCheck, disLikeCheck, dealerNum, userNum);
 		
 	}
 
@@ -82,6 +83,30 @@ public class DealerServiceImpl implements DealerService{
 		
 		return dao.dealerMyPage(login);
 		
+	}
+
+	@Override
+	public int userNum_read(String email) throws Exception {
+		
+		return dao.userNum_read(email);
+	}
+
+	@Override
+	public int searchDealerUserNum(int dealerUserNum) throws Exception {
+		
+		return dao.searchDealerUserNum(dealerUserNum);
+	}
+
+	@Override
+	public List<Dealer> checkUserNum(int dealerUserNum, String likeCheck, String disLikeCheck) throws Exception {
+		
+		return dao.checkUserNum(dealerUserNum,likeCheck,disLikeCheck);
+	}
+
+	@Override
+	public List<Dealer> checkDealerPageNum(int dealerNum, String likeCheck, String disLikeCheck) throws Exception {
+		
+		return dao.checkDealerPageNum(dealerNum,likeCheck,disLikeCheck);
 	}
 
 }
