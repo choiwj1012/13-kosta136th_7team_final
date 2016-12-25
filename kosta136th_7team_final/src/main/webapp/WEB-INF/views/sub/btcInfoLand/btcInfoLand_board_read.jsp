@@ -69,6 +69,8 @@
 								<span class="dealer_score">${dealer.score}point</span>
 
 							</div>
+						
+						</div>
 							
 							<div class="btn-group">
 								
@@ -100,7 +102,7 @@
 						
 						</div>
 					<!-- .border_left_none  -->
-					</div>
+					
 				</div>
 			</div>
 		<!-- end of col-sm-4 column -->
@@ -183,12 +185,12 @@
 		</div>
 	</div>
 	<!-- 전항 버튼 -->
-	<form id="form_previous_news" action="/getPreviousNews">
+	<form id="form_previous_news">
 		<input type="hidden" name="dealer_news_num" value="${pageMaker.dealer_news_num}" />
 		<input type="hidden" name="currentPage" value="${pageMaker.currentPage}" />
 	</form>
 	<!-- 후항 버튼 -->
-	<form id="form_next_news" action="/getNextNews">
+	<form id="form_next_news">
 		<input type="hidden" name="dealer_news_num" value="${pageMaker.dealer_news_num}" />
 		<input type="hidden" name="currentPage" value="${pageMaker.currentPage}" />
 	</form>
@@ -215,12 +217,12 @@
 		</div>
 	</div>
 	<!-- 목록 버튼 클릭 시 스크립트 실행을 위한 폼 : #form_go_list-->
-	<form id="form_go_list" action="/btcInfoLand_board_read_to_list">
+	<form id="form_go_list">
 		<input type="hidden" name="dealer_news_num" value="${pageMaker.dealer_news_num}" />
 		<input type="hidden" name="currentPage" value="${pageMaker.currentPage}" />
 	</form>
 	<!-- 삭제 버튼 클릭 시 스크립트 실행을 위한 폼 : form_delete-->
-	<form id="form_delete" action="/deleteNews">
+	<form id="form_delete">
 		<input type="hidden" name="dealer_news_num" value="${pageMaker.dealer_news_num}" />
 		<input type="hidden" name="currentPage" value="${pageMaker.currentPage}" />
 	</form>
@@ -231,7 +233,7 @@
 		<input type="hidden" name="reply_num" />
 	</form>
 	<!-- 댓글 수정 전송 폼 -->
-	<form id="form_modify" action="/modifyNews">
+	<form id="form_modify"">
 		<input type="hidden" name="dealer_news_num" value="${pageMaker.dealer_news_num}" />
 		<input type="hidden" name="title" />
 		<input type="hidden" name="content" />
@@ -240,8 +242,9 @@
 	<script>
 		$(document).ready(function() {
 			$('#go_list_btn').on('click', function() {
+				$('#form_go_list').attr('action','/btcInfoLand_board_read_to_list/' + $('#dealerName', window.parent.document).html());
 				$('#form_go_list').submit();
-			});
+ 			});
 		});
 	</script>
 	<!-- 글수정 버튼: #modifyBtn 클릭 -->
@@ -303,12 +306,14 @@
 			    		});
 			    	
 						$('#form_modify input[name="content"]').val($('#summernote').summernote('code'));
+						
+						$('#form_modify').attr('action', "/modifyNews/" + $('#dealerName', window.parent.document).html());
 						$('#form_modify').submit();
-				}
+					}
 					
-					});
+				});
 
-			});
+		});
 	</script>
 	<!-- 마이페이지 이동 버튼: .reply_writer 클릭 -->
 	<script>
@@ -344,7 +349,7 @@
 					return;
 				}
 				/* 끝 */
-
+				$('#form_delete').attr('action','/deleteNews/' + $('#dealerName', window.parent.document).html());
 				$('#form_delete').submit();
 			});
 		});
@@ -559,6 +564,8 @@
 	<script>
 		$(document).ready(function() {
 			$('body').on('click', '#previous_news_btn', function() {
+				$('#form_previous_news').attr('action', '/getPreviousNews/'
+						 + $('#dealerName', window.parent.document).html());
 				$('#form_previous_news').submit();
 			});
 		});
@@ -567,6 +574,8 @@
 	<script>
 		$(document).ready(function() {
 			$('body').on('click', '#next_news_btn', function() {
+				$('#form_next_news').attr('action', '/getNextNews/'
+						 + $('#dealerName', window.parent.document).html());
 				$('#form_next_news').submit();
 			});
 		});
