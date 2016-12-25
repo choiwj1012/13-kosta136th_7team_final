@@ -14,59 +14,59 @@ public class DealerNewsServiceImpl implements DealerNewsService{
 	private DealerNewsDAO dealerNewsDAO;
 	
 	@Override
-	public List<DealerNews> getDealerNewsList(int startDealerNewsIndex, int howMuch) {
-		List<DealerNews> dealerNewsList = dealerNewsDAO.getDealerNewsList(startDealerNewsIndex, howMuch);
+	public List<DealerNews> getDealerNewsList(int startDealerNewsIndex, int howMuch, String dealerName) {
+		List<DealerNews> dealerNewsList = dealerNewsDAO.getDealerNewsList(startDealerNewsIndex, howMuch, dealerName);
 		return dealerNewsList;
 	}
 
 	@Override
-	public DealerNews getPageMaker(DealerNews pageMaker) {
-		pageMaker = dealerNewsDAO.getPageMaker(pageMaker);
+	public DealerNews getPageMaker(DealerNews pageMaker, String dealerName) {
+		pageMaker = dealerNewsDAO.getPageMaker(pageMaker, dealerName);
 		return pageMaker;
 	}
 
 	@Override
-	public void getPageMakerByDealerNewsNo(DealerNews pageMaker) {
-		dealerNewsDAO.getPageMakerByDealerNewsNo(pageMaker);
+	public void getPageMakerByDealerNewsNo(DealerNews pageMaker, String dealerName) {
+		dealerNewsDAO.getPageMakerByDealerNewsNo(pageMaker, dealerName);
 	}
 
 	@Override
-	public void writeNews(DealerNews dealerNews, HttpSession httpSession) {
+	public void writeNews(DealerNews dealerNews, HttpSession httpSession, String dealerName) {
 		try{
-		dealerNewsDAO.writeNews(dealerNews, httpSession);
+		dealerNewsDAO.writeNews(dealerNews, httpSession, dealerName);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}
 	
 	@Override
-	public void deleteNews(DealerNews dealerNews) {
-		dealerNewsDAO.deleteNews(dealerNews);
+	public void deleteNews(DealerNews dealerNews, String dealerName) {
+		dealerNewsDAO.deleteNews(dealerNews, dealerName);
 	}
 
 	@Override
-	public DealerNews getNews(DealerNews dealerNews) {
-		return dealerNewsDAO.getNews(dealerNews);
+	public DealerNews getNews(DealerNews dealerNews, String dealerName) {
+		return dealerNewsDAO.getNews(dealerNews, dealerName);
 	}
 	
 	@Override
-	public void modifyNews(DealerNews dealerNews) {
-		dealerNewsDAO.modifyNews(dealerNews);
+	public void modifyNews(DealerNews dealerNews, String dealerName) {
+		dealerNewsDAO.modifyNews(dealerNews, dealerName);
 	}
 
 	@Override
-	public DealerNews getPreviousNews(DealerNews dealerNews) {
-		return dealerNewsDAO.getPreviousNews(dealerNews);
+	public DealerNews getPreviousNews(DealerNews dealerNews, String dealerName) {
+		return dealerNewsDAO.getPreviousNews(dealerNews, dealerName);
 	}
 
 	@Override
-	public DealerNews getNextNews(DealerNews dealerNews) {
-		return dealerNewsDAO.getNextNews(dealerNews);
+	public DealerNews getNextNews(DealerNews dealerNews, String dealerName) {
+		return dealerNewsDAO.getNextNews(dealerNews, dealerName);
 	}
 
 	@Override
-	public int getDealerNewsListSize() {
-		return dealerNewsDAO.getDealerNewsListSize();
+	public int getDealerNewsListSize(String dealerName) {
+		return dealerNewsDAO.getDealerNewsListSize(dealerName);
 	}
 	
 }
