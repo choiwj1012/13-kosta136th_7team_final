@@ -31,9 +31,9 @@ public class DealerNewsServiceImpl implements DealerNewsService{
 	}
 
 	@Override
-	public void writeNews(DealerNews dealerNews, HttpSession httpSession, String dealerName) {
+	public void writeNews(DealerNews dealerNews, String dealerName) {
 		try{
-		dealerNewsDAO.writeNews(dealerNews, httpSession, dealerName);
+		dealerNewsDAO.writeNews(dealerNews, dealerName);
 		}catch(Exception e){
 			e.printStackTrace();
 		}

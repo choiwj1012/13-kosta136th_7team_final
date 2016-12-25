@@ -1,16 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ include file="../../include/header.jsp"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <head>
 
+<link rel="stylesheet" href="../../../resources/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../../../resources/css/common.css">
+		
+<script src="http://code.jquery.com/jquery-2.2.3.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="../../../resources/js/common.js"></script>
+		
+<script src="../../../resources/js/googleAnalytics.js"></script>
 <link rel="stylesheet" href="../../resources/css/btcInfoLand.css" />
-
 <link rel="stylesheet" href="../../resources/css/river_community.css" />
 
 <!-- include summernote css/js-->
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
+
+<script>
+	var dealerName = $('#dealerName', window.parent.document).html();
+</script>
 
 </head>
 
@@ -39,25 +51,31 @@
 	</div>
 	<div class="container text-center">
 		<div class="btn_area">
-			<button type="button" class="btn btn-default" id="write_btn">글쓰기</button>
+			<c:if test = "${login.USER_NICKNAME == dealerName}">
+				<button type="button" class="btn btn-default" id="write_btn">글쓰기</button>
+			</c:if>
 		</div>
 	</div>
 	<div class="container text-center">
 		<ul class="pagination pagination-sm">
-			<li><a href="#" id="previous_page_btn">&laquo;</a></li>
-			<c:forEach var="i" begin="${pageMaker.firstPage}" end="${pageMaker.lastPage}">
-				<c:if test="${i != pageMaker.currentPage}">
-					<li><a href="#" class="pageNum">
-							<c:out value="${i}" />
-						</a></li>
-				</c:if>
-				<c:if test="${i == pageMaker.currentPage}">
-					<li class="active"><a href="#" class="pageNum">
-							<c:out value="${i}" />
-						</a></li>
-				</c:if>
-			</c:forEach>
-			<li><a href="#" id="next_page_btn">&raquo;</a></li>
+			
+			<c:if test="${not empty pageMaker.firstPage}">
+				<li><a href="#" id="previous_page_btn">&laquo;</a></li>
+        		<c:forEach var="i" begin="${pageMaker.firstPage}" end="${pageMaker.lastPage}">
+					<c:if test="${i != pageMaker.currentPage}">
+						<li><a href="#" class="pageNum">
+								<c:out value="${i}" />
+							</a></li>
+					</c:if>
+					<c:if test="${i == pageMaker.currentPage}">
+						<li class="active"><a href="#" class="pageNum">
+								<c:out value="${i}" />
+							</a></li>
+					</c:if>
+				</c:forEach>
+				<li><a href="#" id="next_page_btn">&raquo;</a></li>
+    		</c:if>
+						
 		</ul>
 	</div>
 	
@@ -110,11 +128,10 @@
 	function sendFile(file, editor, welEditable) {
 		data = new FormData();
 	    data.append("multipartFile", file);
-	    alert(file.name);
 		$.ajax({
 		  data: data,
 	      type: "POST",
-		   url:"/writeImage",
+		   url:"/writeImage/0",
 		   cache: false,
 	       contentType: false,
 	       processData: false,
@@ -159,7 +176,8 @@
 			//로그인 되어 있으면
 			var login = {
 							USER_EMAIL : '${login.USER_EMAIL}',
-							REGISTER_TYPE_CODE : '${login.REGISTER_TYPE_CODE}' 
+							REGISTER_TYPE_CODE : '${login.REGISTER_TYPE_CODE}',
+							USER_NICKNAME : '${login.USER_NICKNAME}'
 						};
 		</script>
 	</c:if>
@@ -237,6 +255,13 @@
 			/* 로그인 테스트 시작 */
 			if ((login.REGISTER_TYPE_CODE != "d") && (login.REGISTER_TYPE_CODE != "D")) {
 				alert('딜러만이 글을 쓸 수 있습니다.');
+				return;
+			}
+			/* 끝 */
+			
+			/* */
+			if ( login.USER_NICKNAME != $('#dealerName', window.parent.document).html()) {
+				alert('본인의 딜러 페이지에 글을 써야합니다');
 				return;
 			}
 			/* 끝 */

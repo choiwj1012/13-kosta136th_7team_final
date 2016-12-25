@@ -93,6 +93,8 @@ public class UserDAOImpl implements UserDAO{
 				String REGISTER_TYPE_CODE = session.selectOne(namespace +".getRegisterTypeCode", resultUser);
 				loginInfo.setUSER_EMAIL(resultUser.getUSER_EMAIL());
 				loginInfo.setREGISTER_TYPE_CODE(REGISTER_TYPE_CODE);
+				loginInfo.setUSER_NICKNAME(resultUser.getUSER_NICKNAME());
+				System.out.println("별명 : " + loginInfo.getUSER_NICKNAME());
 			}
 
 		} catch(Exception e){

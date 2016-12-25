@@ -71,6 +71,7 @@
 		</div>
 	</div>
 	
+	<div class="container">
 
 		<div class="row">
 
@@ -85,11 +86,10 @@
 							<img src="../../resources/img/dealer_test_img01.jpg">
 
 						</div>
-
-						<div class="dealer_room_title">딜러 카테고리: ${dealer.category}</div>
-
-						<div class="dealer_position_title">딜러 포지션: ${dealer.user_nickName}</div>
-
+						
+							<div class="dealer_room_title">딜러 카테고리: ${dealer.category}</div>
+							<div class="dealer_position_title">딜러 포지션: ${dealer.user_nickName}</div>
+						
 					</div>
 
 					<div class="col-sm-6 border_left_none">
@@ -140,7 +140,7 @@
 			</div>
 		<!-- end of col-sm-4 column -->
 		</div>
-
+	</div>
 	<!-- 딜러 전문소식 리스트 -->
 	<div class="container">
 		<div class="row">

@@ -14,7 +14,7 @@ public interface DealerNewsDAO {
 
 	DealerNews getPageMakerByDealerNewsNo(DealerNews pageMaker, String dealerName);
 
-	void writeNews(DealerNews dealerNews, HttpSession httpSession, String dealerName);
+	void writeNews(DealerNews dealerNews, String dealerName);
 
 	void deleteNews(DealerNews dealerNews, String dealerName);
 

@@ -9,7 +9,7 @@ public class DealerNews {
 	private String content;
 	private int user_num;
 	private int currentPage = 1;
-	private int perPageNum = 6;
+	private int perPageNum = 8;
 	private int perPagebarPage = 5;
 	private int firstPage;
 	private int lastPage;
