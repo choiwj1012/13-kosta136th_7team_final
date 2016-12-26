@@ -1,0 +1,69 @@
+@CHARSET "UTF-8";
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+/* board_writer */
+body a{
+	color: #000;	
+}
+
+* a:hover {
+	color: #3e76fb;
+}
+
+div.first_board{
+	border: 1px solid red;
+}
+
+table th {
+	text-align: center;
+	background-color: #cccccc;
+}
+
+div.location_bg {
+	width: 100%;
+	height: 150px;
+	background: url("../img/1903x500_news.png");
+}
+
+div.page-header {
+	position: relative;	
+}
+
+ul.breadcrumb {
+	position: absolute;
+	top: 20px;
+	right: 10px;
+	width: 300px;
+	text-align: right;
+	background-color: transparent;
+}
+
+div.content_width {
+	padding:20px;	
+}
+
+div.form-group label {
+	margin-bottom: 10px;
+	border: 1px solid #828282;
+	padding-left: 10px;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	display: block;
+}
+
+div.form-group input {
+	margin-bottom: 10px;
+}
+
+span.article_content {
+	padding: 10px;
+	display: block;
+	height: auto;
+	overflow: visible;
+	text-align: justify;
+}
+
+
+table .read_table_num {
+	width: 150px;
+}
