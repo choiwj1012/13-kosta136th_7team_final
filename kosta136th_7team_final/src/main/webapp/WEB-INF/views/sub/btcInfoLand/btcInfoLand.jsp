@@ -11,6 +11,20 @@
 			height : 100%;
 		}
 	</style>
+	
+	<c:if test="${not empty login}">
+		<script>
+			//로그인 되어 있으면
+			var login = '${login.USER_EMAIL}';
+		</script>
+	</c:if>
+
+	<c:if test="${empty login}">
+		<script>
+			//로그인 안 되 있으면
+			var login = null;
+		</script>
+	</c:if>
 </head>
 
 <%@ include file="../../include/grandNav.jsp"%>
@@ -53,15 +67,6 @@
 
 				</div>
 			</div>
-
-	<c:if test = "${login.REGISTER_TYPE_CODE eq 'd'}">
-		<button class="btn btn-default" id="newBtn">딜러 페이지 등록</button>
-	</c:if>
-	<c:forEach items="${list}" var="del">
-		<c:if test = "${login.REGISTER_TYPE_CODE eq 'd' && login.USER_EMAIL == del.user_email}">
-			<button id = "mypage" class="btn btn-default">내 딜러 페이지</button>
-		</c:if>
-	</c:forEach>
 	</div>
 
 </div>
@@ -123,6 +128,29 @@
 	</body>
 </html>
 
+<script>
+	$(document).ready(function(){
+																	
+		//딜러 페이지 존재 여부, 로그인 여부에 따라 버튼을 생성하는 메서드
+		$.ajax({
+			url: "/sub/btcInfoLand/dealerMyPage",
+			type: 'get',
+			data: {"login" : login},
+			success:  function (data) {
+				if(data != null){
+					$('.input-group').append('<button id = "mypage" class="btn btn-default">내 딜러 페이지</button>');
+				}
+			},  
+		    error:function(e){
+		    	if(login != null) {
+					$('.input-group').append('<button class="btn btn-default" id="newBtn">딜러 페이지 등록</button>');
+				} 
+		    }  
+									
+			});
+	});
+	</script>
+
 
 <script>
 	var result = '${result}';
@@ -135,16 +163,6 @@
 </script>
 
 <script>
-
-<c:if test = "${not empty login}">
-//로그인 되어 있으면
-var login = '${login.USER_EMAIL}';
-</c:if>
-
-<c:if test = "${empty login}">
-//로그인 안 되 있으면
-var login = null;
-</c:if>
 	$(document).ready(
 			
 			function() {
@@ -159,15 +177,15 @@ var login = null;
 
 				});
 
-				$('#newBtn').on("click", function(event) {
+				$('body').on("click", '#newBtn', function(event) {
 
 					self.location = "dealerPageSave";
 
 				});
 				
-				$('#mypage').on("click", function(event) {
-																						
-							$.ajax({
+				$('body').on("click", '#mypage', function(event) {
+
+						$.ajax({
 								url: "/sub/btcInfoLand/dealerMyPage",
 								type: 'get',
 								data: {"login" : login},
