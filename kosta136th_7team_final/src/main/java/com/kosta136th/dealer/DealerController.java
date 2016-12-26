@@ -6,12 +6,9 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,55 +41,59 @@ public class DealerController {
 	
 	//딜러페이지 저장뷰 불러오기
 	@RequestMapping(value = "/dealerPageSave", method = RequestMethod.GET)
-	public void DealerPageSaveLoad() throws Exception {
+	public void dealerPageSaveLoad() throws Exception {
 
 		
 	}
 	
 	//딜러페이지 저장
 	@RequestMapping(value = "/dealerPageSave", method = RequestMethod.POST)
-	public String DealerPageSave(Dealer dealer, HttpSession session, RedirectAttributes rttr) throws Exception {
+	public String dealerPageSave(Dealer dealer, HttpSession session, RedirectAttributes rttr) throws Exception {
 
 		
 		boolean check = true;
 		String dealer_join_id = (String) (( (Map<String,Object>)( session.getAttribute("login"))).get("USER_EMAIL"));
 
-		// 세션에서받아온 아이디를 스트링형 변수에저장된것을 괄호 안에 저장해줘야함
 		List<Dealer> dealerList = service.userTypeCheck();
 
-		for(int i = 0 ; i <dealerList.size(); i++) {
+		for (int i = 0 ; i <dealerList.size(); i++) {
 			
-			if(dealer_join_id.equals(dealerList.get(i).getUser_email())) {
+			if (dealer_join_id.equals(dealerList.get(i).getUser_email())) {
 				
-			 dealer.setUser_num(dealerList.get(i).getUser_num());
+				dealer.setUser_num(dealerList.get(i).getUser_num());
+				
 			}
 		}
+		
 		List<Dealer> dealerPageList = service.dealerPageDuplicationCheck();
 		
-		if(dealer.getUser_num() != 0) {
+		if (dealer.getUser_num() != 0) {
 			
-			for(int j = 0 ; j < dealerPageList.size(); j++){
+			for (int j = 0 ; j < dealerPageList.size(); j++){
 				
-				if(dealer.getUser_num() == dealerPageList.get(j).getUser_num()) {
-					System.out.println("딜러페이지가 존재합니다.");
+				if (dealer.getUser_num() == dealerPageList.get(j).getUser_num()) {
+					
 					check = false;
 					rttr.addFlashAttribute("result", "false");
+					
 				}
 			}
 			
-			if(check == true) {
+			if (check == true) {
 
 				service.regist(dealer);
 				rttr.addFlashAttribute("result", "success");
+				
 			}
 			
 		} else {
-			System.out.println("딜러가 존재하지 않습니다.");
+			
 			rttr.addFlashAttribute("result", "false");
+			
 		}
 		
-		
 		return "redirect:/sub/btcInfoLand/btcInfoLand";
+		
 	}
 	//딜러페이지 읽기
 	@RequestMapping(value = "/btcInfoLand_board_list", method = RequestMethod.GET)
@@ -171,14 +172,15 @@ public class DealerController {
 		List<Dealer> userCheck = service.checkUserNum(dealerUserNum, likeCheck, disLikeCheck);
 		
 		List<Dealer> dealerPageCheck = service.checkDealerPageNum(dealerNum, likeCheck, disLikeCheck);
-		if(userCheck.size() != 0 && dealerPageCheck.size() != 0){
+		if (userCheck.size() != 0 && dealerPageCheck.size() != 0){
 			for (int i = 0; i < userCheck.size(); i++) {
 				for (int j = 0; j < dealerPageCheck.size(); j++) {
 					
 				
-				if(userCheck.get(i).getUser_num() == userNum && dealerPageCheck.get(j).getDealer_page_num() == dealerNum) {
+				if (userCheck.get(i).getUser_num() == userNum && dealerPageCheck.get(j).getDealer_page_num() == dealerNum) {
 					
 					return status;
+					
 					}
 				}
 			}
@@ -197,13 +199,5 @@ public class DealerController {
 
 		return dealer_page_num;
 	}
-	
-//	@RequestMapping("/getAttach/{dealer_page_num}")
-//	@ResponseBody
-//	public List<String> getAttach(@PathVariable("dealer_page_num") int dealer_page_num) throws Exception {
-//		
-//		return service.getAttach(dealer_page_num);
-		
-//	}
 
 }
