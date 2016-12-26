@@ -1,130 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ include file="../../include/header.jsp"%>
+
 <head>
+	<link rel="stylesheet" href="../../../resources/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="../../../resources/css/common.css">
+		
+	<script src="http://code.jquery.com/jquery-2.2.3.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	<script src="../../../resources/js/common.js"></script>
+		
+	<script src="../../../resources/js/googleAnalytics.js"></script>
 	<link rel="stylesheet" href="../../resources/css/btcInfoLand.css" />
 	<link rel="stylesheet" href="../../resources/css/river_community.css" />
 	
 	<!-- include summernote css/js-->
 	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
-
+	
+	<script>
+	var dealerName = $('#dealerName', window.parent.document).html();
+	</script>
+	
 </head>
-<body id="page-top">
-	<div id="main_img">
-		<div class="row">
-			<div class="col-lg-3 visible"></div>
-		</div>
-		<%@ include file="../../include/grandNav.jsp"%>
-		<div class="container">
-			<div class="page-header">
-				<h1>
-					리버 커뮤니티<small>_딜러 전문소식</small>
-				</h1>
-				<ul class="breadcrumb">
-					<li><a href="/">Home</a></li>
-					<li><a href="btcInfoLand">리버 커뮤니티</a></li>
-					<li class="active">딜러 전문소식</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<div class="container">
-		<div class="row">
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<span class="page_title">이달의 추천 딜러 |</span> <span>비트리버 회원이면 누구나 전문 딜러로 활동 할 수 있습니다. 다양한 정보를 많은 회원들과 공유해 보시길 바랍니다.</span>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-
-			<div class="panel panel-default">
-
-				<div class="panel-body">
-
-					<div class="col-sm-6">
-
-						<div class="dealer_photoshot">
-
-							<img src="../../resources/img/dealer_test_img01.jpg">
-
-						</div>
-
-						<div class="dealer_room_title">딜러 카테고리: ${dealer.category}</div>
-
-						<div class="dealer_position_title">딜러 포지션: ${dealer.user_nickName}</div>
-
-					</div>
-
-					<div class="col-sm-6 border_left_none">
-
-						<div class="dealer_point">딜러 ${dealer.user_nickName} 님의 내공지수?</div>
-
-						<div class="progress">
-
-							<div class="progress-bar" role="progressbar" aria-valuenow="${dealer.score}" aria-valuemin="0" aria-valuemax="100" style="width: ${dealer.score}">
-
-								<span class="dealer_score">${dealer.score}point</span>
-
-							</div>
-							
-							<div class="btn-group">
-								
-								<button type="button" class="btn btn-default" id="report">
-									<span class="glyphicon glyphicon-bullhorn"> 신고하기</span>
-								</button>
-
-								<button type="button" class="btn btn-default" id="recommend">
-									<span class="glyphicon glyphicon glyphicon-heart"> 추천하기</span>
-								</button>
-							
-								<div class="vote_use">
-									
-									<c:if test = "${login.REGISTER_TYPE_CODE eq 'd' && login.USER_EMAIL == dealer.user_email}">
-								
-									<button type="button" class="btn btn-default" id="modify">
-										<span class="glyphicon glyphicon glyphicon-ok"> 수정</span>
-									</button>
-								
-									<button type="button" class="btn btn-default" id="remove">
-										<span class="glyphicon glyphicon glyphicon-remove"> 삭제</span>
-									</button>
-								
-									</c:if>
-								
-								</div>
-							
-							</div>
-						
-						</div>
-					<!-- .border_left_none  -->
-					</div>
-				</div>
-			</div>
-		<!-- end of col-sm-4 column -->
-		</div>
-		<!-- end of col-sm-4 column -->
-	</div>
-	<!-- end of row content -->
-	<div>&nbsp;</div>
-	<div class="container">
-		<div>
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<span class="page_title">딜러 전문소식 |</span> <span>비트리버에서 활동하는 전문 딜러들의 전문 소식 특화된 정보를 가장빨리 만나볼 수 있습니다. </span>
-				</div>
-			</div>
-		</div>
-	</div>
+<body>
 	<!-- 딜러 전문소식 리스트 -->
 	<div class="container">
 		<div class="article_title ">
 			<div class="board_readtitle">
 				<h3>
-					<input type = "text" id = "dealer_news_title" value = "${pageMaker.title}" 
-					 style="border-style: none" readOnly/>
+					<input type = "text" id = "dealer_news_title" 
+					value = "${pageMaker.title}" 
+					 style="border-style: none; width:100%" readOnly/>
 				</h3>
 			</div>
 			<span class="btcinfoland_writer">작성자 : ${pageMaker.writer}</span> <span class="btcinfoland_writeDate">작성일 : 2016-12-23<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${pageMaker.regi_date}" />
@@ -156,8 +64,12 @@
 							</span>
 						</button>
 						<button type="button" class="btn btn-default" id="go_list_btn">글목록</button>
+						
+						<c:if test = "${login.USER_NICKNAME == dealerName}">
 						<button type="button" class="btn btn-default" id="modify_btn">글수정</button>
 						<button type="button" class="btn btn-default" id="delete_btn">글삭제</button>
+						</c:if>
+						
 						<button type="button" class="btn btn-default" data-toggle="tooltip" title="다음글">
 							<span id="next_news_btn" class="glyphicon glyphicon-chevron-right">
 							</span>
@@ -183,12 +95,12 @@
 		</div>
 	</div>
 	<!-- 전항 버튼 -->
-	<form id="form_previous_news" action="/getPreviousNews">
+	<form id="form_previous_news">
 		<input type="hidden" name="dealer_news_num" value="${pageMaker.dealer_news_num}" />
 		<input type="hidden" name="currentPage" value="${pageMaker.currentPage}" />
 	</form>
 	<!-- 후항 버튼 -->
-	<form id="form_next_news" action="/getNextNews">
+	<form id="form_next_news">
 		<input type="hidden" name="dealer_news_num" value="${pageMaker.dealer_news_num}" />
 		<input type="hidden" name="currentPage" value="${pageMaker.currentPage}" />
 	</form>
@@ -207,20 +119,22 @@
 						<label for="write_reply_content">내용</label>
 						<input type="text" class="form-control" name="content" id="write_reply_content" placeholder="내용을 입력하세요" />
 						<br>
-						<input type="button" id="reply_agree_btn" value="보내기" />
-						<input type="button" id="reply_cancel_btn" value="취소" />
+						<input type="button" class="btn btn-primary"
+						id="reply_agree_btn" value="보내기" />
+						<input type="button" class="btn btn-danger"
+						id="reply_cancel_btn" value="취소" />
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- 목록 버튼 클릭 시 스크립트 실행을 위한 폼 : #form_go_list-->
-	<form id="form_go_list" action="/btcInfoLand_board_read_to_list">
+	<form id="form_go_list">
 		<input type="hidden" name="dealer_news_num" value="${pageMaker.dealer_news_num}" />
 		<input type="hidden" name="currentPage" value="${pageMaker.currentPage}" />
 	</form>
 	<!-- 삭제 버튼 클릭 시 스크립트 실행을 위한 폼 : form_delete-->
-	<form id="form_delete" action="/deleteNews">
+	<form id="form_delete">
 		<input type="hidden" name="dealer_news_num" value="${pageMaker.dealer_news_num}" />
 		<input type="hidden" name="currentPage" value="${pageMaker.currentPage}" />
 	</form>
@@ -231,7 +145,7 @@
 		<input type="hidden" name="reply_num" />
 	</form>
 	<!-- 댓글 수정 전송 폼 -->
-	<form id="form_modify" action="/modifyNews">
+	<form id="form_modify"">
 		<input type="hidden" name="dealer_news_num" value="${pageMaker.dealer_news_num}" />
 		<input type="hidden" name="title" />
 		<input type="hidden" name="content" />
@@ -240,10 +154,12 @@
 	<script>
 		$(document).ready(function() {
 			$('#go_list_btn').on('click', function() {
+				$('#form_go_list').attr('action','/btcInfoLand_board_read_to_list/' + $('#dealerName', window.parent.document).html());
 				$('#form_go_list').submit();
-			});
+ 			});
 		});
 	</script>
+	
 	<!-- 글수정 버튼: #modifyBtn 클릭 -->
 	<script>
 		$(document).ready(function() {
@@ -273,7 +189,12 @@
 		  				,callbacks: {
 		  				  onImageUpload: function(files, editor, welEditable) {
 		  				      sendFile(files[0], editor, welEditable);
-		  				   }
+		  				   },
+		  				 onMediaDelete : function($target, editor, $editable) {
+		  			          alert($target[0].src); // img 
+							  
+		  			          $target.remove();
+		  			       }
 		  				 }
 					});
 			    	   
@@ -303,13 +224,16 @@
 			    		});
 			    	
 						$('#form_modify input[name="content"]').val($('#summernote').summernote('code'));
+						
+						$('#form_modify').attr('action', "/modifyNews/" + $('#dealerName', window.parent.document).html());
 						$('#form_modify').submit();
-				}
+					}
 					
-					});
+				});
 
-			});
+		});
 	</script>
+	
 	<!-- 마이페이지 이동 버튼: .reply_writer 클릭 -->
 	<script>
 		$(document).ready(function() {
@@ -322,11 +246,12 @@
 				}
 				/* 끝 */
 
-				location.href = '/myPage';
+				window.parent.location.href = '/myPage';
 
 			});
 		});
 	</script>
+	
 	<!-- 글삭제 버튼: #deleteBtn 클릭 -->
 	<script>
 		$(document).ready(function() {
@@ -344,11 +269,12 @@
 					return;
 				}
 				/* 끝 */
-
+				$('#form_delete').attr('action','/deleteNews/' + $('#dealerName', window.parent.document).html());
 				$('#form_delete').submit();
 			});
 		});
 	</script>
+	
 	<!-- 댓글삭제 버튼: #delete_reply 클릭 -->
 	<script>
 		$(document).ready(function() {
@@ -384,6 +310,7 @@
 			});
 		});
 	</script>
+	
 	<!-- 답글 모달창을 호출하는 답글 옆에 써진 '답글' : #write_reply 클릭시 글번호 변경 -->
 	<script>
 		$(document).ready(function() {
@@ -403,6 +330,7 @@
 			});
 		});
 	</script>
+	
 	<!-- 답글 모달창을 호출하는 '답글쓰기' 버튼 : #write_reply_btn 클릭시 글번호 변경 -->
 	<script>
 		$(document).ready(function() {
@@ -415,12 +343,13 @@
 				}
 				/* 로그인 테스트 끝 */
 
-				/*새로 답글 쓰기 버튼을 눌러 쓰는 답글은 누구에 대한 답글도 아니다*/
+				/*새로 답글 쓰기 버튼을 눌러 쓰는 답글은 누구(reply_num)에 대한 답글도 아니다*/
 				reply_num = 0;
 				$('#modal_write_reply').modal("show");
 			});
 		});
 	</script>
+	
 	<!-- 초기 설정 : 시작-->
 	<script>
 		//어느 댓글에 대하여 답글을 다는가 
@@ -432,7 +361,8 @@
 			//로그인 되어 있으면
 			var login = {
 							USER_EMAIL : '${login.USER_EMAIL}',
-							REGISTER_TYPE_CODE : '${login.REGISTER_TYPE_CODE}' 
+							REGISTER_TYPE_CODE : '${login.REGISTER_TYPE_CODE}',
+							USER_NICKNAME : '${login.USER_NICKNAME}'
 						};
 		</script>
 	</c:if>
@@ -445,7 +375,7 @@
 	</c:if>
 	
 	<!-- 초기 설정 : 끝 -->
-	<!-- 제출 버튼 클릭 -->
+	<!-- 답글 모달에서 제출 버튼 클릭 -->
 	<script>
 		$(document).ready(function() {
 			$('#reply_agree_btn').on('click', function(e) {
@@ -471,6 +401,14 @@
 				});
 			});
 		});
+	</script>
+	<!-- 답글 모달에서 답글 취소 버튼 클릭 : #reply_cancel_btn -->
+	<script>
+	$(document).ready(function() {
+		$('#reply_cancel_btn').on('click', function(e) {
+			$('#modal_write_reply').modal("hide");
+		});
+	});
 	</script>
 	<!-- 댓글보기 버튼 클릭 시 스크립트 실행을 위한 폼.-->
 	<script>
@@ -546,10 +484,19 @@
 								'<button type="button" class="btn btn-default  btn-sm" id="write_reply">답글</button>');
 				$('#' + data[i].reply_num).append('&nbsp;&nbsp;');
 				
-				$('#' + data[i].reply_num)
-						.append(
-								'<button type="button" class="btn btn-default  btn-sm" id="delete_reply">삭제</button>');
-				$('#' + data[i].reply_num).append('<p class="reply_content"><span class="reply_content_title">내용 :</span> ' + data[i].content + '</p>');
+				if (data[i].writer == login.USER_EMAIL){	
+					$('#' + data[i].reply_num).append(
+								'<button type="button" class="btn btn-default  btn-sm" id="delete_reply">삭제</button>'
+								);
+				}
+				
+				$('#' + data[i].reply_num).append('<p class="reply_content">');
+				
+				for (var j = 0; j < data[i].indent; j++) {
+					$('#' + data[i].reply_num).append('&nbsp;&nbsp;&nbsp;&nbsp;');
+				}
+				
+				$('#' + data[i].reply_num).append('<span class="reply_content_title">내용 :</span> ' + data[i].content + '</p>');
 			}
 			$('#reply_list').append('</div>');
 
@@ -559,6 +506,8 @@
 	<script>
 		$(document).ready(function() {
 			$('body').on('click', '#previous_news_btn', function() {
+				$('#form_previous_news').attr('action', '/getPreviousNews/'
+						 + $('#dealerName', window.parent.document).html());
 				$('#form_previous_news').submit();
 			});
 		});
@@ -567,6 +516,8 @@
 	<script>
 		$(document).ready(function() {
 			$('body').on('click', '#next_news_btn', function() {
+				$('#form_next_news').attr('action', '/getNextNews/'
+						 + $('#dealerName', window.parent.document).html());
 				$('#form_next_news').submit();
 			});
 		});
@@ -579,7 +530,7 @@
 		$.ajax({
 		  data: data,
 	      type: "POST",
-		   url:"/writeImage",
+		   url:"/writeImage/" + ${pageMaker.dealer_news_num},
 		   cache: false,
 	       contentType: false,
 	       processData: false,
@@ -593,4 +544,3 @@
 	}
 	</script>
 </body>
-<%@ include file="../../include/footer.jsp"%>
