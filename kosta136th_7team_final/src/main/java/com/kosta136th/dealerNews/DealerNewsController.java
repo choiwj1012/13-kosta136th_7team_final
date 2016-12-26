@@ -1,5 +1,4 @@
 package com.kosta136th.dealerNews;
-
 import java.util.List;
 
 import javax.inject.Inject;
