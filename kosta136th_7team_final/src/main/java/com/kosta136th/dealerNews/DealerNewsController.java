@@ -71,7 +71,7 @@ public class DealerNewsController {
 			e.printStackTrace();
 		}
 
-		return "sub/btcInfoLand/btcInfoLand_board_list";
+		return "sub/btcInfoLand/btcInfoLand_board_list2";
 	}
 	
 	private int getDealerNewsListSize() {
@@ -102,7 +102,7 @@ public class DealerNewsController {
 		
 		model.addAttribute("pageMaker", pageMaker);
 		
-		return "sub/btcInfoLand/btcInfoLand_board_read";
+		return "sub/btcInfoLand/btcInfoLand_board_read2";
 	}
 	
 	@RequestMapping("/btcInfoLand_board_read_to_list")

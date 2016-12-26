@@ -25,7 +25,7 @@
 					<li><a href="/marketPrice">시세</a></li>
 					<li><a href="/news">비트코인뉴스</a></li>
 					<li><a href="/sub/btcInfoLand/btcInfoLand">리버커뮤니티</a></li>
-					<li><a href="/board_list">프리보드</a></li>
+					<li><a href="/sub/freeboard/board_list">자유게시판</a></li>
 
 				</ul>
 			</div>

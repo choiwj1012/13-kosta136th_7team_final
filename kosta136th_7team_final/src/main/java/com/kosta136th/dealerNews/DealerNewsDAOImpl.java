@@ -72,8 +72,7 @@ public class DealerNewsDAOImpl implements DealerNewsDAO{
 		try{				
 		int index = sqlSession.selectOne(namespace + ".getDealerNewsIndex", pageMaker);
 		int newCurrentPage = (int)Math.floor((double)index / pageMaker.getPerPageNum()) + 1;
-		pageMaker.setCurrentPage(newCurrentPage);
-		
+		pageMaker.setCurrentPage(newCurrentPage);	
 		System.out.println("getPageMakerByDealerNewsNo");
 		System.out.println("★★★★★★★★★★★★★★★★★★★★");
 		System.out.println("현재 글번호에 해당하는 인덱스 : " + index);
@@ -99,7 +98,7 @@ public class DealerNewsDAOImpl implements DealerNewsDAO{
 
 	@Override
 	public void writeNews(DealerNews dealerNews, HttpSession httpSession) {
-		
+		try{
 		User user = new User();
 		String email = (String) ( 
 				( (Map<String,Object>)( httpSession.getAttribute("login") ) )
@@ -114,7 +113,9 @@ public class DealerNewsDAOImpl implements DealerNewsDAO{
 		System.out.println(map.toString());
 		
 		sqlSession.insert(namespace + ".writeNews", map);
-		
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	
 	@Override

@@ -5,156 +5,44 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.kosta136th.mapper.freeBoardMapper">
 
-	<insert id="create" parameterType="com.kosta136th.freeBoard.FreeBoard">
-		INSERT INTO 
-			FREEBOARD(TITLE, CONTENT) 
-		VALUES 
-			(#{title}, #{content})
+	<insert id="create">
+		INSERT INTO FREEBOARD(TITLE, CONTENT, WRITER) 
+		VALUES(#{title}, #{content}, #{writer})
 	</insert>
 	
-	<select id="read" resultType="com.kosta136th.freeBoard.FreeBoard">
-		SELECT
-			FREEBOARD_NUM, TITLE, CONTENT, WRITER, REGDATE, VIEWCNT
+	
+	<select id="read" resultType="freeBoard" parameterType="int">
+		SELECT 
+			FREEBOARD_NUM, TITLE, CONTENT, WRITER, REGI_DATE, VIEW_COUNT, REPLY_COUNT
 		FROM 
 			FREEBOARD
-		WHERE
+		WHERE 
 			FREEBOARD_NUM = #{freeBoard_Num}
 	</select>
 	
-	<select id="listAll" resultType="com.kosta136th.freeBoard.FreeBoard">
-		
-		SELECT
-			FREEBOARD_NUM, TITLE, CONTENT, WRITER, REGDATE, VIEW_COUNT
-		FROM 
-			FREEBOARD
-		WHERE
-			FREEBOARD_NUM > 0
-		ORDER BY FREEBOARD_NUM DESC, REGDATE DESC
-		
-	</select>
-	
-	<update id="updateViewCnt">
-		UPDATE
-			FREEBOARD
-		SET
-			VIEWCNT = VIEWCNT +1
+	<select id="update" resultType="freeBoard">
+		UPDATE 
+			FREEBOARD SET TITLE = #{title}, CONTENT = #{content}
 		WHERE
 			FREEBOARD_NUM = #{freeBoard_Num}
-	</update>
-	
-	<select id="listPage" resultType="com.kosta136th.freeBoard.FreeBoard">
-		<![CDATA[
-		SELECT
-			FREEBOARD_NUM, TITLE, WRITER, REGDATE, VIEWCNT
-		FROM
+	</select>
+
+	<select id="delete" resultType="freeBoard">
+		DELETE FROM 
 			FREEBOARD
 		WHERE 
-			FREEBOARD_NUM > 0
-		ORDER BY FREEBOARD_NUM DESC, REGDATE DESC
-		LIMIT #{pageStart}, 10
-		]]>
-		
+			FREEBOARD_NUM = #{freeBoard_Num}
 	</select>
 	
-	<select id="listCriteria" resultType="com.kosta136th.freeBoard.FreeBoard">
-		<![CDATA[
-		SELECT
-			FREEBOARD_NUM, TITLE, WRITER, REGDATE, VIEWCNT, REPLYCNT
-		FROM
+	<select id="listAll" resultType="freeBoard">
+	<![CDATA[
+		SELECT FREEBOARD_NUM, TITLE, WRITER, REGI_DATE, VIEW_COUNT
+		FROM 
 			FREEBOARD
 		WHERE 
-			FREEBOARD_NUM > 0
-		ORDER BY FREEBOARD_NUM DESC, REGDATE DESC
-		LIMIT #{pageStart}, #{perPageNum}
-		]]>
-	</select>
-	
-	
-	
-	 <select id="countPaging" resultType="int">
-		<![CDATA[
-		SELECT
-			COUNT(freeBoard_Num)
-		FROM
-			FREEBOARD
-		WHERE
 			freeBoard_Num > 0
-		]]>
-	</select> 
-	
-	<sql id="search">
-		<if test="searchType != null">
-			<if test="searchType == '제목'.toString()">
-				AND TITLE LIKE CONCAT('%', #{keyword}, '%')
-			</if>
-			<if test="searchType == 'c'.toString()">
-				AND CONTENT LIKE CONCAT('%', #{keyword}, '%')
-			</if>
-			<!-- <if test="searchType == 'w'.toString()">
-				AND WRITER LIKE CONCAT('%', #{keyword}, '%')
-			</if> -->
-			<if test="searchType == 'tc'.toString()">
-				AND ( TITLE LIKE CONCAT('%', #{keyword}, '%') OR CONTENT
-				LIKE
-				CONCAT('%', #{keyword}, '%'))
-			</if>
-			<if test="searchType == 'cw'.toString()">
-				AND ( CONTENT LIKE CONCAT('%', #{keyword}, '%') OR WRITER
-				LIKE
-				CONCAT('%', #{keyword}, '%'))
-			</if>
-			<if test="searchType == 'tcw'.toString()">
-				AND ( TITLE LIKE CONCAT('%', #{keyword}, '%')
-				OR
-				CONTENT
-				LIKE CONCAT('%', #{keyword}, '%')
-				OR
-				WRTIER LIKE CONCAT('%',
-				#{keyword}, '%'))
-			</if>
-		</if>
-	</sql>
-	
-	<select id="listSearch" resultType="com.kosta136th.freeBoard.FreeBoard">
-		<![CDATA[
-			SELECT * FROM
-				FREEBOARD
-			WHERE
-				FREEBOARD_NUM > 0
-		]]>
-		
-		<include refid="search"></include>
-		
-		<![CDATA[
-			ORDER BY FREEBOARD_NUM DESC
-			LIMIT #{pageStart}, #{perPageNum}
+		ORDER BY 
+			freeBoard_Num DESC, regi_date DESC
 		]]>
 	</select>
-	
-	<select id="listSearchCount" resultType="int">
-		<![CDATA[
-			SELECT 
-				COUNT(FREEBOARD_NUM)
-			FROM
-				FREEBOARD
-			WHERE
-				FREEBOARD_NUM > 0
-		]]>
-			
-		<include refid="search"></include>
-	</select>
-	
-	<update id="updateReplyCnt">
-		UPDATE
-			FREEBOARD
-		SET
-			REPLYCNT = REPLYCNT + #{amount}
-		WHERE
-			FREEBOARD_NUM = #{FREEBOARD_NUM}
-	</update>
-	
-	
-
-
-
 </mapper>
