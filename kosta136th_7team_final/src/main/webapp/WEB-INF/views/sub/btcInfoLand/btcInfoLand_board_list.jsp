@@ -98,9 +98,11 @@
 
 						<div class="progress">
 
-							<div class="progress-bar" role="progressbar" aria-valuenow="${dealer.score}" aria-valuemin="0" aria-valuemax="100" style="width: ${dealer.score}%">
 
-								<span class="dealer_score">${dealer.score}point</span>
+							<div class="progress-bar" role="progressbar" aria-valuenow="${dealer.score}" aria-valuemin="0" aria-valuemax="100" style="width: 1%">
+
+
+								<span class="dealer_score">${dealer.score}Point</span>
 
 							</div>
 
