@@ -80,16 +80,10 @@ span.dealer_score {
 
 div.dealer_room_title {
 	font-size: 20px;
-	position: absolute;
-	left: 330px;
-	top: 20px;
 }
 
 div.dealer_position_title {
 	font-size: 20px;
-	position: absolute;
-	left: 330px;
-	top: 50px;
 }
 
 span.glyphicon {
