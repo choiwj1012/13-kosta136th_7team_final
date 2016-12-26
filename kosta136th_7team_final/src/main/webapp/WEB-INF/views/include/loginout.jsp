@@ -273,17 +273,13 @@
 			var signup_authentication = $('#signup_authentication').val();
 			if(signup_authentication == authenticationCode)
 				{
-					alert("입력한 값과 전송한 값이 일치함" +"\n"
-							+ "전송된 값 : " + authenticationCode + "\n"
-							+ "입력한 값 : " + signup_authentication + "\n");
+					alert("인증성공");
 					isAuthenticate = true;
 					$('#signup_authentication').prop('readonly', true);
 				}
 			else
 				{
-					alert("입력한 값과 전송한 값이 불일치함" +"\n"
-						+ "전송된 값 : " + authenticationCode + "\n"
-						+ "입력한 값 : " + signup_authentication + "\n");
+					alert("인증번호를 다시 확인해 주세요.");
 					
 				}
 			
@@ -444,8 +440,6 @@
 			
 			var email = '<c:out value="${login.USER_EMAIL}"/>';					//세션에담긴것
 			var registerType = '<c:out value="${login.REGISTER_TYPE_CODE}"/>';
-			alert("로그아웃 버튼 클릭시 이메일 : " + email + "\n"
-					+"가입유형코드 : " + registerType);
 			$.ajax({
 				type : 'POST',
 				async : false,
@@ -514,17 +508,6 @@
 	});
 </script>
 
-
-<!-- 네이버로 가입 버튼을 클릭했을 때 작동하는 스크립트입니다. -->
-<script>
-	$(document).ready(function(){
-		$('#signup_naver_img').on('click', function(e){
-			
-			alert("구현중");
-			
-	});
-	});
-</script>
 
 <!-- 네이버로 가입 버튼을 클릭했을 때 작동하는 스크립트입니다. -->
 <script>

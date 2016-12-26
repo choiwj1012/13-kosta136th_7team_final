@@ -210,7 +210,6 @@ $(document).ready(function(){
 			alert("새 비밀번호가 다릅니다.");
 			return;
 		}
-		alert(password + "\n" + newPassword);
 		$.ajax({
 			type : 'POST',
 			url : '/changePassword',
@@ -224,7 +223,7 @@ $(document).ready(function(){
 		    success : function(data) {
 		    	if(data=="true")
 	    		{
-	    			alert("닉네임변경성공");
+	    			alert("비밀번호변경성공");
 	    		}
 		         					
 		    }
