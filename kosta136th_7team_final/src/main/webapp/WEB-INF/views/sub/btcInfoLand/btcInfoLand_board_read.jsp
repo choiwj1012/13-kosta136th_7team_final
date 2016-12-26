@@ -35,7 +35,7 @@
 					 style="border-style: none; width:100%" readOnly/>
 				</h3>
 			</div>
-			<span class="btcinfoland_writer">작성자 : ${pageMaker.writer}</span> <span class="btcinfoland_writeDate">작성일 : 2016-12-23<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${pageMaker.regi_date}" />
+			<span class="btcinfoland_writer">작성자 : ${pageMaker.writer}</span> <span class="btcinfoland_writeDate"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${pageMaker.regi_date}" />
 			</span> <span class="btcinfoland_write_readCount">조회수 : 21,234</span>
 			<script>
 				$(document).ready(function() {

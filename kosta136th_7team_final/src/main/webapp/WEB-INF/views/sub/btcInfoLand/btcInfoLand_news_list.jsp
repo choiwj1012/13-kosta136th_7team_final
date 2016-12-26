@@ -41,7 +41,7 @@
 								<div class="board_card_title">${dealerNewsItem.title}</div>
 								<div class="board_card_writer">${dealerNewsItem.writer}</div>
 								<div class="board_card_readcount">21,234</div>
-								<div class="board_card_date">${dealerNewsItem.regi_date}</div>
+								<div class="board_card_date"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dealerNewsItem.regi_date}" /></div>
 							</div>
 						</div>
 					</c:forEach>
@@ -226,13 +226,13 @@
 			function() {
 				$('body').on(
 						'click',
-						'.board_card_img',
+						'.board_card',
 						function() {
 							$('#form_read').attr('action', '/btcInfoLand_board_read/'
 									 + $('#dealerName', window.parent.document).html());
 							
 							//글번호 선택자 정확함
-							var dealer_news_num = $(this).siblings(
+							var dealer_news_num = $(this).children(
 									'.board_card_num').text();
 							$('#form_read').children(
 									'input[name = "dealer_news_num"]').val(
