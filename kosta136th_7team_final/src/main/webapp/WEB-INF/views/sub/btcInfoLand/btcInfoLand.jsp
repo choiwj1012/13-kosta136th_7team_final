@@ -6,7 +6,7 @@
 <head>
 	<link rel="stylesheet" href="../../resources/css/btcInfoLand.css" />
 	<style type="text/css">
-		#imgtest > div > img{
+		#imgtest > div > a > img{
 			width : 100%;
 			height : 100%;
 		}
@@ -79,7 +79,7 @@
 		<c:forEach items="${list}" var="dealer" varStatus="idx">
 		<div id="imgtest" class="col-sm-4">
 			<div class="panel panel-default"> 
-			<img src="../../../../resources/img/dealer/${idx.index+10}.jpg" alt="프로필 사진 더미" />
+			<a href='btcInfoLand_board_list${pageMaker.makeSearch(pageMaker.cri.page)}&dealer_page_num=${dealer.dealer_page_num}'><img src="../../../../resources/img/dealer/${idx.index+10}.jpg" alt="프로필 사진 더미" /></a>
 			<p>${dealer.user_nickName}</p>
 			<p><a href='btcInfoLand_board_list${pageMaker.makeSearch(pageMaker.cri.page)}&dealer_page_num=${dealer.dealer_page_num}'>${dealer.category}</a></p>
 			<p>${dealer.like_count}</p>								
