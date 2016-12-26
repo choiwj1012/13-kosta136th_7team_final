@@ -232,6 +232,7 @@ public class UserController {
 			System.out.println("2");
 			map.put("USER_EMAIL", loginInfo.getUSER_EMAIL());
 			map.put("REGISTER_TYPE_CODE", loginInfo.getREGISTER_TYPE_CODE());
+			map.put("USER_NICKNAME", loginInfo.getUSER_NICKNAME());
 			request.getSession().setAttribute("userVO", map);
 			result = "true";
 		}

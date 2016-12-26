@@ -6,24 +6,24 @@ import javax.servlet.http.HttpSession;
 
 public interface DealerNewsService {
 
-	List<DealerNews> getDealerNewsList(int startDealerNewsIndex, int howMuch);
+	List<DealerNews> getDealerNewsList(int startDealerNewsIndex, int howMuch, String dealerName);
 
-	DealerNews getPageMaker(DealerNews dealerNews);
+	DealerNews getPageMaker(DealerNews dealerNews, String dealerName);
 
-	void getPageMakerByDealerNewsNo(DealerNews pageMaker);
+	void getPageMakerByDealerNewsNo(DealerNews pageMaker, String dealerName);
 
-	void writeNews(DealerNews dealerNews, HttpSession httpSession);
+	void writeNews(DealerNews dealerNews, String dealerName);
 
-	void deleteNews(DealerNews dealerNews);
+	void deleteNews(DealerNews dealerNews, String dealerName);
 
-	DealerNews getNews(DealerNews dealerNews);
+	DealerNews getNews(DealerNews dealerNews, String dealerName);
 
-	void modifyNews(DealerNews dealerNews);
+	void modifyNews(DealerNews dealerNews, String dealerName);
 
-	DealerNews getPreviousNews(DealerNews dealerNews);
+	DealerNews getPreviousNews(DealerNews dealerNews, String dealerName);
 
-	DealerNews getNextNews(DealerNews dealerNews);
+	DealerNews getNextNews(DealerNews dealerNews, String dealerName);
 
-	int getDealerNewsListSize();
+	int getDealerNewsListSize(String dealerName);
 
 }
