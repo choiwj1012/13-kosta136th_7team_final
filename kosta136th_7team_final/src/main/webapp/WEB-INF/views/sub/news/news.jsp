@@ -387,12 +387,7 @@
 		}
 		else
 		{
-			alert("한국기사스크랩버튼 클릭됨" + "\n"
-					+ "email : " + email + "\n"
-					+ "link : " + link + "\n"
-					+ "title : " + title + "\n"
-					+ "date : " + pubDate + "\n"
-					+ "date : " + description);
+			
 			 $.ajax({
 				type : 'post',
 				url : '/addDemesticScrap',
@@ -434,14 +429,7 @@
 		}
 		else
 		{
-			alert("외국기사스크랩버튼 클릭됨" + "\n"
-					+ "email : " + email + "\n"
-					+ "imgsrc : " + imgSrc+ "\n" 
-					+ "link : " + link+ "\n"
-					+ "title : " + title + "\n"
-					+ "date : " + date + "\n"
-					+ "author : " + author + "\n"
-					+ "description : " + description);
+			
 			$.ajax({
 				type : 'post',
 				url : '/addAbroadScrap',

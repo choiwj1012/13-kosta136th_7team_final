@@ -63,7 +63,7 @@ public class MyPageController {
 			{
 				idxCount = 0;
 			}
-			String imgsrc = "../../../../resources/img/news/" + idxCount + ".png";
+			String imgsrc = "../../../../resources/img/news/" + idxCount + ".jpg";
 			idxCount = idxCount + 1;
 			demScrapList.get(i).setDOMESTIC_SCRAP_IMGSRC(imgsrc);
 		}
