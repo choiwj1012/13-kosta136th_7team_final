@@ -10,6 +10,22 @@ body, .container-fluid {
 	
 }
 
+#search_icon {
+	
+	margin-top: -10px;
+	height: 35px;
+	
+}
+
+#search_title {
+	
+	padding-top: 20px;
+	padding-bottom: 20px;
+	background-color: #444;
+	color: #eee;
+	
+}
+
 #searchNews {
 	
 }
@@ -88,6 +104,7 @@ body, .container-fluid {
 #newsTable > div#imgSrc {
 	
 	padding: 0;
+	padding-left: 15px;
 	
 }
 

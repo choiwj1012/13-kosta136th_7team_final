@@ -16,9 +16,10 @@
 
 		<form class="form-horizontal" role="form" action="">
 	
-			<div class="col-sm-1">
+			<div id="search_title" class="col-sm-1" >
 				<!-- <img src="../../../resources/img/news/search_blue.png" id="searchIcon" alt="검색돋보기" /> -->
-				기사 검색
+				<img id="search_icon" src="../../resources/img/news/search_white.png"/>
+				<span>기사 검색</span>
 			</div>
 	
 			<div class="col-sm-9 form-group">
