@@ -34,12 +34,11 @@
 	
 	<div class="page-header">
 		<h1>
-			BTC 정보광장<small>_이달의 추천 딜러</small>
+			리버 커뮤니티<small>_이달의 추천 딜러</small>
 		</h1>
 		<ul class="breadcrumb">
 			<li>Home</li>
-			<li>BTC정보광장</li>
-			<li class="active">이달의 추천딜러</li>
+			<li>리버 커뮤니티</li>
 		</ul>	
 	</div>
 		
@@ -76,17 +75,19 @@
 
 	<div id="container" class = "row">
 		
-		<c:forEach items="${list}" var="dealer" varStatus="idx">
-		<div id="imgtest" class="col-sm-4">
-			<div class="panel panel-default"> 
-			<a href='btcInfoLand_board_list${pageMaker.makeSearch(pageMaker.cri.page)}&dealer_page_num=${dealer.dealer_page_num}'><img src="../../../../resources/img/dealer/${idx.index+10}.jpg" alt="프로필 사진 더미" /></a>
-			<p>${dealer.user_nickName}</p>
-			<p><a href='btcInfoLand_board_list${pageMaker.makeSearch(pageMaker.cri.page)}&dealer_page_num=${dealer.dealer_page_num}'>${dealer.category}</a></p>
-			<p>${dealer.like_count}</p>								
+		<div class="col-sm-offset-1 col-sm-10">
+		
+			<c:forEach items="${list}" var="dealer" varStatus="idx">
+			<div id="imgtest" class="col-sm-4">
+				<div class="panel panel-default"> 
+				<a href='btcInfoLand_board_list${pageMaker.makeSearch(pageMaker.cri.page)}&dealer_page_num=${dealer.dealer_page_num}'><img src="../../../../resources/img/dealer/${idx.index+10}.jpg" alt="프로필 사진 더미" /></a>
+				<p>${dealer.user_nickName}</p>
+				<p><a href='btcInfoLand_board_list${pageMaker.makeSearch(pageMaker.cri.page)}&dealer_page_num=${dealer.dealer_page_num}'>${dealer.category}</a></p>
+				<p>${dealer.like_count}</p>								
+				</div>
 			</div>
-		</div>
 		</c:forEach>
-					
+		</div>
 	</div>
 	
 	<div class="box-footer">

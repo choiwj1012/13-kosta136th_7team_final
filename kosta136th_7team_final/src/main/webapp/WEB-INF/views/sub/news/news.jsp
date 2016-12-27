@@ -8,30 +8,32 @@
 
 <%@ include file="../../include/grandNav.jsp" %>
 
+	
+<div id="news_title">Bitcoin News Page</div>
+
 <!-- keyword 검색 체크박스 -->
 	<div class="row text-center" id="searchNews">
 
 		<form class="form-horizontal" role="form" action="">
 	
-			<div class="col-sm-1">
+			<div id="search_title" class="col-sm-1" >
 				<!-- <img src="../../../resources/img/news/search_blue.png" id="searchIcon" alt="검색돋보기" /> -->
-				기사 검색
+				<img id="search_icon" src="../../resources/img/news/search_white.png"/>
+				<span>기사 검색</span>
 			</div>
 	
-			<div class="col-sm-10 form-group">
-				<input type="text" id="searchInputBox" name="searchKeyword" class="form-control" placeholder="검색할 키워드를 적어주세요" />
+			<div class="col-sm-9 form-group">
+				<input type="text" id="searchInputBox" name="searchKeyword" class="form-control" placeholder="검색할 키워드를 입력하세요" />
 				<input type="hidden" name="page" value=1>	
 			</div>
 			
-			<div class="col-sm-1" id="searchBox">
-				<button type="submit" class="btn btn-primary">검색하기</button>
+			<div class="col-sm-2" id="searchBox">
+				<button type="submit" class="btn btn-primary">검색</button>
 			</div>
 	
 		</form>
 	
 	</div>
-	
-<div id="news_title">Bitcoin News Page</div>
 
 <!-- 메인 콘텐츠 영역 -->	
 <div class="container-fluid" id="mainWrapper">
