@@ -273,17 +273,13 @@
 			var signup_authentication = $('#signup_authentication').val();
 			if(signup_authentication == authenticationCode)
 				{
-					alert("입력한 값과 전송한 값이 일치함" +"\n"
-							+ "전송된 값 : " + authenticationCode + "\n"
-							+ "입력한 값 : " + signup_authentication + "\n");
+					alert("인증성공");
 					isAuthenticate = true;
 					$('#signup_authentication').prop('readonly', true);
 				}
 			else
 				{
-					alert("입력한 값과 전송한 값이 불일치함" +"\n"
-						+ "전송된 값 : " + authenticationCode + "\n"
-						+ "입력한 값 : " + signup_authentication + "\n");
+					alert("인증번호를 다시 확인해 주세요.");
 					
 				}
 			
@@ -442,10 +438,8 @@
 			e.preventDefault();
 			e.stopPropagation();
 			
-			var email = '<c:out value="${login.USER_EMAIL}"/>';
+			var email = '<c:out value="${login.USER_EMAIL}"/>';					//세션에담긴것
 			var registerType = '<c:out value="${login.REGISTER_TYPE_CODE}"/>';
-			alert("로그아웃 버튼 클릭시 이메일 : " + email + "\n"
-					+"가입유형코드 : " + registerType);
 			$.ajax({
 				type : 'POST',
 				async : false,
@@ -520,36 +514,19 @@
 	$(document).ready(function(){
 		$('#signup_naver_img').on('click', function(e){
 			
-			e.preventDefault();
+			alert("구현중");
 			
-			$.ajax({
-				type : 'POST',
-				url : '/requestSignupNaver',
-			    success : function(data) {
-			    	window.open(data);
-			    }
-			});
-			
-			var isSignin = requestSigninSessionAttribute();
+	});
+	});
+</script>
 
-			if (isSignin == false){
-				$('#signupBtn').remove();
-			    $('#signinBtn').remove();
-			    $('#myPage').remove();
-			    $('#signoutBtn').remove();
-				$('.nav').append('<li><a href="#" id="signupBtn" data-toggle="modal" data-target="#signup">회원가입</a></li>');
-	        	$('.nav').append('<li><a href="#" id="signinBtn" data-toggle="modal" data-target="#signin">로그인</a></li>'); 
-	        }
+<!-- 네이버로 로그인 버튼을 클릭했을 때 작동하는 스크립트입니다. -->
+<script>
+	$(document).ready(function(){
+		$('#signin_naver_img').on('click', function(e){
 			
-		    if (isSignin == true){
-		    	$('#signupBtn').remove();
-			    $('#signinBtn').remove();
-			    $('#myPage').remove();
-			    $('#signoutBtn').remove();
-			    $('.nav').append('<li><a href="/myPage" id = "myPage">마이페이지</a></li>');
-			    $('.nav').append('<li><a href="#" id="signoutBtn">로그아웃</a></li>');
-	        }
+			alert("구현중");
 			
-		});
+	});
 	});
 </script>

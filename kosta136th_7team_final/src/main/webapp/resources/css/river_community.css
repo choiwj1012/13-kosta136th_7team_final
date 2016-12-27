@@ -1,0 +1,108 @@
+@media only screen and (max-width: 768px) {
+	/* For mobile phones: */
+	[class*="col-"] {
+		width: 100%;
+	}
+	.dealer_room_title, .dealer_position_title {
+		display: none;
+	}
+	
+	div.dealer_photoshot {
+		background-color: #000;
+		width: 100%;
+		overflow: none;
+	}
+	
+	div.dealer_photoshot img {
+		width: 400px;
+	}
+	
+	div.btn-group {
+		margin-left: 20px;
+		width: 100%;
+	}
+}
+
+span.page_title {
+	font-weight: bold;
+}
+
+div.board_card {
+	width: 302px;
+	margin: 10px 5px 10px 40px;
+	float: left;
+	border: 1px solid #d5d5d5;
+}
+
+div.board_card:hover {
+	cursor: pointer;
+	border: 1px solid #ff4051;
+}
+
+.container {
+	/* border: 1px solid red; */
+	
+}
+
+div.card_board_list {
+	width: 97%;
+	margin: 0 auto;
+}
+
+div.dealer_infoarea {
+	/* width: 100%; */
+	/* background-color: #ff4051; */
+	
+}
+
+div.dealer_photoshot {
+	width: 300px;
+}
+
+div.dealer_point {
+	padding-top: 20px;
+	font-size: 20px;
+}
+
+div.progress {
+	height: 50px;
+}
+
+div.progress .progress-bar {
+	background-color: #ff4051;
+}
+
+span.dealer_score {
+	position: absolute;
+	top: 60px;
+	font-size: 20px;
+}
+
+div.dealer_room_title {
+	font-size: 20px;
+}
+
+div.dealer_position_title {
+	font-size: 20px;
+}
+
+span.glyphicon {
+	color: #ff4051;
+}
+
+div.board_card_col {
+	padding:10px;
+}
+
+div.board_card_col:hover {
+	color: #fff;
+	background-color: #ff4051;
+}
+
+
+iframe {
+	
+	overflow: inherit;
+	height: 900px;
+	width: 100%;
+}

@@ -20,12 +20,14 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />																								
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	
-	<context:component-scan base-package="com.kosta136th" />
-	
+   
+   	<!-- 로그인 인터셉터 -->
 	<beans:bean id="loginInterceptor" class="com.kosta136th.user.LoginInterceptor"></beans:bean>
 	<beans:bean id="logoutInterceptor" class="com.kosta136th.user.LogoutInterceptor"></beans:bean>
+	<beans:bean id="authInterceptor" class="com.kosta136th.user.AuthInterceptor"></beans:bean>
+	
 	<interceptors>
+	
 		<interceptor>
 			<mapping path="/requestSigninEmail" />
 			<beans:ref bean="loginInterceptor" />
@@ -35,6 +37,18 @@
 			<mapping path="/requestSignout" />
 			<beans:ref bean="logoutInterceptor" />
 		</interceptor>
+		
+		<interceptor>
+			<mapping path="/myPage" />
+			<mapping path="/manageMyInfo" />
+			<mapping path="/manageMyBoard" />
+			<beans:ref bean="authInterceptor" />
+		</interceptor>
+			
 	</interceptors>
+ 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> 
+ 		<beans:property name="maxUploadSize" value="10485760"></beans:property>	 
+ 	</beans:bean> 
+	<context:component-scan base-package="com.kosta136th" />
 
 </beans:beans>

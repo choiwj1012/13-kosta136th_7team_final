@@ -46,7 +46,7 @@ public class MarketPriceDataController {
             String command = "";
             
             //apiURL = "https://www.worldcoinindex.com/apiservice/json?key=TSd9QUg1uE9PRE3JSFP88IWvJ";
-            //apiURL = "https://www.worldcoinindex.com/apiservice/json?key=3GJ2UwUK92ikwWvZOZ0xtKXlA";
+            apiURL = "https://www.worldcoinindex.com/apiservice/json?key=3GJ2UwUK92ikwWvZOZ0xtKXlA";
             
             URL url = new URL(apiURL);
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
@@ -126,8 +126,8 @@ public class MarketPriceDataController {
         }
         
     }
-    
 
+    
 	//db에서 받아온 데이터 중 원하는 속성만 추려서 JSON 객체화 한다.
 	@RequestMapping(value = "/chartData", method = RequestMethod.GET)
 	public JSONArray chart(@RequestParam("money_type") String money_type, HttpServletResponse response) throws Exception {
@@ -172,17 +172,11 @@ public class MarketPriceDataController {
 				
 			}
 					
-			//bigDecimal로 형변환하기 위해서는 String으로 먼저 형변환해야한다.
-			//timestamp는 원래 String 타입이므로 바로 BigDecimal 적용
-			//api script에서 ms단위 까지 입력해야 정상 작동한다. 
-			//db저장은 s단위 까지 저장했으므로 ms단위로 변형하기 위해 000을 덧붙여준다.
 			BigDecimal bigTimestamp = new BigDecimal(timestamp + "000");
 			BigDecimal bigPerPrice = new BigDecimal(perPrice); 	
-			
-			//배열에 삽입한다.	//객체에 담으면 API가 인식하지 못 한다.
+
 			BigDecimal[] bigDecimalArray = {bigTimestamp, bigPerPrice};
-			
-			//Array 타입을 jsonArray에 추가한다.
+
 			jsonArray.add(bigDecimalArray);
 			
 		}
@@ -281,7 +275,8 @@ public class MarketPriceDataController {
             String command = "";
             String[] names = {"USDKRW", "JPYKRW", "EURKRW", "CNYKRW", "RUBKRW", "GBPKRW", "BTCKRW"};
             for(int i = 0; i<names.length; i++){
-            apiURL = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%3D%22"+ names[i] +"%22&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
+            apiURL = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%3D%22"+ names[i] +
+            		"%22&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
             
             URL url = new URL(apiURL);
             HttpURLConnection con = (HttpURLConnection)url.openConnection();

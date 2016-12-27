@@ -3,100 +3,169 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-	<mapper namespace = "com.kosta136th.mapper.dealerMapper">
-			
-	<select id="check" resultType="com.kosta136th.dealer.Dealer">
-		SELECT USER.USER_EMAIL, USER.USER_NICKNAME, REGISTER_TYPE.USER_NUM, REGISTER_TYPE.REGISTER_TYPE_CODE FROM REGISTER_TYPE  
-		JOIN USER ON REGISTER_TYPE.USER_NUM = USER.USER_NUM 
-		WHERE REGISTER_TYPE_CODE  = 'D';
+<mapper namespace="com.kosta136th.mapper.dealerMapper">
+
+	<select id="userTypeCheck" resultType="com.kosta136th.dealer.Dealer">
+		SELECT USER.USER_EMAIL,
+		USER.USER_NICKNAME, REGISTER_TYPE.USER_NUM,
+		REGISTER_TYPE.REGISTER_TYPE_CODE FROM REGISTER_TYPE
+		JOIN USER ON REGISTER_TYPE.USER_NUM = USER.USER_NUM
+		WHERE REGISTER_TYPE_CODE = 'D';
 	</select>
-		<insert id="insert">
+
+	<select id="dealerPageDuplicationCheck" resultType="com.kosta136th.dealer.Dealer">
+		SELECT
+		USER_NUM
+		FROM DEALER_PAGE
+	</select>
+
+	<insert id="insert">
 		insert into DEALER_PAGE (CATEGORY, USER_NUM)
 		values(#{category},#{user_num})
 	</insert>
-	
-	<select id="list" resultType="com.kosta136th.dealer.Dealer">
-		SELECT USER_NUM
-		FROM DEALER_PAGE
-	</select>
-	
+
 	<select id="read" resultType="com.kosta136th.dealer.Dealer">
 		SELECT
-			USER.USER_NICKNAME, CATEGORY
+		USER.USER_NICKNAME, CATEGORY, DEALER_PAGE_NUM, USER.USER_EMAIL
 		FROM
-			DEALER_PAGE
+		DEALER_PAGE
 		JOIN USER ON USER.USER_NUM = DEALER_PAGE.USER_NUM
 
-		WHERE DEALER_PAGE_NUM = #{dealerNum};
+		WHERE DEALER_PAGE_NUM
+		= #{dealer_page_num};
 	</select>
-	
+
 	<delete id="delete">
-		DELETE FROM DEALER_PAGE WHERE DEALER_PAGE_NUM = #{dealerNum}
+		DELETE FROM DEALER_PAGE WHERE DEALER_PAGE_NUM =
+		#{dealer_page_num}
 	</delete>
-	
+
 	<select id="score" resultType="int">
-		SELECT LIKE_COUNT - DISLIKE_COUNT FROM DEALER_PAGE WHERE DEALER_PAGE_NUM = #{dealerNum}
+		SELECT LIKE_COUNT - DISLIKE_COUNT
+		FROM DEALER_PAGE WHERE DEALER_PAGE_NUM = #{dealer_page_num}
 	</select>
-	
+
 	<update id="update">
 		UPDATE DEALER_PAGE SET CATEGORY =#{category}
-		WHERE DEALER_PAGE_NUM = #{dealerNum}
+		WHERE
+		DEALER_PAGE_NUM = #{dealer_page_num}
 	</update>
 
 	<update id="like">
-		UPDATE DEALER_PAGE SET LIKE_COUNT = LIKE_COUNT + 10 WHERE DEALER_PAGE_NUM = #{dealerNum}
+		
+		UPDATE DEALER_PAGE SET LIKE_COUNT = LIKE_COUNT + 10 WHERE DEALER_PAGE_NUM = #{dealer_page_num};
+		
 	</update>
-	
+
+	<insert id ="likeUser">
+		
+		INSERT INTO DEALER_LIKE(DEALER_PAGE_NUM, USER_NUM) VALUES (#{dealer_page_num}, #{user_num});
+		
+	</insert>
+
 	<update id="dislike">
-		UPDATE DEALER_PAGE SET DISLIKE_COUNT = DISLIKE_COUNT + 10 WHERE DEALER_PAGE_NUM = #{dealerNum}
+	
+		UPDATE DEALER_PAGE SET DISLIKE_COUNT = DISLIKE_COUNT + 10 WHERE DEALER_PAGE_NUM = #{dealer_page_num};
+
 	</update>
+	<insert id="dislikeUser">
 	
-	<select id="allList" resultType="com.kosta136th.dealer.Dealer">
+		INSERT INTO DEALER_DISLIKE(DEALER_PAGE_NUM, USER_NUM) VALUES (#{dealer_page_num}, #{user_num});
+	
+	</insert>
+	<select id="searchList" resultType="com.kosta136th.dealer.Dealer">
 		<![CDATA[
-		SELECT USER.USER_NICKNAME, CATEGORY, LIKE_COUNT, DEALER_PAGE_NUM
-		FROM DEALER_PAGE
-		JOIN USER ON USER.USER_NUM = DEALER_PAGE.USER_NUM
-		ORDER BY DEALER_PAGE_NUM ASC
-		LIMIT 0, 15;
+			SELECT USER.USER_NICKNAME, CATEGORY, LIKE_COUNT, DEALER_PAGE_NUM, USER.USER_EMAIL
+			FROM DEALER_PAGE
+			JOIN USER ON USER.USER_NUM = DEALER_PAGE.USER_NUM
 		]]>
+		<if test="searchType != null">
+			<if test="searchType == 'w'.toString()">
+				AND USER.USER_NICKNAME LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 't'.toString()">
+				AND CATEGORY LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+		</if>
+		<![CDATA[
+ 			ORDER BY LIKE_COUNT DESC 
+ 			LIMIT #{pageStart}, #{perPageNum} 
+ 		]]>
+
 	</select>
-	
-	<select id="downList" resultType="com.kosta136th.dealer.Dealer">
+
+	<select id="listSearchCount" resultType="int">
 		<![CDATA[
-		
-		SELECT USER.USER_NICKNAME, CATEGORY, LIKE_COUNT, DEALER_PAGE_NUM
+		SELECT COUNT(DEALER_PAGE_NUM)
 		FROM DEALER_PAGE
 		JOIN USER ON USER.USER_NUM = DEALER_PAGE.USER_NUM
-		WHERE DEALER_PAGE_NUM <= #{bnoToStart}
-		AND DEALER_PAGE_NUM > #{bnoToStart}-20
-		ORDER BY DEALER_PAGE_NUM ASC
-		
 		]]>
+		<if test="searchType != null">
+
+			<if test="searchType == 'w'.toString()">
+				AND USER.USER_NICKNAME LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+
+			<if test="searchType == 't'.toString()">
+				AND CATEGORY LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+
+		</if>
 
 	</select>
 	
+	<select id="dealerMyPage" resultType="int">
+		SELECT
+		DEALER_PAGE_NUM
+		FROM
+		DEALER_PAGE
+		JOIN USER ON USER.USER_NUM = DEALER_PAGE.USER_NUM
+
+		WHERE USER.USER_EMAIL = #{login}
+	</select>
 	
-	<select id ="searchList" resultType="com.kosta136th.dealer.Dealer">
-		<![CDATA[
-			SELECT USER.USER_NICKNAME, CATEGORY, LIKE_COUNT
-			FROM DEALERPAGE
-			JOIN USER ON USER>USER_NUM = DEALER_PAGE.USER_NUM
-		]]>
-			<include refid="search"></include>
-		<![CDATA[
-			ORDER BY LIKE_COUNT DESC
-		]]>			
+	<select id="userNum_read" resultType = "int">
+		
+		SELECT
+		USER_NUM
+		FROM
+		USER
+		WHERE USER_EMAIL = #{email}
 		
 	</select>
 	
-	<sql id="search">
-		<if test="searchType != null">
-			<if test="searchType == 't'.toString()">
-				AND CATEGORY like CONCAT('%', #{keyword}, '%')
-			</if>
-			<if test="searchType == 'w'.toString()">
-				AND USER.USER_NICKNAME like CONCAT('%', #{keyword}, '%')
-			</if>
-		</if>		
-	</sql>
-	</mapper>
+	<select id="searchDealerUserNum" resultType = "int">
+		SELECT
+		USER_NUM
+		FROM
+		DEALER_PAGE
+		WHERE DEALER_PAGE_NUM = #{dealerNum}
+	</select>
+	
+	<select id="likeCheckUserNum" resultType = "com.kosta136th.dealer.Dealer">
+		SELECT
+		USER_NUM
+		FROM
+		DEALER_LIKE
+	</select>
+	<select id="likeCheckDealerPageNum" resultType = "com.kosta136th.dealer.Dealer">
+		SELECT
+		DEALER_PAGE_NUM
+		FROM
+		DEALER_LIKE
+	</select>
+	
+	<select id="disLikeCheckUserNum" resultType = "com.kosta136th.dealer.Dealer">
+		SELECT
+		USER_NUM
+		FROM
+		DEALER_DISLIKE
+	</select>
+	<select id="disLikeCheckDealerPageNum" resultType = "com.kosta136th.dealer.Dealer">
+		SELECT
+		DEALER_PAGE_NUM
+		FROM
+		DEALER_DISLIKE
+	</select>
+	
+</mapper>

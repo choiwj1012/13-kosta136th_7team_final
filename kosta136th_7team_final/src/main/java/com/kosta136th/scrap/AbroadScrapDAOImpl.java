@@ -40,4 +40,11 @@ public class AbroadScrapDAOImpl implements AbroadScrapDAO{
 		
 	}
 
+	@Override
+	public List<GETAbroadScrap> abrScrapList(String email) throws Exception {
+		
+		int userNum = session.selectOne(namespace + ".getUserNum", email);
+		return session.selectList(namespace + ".getAbrScrapList", userNum);
+	}
+
 }

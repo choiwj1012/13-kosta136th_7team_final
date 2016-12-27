@@ -1,6 +1,8 @@
 package com.kosta136th.dealer;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -16,9 +18,9 @@ public class DealerDAOImpl implements DealerDAO{
 	private static String namespace = "com.kosta136th.mapper.dealerMapper";
 
 	@Override
-	public List<Dealer> check() throws Exception {
+	public List<Dealer> userTypeCheck() throws Exception {
 		
-		return session.selectList(namespace + ".check");
+		return session.selectList(namespace + ".userTypeCheck");
 	}
 
 	@Override
@@ -29,28 +31,28 @@ public class DealerDAOImpl implements DealerDAO{
 	}
 
 	@Override
-	public List<Dealer> list() throws Exception {
+	public List<Dealer> dealerPageDuplicationCheck() throws Exception {
 		
-		return session.selectList(namespace + ".list");
+		return session.selectList(namespace + ".dealerPageDuplicationCheck");
 	}
 
 	@Override
-	public Dealer read(int dealerNum) throws Exception {
+	public Dealer read(int dealer_page_num) throws Exception {
 		
-		return session.selectOne(namespace + ".read", dealerNum);
+		return session.selectOne(namespace + ".read", dealer_page_num);
 	}
 
 	@Override
-	public void remove(int dealerNum) throws Exception {
+	public void remove(int dealer_page_num) throws Exception {
 		
-		session.delete(namespace + ".delete", dealerNum);
+		session.delete(namespace + ".delete", dealer_page_num);
 		
 	}
 
 	@Override
-	public int score(int dealerNum) throws Exception {
-		System.out.println(dealerNum);
-		return session.selectOne(namespace + ".score", dealerNum);
+	public int score(int dealer_page_num) throws Exception {
+		
+		return session.selectOne(namespace + ".score", dealer_page_num);
 		
 	}
 
@@ -62,37 +64,81 @@ public class DealerDAOImpl implements DealerDAO{
 	}
 
 	@Override
-	public void likeEvent(String likeCheck, String disLikeCheck, int dealerNum) throws Exception {
+	public void likeEvent(String likeCheck, String disLikeCheck, int dealerNum, int dealerUserNum) throws Exception {
 
+		Dealer dealer = new Dealer();
+		
+		dealer.setUser_num(dealerUserNum);
+		dealer.setDealer_page_num(dealerNum);
+		
 		if(likeCheck.equals("checked")) {
 			
-			session.update(namespace + ".like", dealerNum);
+			session.update(namespace + ".like", dealer);
+			session.insert(namespace + ".likeUser", dealer);
+			
 		} else if(disLikeCheck.equals("checked")) {
 			
-			session.update(namespace + ".dislike", dealerNum);
+			session.update(namespace + ".dislike", dealer);
+			session.insert(namespace + ".dislikeUser", dealer);
 		}
 
 	}
 
 	@Override
-	public List<Dealer> allList() throws Exception {
+	public List<Dealer> allListSearch(SearchCriteria cri) throws Exception {
+
+		return session.selectList(namespace + ".searchList", cri);
+	}
+	
+	@Override
+	public int listSearchCount(SearchCriteria cri) throws Exception {
 		
-		return session.selectList(namespace + ".allList");
+		return session.selectOne(namespace + ".listSearchCount", cri);
+	}
+
+	@Override
+	public int dealerMyPage(String login) throws Exception {
+	
+		return session.selectOne(namespace + ".dealerMyPage", login);
 		
 	}
 
 	@Override
-	public List<Dealer> allListSearch(SearchDealer searchDealer) throws Exception {
+	public int userNum_read(String email) throws Exception {
 		
-		return session.selectList(namespace + ".searchList", searchDealer);
+		return session.selectOne(namespace + ".userNum_read", email);
 	}
 
 	@Override
-	public List<Dealer> downList(int bnoToStart) throws Exception {
+	public int searchDealerUserNum(int dealerNum) throws Exception {
 		
-		return session.selectList(namespace + ".downList", bnoToStart);
+		return session.selectOne(namespace + ".searchDealerUserNum", dealerNum);
 	}
-	
-	
+
+	@Override
+	public List<Dealer> checkUserNum(int dealerUserNum, String likeCheck, String disLikeCheck) throws Exception {
+		Dealer dealer = new Dealer();
+		dealer.setUser_num(dealerUserNum);
+		if(likeCheck.equals("checked")) {
+			
+			return session.selectList(namespace + ".likeCheckUserNum", dealer);
+			
+		}
+		
+		return session.selectList(namespace + ".disLikeCheckUserNum", dealer);
+		
+	}
+
+	@Override
+	public List<Dealer> checkDealerPageNum(int dealerNum, String likeCheck, String disLikeCheck) throws Exception {
+		Dealer dealer = new Dealer();
+		dealer.setDealer_page_num(dealerNum);
+		if(disLikeCheck.equals("checked")) {
+			
+			return session.selectList(namespace + ".likeCheckDealerPageNum", dealer);
+			
+		}
+		return session.selectList(namespace + ".disLikeCheckDealerPageNum", dealer);
+	}
 
 }

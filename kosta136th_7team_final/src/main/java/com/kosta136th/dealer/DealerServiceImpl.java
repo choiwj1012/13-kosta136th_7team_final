@@ -1,3 +1,4 @@
+
 package com.kosta136th.dealer;
 
 import java.util.List;
@@ -13,9 +14,9 @@ public class DealerServiceImpl implements DealerService{
 	DealerDAO dao;
 	
 	@Override
-	public List<Dealer> check() throws Exception {
+	public List<Dealer> userTypeCheck() throws Exception {
 		
-		return dao.check();
+		return dao.userTypeCheck();
 	}
 
 	@Override
@@ -26,61 +27,86 @@ public class DealerServiceImpl implements DealerService{
 	}
 
 	@Override
-	public List<Dealer> list() throws Exception {
+	public List<Dealer> dealerPageDuplicationCheck() throws Exception {
 		
-		return dao.list();
+		return dao.dealerPageDuplicationCheck();
 	}
 
 	@Override
-	public Dealer read(int dealerNum) throws Exception {
+	public Dealer read(int dealer_page_num) throws Exception {
 		
-		return dao.read(dealerNum);
+		return dao.read(dealer_page_num);
 	}
 
 	@Override
-	public void remove(int dealerNum) throws Exception {
-		
-		dao.remove(dealerNum);
+	public void remove(int dealer_page_num) throws Exception {
+
+		dao.remove(dealer_page_num);
 		
 	}
 
 	@Override
-	public int score(int dealerNum) throws Exception {
+	public int score(int dealer_page_num) throws Exception {
 		
-		return dao.score(dealerNum);
+		return dao.score(dealer_page_num);
 	}
 
 	@Override
 	public void modify(Dealer dealer) throws Exception {
 		
 		dao.update(dealer);
+
+	}
+
+	@Override
+	public void likeEvent(String likeCheck, String disLikeCheck, int dealerNum, int userNum) throws Exception {
+		
+		dao.likeEvent(likeCheck, disLikeCheck, dealerNum, userNum);
+		
+	}
+
+
+	@Override
+	public List<Dealer> allListSearch(SearchCriteria cri) throws Exception {
+		
+		return dao.allListSearch(cri);
+	}
+	
+	@Override
+	public int listSearchCount(SearchCriteria cri) throws Exception {
+		
+		return dao.listSearchCount(cri);
+	}
+
+	@Override
+	public int dealerMypage(String login) throws Exception {
+		
+		return dao.dealerMyPage(login);
 		
 	}
 
 	@Override
-	public void likeEvent(String likeCheck, String disLikeCheck, int dealerNum) throws Exception {
+	public int userNum_read(String email) throws Exception {
 		
-		dao.likeEvent(likeCheck, disLikeCheck, dealerNum);
-		
+		return dao.userNum_read(email);
 	}
 
 	@Override
-	public List<Dealer> allList() throws Exception {
-
-		return dao.allList();
+	public int searchDealerUserNum(int dealerUserNum) throws Exception {
 		
+		return dao.searchDealerUserNum(dealerUserNum);
 	}
 
 	@Override
-	public List<Dealer> allListSearch(SearchDealer searchDealer) throws Exception {
+	public List<Dealer> checkUserNum(int dealerUserNum, String likeCheck, String disLikeCheck) throws Exception {
 		
-		return dao.allListSearch(searchDealer);
+		return dao.checkUserNum(dealerUserNum,likeCheck,disLikeCheck);
 	}
 
 	@Override
-	public List<Dealer> downList(int bnoToStart) throws Exception {
+	public List<Dealer> checkDealerPageNum(int dealerNum, String likeCheck, String disLikeCheck) throws Exception {
 		
-		return dao.downList(bnoToStart);
+		return dao.checkDealerPageNum(dealerNum,likeCheck,disLikeCheck);
 	}
 
 }

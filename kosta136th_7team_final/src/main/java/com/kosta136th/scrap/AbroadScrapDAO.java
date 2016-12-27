@@ -12,4 +12,6 @@ public interface AbroadScrapDAO {
 
 	public void removeAbroadScrap(AbroadScrap vo) throws Exception;
 
+	public List<GETAbroadScrap> abrScrapList(String email) throws Exception;
+
 }

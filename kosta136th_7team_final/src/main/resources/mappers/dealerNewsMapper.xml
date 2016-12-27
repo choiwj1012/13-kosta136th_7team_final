@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "com.kosta136th.mapper.dealerNewsMapper">
+	
+	<select id = "getDealerNewsList" resultType = "com.kosta136th.dealerNews.DealerNews">
+		SELECT *,(SELECT USER_EMAIL FROM USER WHERE USER_NUM = d.USER_NUM) AS WRITER  
+		FROM DEALER_NEWS d
+		WHERE DEL_GB = 'N' 
+		AND USER_NUM = (SELECT USER_NUM FROM USER WHERE USER_NICKNAME = #{dealerName})		
+		ORDER BY regi_date DESC, DEALER_NEWS_NUM DESC
+		LIMIT #{startDealerNewsIndex}, #{howMuch} 
+	</select>
+	
+	<select resultType = "int" id = "getDealerNewsListSize">
+		SELECT COUNT(*) FROM DEALER_NEWS WHERE DEL_GB = 'N' 
+		AND USER_NUM = (SELECT USER_NUM FROM USER WHERE USER_NICKNAME = #{dealerName})
+	</select>
+	
+	<select resultType = "int" id = "getDealerNewsIndex">
+		SELECT COUNT(*)-1 
+		FROM DEALER_NEWS 
+		WHERE DEALER_NEWS_NUM <![CDATA[>=]]> #{pageMaker.dealer_news_num}
+		AND USER_NUM = (SELECT USER_NUM FROM USER WHERE USER_NICKNAME = #{dealerName}) 
+		AND DEL_GB = 'N' 
+	</select>
+	
+	<select id = "getDealerNewsReplyList" resultType = "com.kosta136th.dealerNews.DealerNewsReply">
+		SELECT *, 
+				(SELECT USER_EMAIL FROM USER WHERE USER_NUM = r.USER_NUM) AS WRITER 
+		FROM REPLY r
+		WHERE DEALER_NEWS_NUM = #{dealer_news_num}
+		AND DEL_GB = 'N'
+		ORDER BY PARENT_REPLY_NUM ASC, RANK ASC 
+	</select>
+	
+	<select id = "writeNews" parameterType = "map">
+		INSERT INTO DEALER_NEWS(DEALER_PAGE_NUM, USER_NUM, TITLE, CONTENT)
+		VALUES(
+		(SELECT DEALER_PAGE_NUM FROM DEALER_PAGE WHERE USER_NUM = 
+		(SELECT USER_NUM FROM USER WHERE USER_NICKNAME = #{dealerName})
+		),
+		 (SELECT USER_NUM FROM USER WHERE USER_NICKNAME = #{dealerName}),
+		#{news.title}, #{news.content})
+	</select>
+	
+	<update id = "deleteNews">
+		UPDATE DEALER_NEWS SET DEL_GB = 'Y' WHERE DEALER_NEWS_NUM = #{dealer_news_num} 
+		AND DEL_GB = 'N' 
+	</update>
+	
+	<select id = "getNews" resultType = "com.kosta136th.dealerNews.DealerNews">
+		SELECT 
+				*, 
+				(SELECT USER_EMAIL FROM USER WHERE USER_NUM = d.USER_NUM) AS WRITER 
+		FROM
+			 DEALER_NEWS d
+		WHERE
+			 DEALER_NEWS_NUM = #{dealer_news_num}
+		AND
+			 DEL_GB = 'N'
+	</select>
+	
+	<select id = "getPreviousNews" resultType = "com.kosta136th.dealerNews.DealerNews" parameterType = "map">
+		SELECT 
+				*, 
+				(SELECT USER_EMAIL FROM USER WHERE USER_NUM = d.USER_NUM) AS WRITER
+		FROM
+				DEALER_NEWS d
+		WHERE
+				dealer_news_num = 
+				
+				(	
+					SELECT
+							MIN(dealer_news_num)
+					FROM
+							DEALER_NEWS
+					WHERE
+							dealer_news_num <![CDATA[>]]> ${news.dealer_news_num}
+					AND
+							DEL_GB = 'N'
+					AND
+							USER_NUM = 
+							
+							(SELECT USER_NUM FROM USER WHERE USER_NICKNAME = #{dealerName}) 				
+				)
+	</select>
+	
+	<select id = "getNextNews" resultType = "com.kosta136th.dealerNews.DealerNews" parameterType = "map">
+		SELECT 
+				*, 
+				(SELECT USER_EMAIL FROM USER WHERE USER_NUM = d.USER_NUM) AS WRITER 
+		FROM
+				DEALER_NEWS d
+		WHERE
+				dealer_news_num = 
+				
+				(	
+					SELECT
+							MAX(dealer_news_num)
+					FROM
+							DEALER_NEWS
+					WHERE
+							dealer_news_num <![CDATA[<]]> ${news.dealer_news_num}
+					AND
+							DEL_GB = 'N'
+					AND
+							USER_NUM = 
+							
+							(SELECT USER_NUM FROM USER WHERE USER_NICKNAME = #{dealerName})
+				)
+	</select>
+	
+	<update id = "modifyNews">
+		UPDATE DEALER_NEWS SET TITLE = #{title}, CONTENT = #{content}
+		WHERE DEALER_NEWS_NUM = #{dealer_news_num}
+		AND DEL_GB = 'N'		
+	</update>
+	
+	<select id = "getReplyWhom" resultType = "com.kosta136th.dealerNews.DealerNewsReply">
+		SELECT * FROM REPLY WHERE REPLY_NUM = #{reply_num}
+	</select>
+	
+	<select id = "getReplyRank" resultType = "int">
+		SELECT IFNULL(MIN(RANK), (SELECT MAX(RANK) + 1
+		FROM REPLY
+		WHERE PARENT_REPLY_NUM = #{parent_reply_num}))
+		FROM REPLY
+		WHERE PARENT_REPLY_NUM = #{parent_reply_num}
+		AND RANK<![CDATA[>]]> #{rank}
+		AND INDENT <![CDATA[<=]]> #{indent}
+	</select>
+	
+	<update id = "getReplyRankUpdate">
+		UPDATE REPLY
+		SET RANK = RANK + 1
+		WHERE PARENT_REPLY_NUM = #{parent_reply_num}
+		AND RANK <![CDATA[>=]]>  
+			(SELECT * FROM
+            (
+				SELECT IFNULL(MIN(RANK), (SELECT MAX(RANK) + 1
+				FROM REPLY
+				WHERE PARENT_REPLY_NUM = #{parent_reply_num}))
+				FROM REPLY AS S
+				WHERE PARENT_REPLY_NUM = #{parent_reply_num}
+				AND RANK<![CDATA[>]]> #{rank}
+				AND INDENT <![CDATA[<=]]> #{indent}
+			)FAKE
+        )
+            
+	</update>
+	
+	<insert id = "writeReply" parameterType = "map">	
+		INSERT INTO
+		REPLY(DEALER_NEWS_NUM, USER_NUM, CONTENT, RANK, INDENT, PARENT_REPLY_NUM)
+		<if test = '#{reply_num} != "0"'>
+		VALUES(${reply.dealer_news_num}, 
+		(SELECT USER_NUM FROM USER WHERE USER_EMAIL = #{user.USER_EMAIL})
+		, #{reply.content}, #{reply.rank}, #{reply.indent}, #{reply.parent_reply_num})
+		</if>
+		<if test = '#{reply_num} == "0"'>
+		VALUES(${reply.dealer_news_num}, 
+		(SELECT USER_NUM FROM USER WHERE USER_EMAIL = #{user.USER_EMAIL})
+		, #{reply.content}, 0, 0, -1)
+		</if>
+	</insert>
+	
+	<update id = "updateParentReplyNums">
+		UPDATE REPLY
+		SET PARENT_REPLY_NUM = REPLY_NUM
+		WHERE PARENT_REPLY_NUM = 0
+	</update>
+	
+	<update id = "deleteReply">
+		UPDATE REPLY
+		SET DEL_GB = "Y"
+		WHERE REPLY_NUM = ${reply_num}
+	</update>
+	
+	<select resultType = "int" id = "getAutoIncrementOfDealerNews">
+		SELECT AUTO_INCREMENT
+		FROM  INFORMATION_SCHEMA.TABLES
+		WHERE TABLE_SCHEMA = 'bitcoin'
+		AND   TABLE_NAME = 'dealer_news'; 
+	</select>
+	
+</mapper>
