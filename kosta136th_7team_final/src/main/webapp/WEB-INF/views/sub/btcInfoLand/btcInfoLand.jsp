@@ -34,12 +34,11 @@
 	
 	<div class="page-header">
 		<h1>
-			BTC 정보광장<small>_이달의 추천 딜러</small>
+			리버 커뮤니티<small>_이달의 추천 딜러</small>
 		</h1>
 		<ul class="breadcrumb">
 			<li>Home</li>
-			<li>BTC정보광장</li>
-			<li class="active">이달의 추천딜러</li>
+			<li>리버 커뮤니티</li>
 		</ul>	
 	</div>
 		
